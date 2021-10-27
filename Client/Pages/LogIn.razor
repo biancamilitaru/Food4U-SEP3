@@ -1,0 +1,59 @@
+﻿@page "/LogIn"
+@namespace LogInComponent
+
+@inject AuthenticationStateProvider AuthenticationStateProvider;
+@inject NavigationManager NavigationManager;
+
+<AuthorizeView>
+    <NotAuthorized>
+        <div class="form-group" style="margin-left: 10px">
+            <label>User name:</label>
+            <input type="text" style="margin-left: 5px" placeholder="user name" @bind-value="username" />
+        </div>
+        <div class="form-group">
+            <label>Password:</label>
+            <input type="password" placeholder="password" @bind-value="password"/>
+        </div>
+        <div style="color: red">@errorMessage</div>
+        <button type="button" @onclick="PerformLogin">Log in</button>
+    </NotAuthorized>
+    <Authorized>
+        <button type="button" @onclick="PerformLogout">Log out</button>
+    </Authorized>
+</AuthorizeView>
+<h3>LogIn</h3>
+
+@code {
+    private string username;
+    private string password;
+    private string errorMessage;
+
+    public async Task PerformLogin()
+    {
+        errorMessage = "";
+        try
+        {
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+    public async Task PerformLogout()
+    {
+        errorMessage = "";
+        try
+        {
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+    
+    
+}
