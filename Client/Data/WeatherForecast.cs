@@ -1,6 +1,6 @@
 using System;
 
-namespace Food4U_SEP3
+namespace Client.Data
 {
     public class WeatherForecast
     {
