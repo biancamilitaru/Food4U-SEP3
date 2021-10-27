@@ -1,42 +1,46 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Client.Data.UserServices;
+using Client.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Food4U_SEP3.Controllers
 {
-    [Microsoft.AspNetCore.Components.Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    [Route("[controller]")]
+    public class UserController : ControllerBase
     {
-        private readonly IUserService userService;
+        private IUserServices _inMemoryUserService;
 
-        public UsersController(IUserService userService) => this.userService = userService;
+        public UserController(IUserServices inMemoryUserService)
+        {
+            _inMemoryUserService = inMemoryUserService;
+        }
 
         [HttpGet]
-        public async Task<ActionResult<IList<User>>> GetUsers()
+        public async Task<ActionResult<User>> ValidateUser([FromQuery] string userName, [FromQuery] string password)
         {
             try
             {
-                IList<User> users = await userService.GetUsers();
-                return Ok(users);
+                //AWAIT recomm ?
+                User user = await _inMemoryUserService.ValidateLoginAsync(userName, password);
+
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                if (!user.Password.Equals(password))
+                {
+                    return Unauthorized(password);
+                }
+
+                return Ok(user);
             }
             catch (Exception e)
             {
-                return StatusCode(500, e.Message);
-            }
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<User>> AddUser([FromBody] User user)
-        {
-            try
-            {
-                userService.ValidateUser(user.Username, user.Password);
-                User added = await userService.Add(user);
-                return Created($"/{added.Username}", added);
-            } catch (Exception e)
-            {
+                Console.WriteLine(e);
                 return StatusCode(500, e.Message);
             }
         }
