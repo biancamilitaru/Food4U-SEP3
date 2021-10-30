@@ -1,48 +1,33 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Client.Data.UserServices;
-using Client.Models;
+using Food4U_SEP3.Models;
+using Food4U_SEP3.UserServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Food4U_SEP3.Controllers
 {
-    [ApiController]
     [Route("[controller]")]
-    public class UserController : ControllerBase
+    [ApiController]
+    public class UsersController : ControllerBase
     {
-        private IUserServices _inMemoryUserService;
+        private readonly IUserService userService;
 
-        public UserController(IUserServices inMemoryUserService)
-        {
-            _inMemoryUserService = inMemoryUserService;
-        }
+        public UsersController(IUserService userService) => this.userService = userService;
 
         [HttpGet]
-        public async Task<ActionResult<User>> ValidateUser([FromQuery] string userName, [FromQuery] string password)
+        public async Task<ActionResult<IList<User>>> GetUsers()
         {
             try
             {
-                //AWAIT recomm ?
-                User user = await _inMemoryUserService.ValidateLoginAsync(userName, password);
-
-                if (user == null)
-                {
-                    return NotFound();
-                }
-
-                if (!user.Password.Equals(password))
-                {
-                    return Unauthorized(password);
-                }
-
-                return Ok(user);
+                IList<User> users = await userService.GetUsers();
+                return Ok(users);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
                 return StatusCode(500, e.Message);
             }
         }
+        
     }
 }
