@@ -19,12 +19,22 @@ namespace Client.Data.UserServices
         
         public async Task<User> ValidateLoginAsync(string username, string password)
         {
-            HttpResponseMessage response = await client.GetAsync(uri+"/users?username={username}&password={password}");
+            HttpResponseMessage response = await client.GetAsync(uri+"/Users?username="+username);
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 string userAsJson = await response.Content.ReadAsStringAsync();
                 User resultUser = JsonSerializer.Deserialize<User>(userAsJson);
-                return resultUser;
+                Console.Write(userAsJson);
+
+                if (resultUser.Password.Equals(password))
+                {
+                    return resultUser;
+                }
+                else
+                {
+                    throw new Exception("Wrong password");
+                }
+                
             } 
             throw new Exception("User not found");
         }
