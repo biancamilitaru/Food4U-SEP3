@@ -4,7 +4,7 @@ using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Client.Data.UserServices;
-using Client.Models;
+using Food4U_SEP3.Models;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
 
