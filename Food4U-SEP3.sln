@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Food4U-SEP3", "Food4U-SEP3\Food4U-SEP3.csproj", "{B43EA3FD-8A92-4EDD-8C46-49BBB9FAA290}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tier2", "Tier2\Tier2.csproj", "{B43EA3FD-8A92-4EDD-8C46-49BBB9FAA290}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{8D40ACA0-B041-4105-BC0F-12CEC76F213A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tier1", "Tier1\Tier1.csproj", "{8D40ACA0-B041-4105-BC0F-12CEC76F213A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{0F4918B8-1CDA-40A9-A474-EBC0D97EA583}"
 EndProject

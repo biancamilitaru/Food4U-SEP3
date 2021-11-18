@@ -8,7 +8,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Food4U_SEP3.Models;
-using Food4U_SEP3.Permistences;
+
 using Food4U_SEP3.SocketHandler;
 
 
@@ -28,6 +28,8 @@ namespace Food4U_SEP3.UserServices
         {
             return await _userHandler.GetUser(username);
         }
+        
+       
     }
     }
 

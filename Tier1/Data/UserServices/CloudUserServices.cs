@@ -11,15 +11,15 @@ namespace Client.Data.UserServices
     {
         private string uri = "https://localhost:5003";
         private readonly HttpClient client;
-        
+
         public CloudUserServices()
         {
             client = new HttpClient();
         }
-        
+
         public async Task<User> ValidateLoginAsync(string username, string password)
         {
-            HttpResponseMessage response = await client.GetAsync(uri+"/Users?username="+username);
+            HttpResponseMessage response = await client.GetAsync(uri + "/Users?username=" + username);
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 string userAsJson = await response.Content.ReadAsStringAsync();
@@ -34,8 +34,8 @@ namespace Client.Data.UserServices
                 {
                     throw new Exception("Wrong password");
                 }
-                
-            } 
+            }
+
             throw new Exception("User not found");
         }
     }
