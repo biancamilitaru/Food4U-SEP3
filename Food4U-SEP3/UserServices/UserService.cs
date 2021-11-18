@@ -16,8 +16,6 @@ namespace Food4U_SEP3.UserServices
 {
     public class UserService : IUserService
     {
-        public IList<User> Users { get; private set; }
-        private readonly FileContext fileContext;
         private readonly ISocketUserHandler _userHandler;
 
 
@@ -30,21 +28,8 @@ namespace Food4U_SEP3.UserServices
         {
             return await _userHandler.GetUser(username);
         }
-        public void SaveChanges()
-        {
-            fileContext.SaveChanges();
-        }
-        public async Task<User> Add(User user)
-        {
-            await Task.Run(() =>
-            {
-               
-                Users.Add(user);
-                SaveChanges();
-            });
-
-            return user;
-        }
+        
+       
     }
     }
 
