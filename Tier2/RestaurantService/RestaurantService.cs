@@ -8,9 +8,7 @@ namespace Food4U_SEP3.RestaurantService
 {
     public class RestaurantService : IRestaurantService
     {
-        
-        private readonly ISocketUserHandler _userHandler;
-        
+
         public async Task<IList<Restaurant>> GetRestaurantsAsync()
         {
             throw new System.NotImplementedException();
