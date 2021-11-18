@@ -15,8 +15,9 @@ namespace Food4U_SEP3.UserServices
 {
     public class UserService : IUserService
     {
-        //public IList<User> Users { get; private set; }
-        //private readonly FileContext fileContext;
+        private FileContext fileContext;
+        public IList<User> Users { get; private set; }
+        
         
         private string uri = "http://localhost:8080/api/v1/";
         
@@ -34,6 +35,21 @@ namespace Food4U_SEP3.UserServices
             //return Users;
         }
         */
+        public async Task<User> Add(User user)
+        {
+            await Task.Run(() =>
+            {
+                
+                Users.Add(user);
+                SaveChanges();
+            });
+
+            return user;
+        }
+        public void SaveChanges()
+        {
+            fileContext.SaveChanges();
+        }
 
         public async Task <User> ValidateLogin(string username)
         {
