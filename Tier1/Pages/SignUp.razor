@@ -1,0 +1,39 @@
+@page "/SignUp"
+@using Components
+@using Client.Components
+
+  <h3 style="margin-bottom: 20px">SignUp</h3>
+
+<div class="row">
+  <div style="margin: 10px" class="column">
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+      <label class="form-check-label" for="flexRadioDefault1">
+        Customer
+      </label>
+    </div>
+  </div>
+  <div style="margin: 10px" class="column">
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+      <label class="form-check-label" for="flexRadioDefault2">
+        Restaurant
+      </label>
+    </div>
+  </div>
+  <div style="margin: 10px" class="column">
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+      <label class="form-check-label" for="flexRadioDefault2">
+        Driver
+      </label>
+    </div>
+  </div>
+</div>
+<hr>
+<RestaurantSignUp></RestaurantSignUp>
+
+
+@code {
+    
+}

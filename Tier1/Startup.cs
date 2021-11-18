@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Client.Data;
 using Client.Data.UserServices;
 using Microsoft.AspNetCore.Components.Authorization;
 
