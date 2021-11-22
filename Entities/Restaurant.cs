@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace Entities
@@ -22,5 +23,12 @@ namespace Entities
         
         [JsonPropertyName("restaurantID"), Key]
         public int RestaurantId { get; set; }
+        
+        [JsonPropertyName("delivery_option_1")]
+        public Delivery DeliveryOption1 { get; set; }
+        
+        [JsonPropertyName("delivery_option_2")]
+        public Delivery DeliveryOption2 { get; set; }
+
     }
 }
