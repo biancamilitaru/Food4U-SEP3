@@ -8,6 +8,7 @@ namespace Food4U_SEP3.RestaurantService
 {
     public class RestaurantService : IRestaurantService
     {
+        private readonly ISocketRestaurantHandler _restaurantHandler;
 
         public async Task<IList<Restaurant>> GetRestaurantsAsync()
         {
@@ -17,7 +18,7 @@ namespace Food4U_SEP3.RestaurantService
         [HttpPost]
         public async Task<Restaurant> AddRestaurantAsync(Restaurant restaurant)
         {
-            throw new System.NotImplementedException();
+            return await _restaurantHandler.AddRestaurant(restaurant);
         }
 
         public async Task RemoveRestaurantAsync(int restaurantID)
