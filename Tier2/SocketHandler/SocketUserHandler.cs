@@ -44,6 +44,7 @@ namespace Food4U_SEP3.SocketHandler
             SendToServer("ValidateUser",username);
             User getUser = JsonSerializer.Deserialize<User>(GetFromServer());
             return Task.FromResult(getUser); 
+            
         }
     }
 }

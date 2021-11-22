@@ -15,21 +15,7 @@ namespace Food4U_SEP3.Controllers
 
         public UsersController(IUserService userService) => this.userService = userService;
 
-        /*
-        [HttpGet]
-        public async Task<ActionResult<IList<User>>> GetUsers()
-        {
-            try
-            {
-                IList<User> users = await userService.GetUsers();
-                return Ok(users);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, e.Message);
-            }
-        }
-        */
+       
         
         [HttpGet]
         public async Task<ActionResult<User>> GetUser([FromQuery] string? username)
