@@ -29,7 +29,7 @@ namespace Food4U_SEP3.UserServices
             return await _userHandler.GetUser(username);
         }
         
-       
+        
     }
     }
 
