@@ -24,12 +24,23 @@ namespace Food4U_SEP3.UserServices
             _userHandler = new SocketUserHandler();
         }
         
-        public async Task <User> ValidateLogin(string username)
+        public async Task <User> ValidateLoginAsync(string username)
         {
             return await _userHandler.GetUser(username);
         }
-        
-        
+
+        public async Task<User> AddUserAsync(User user)
+        {
+            try
+            {
+                return await _userHandler.AddUser(user);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
     }
 

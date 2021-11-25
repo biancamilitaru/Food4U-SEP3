@@ -22,10 +22,23 @@ namespace Food4U_SEP3.Controllers
         {
             try
             {
-                User user = await userService.ValidateLogin(username);
+                User user = await userService.ValidateLoginAsync(username);
                 return Ok(user);
             }
             catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+        
+        [HttpPost]
+        public async Task<ActionResult<User>> AddUser([FromBody] User user)
+        {
+            try
+            {
+                await userService.AddUserAsync(user);
+                return Created($"/{user}", user);
+            } catch (Exception e)
             {
                 return StatusCode(500, e.Message);
             }
