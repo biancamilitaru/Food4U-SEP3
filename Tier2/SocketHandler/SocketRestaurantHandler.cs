@@ -50,5 +50,12 @@ namespace Food4U_SEP3.SocketHandler
             SendToServer("AddRestaurant",serialisedRestaurant);
             return Task.FromResult(restaurant);
         }
+
+        public Task<Restaurant> UpdateRestaurant(Restaurant restaurant)
+        {
+            string serialisedRestaurant = JsonSerializer.Serialize(restaurant);
+            SendToServer("UpdateRestaurant",serialisedRestaurant);
+            return Task.FromResult(restaurant);
+        }
     }
 }
