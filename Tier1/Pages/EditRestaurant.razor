@@ -1,0 +1,52 @@
+﻿@page "/EditRestaurant"
+@using Entities
+@using Client.Data.RestaurantService
+@inject Restaurant Restaurant
+@inject IRestaurantService RestaurantService
+
+<h3>EditRestaurant</h3>
+
+
+
+
+<EditForm Model="" OnValidSubmit="">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+    <div class="form-group">New name of the restaurant:<br/>
+        <InputText @bind-Value="Restaurant.Name"/></div>
+    
+    <div class="form-group">New address of the restaurant:<br/>
+        <InputText @bind-Value="Restaurant.Address"/></div>
+    
+    <div class="form-group">New phone number of the restaurant:<br/>
+        <InputText @bind-Value="Restaurant.PhoneNumber"/></div>
+    
+    <div class="form-group">New opening hours: <br/>
+        <p> Monday:<InputText @bind-Value="Restaurant.OpeningHoursMonday"></InputText><br/>
+            Tuesday:<InputText @bind-Value="Restaurant.OpeningHoursTuesday"></InputText><br/>
+            Wednesday:<InputText @bind-Value="Restaurant.OpeningHoursWednesday"></InputText><br/>
+            Thursday:<InputText @bind-Value="Restaurant.OpeningHoursThursday"></InputText><br/>
+            Friday:<InputText @bind-Value="Restaurant.OpeningHoursFriday"></InputText><br/>
+            Saturday:<InputText @bind-Value="Restaurant.OpeningHoursSaturday"></InputText><br/>
+            Sunday:<InputText @bind-Value="Restaurant.OpeningHoursSunday"></InputText><br/>
+        </p>
+    </div>
+    
+    <div class="form-group">New description of restaurant:<br/>
+        <InputText @bind-Value="Restaurant.Description"/></div>
+    
+    <div class="form-group">Delivery options:<br/>
+        <input type="checkbox" id="delivery" name="Delivery"/>
+        <input type="checkbox" id="pickup" name="Pickup"/>
+    </div>
+    
+    <div class="form-group">Price of delivery:<br/>
+        <InputText @bind-Value=""/></div>
+    
+    <p class="actions"><button class="btn btn-outline-dark" type="submit">Save</button></p>
+</EditForm>
+
+
+@code {
+    
+}
