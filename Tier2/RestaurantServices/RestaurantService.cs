@@ -20,7 +20,7 @@ namespace Food4U_SEP3.RestaurantServices
         {
             try
             {
-                return await _restaurantHandler.GetRestaurant();
+                return await _restaurantHandler.GetRestaurants();
             }
             catch (Exception e)
             {

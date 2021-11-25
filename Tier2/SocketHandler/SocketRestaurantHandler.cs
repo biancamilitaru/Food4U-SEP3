@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
@@ -58,6 +59,11 @@ namespace Food4U_SEP3.SocketHandler
             string serialisedRestaurant = JsonSerializer.Serialize(restaurant);
             SendToServer("UpdateRestaurant",serialisedRestaurant);
             return Task.FromResult(restaurant);
+        }
+
+        public Task<IList<Restaurant>> GetRestaurants()
+        {
+            throw new NotImplementedException();
         }
     }
 }
