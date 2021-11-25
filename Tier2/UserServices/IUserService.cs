@@ -7,7 +7,9 @@ namespace Food4U_SEP3.UserServices
 {
     public interface IUserService
     {
-        Task <User> ValidateLogin(string username);
-       
+        Task <User> ValidateLoginAsync(string username);
+        Task<User> AddUserAsync(User user);
+        Task<User> UpdateUserAsync (User user, string username);
+
     }
 }

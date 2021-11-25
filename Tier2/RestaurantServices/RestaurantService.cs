@@ -18,7 +18,15 @@ namespace Food4U_SEP3.RestaurantServices
 
         public async Task<IList<Restaurant>> GetRestaurantsAsync()
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                return await _restaurantHandler.GetRestaurants();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
         
         public async Task<Restaurant> AddRestaurantAsync(Restaurant restaurant)
@@ -42,7 +50,15 @@ namespace Food4U_SEP3.RestaurantServices
 
         public async Task<Restaurant> UpdateRestaurantAsync(Restaurant restaurant)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                return await _restaurantHandler.UpdateRestaurant(restaurant);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }

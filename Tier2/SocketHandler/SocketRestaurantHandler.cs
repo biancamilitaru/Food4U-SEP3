@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
@@ -41,7 +42,9 @@ namespace Food4U_SEP3.SocketHandler
         
         public Task<Restaurant> GetRestaurant(string id)
         {
-            throw new System.NotImplementedException();
+            SendToServer("GetRestaurant",id);
+            Restaurant getRestaurant = JsonSerializer.Deserialize<Restaurant>(GetFromServer());
+            return Task.FromResult(getRestaurant);
         }
 
         public Task<Restaurant> AddRestaurant(Restaurant restaurant)
@@ -49,6 +52,18 @@ namespace Food4U_SEP3.SocketHandler
             string serialisedRestaurant = JsonSerializer.Serialize(restaurant);
             SendToServer("AddRestaurant",serialisedRestaurant);
             return Task.FromResult(restaurant);
+        }
+
+        public Task<Restaurant> UpdateRestaurant(Restaurant restaurant)
+        {
+            string serialisedRestaurant = JsonSerializer.Serialize(restaurant);
+            SendToServer("UpdateRestaurant",serialisedRestaurant);
+            return Task.FromResult(restaurant);
+        }
+
+        public Task<IList<Restaurant>> GetRestaurants()
+        {
+            throw new NotImplementedException();
         }
     }
 }

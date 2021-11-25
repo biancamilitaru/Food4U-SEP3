@@ -6,5 +6,6 @@ namespace Client.Data.UserServices
     public interface IUserServices
     {
         Task<User> ValidateLoginAsync(string username, string password);
+        Task DeleteUser(string username);
     }
 }
