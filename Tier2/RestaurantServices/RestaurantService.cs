@@ -50,11 +50,11 @@ namespace Food4U_SEP3.RestaurantServices
             throw new System.NotImplementedException();
         }
 
-        public async Task<Restaurant> UpdateRestaurantAsync(Restaurant restaurant)
+        public async Task<Restaurant> UpdateRestaurantAsync(Restaurant restaurant, int restaurantId)
         {
             try
             {
-                return await _restaurantHandler.UpdateRestaurant(restaurant);
+                return await _restaurantHandler.UpdateRestaurant(restaurant , restaurantId);
             }
             catch (Exception e)
             {

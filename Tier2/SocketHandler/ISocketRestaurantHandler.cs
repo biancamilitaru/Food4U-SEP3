@@ -9,7 +9,7 @@ namespace Food4U_SEP3.SocketHandler
     {
         Task<Restaurant> GetRestaurant(int restaurantId); 
         Task<Restaurant> AddRestaurant(Restaurant restaurant);
-        Task<Restaurant> UpdateRestaurant(Restaurant restaurant);
+        Task<Restaurant> UpdateRestaurant(Restaurant restaurant, int restaurantId);
         
 
     }
