@@ -33,12 +33,15 @@
         <InputText @bind-Value="Restaurant.Description"/></div>
     
     <div class="form-group">Delivery options:<br/>
-        <input type="checkbox" id="delivery" name="Delivery"/>
-        <input type="checkbox" id="pickup" name="Pickup"/>
+        First:
+        Name: <InputText @bind-Value="Restaurant.DeliveryOption1.DeliveryName"/><br/>
+        Price: <InputText @bind-Value="Restaurant.DeliveryOption1.Price"/><br/><br/>
+        
+        Second:
+        Name: <InputText @bind-Value="Restaurant.DeliveryOption2.DeliveryName"/><br/>
+        Price: <InputText @bind-Value="Restaurant.DeliveryOption2.Price"/><br/>
     </div>
     
-    <div class="form-group">Price of delivery:<br/>
-        <InputText @bind-Value=""/></div>
     
     <p class="actions"><button class="btn btn-outline-dark" type="submit">Save</button></p>
 </EditForm>

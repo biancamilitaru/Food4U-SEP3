@@ -9,7 +9,7 @@
 
 
 
-<EditForm Model="" OnValidSubmit="">
+<EditForm Model="editRestaurantItem" OnValidSubmit="EditExistingRestaurant">
     <DataAnnotationsValidator/>
     <ValidationSummary/>
     <div class="form-group">New name of the restaurant:<br/>
@@ -35,18 +35,27 @@
     <div class="form-group">New description of restaurant:<br/>
         <InputText @bind-Value="Restaurant.Description"/></div>
     
-    <div class="form-group">Delivery options:<br/>
-        <input type="checkbox" id="delivery" name="Delivery"/>
-        <input type="checkbox" id="pickup" name="Pickup"/>
-    </div>
-    
-    <div class="form-group">Price of delivery:<br/>
-        <InputText @bind-Value=""/></div>
+     <div class="form-group">Delivery options:<br/>
+            First:
+            Name: <InputText @bind-Value="Restaurant.DeliveryOption1.DeliveryName"/><br/>
+            Price: <InputText @bind-Value="Restaurant.DeliveryOption1.Price"/><br/><br/>
+            
+            Second:
+            Name: <InputText @bind-Value="Restaurant.DeliveryOption2.DeliveryName"/><br/>
+            Price: <InputText @bind-Value="Restaurant.DeliveryOption2.Price"/><br/>
+        </div>
     
     <p class="actions"><button class="btn btn-outline-dark" type="submit">Save</button></p>
 </EditForm>
 
 
 @code {
-    
+
+    public void EditExistingRestaurant()
+    {
+        RestaurantService.EditRestaurantAsync(editRestaurantItem);
+    }
+
+    private Restaurant editRestaurantItem = new Restaurant();
+
 }
