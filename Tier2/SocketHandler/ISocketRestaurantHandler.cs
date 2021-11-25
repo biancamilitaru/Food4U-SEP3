@@ -7,11 +7,10 @@ namespace Food4U_SEP3.SocketHandler
 {
     public interface ISocketRestaurantHandler
     {
-        Task<Restaurant> GetRestaurant(string id); 
+        Task<Restaurant> GetRestaurant(int restaurantId); 
         Task<Restaurant> AddRestaurant(Restaurant restaurant);
         Task<Restaurant> UpdateRestaurant(Restaurant restaurant);
-
-        Task<IList<Restaurant>> GetRestaurants();
+        
 
     }
 }

@@ -40,9 +40,9 @@ namespace Food4U_SEP3.SocketHandler
             return response;
         }
         
-        public Task<Restaurant> GetRestaurant(string id)
+        public Task<Restaurant> GetRestaurant(int restaurantId)
         {
-            SendToServer("GetRestaurant",id);
+            SendToServer("GetRestaurant",restaurantId.ToString());
             Restaurant getRestaurant = JsonSerializer.Deserialize<Restaurant>(GetFromServer());
             return Task.FromResult(getRestaurant);
         }
@@ -61,9 +61,6 @@ namespace Food4U_SEP3.SocketHandler
             return Task.FromResult(restaurant);
         }
 
-        public Task<IList<Restaurant>> GetRestaurants()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

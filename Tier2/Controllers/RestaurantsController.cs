@@ -45,17 +45,34 @@ namespace Food4U_SEP3.Controllers
             }
         }
         [HttpGet]
-        public async Task<ActionResult<IList<Restaurant>>> GetRestaurants()
+        public async Task<ActionResult<Restaurant>> GetRestaurant([FromQuery] int restaurantId)
         {
             try
             {
-                IList<Restaurant> adults = await restaurantService.GetRestaurantsAsync();
-                return Ok(adults);
-            } catch (Exception e)
+                Restaurant restaurant = await restaurantService.GetRestaurantAsync(restaurantId);
+                return Ok(restaurant);
+            }
+            catch (Exception e)
             {
                 return StatusCode(500, e.Message);
             }
         }
+        
+        [HttpDelete]
+        [Route("{restaurantID:int}")]
+        public async Task<ActionResult> DeleteRestaurant([FromQuery] int restaurantId)
+        {
+            try
+            {
+                await restaurantService.RemoveRestaurantAsync(restaurantId);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+        
 
     }
 }

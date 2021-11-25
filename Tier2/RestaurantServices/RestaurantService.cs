@@ -16,11 +16,11 @@ namespace Food4U_SEP3.RestaurantServices
             _restaurantHandler = new SocketRestaurantHandler();
         }
 
-        public async Task<IList<Restaurant>> GetRestaurantsAsync()
+        public async Task<Restaurant> GetRestaurantAsync(int restaurantId)
         {
             try
             {
-                return await _restaurantHandler.GetRestaurants();
+                return await _restaurantHandler.GetRestaurant(restaurantId);
             }
             catch (Exception e)
             {
@@ -28,7 +28,9 @@ namespace Food4U_SEP3.RestaurantServices
                 throw;
             }
         }
+
         
+
         public async Task<Restaurant> AddRestaurantAsync(Restaurant restaurant)
         {
             try
