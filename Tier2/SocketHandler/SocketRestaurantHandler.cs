@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
@@ -10,12 +8,12 @@ using Food4U_SEP3.Models;
 
 namespace Food4U_SEP3.SocketHandler
 {
-    public class SocketUserHandler : ISocketUserHandler
+    public class SocketRestaurantHandler : ISocketRestaurantHandler
     {
         private readonly TcpClient _tcpClient = new ("127.0.0.1", 2910);
         private readonly NetworkStream _stream;
 
-        public SocketUserHandler()
+        public SocketRestaurantHandler()
         {
             _stream = _tcpClient.GetStream();
         }
@@ -40,20 +38,24 @@ namespace Food4U_SEP3.SocketHandler
             Console.WriteLine(response);
             return response;
         }
-    
-
-        public Task<User> GetUser(string username)
+        
+        public Task<Restaurant> GetRestaurant(string id)
         {
-            SendToServer("ValidateUser",username);
-            User getUser = JsonSerializer.Deserialize<User>(GetFromServer());
-            return Task.FromResult(getUser); 
+            throw new System.NotImplementedException();
         }
 
-        public Task<User> AddUser(User user)
+        public Task<Restaurant> AddRestaurant(Restaurant restaurant)
         {
-            string serialisedUser = JsonSerializer.Serialize(user);
-            SendToServer("AddUser",serialisedUser);
-            return Task.FromResult(user);
+            string serialisedRestaurant = JsonSerializer.Serialize(restaurant);
+            SendToServer("AddRestaurant",serialisedRestaurant);
+            return Task.FromResult(restaurant);
+        }
+
+        public Task<Restaurant> UpdateRestaurant(Restaurant restaurant)
+        {
+            string serialisedRestaurant = JsonSerializer.Serialize(restaurant);
+            SendToServer("UpdateRestaurant",serialisedRestaurant);
+            return Task.FromResult(restaurant);
         }
     }
 }

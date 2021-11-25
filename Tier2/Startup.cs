@@ -1,4 +1,4 @@
-
+using Food4U_SEP3.RestaurantServices;
 using Food4U_SEP3.UserServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+
 
 namespace Food4U_SEP3
 {
@@ -27,6 +28,7 @@ namespace Food4U_SEP3
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "Food4U_SEP3", Version = "v1"});
             });
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRestaurantService, RestaurantService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

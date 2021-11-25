@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Entities;
 
-namespace Food4U_SEP3.RestaurantService
+namespace Food4U_SEP3.RestaurantServices
 {
     public interface IRestaurantService
     {
