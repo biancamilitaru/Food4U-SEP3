@@ -41,5 +41,10 @@ namespace Client.Data.RestaurantService
             HttpContent content = new StringContent(todoAsJson, Encoding.UTF8, "application/json");
             await client.PatchAsync($"{uri}/restaurant/{restaurant.RestaurantId}", content);
         }
+
+        public async Task RemoveRestaurantAsync(int restaurantId)
+        {
+            await client.DeleteAsync($"{uri}/restaurant/{restaurantId}");
+        }
     }
 }

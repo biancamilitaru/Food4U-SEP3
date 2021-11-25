@@ -1,8 +1,11 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Entities;
 using Food4U_SEP3.Models;
 
 namespace Food4U_SEP3.SocketHandler
@@ -39,11 +42,17 @@ namespace Food4U_SEP3.SocketHandler
         }
     
 
-        public Task<User> GetUser(string username)
+        public async Task<User> GetUser(string username)
         {
             SendToServer("ValidateUser",username);
-            User getUser = JsonSerializer.Deserialize<User>(GetFromServer());
-            return Task.FromResult(getUser); 
+            User getUser = JsonSerializer.Deserialize<User>(GetFromServer()); 
+            //Shouldnt this be like this, instead of Task.fromResult(getuser)
+            return getUser; 
+        }
+
+        public async Task<IList<Restaurant>> getRestaurants()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
