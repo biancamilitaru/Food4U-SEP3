@@ -12,7 +12,7 @@ namespace Food4U_SEP3.SocketHandler
     {
         private readonly TcpClient _tcpClient = new ("127.0.0.1", 2910);
         private readonly NetworkStream _stream;
-        
+
         public SocketRestaurantHandler()
         {
             _stream = _tcpClient.GetStream();

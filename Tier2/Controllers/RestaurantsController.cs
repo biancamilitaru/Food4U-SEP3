@@ -1,8 +1,8 @@
 using System;
 using System.Threading.Tasks;
-using Client.Data.RestaurantService;
 using Entities;
 using Food4U_SEP3.Models;
+using Food4U_SEP3.RestaurantServices;
 using Food4U_SEP3.UserServices;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,8 +21,8 @@ namespace Food4U_SEP3.Controllers
         {
             try
             {
-                Restaurant added = await restaurantService.AddRestaurantAsync(restaurant);
-                return Created($"/{added.RestaurantId}", added);
+                await restaurantService.AddRestaurantAsync(restaurant);
+                return Created($"/{restaurant}", restaurant);
             } catch (Exception e)
             {
                 return StatusCode(500, e.Message);
