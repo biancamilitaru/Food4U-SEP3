@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Entities;
 using Food4U_SEP3.Models;
@@ -43,6 +44,18 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-        
+        [HttpGet]
+        public async Task<ActionResult<IList<Restaurant>>> GetRestaurants()
+        {
+            try
+            {
+                IList<Restaurant> adults = await restaurantService.GetRestaurantsAsync();
+                return Ok(adults);
+            } catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
     }
 }
