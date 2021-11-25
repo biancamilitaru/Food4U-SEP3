@@ -41,7 +41,9 @@ namespace Food4U_SEP3.SocketHandler
         
         public Task<Restaurant> GetRestaurant(string id)
         {
-            throw new System.NotImplementedException();
+            SendToServer("GetRestaurant",id);
+            Restaurant getRestaurant = JsonSerializer.Deserialize<Restaurant>(GetFromServer());
+            return Task.FromResult(getRestaurant);
         }
 
         public Task<Restaurant> AddRestaurant(Restaurant restaurant)

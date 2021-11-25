@@ -44,5 +44,37 @@ namespace Food4U_SEP3.Controllers
             }
         }
         
+        [HttpPatch]
+        [Route("{username}")]
+        public async Task<ActionResult> UpdateUser([FromBody] User user, string username)
+        {
+            try
+            {
+                await userService.UpdateUserAsync(user, username);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+        
+        /*
+        [HttpDelete]
+        [Route("{username:string}")]
+        public async Task<ActionResult> DeleteUser()
+        {
+            try
+            {
+                await userService.DeleteUserAsync(username);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+        */
+        
     }
 }
