@@ -41,6 +41,19 @@ namespace Food4U_SEP3.UserServices
                 throw;
             }
         }
+
+        public async Task<User> UpdateUserAsync(User user, string username)
+        {
+            try
+            {
+                return await _userHandler.UpdateUser(user, username);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
     }
 
