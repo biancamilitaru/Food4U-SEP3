@@ -19,7 +19,7 @@ namespace Food4U_SEP3.SocketHandler
             _stream = _tcpClient.GetStream();
         }
         
-        public void SendToServer(string type, string context)
+        private void SendToServer(string type, string context)
         {
             Request newRequest = new Request
             {
@@ -31,7 +31,7 @@ namespace Food4U_SEP3.SocketHandler
             _stream.Write(dataToServer, 0, dataToServer.Length);
         }
 
-        public String GetFromServer()
+        private string GetFromServer()
         {
             byte[] fromServer = new byte[1024];
             int bytesRead = _stream.Read(fromServer, 0, fromServer.Length);
@@ -54,10 +54,10 @@ namespace Food4U_SEP3.SocketHandler
             return Task.FromResult(restaurant);
         }
 
-        public Task<Restaurant> UpdateRestaurant(Restaurant restaurant)
+        public Task<Restaurant> UpdateRestaurant(Restaurant restaurant ,int restaurantId)
         {
             string serialisedRestaurant = JsonSerializer.Serialize(restaurant);
-            SendToServer("UpdateRestaurant",serialisedRestaurant);
+            SendToServer("UpdateRestaurant",serialisedRestaurant + restaurantId);
             return Task.FromResult(restaurant);
         }
 
