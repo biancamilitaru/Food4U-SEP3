@@ -18,7 +18,7 @@ namespace Food4U_SEP3.Controllers
         public RestaurantsController(IRestaurantService restaurantService) => this.restaurantService = restaurantService;
 
         [HttpPost]
-        public async Task<ActionResult<Restaurant>> AddRestaurant([FromBody] Restaurant restaurant)
+        public async Task<ActionResult<Restaurant>> AddRestaurantAsync([FromBody] Restaurant restaurant)
         {
             try
             {
@@ -32,7 +32,7 @@ namespace Food4U_SEP3.Controllers
         
         [HttpPatch]
         [Route("{restaurantID:int}")]
-        public async Task<ActionResult> UpdateRestaurant([FromBody] Restaurant restaurant)
+        public async Task<ActionResult> UpdateRestaurantAsync([FromBody] Restaurant restaurant)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace Food4U_SEP3.Controllers
             }
         }
         [HttpGet]
-        public async Task<ActionResult<Restaurant>> GetRestaurant([FromQuery] int restaurantId)
+        public async Task<ActionResult<Restaurant>> GetRestaurantAsync([FromQuery] int restaurantId)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace Food4U_SEP3.Controllers
         
         [HttpDelete]
         [Route("{restaurantID:int}")]
-        public async Task<ActionResult> DeleteRestaurant([FromQuery] int restaurantId)
+        public async Task<ActionResult> DeleteRestaurantAsync([FromQuery] int restaurantId)
         {
             try
             {

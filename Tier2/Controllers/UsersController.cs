@@ -13,12 +13,13 @@ namespace Food4U_SEP3.Controllers
     {
         private readonly IUserService userService;
 
-        public UsersController(IUserService userService) => this.userService = userService;
+        public UsersController(IUserService userService)
+        {
+            this.userService = userService;
+        }
 
-       
-        
         [HttpGet]
-        public async Task<ActionResult<User>> GetUser([FromQuery] string? username)
+        public async Task<ActionResult<User>> GetUserAsync([FromQuery] string? username)
         {
             try
             {
@@ -30,23 +31,24 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-        
+
         [HttpPost]
-        public async Task<ActionResult<User>> AddUser([FromBody] User user)
+        public async Task<ActionResult<User>> AddUserAsync([FromBody] User user)
         {
             try
             {
                 await userService.AddUserAsync(user);
                 return Created($"/{user}", user);
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return StatusCode(500, e.Message);
             }
         }
-        
+
         [HttpPatch]
         [Route("{username}")]
-        public async Task<ActionResult> UpdateUser([FromBody] User user, string username)
+        public async Task<ActionResult> UpdateUserAsync([FromBody] User user, string username)
         {
             try
             {
@@ -58,7 +60,7 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-        
+
         /*
         [HttpDelete]
         [Route("{username:string}")]
@@ -75,6 +77,5 @@ namespace Food4U_SEP3.Controllers
             }
         }
         */
-        
     }
 }
