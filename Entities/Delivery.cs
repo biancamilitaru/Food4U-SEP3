@@ -5,9 +5,9 @@ namespace Entities
 {
     public class Delivery
     {
-        [Key, JsonPropertyName("delivery_id")]
+        [Key, JsonPropertyName("deliveryID")]
         public string DeliveryId { get; set; }
-        [Required,MaxLength(50), JsonPropertyName("delivery_name")]
+        [Required,MaxLength(50), JsonPropertyName("deliveryName")]
         public string DeliveryName { get; set; }
         [Required, JsonPropertyName("price")]
         public int Price { get; set; }
