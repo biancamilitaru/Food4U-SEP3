@@ -6,11 +6,11 @@ namespace Entities
     public class Delivery
     {
         [Key, JsonPropertyName("deliveryID")]
-        public string DeliveryId { get; set; }
+        public int DeliveryId { get; set; }
         [Required,MaxLength(50), JsonPropertyName("deliveryName")]
         public string DeliveryName { get; set; }
         [Required, JsonPropertyName("price")]
-        public int Price { get; set; }
+        public double Price { get; set; }
 
     }
 }
