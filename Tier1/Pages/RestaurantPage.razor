@@ -3,12 +3,19 @@
 @using Client.Data.RestaurantService
 @using Entities
 @inject IRestaurantService _restaurantService;
+@inject NavigationManager NavigationManager;
 
 <h1>Welcome RestaurantName</h1>
 <RestaurantInfoComponent Id=@Id> </RestaurantInfoComponent>  
 
+<button @onclick="NavigateToAddMenu">Add Menu</button>
+
 @code {
     [Parameter]
     public int Id { get; set; }
-    
+
+    private void NavigateToAddMenu()
+    {
+        NavigationManager.NavigateTo("AddMenu");
+    }
 }
