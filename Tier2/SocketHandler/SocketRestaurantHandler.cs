@@ -11,12 +11,12 @@ namespace Food4U_SEP3.SocketHandler
 {
     public class SocketRestaurantHandler : ISocketRestaurantHandler
     {
-        private readonly TcpClient _tcpClient = new ("127.0.0.1", 2910);
-        private readonly NetworkStream _stream;
+        private readonly TcpClient tcpClient = new ("127.0.0.1", 2910);
+        private readonly NetworkStream stream;
 
         public SocketRestaurantHandler()
         {
-            _stream = _tcpClient.GetStream();
+            stream = tcpClient.GetStream();
         }
         
         private void SendToServer(string type, string context)
@@ -28,13 +28,13 @@ namespace Food4U_SEP3.SocketHandler
             };
             string serialisedRequest = JsonSerializer.Serialize(newRequest);
             byte[] dataToServer = Encoding.ASCII.GetBytes(serialisedRequest);
-            _stream.Write(dataToServer, 0, dataToServer.Length);
+            stream.Write(dataToServer, 0, dataToServer.Length);
         }
 
         private string GetFromServer()
         {
             byte[] fromServer = new byte[1024];
-            int bytesRead = _stream.Read(fromServer, 0, fromServer.Length);
+            int bytesRead = stream.Read(fromServer, 0, fromServer.Length);
             string response = Encoding.ASCII.GetString(fromServer, 0, bytesRead);
             Console.WriteLine(response);
             return response;
@@ -61,6 +61,11 @@ namespace Food4U_SEP3.SocketHandler
             return Task.FromResult(restaurant);
         }
 
-        
+        public Task<Restaurant> RemoveRestaurant(int restaurantId)
+        {
+            SendToServer("RemoveRestaurant",restaurantId.ToString());
+            Restaurant removeRestaurant = JsonSerializer.Deserialize<Restaurant>(GetFromServer());
+            return Task.FromResult(removeRestaurant);
+        }
     }
 }
