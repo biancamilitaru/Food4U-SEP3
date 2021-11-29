@@ -8,6 +8,8 @@ namespace Client.Data.RestaurantService
     {
         Task AddRestaurantAsync(Restaurant restaurant);
         Task EditRestaurantAsync(Restaurant restaurant);
+
+        Task<Restaurant> GetRestaurantsAsync(int restaurantID);
         Task RemoveRestaurantAsync(int restaurantId);
     }
 }

@@ -44,6 +44,23 @@ namespace Client.Data.RestaurantService
             await client.PatchAsync($"{uri}/Restaurants/{restaurant.RestaurantId}", content);
         }
 
+        public async Task<Restaurant> GetRestaurantsAsync(int restaurantID)
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/{restaurantID}");
+
+            if (!responseMessage.IsSuccessStatusCode)
+                throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+
+            string result = await responseMessage.Content.ReadAsStringAsync();
+            
+            Restaurant restaurant = JsonSerializer.Deserialize<Restaurant>(result,new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            }
+                );
+            return restaurant;
+        }
+
         public async Task RemoveRestaurantAsync(int restaurantId)
         {
             await client.DeleteAsync($"{uri}/Restaurants/{restaurantId}");
