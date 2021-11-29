@@ -47,6 +47,9 @@ namespace Entities
         
         [JsonPropertyName("deliveryOption2")]
         public Delivery DeliveryOption2 { get; set; }
+        
+        [JsonPropertyName("menu")]
+        public Menu Menu { get; set; }
 
     }
 }
