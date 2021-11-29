@@ -46,7 +46,7 @@ namespace Client.Data.RestaurantService
 
         public async Task<Restaurant> GetRestaurantsAsync(int restaurantID)
         {
-            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/{restaurantID}");
+            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Restaurant/{restaurantID}");
 
             if (!responseMessage.IsSuccessStatusCode)
                 throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
