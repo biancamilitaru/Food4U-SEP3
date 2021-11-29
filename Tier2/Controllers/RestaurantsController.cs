@@ -60,7 +60,6 @@ namespace Food4U_SEP3.Controllers
         }
         
         [HttpDelete]
-        [Route("{restaurantID:int}")]
         public async Task<ActionResult> DeleteRestaurantAsync([FromQuery] int restaurantId)
         {
             try
