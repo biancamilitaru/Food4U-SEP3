@@ -44,6 +44,7 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+        
         [HttpGet]
         public async Task<ActionResult<Restaurant>> GetRestaurantAsync([FromQuery] int restaurantId)
         {
