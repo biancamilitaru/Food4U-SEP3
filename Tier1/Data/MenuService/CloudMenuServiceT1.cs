@@ -34,5 +34,11 @@ namespace Client.Data.MenuService
                 throw new Exception($@"Error: {responseMessage.StatusCode},{responseMessage.ReasonPhrase}");
             
         }
+        public async Task EditMenuAsync(Menu menu)
+        {
+            string todoAsJson = JsonSerializer.Serialize(menu);
+            HttpContent content = new StringContent(todoAsJson, Encoding.UTF8, "application/json");
+            await client.PatchAsync($"{uri}/Restaurants/{menu.MenuId}", content);
+        }
     }
 }

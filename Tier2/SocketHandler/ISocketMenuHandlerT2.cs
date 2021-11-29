@@ -7,6 +7,7 @@ namespace Food4U_SEP3.SocketHandler
     public interface ISocketMenuHandlerT2
     {
         Task<Menu> AddMenu(Menu menu);
+        Task<Menu> UpdateMenu(Menu menu, int menuId);
 
     }
 }

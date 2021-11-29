@@ -37,5 +37,12 @@ namespace Food4U_SEP3.SocketHandler
             SendToServer("AddMenu", serializedMenu);
             return Task.FromResult(menu);
         }
+
+        public Task<Menu> UpdateMenu(Menu menu, int menuId)
+        {
+            string serialisedMenu = JsonSerializer.Serialize(menu);
+            SendToServer("UpdateMenu",serialisedMenu + menuId);
+            return Task.FromResult(menu);
+        }
     }
 }
