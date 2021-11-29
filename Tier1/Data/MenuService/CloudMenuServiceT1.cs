@@ -36,8 +36,8 @@ namespace Client.Data.MenuService
         }
         public async Task EditMenuAsync(Menu menu)
         {
-            string todoAsJson = JsonSerializer.Serialize(menu);
-            HttpContent content = new StringContent(todoAsJson, Encoding.UTF8, "application/json");
+            string menuAsJson = JsonSerializer.Serialize(menu);
+            HttpContent content = new StringContent(menuAsJson, Encoding.UTF8, "application/json");
             await client.PatchAsync($"{uri}/Restaurants/{menu.MenuId}", content);
         }
     }

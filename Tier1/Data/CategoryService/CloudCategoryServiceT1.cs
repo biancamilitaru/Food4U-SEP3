@@ -34,5 +34,13 @@ namespace Client.Data.CategoryService
                 throw new Exception($@"Error: {responseMessage.StatusCode},{responseMessage.ReasonPhrase}");
 
         }
+
+        public async Task EditCategoryAsync(Category category)
+        {
+            string categoryAsJson = JsonSerializer.Serialize(category);
+            HttpContent content = new StringContent(categoryAsJson, Encoding.UTF8, "application/json");
+            await client.PatchAsync($"{uri}/Categories/{category.CategoryId}", content);
+        
+        }
     }
 }

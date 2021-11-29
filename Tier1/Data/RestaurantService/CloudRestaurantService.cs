@@ -39,8 +39,8 @@ namespace Client.Data.RestaurantService
 
         public async Task EditRestaurantAsync(Restaurant restaurant)
         {
-            string todoAsJson = JsonSerializer.Serialize(restaurant);
-            HttpContent content = new StringContent(todoAsJson, Encoding.UTF8, "application/json");
+            string restaurantAsJson = JsonSerializer.Serialize(restaurant);
+            HttpContent content = new StringContent(restaurantAsJson, Encoding.UTF8, "application/json");
             await client.PatchAsync($"{uri}/Restaurants/{restaurant.RestaurantId}", content);
         }
 
