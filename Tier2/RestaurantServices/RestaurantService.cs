@@ -47,7 +47,15 @@ namespace Food4U_SEP3.RestaurantServices
 
         public async Task RemoveRestaurantAsync(int restaurantID)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                await _restaurantHandler.RemoveRestaurant(restaurantID);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         public async Task<Restaurant> UpdateRestaurantAsync(Restaurant restaurant, int restaurantId)

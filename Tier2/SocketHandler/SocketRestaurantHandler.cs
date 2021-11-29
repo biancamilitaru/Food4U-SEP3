@@ -61,6 +61,11 @@ namespace Food4U_SEP3.SocketHandler
             return Task.FromResult(restaurant);
         }
 
-        
+        public Task<Restaurant> RemoveRestaurant(int restaurantId)
+        {
+            SendToServer("RemoveRestaurant",restaurantId.ToString());
+            Restaurant removeRestaurant = JsonSerializer.Deserialize<Restaurant>(GetFromServer());
+            return Task.FromResult(removeRestaurant);
+        }
     }
 }
