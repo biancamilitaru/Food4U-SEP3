@@ -49,7 +49,7 @@ namespace Food4U_SEP3.RestaurantServices
         {
             try
             {
-                await _restaurantHandler.RemoveRestaurant(restaurantID);
+                await restaurantHandler.RemoveRestaurant(restaurantID);
             }
             catch (Exception e)
             {
