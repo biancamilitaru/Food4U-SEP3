@@ -1,3 +1,7 @@
+@using Entities
+@using Client.Data.RestaurantService
+@inject IRestaurantService _restaurantService;
+
 <div class="card">
   <div class="card-body">
       <div class="form-group">
@@ -7,7 +11,7 @@
                   <h6>Adress:</h6> 
               </div>
               <div class="column" style="padding-left: 10px;">
-                  Some address
+                  @_restaurant.Address
               </div>
           </div>
           <div class="row">
@@ -15,7 +19,7 @@
                   <h6>Phone number:</h6>
               </div>
               <div class="column" style="padding-left: 10px;">
-                  09765456
+                  @_restaurant.PhoneNumber
               </div>
           </div>
           <a data-toggle="collapse" data-target="#collapseOpeningHours" role="button" aria-expanded="false" aria-controls="collapseOpeningHours">
@@ -27,7 +31,7 @@
                       <h6>Monday:</h6>
                   </div>
                   <div class="column" style="padding-left: 10px;">
-                      7:00-20:00
+                      @_restaurant.OpeningHoursMonday
                   </div>
               </div>
               <div class="row">
@@ -35,7 +39,7 @@
                       <h6>Tuesday:</h6>
                   </div>
                   <div class="column" style="padding-left: 10px;">
-                      7:00-20:00
+                      @_restaurant.OpeningHoursTuesday
                   </div>
               </div>
               <div class="row">
@@ -43,7 +47,7 @@
                       <h6>Wednesday:</h6>
                   </div>
                   <div class="column" style="padding-left: 10px;">
-                      7:00-20:00
+                      @_restaurant.OpeningHoursWednesday
                   </div>
               </div>
               <div class="row">
@@ -51,7 +55,7 @@
                       <h6>Thurday:</h6>
                   </div>
                   <div class="column" style="padding-left: 10px;">
-                      7:00-20:00
+                      @_restaurant.OpeningHoursThursday
                   </div>
               </div>
               <div class="row">
@@ -59,7 +63,7 @@
                       <h6>Friday:</h6>
                   </div>
                   <div class="column" style="padding-left: 10px;">
-                      7:00-20:00
+                      @_restaurant.OpeningHoursFriday
                   </div>
               </div>
               <div class="row">
@@ -67,7 +71,7 @@
                       <h6>Saturday:</h6>
                   </div>
                   <div class="column" style="padding-left: 10px;">
-                      7:00-20:00
+                      @_restaurant.OpeningHoursSaturday
                   </div>
               </div>
               <div class="row">
@@ -75,7 +79,7 @@
                       <h6>Sunday:</h6>
                   </div>
                   <div class="column" style="padding-left: 10px;">
-                      7:00-20:00
+                      @_restaurant.OpeningHoursSunday
                   </div>
               </div>
           </div>
@@ -85,18 +89,18 @@
           <div class="collapse" id="collapseDelivery">
               <div class="row">
                   <div class="column" style="padding-left: 30px">
-                      <h6>Delivery name</h6>
+                      <h6>@_restaurant.DeliveryOption1.DeliveryName</h6>
                   </div>
                   <div class="column" style="padding-left: 10px;">
-                      100dkk
+                      @_restaurant.DeliveryOption1.Price
                   </div>
               </div>
               <div class="row">
                   <div class="column" style="padding-left: 30px">
-                      <h6>Delivery name</h6>
+                      <h6>@_restaurant.DeliveryOption2.DeliveryName</h6>
                   </div>
                   <div class="column" style="padding-left: 10px;">
-                      200dkk
+                      @_restaurant.DeliveryOption2.Price
                   </div>
               </div>
           </div>
@@ -105,5 +109,20 @@
 </div>
 
 @code {
+    [Parameter]
+    public int Id { get; set; }
     
+    private Restaurant _restaurant = new ();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _restaurant = await _restaurantService.GetRestaurantsAsync(Id);
+        }
+        catch (Exception e)
+        {
+    // update some error label here, or show popup..
+        }
+    }
 }
