@@ -8,40 +8,134 @@
 <EditForm Model="@addNewRestaurantItem" OnValidSubmit="@AddNewRestaurant">
     <DataAnnotationsValidator/>
     <ValidationSummary/>
-    <div class="form-group">Name of the restaurant:<br/>
-        <InputText @bind-Value="addNewRestaurantItem.Name"/></div>
+    <div class="card" style="margin-bottom: 20px">
+      <div class="card-body">
+        <h4>Information:</h4>
+        <div class="form-group">
+          <label>Name of the restaurant:</label>
+          <InputText placeholder="Enter a name of the restaurant" style="max-width: 50%" class="form-control" @bind-Value="addNewRestaurantItem.Name"/>
+        </div>
     
-    <div class="form-group">Address of the restaurant:<br/>
-        <InputText @bind-Value="addNewRestaurantItem.Address"/></div>
+        <div class="form-group">
+          <label>Description:</label>
+          <InputText placeholder="Enter a description of the restaurant" style="max-width: 50%" class="form-control" @bind-Value="addNewRestaurantItem.Description"/>
+        </div>
+
+        <div class="form-group">
+          <label>Address of the restaurant:</label>
+          <InputText placeholder="Enter an address of the restaurant" style="max-width: 50%" class="form-control" @bind-Value="addNewRestaurantItem.Address"/>
+        </div>
     
-    <div class="form-group">Phone number of the restaurant:<br/>
-        <InputText @bind-Value="addNewRestaurantItem.PhoneNumber"/></div>
-    
-    <div class="form-group">Opening hours: <br/>
-        <p> Monday:<InputText @bind-Value="addNewRestaurantItem.OpeningHoursMonday"></InputText><br/>
-            Tuesday:<InputText @bind-Value="addNewRestaurantItem.OpeningHoursTuesday"></InputText><br/>
-            Wednesday:<InputText @bind-Value="addNewRestaurantItem.OpeningHoursWednesday"></InputText><br/>
-            Thursday:<InputText @bind-Value="addNewRestaurantItem.OpeningHoursThursday"></InputText><br/>
-            Friday:<InputText @bind-Value="addNewRestaurantItem.OpeningHoursFriday"></InputText><br/>
-            Saturday:<InputText @bind-Value="addNewRestaurantItem.OpeningHoursSaturday"></InputText><br/>
-            Sunday:<InputText @bind-Value="addNewRestaurantItem.OpeningHoursSunday"></InputText><br/>
-        </p>
+        <div class="form-group">
+          <label>Phone number:</label>
+          <InputText placeholder="Enter a phone number of the restaurant"  style="max-width: 50%" class="form-control" @bind-Value="addNewRestaurantItem.PhoneNumber"/>
+        </div>
+      </div>
     </div>
     
-    <div class="form-group">Description of restaurant:<br/>
-        <InputText @bind-Value="addNewRestaurantItem.Description"/></div>
-    
-    <div class="form-group">Delivery options:<br/>
-        First:
-        Name: <InputText @bind-Value="addNewRestaurantItem.DeliveryOption1.DeliveryName"/><br/>
-        Price: <InputNumber @bind-Value="addNewRestaurantItem.DeliveryOption1.Price"/><br/><br/>
-        
-        Second:
-        Name: <InputText @bind-Value="addNewRestaurantItem.DeliveryOption2.DeliveryName"/><br/>
-        Price: <InputNumber @bind-Value="addNewRestaurantItem.DeliveryOption2.Price"/><br/>
+    <div class="card" style="margin-bottom: 20px">
+      <div class="card-body">
+        <h4>Opening hours:</h4>
+        <div class="form-group">
+          <div class="row">
+            <div class="column">
+              <label style="margin-left: 20px; min-width: 90px">Monday:</label>
+            </div>
+            <div class="column">
+              <InputText placeholder="8:00 - 20:00"  class="form-control" @bind-Value="addNewRestaurantItem.OpeningHoursMonday"></InputText>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="column">
+              <label style="margin-left: 20px; min-width: 90px">Tuesday:</label>
+            </div>
+            <div class="column">
+              <InputText placeholder="8:00 - 20:00"  class="form-control" @bind-Value="addNewRestaurantItem.OpeningHoursTuesday"></InputText>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="column">
+              <label style="margin-left: 20px; min-width: 90px">Wednesday:</label>
+            </div>
+            <div class="column">
+              <InputText placeholder="8:00 - 20:00"  class="form-control" @bind-Value="addNewRestaurantItem.OpeningHoursWednesday"></InputText>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="column">
+              <label style="margin-left: 20px; min-width: 90px">Thursday:</label>
+            </div>
+            <div class="column">
+              <InputText placeholder="8:00 - 20:00"  class="form-control" @bind-Value="addNewRestaurantItem.OpeningHoursThursday"></InputText>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="column">
+              <label style="margin-left: 20px; min-width: 90px">Friday:</label>
+            </div>
+            <div class="column">
+              <InputText placeholder="8:00 - 20:00"  class="form-control" @bind-Value="addNewRestaurantItem.OpeningHoursFriday"></InputText>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="column">
+              <label style="margin-left: 20px; min-width: 90px">Saturday:</label>
+            </div>
+            <div class="column">
+              <InputText placeholder="8:00 - 20:00"  class="form-control" @bind-Value="addNewRestaurantItem.OpeningHoursSaturday"></InputText>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="column">
+              <label style="margin-left: 20px; min-width: 90px">Sunday:</label>
+            </div>
+            <div class="column">
+              <InputText placeholder="8:00 - 20:00" class="form-control" @bind-Value="addNewRestaurantItem.OpeningHoursSunday"></InputText>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     
     
+    <div class="card" style="margin-bottom: 20px">
+              <div class="card-body">
+    <h4>Delivery options:</h4>
+                <div class="row">
+                  <div class="column" style="padding: 20px">
+                    <div class="card">
+                      <div class="card-body">
+                        <h6>Delivery option 1</h6>
+                        <InputText placeholder="Delivery name" class="form-control" @bind-Value="addNewRestaurantItem.DeliveryOption1.DeliveryName"/>
+                        <InputNumber class="form-control" @bind-Value="addNewRestaurantItem.DeliveryOption1.Price"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="column" style="padding: 20px">
+                    <div class="card">
+                      <div class="card-body">
+                        <h6>Delivery option 2</h6>
+                        <InputText placeholder="Delivery name" class="form-control" @bind-Value="addNewRestaurantItem.DeliveryOption2.DeliveryName"/>
+                        <InputNumber class="form-control" @bind-Value="addNewRestaurantItem.DeliveryOption2.Price"/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+    </div>
+
     <p class="actions"><button class="btn btn-outline-dark" type="submit">Save</button></p>
 </EditForm>
 

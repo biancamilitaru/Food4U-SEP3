@@ -57,7 +57,7 @@ namespace Food4U_SEP3.SocketHandler
         public Task<Restaurant> UpdateRestaurant(Restaurant restaurant ,int restaurantId)
         {
             string serialisedRestaurant = JsonSerializer.Serialize(restaurant);
-            SendToServer("UpdateRestaurant",serialisedRestaurant + restaurantId);
+            SendToServer("UpdateRestaurant",serialisedRestaurant);
             return Task.FromResult(restaurant);
         }
 

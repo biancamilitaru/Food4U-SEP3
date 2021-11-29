@@ -4,11 +4,28 @@
 @using Entities
 @inject IRestaurantService _restaurantService;
 
-<h1>Welcome RestaurantName</h1>
+@if (_restaurant.Name != null)
+{
+    <h1>Welcome @_restaurant.Name</h1>
+}
 <RestaurantInfoComponent Id=@Id> </RestaurantInfoComponent>  
 
 @code {
     [Parameter]
     public int Id { get; set; }
     
+    
+    private Restaurant _restaurant = new ();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _restaurant = await _restaurantService.GetRestaurantsAsync(Id);
+        }
+        catch (Exception e)
+        {
+    // update some error label here, or show popup..
+        }
+    }
 }
