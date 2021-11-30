@@ -1,61 +1,71 @@
-﻿@page "/EditRestaurant"
+﻿@page "/EditRestaurant/{Id:int}"
 @using Entities
 @using Client.Data.RestaurantService
-@inject Restaurant Restaurant
-@inject IRestaurantService RestaurantService
+@inject IRestaurantService _restaurantService;
 
 <h3>EditRestaurant</h3>
-
-
-
-
-<EditForm Model="editRestaurantItem" OnValidSubmit="EditExistingRestaurant">
-    <DataAnnotationsValidator/>
-    <ValidationSummary/>
-    <div class="form-group">New name of the restaurant:<br/>
-        <InputText @bind-Value="Restaurant.Name"/></div>
+@if (_restaurant.Name != null) {
+    <EditForm Model="_restaurant" OnValidSubmit="EditExistingRestaurant">
+        <DataAnnotationsValidator/>
+        <ValidationSummary/>
+        <div class="form-group">New name of the restaurant:<br/>
+            <InputText @bind-Value="_restaurant.Name"/></div>
     
-    <div class="form-group">New address of the restaurant:<br/>
-        <InputText @bind-Value="Restaurant.Address"/></div>
+        <div class="form-group">New address of the restaurant:<br/>
+            <InputText @bind-Value="_restaurant.Address"/></div>
     
-    <div class="form-group">New phone number of the restaurant:<br/>
-        <InputText @bind-Value="Restaurant.PhoneNumber"/></div>
+        <div class="form-group">New phone number of the restaurant:<br/>
+            <InputText @bind-Value="_restaurant.PhoneNumber"/></div>
     
-    <div class="form-group">New opening hours: <br/>
-        <p> Monday:<InputText @bind-Value="Restaurant.OpeningHoursMonday"></InputText><br/>
-            Tuesday:<InputText @bind-Value="Restaurant.OpeningHoursTuesday"></InputText><br/>
-            Wednesday:<InputText @bind-Value="Restaurant.OpeningHoursWednesday"></InputText><br/>
-            Thursday:<InputText @bind-Value="Restaurant.OpeningHoursThursday"></InputText><br/>
-            Friday:<InputText @bind-Value="Restaurant.OpeningHoursFriday"></InputText><br/>
-            Saturday:<InputText @bind-Value="Restaurant.OpeningHoursSaturday"></InputText><br/>
-            Sunday:<InputText @bind-Value="Restaurant.OpeningHoursSunday"></InputText><br/>
-        </p>
-    </div>
-    
-    <div class="form-group">New description of restaurant:<br/>
-        <InputText @bind-Value="Restaurant.Description"/></div>
-    
-     <div class="form-group">Delivery options:<br/>
-            First:
-            Name: <InputText @bind-Value="Restaurant.DeliveryOption1.DeliveryName"/><br/>
-            Price: <InputNumber @bind-Value="Restaurant.DeliveryOption1.Price"/><br/><br/>
-            
-            Second:
-            Name: <InputText @bind-Value="Restaurant.DeliveryOption2.DeliveryName"/><br/>
-            Price: <InputNumber @bind-Value="Restaurant.DeliveryOption2.Price"/><br/>
+        <div class="form-group">New opening hours: <br/>
+            <p> Monday:<InputText @bind-Value="_restaurant.OpeningHoursMonday"></InputText><br/>
+                Tuesday:<InputText @bind-Value="_restaurant.OpeningHoursTuesday"></InputText><br/>
+                Wednesday:<InputText @bind-Value="_restaurant.OpeningHoursWednesday"></InputText><br/>
+                Thursday:<InputText @bind-Value="_restaurant.OpeningHoursThursday"></InputText><br/>
+                Friday:<InputText @bind-Value="_restaurant.OpeningHoursFriday"></InputText><br/>
+                Saturday:<InputText @bind-Value="_restaurant.OpeningHoursSaturday"></InputText><br/>
+                Sunday:<InputText @bind-Value="_restaurant.OpeningHoursSunday"></InputText><br/>
+            </p>
         </div>
     
-    <p class="actions"><button class="btn btn-outline-dark" type="submit">Save</button></p>
-</EditForm>
+        <div class="form-group">New description of restaurant:<br/>
+            <InputText @bind-Value="_restaurant.Description"/></div>
+    
+        <div class="form-group">Delivery options:<br/>
+            First:
+            Name: <InputText @bind-Value="_restaurant.DeliveryOption1.DeliveryName"/><br/>
+            Price: <InputNumber @bind-Value="_restaurant.DeliveryOption1.Price"/><br/><br/>
+            
+            Second:
+            Name: <InputText @bind-Value="_restaurant.DeliveryOption2.DeliveryName"/><br/>
+            Price: <InputNumber @bind-Value="_restaurant.DeliveryOption2.Price"/><br/>
+        </div>
+    
+        <p class="actions"><button class="btn btn-outline-dark" type="submit">Save</button></p>
+    </EditForm>
+}
 
 
 @code {
-
-    public void EditExistingRestaurant()
+    [Parameter]
+    public int Id { get; set; }
+    
+    private Restaurant _restaurant = new ();
+    
+    protected override async Task OnInitializedAsync()
     {
-        RestaurantService.EditRestaurantAsync(editRestaurantItem);
+        try
+        {
+            _restaurant = await _restaurantService.GetRestaurantsAsync(Id);
+        }
+        catch (Exception e)
+        {
+    // update some error label here, or show popup..
+        }
     }
-
-    private Restaurant editRestaurantItem = new Restaurant();
-
+    
+    private void EditExistingRestaurant()
+        {
+            _restaurantService.EditRestaurantAsync(_restaurant);
+        }
 }
