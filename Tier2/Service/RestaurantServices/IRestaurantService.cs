@@ -7,10 +7,10 @@ namespace Food4U_SEP3.RestaurantServices
 {
     public interface IRestaurantService
     {
-        Task<Restaurant> GetRestaurantAsync(int restaurantId);
+        Task<Restaurant> GetRestaurantAsync(string username);
         Task<Restaurant> AddRestaurantAsync(Restaurant restaurant);
-        Task RemoveRestaurantAsync(int restaurantID);
-        Task<Restaurant> UpdateRestaurantAsync(Restaurant restaurant, int restaurantId);
+        Task RemoveRestaurantAsync(string username);
+        Task<Restaurant> UpdateRestaurantAsync(Restaurant restaurant, string username);
         Task <Restaurant> ValidateLoginAsync(string username);
 
     }

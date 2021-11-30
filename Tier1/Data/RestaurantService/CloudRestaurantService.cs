@@ -41,12 +41,12 @@ namespace Client.Data.RestaurantService
         {
             string restaurantAsJson = JsonSerializer.Serialize(restaurant);
             HttpContent content = new StringContent(restaurantAsJson, Encoding.UTF8, "application/json");
-            await client.PatchAsync($"{uri}/Restaurants/{restaurant.RestaurantId}", content);
+            await client.PatchAsync($"{uri}/Restaurants/{restaurant.Username}", content);
         }
 
-        public async Task<Restaurant> GetRestaurantsAsync(int restaurantID)
+        public async Task<Restaurant> GetRestaurantsAsync(string username)
         {
-            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Restaurants?restaurantId={restaurantID}");
+            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Restaurants?restaurantId={username}");
 
             if (!responseMessage.IsSuccessStatusCode)
                 throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
@@ -61,9 +61,9 @@ namespace Client.Data.RestaurantService
             return restaurant;
         }
 
-        public async Task RemoveRestaurantAsync(int restaurantId)
+        public async Task RemoveRestaurantAsync(string username)
         {
-            await client.DeleteAsync($"{uri}/Restaurants/{restaurantId}");
+            await client.DeleteAsync($"{uri}/Restaurants/{username}");
         }
     }
 }

@@ -16,11 +16,11 @@ namespace Food4U_SEP3.RestaurantServices
             this.restaurantHandlerT2 = restaurantHandlerT2;
         }
 
-        public async Task<Restaurant> GetRestaurantAsync(int restaurantId)
+        public async Task<Restaurant> GetRestaurantAsync(string username)
         {
             try
             {
-                return await restaurantHandlerT2.GetRestaurant(restaurantId);
+                return await restaurantHandlerT2.GetRestaurant(username);
             }
             catch (Exception e)
             {
@@ -45,11 +45,11 @@ namespace Food4U_SEP3.RestaurantServices
             
         }
 
-        public async Task RemoveRestaurantAsync(int restaurantID)
+        public async Task RemoveRestaurantAsync(string username)
         {
             try
             {
-                await restaurantHandlerT2.RemoveRestaurant(restaurantID);
+                await restaurantHandlerT2.RemoveRestaurant(username);
             }
             catch (Exception e)
             {
@@ -58,11 +58,11 @@ namespace Food4U_SEP3.RestaurantServices
             }
         }
 
-        public async Task<Restaurant> UpdateRestaurantAsync(Restaurant restaurant, int restaurantId)
+        public async Task<Restaurant> UpdateRestaurantAsync(Restaurant restaurant, string username)
         {
             try
             {
-                return await restaurantHandlerT2.UpdateRestaurant(restaurant , restaurantId);
+                return await restaurantHandlerT2.UpdateRestaurant(restaurant , username);
             }
             catch (Exception e)
             {

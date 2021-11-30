@@ -13,11 +13,6 @@ namespace Food4U_SEP3.SocketHandler
 {
     public class SocketUserHandlerT2 : SocketHandler,IUserHandlerT2
     {
-        
-        public SocketUserHandlerT2() : base()
-        {
-        }
-
         public Task<User> GetUser(string username)
         {
             SendToServer("ValidateUser",username);

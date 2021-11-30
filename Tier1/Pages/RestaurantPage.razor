@@ -1,30 +1,30 @@
-@page "/Restaurant/{Id:int}"
+@page "/Restaurant/{Username:string}"
 @using Client.Components
 @using Client.Data.RestaurantService
 @using Entities
-@inject IRestaurantService _restaurantService;
+@inject IRestaurantService restaurantService;
 @inject NavigationManager NavigationManager;
 
-@if (_restaurant.Name != null)
+@if (restaurant.Name != null)
 {
-    <h1>Welcome @_restaurant.Name</h1>
+    <h1>Welcome @restaurant.Name</h1>
 }
-<RestaurantInfoComponent Id=@Id> </RestaurantInfoComponent>  
+<RestaurantInfoComponent Username=@username> </RestaurantInfoComponent>  
 
 <button @onclick="NavigateToAddMenu">Add Menu</button>
 
 @code {
     [Parameter]
-    public int Id { get; set; }
+    public string username { get; set; }
     
     
-    private Restaurant _restaurant = new ();
+    private Restaurant restaurant = new ();
     
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            _restaurant = await _restaurantService.GetRestaurantsAsync(Id);
+            restaurant = await restaurantService.GetRestaurantsAsync(username);
         }
         catch (Exception e)
         {

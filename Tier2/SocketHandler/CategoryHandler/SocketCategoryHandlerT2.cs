@@ -12,11 +12,6 @@ namespace Food4U_SEP3.SocketHandler
     public class SocketCategoryHandlerT2 : SocketHandler, ICategoryHandlerT2
     {
 
-        public SocketCategoryHandlerT2()
-        {
-        }
-
-
         public Task<Category> AddCategory(Category category)
         {
             string serializedCategory = JsonSerializer.Serialize(category);

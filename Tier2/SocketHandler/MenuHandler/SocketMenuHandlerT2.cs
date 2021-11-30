@@ -10,11 +10,6 @@ namespace Food4U_SEP3.SocketHandler
 {
     public class SocketMenuHandlerT2 : SocketHandler, IMenuHandlerT2
     {
-
-        public SocketMenuHandlerT2()
-        {
-        }
-
         public Task<Menu> AddMenu(Menu menu)
         {
             string serializedMenu = JsonSerializer.Serialize(menu);

@@ -1,8 +1,8 @@
 @using Entities
 @using Client.Data.RestaurantService
-@inject IRestaurantService _restaurantService;
+@inject IRestaurantService restaurantService;
 
-@if (_restaurant.Name != null){
+@if (restaurant.Name != null){
 
 <div class="card">
   <div class="card-body">
@@ -13,7 +13,7 @@
                   <h6>Adress:</h6> 
               </div>
               <div class="column" style="padding-left: 10px;">
-                  @_restaurant.Address
+                  @restaurant.Address
               </div>
           </div>
           <div class="row">
@@ -21,7 +21,7 @@
                   <h6>Phone number:</h6>
               </div>
               <div class="column" style="padding-left: 10px;">
-                  @_restaurant.PhoneNumber
+                  @restaurant.PhoneNumber
               </div>
           </div>
           <a data-toggle="collapse" data-target="#collapseOpeningHours" role="button" aria-expanded="false" aria-controls="collapseOpeningHours">
@@ -33,7 +33,7 @@
                       <h6>Monday:</h6>
                   </div>
                   <div class="column" style="padding-left: 10px;">
-                      @_restaurant.OpeningHoursMonday
+                      @restaurant.OpeningHoursMonday
                   </div>
               </div>
               <div class="row">
@@ -41,7 +41,7 @@
                       <h6>Tuesday:</h6>
                   </div>
                   <div class="column" style="padding-left: 10px;">
-                      @_restaurant.OpeningHoursTuesday
+                      @restaurant.OpeningHoursTuesday
                   </div>
               </div>
               <div class="row">
@@ -49,7 +49,7 @@
                       <h6>Wednesday:</h6>
                   </div>
                   <div class="column" style="padding-left: 10px;">
-                      @_restaurant.OpeningHoursWednesday
+                      @restaurant.OpeningHoursWednesday
                   </div>
               </div>
               <div class="row">
@@ -57,7 +57,7 @@
                       <h6>Thurday:</h6>
                   </div>
                   <div class="column" style="padding-left: 10px;">
-                      @_restaurant.OpeningHoursThursday
+                      @restaurant.OpeningHoursThursday
                   </div>
               </div>
               <div class="row">
@@ -65,7 +65,7 @@
                       <h6>Friday:</h6>
                   </div>
                   <div class="column" style="padding-left: 10px;">
-                      @_restaurant.OpeningHoursFriday
+                      @restaurant.OpeningHoursFriday
                   </div>
               </div>
               <div class="row">
@@ -73,7 +73,7 @@
                       <h6>Saturday:</h6>
                   </div>
                   <div class="column" style="padding-left: 10px;">
-                      @_restaurant.OpeningHoursSaturday
+                      @restaurant.OpeningHoursSaturday
                   </div>
               </div>
               <div class="row">
@@ -81,7 +81,7 @@
                       <h6>Sunday:</h6>
                   </div>
                   <div class="column" style="padding-left: 10px;">
-                      @_restaurant.OpeningHoursSunday
+                      @restaurant.OpeningHoursSunday
                   </div>
               </div>
           </div>
@@ -91,18 +91,18 @@
           <div class="collapse" id="collapseDelivery">
               <div class="row">
                   <div class="column" style="padding-left: 30px">
-                      <h6>@_restaurant.DeliveryOption1.DeliveryName</h6>
+                      <h6>@restaurant.DeliveryOption1.DeliveryName</h6>
                   </div>
                   <div class="column" style="padding-left: 10px;">
-                      @_restaurant.DeliveryOption1.Price
+                      @restaurant.DeliveryOption1.Price
                   </div>
               </div>
               <div class="row">
                   <div class="column" style="padding-left: 30px">
-                      <h6>@_restaurant.DeliveryOption2.DeliveryName</h6>
+                      <h6>@restaurant.DeliveryOption2.DeliveryName</h6>
                   </div>
                   <div class="column" style="padding-left: 10px;">
-                      @_restaurant.DeliveryOption2.Price
+                      @restaurant.DeliveryOption2.Price
                   </div>
               </div>
           </div>
@@ -113,15 +113,15 @@
 
 @code {
     [Parameter]
-    public int Id { get; set; }
+    public string Username { get; set; }
     
-    private Restaurant _restaurant = new ();
+    private Restaurant restaurant = new ();
     
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            _restaurant = await _restaurantService.GetRestaurantsAsync(Id);
+            restaurant = await restaurantService.GetRestaurantsAsync(Username);
         }
         catch (Exception e)
         {

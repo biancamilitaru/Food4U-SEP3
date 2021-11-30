@@ -12,13 +12,9 @@ namespace Food4U_SEP3.SocketHandler
     public class SocketRestaurantHandlerT2 : SocketHandler,IRestaurantHandlerT2
     {
 
-        public SocketRestaurantHandlerT2()
+        public Task<Restaurant> GetRestaurant(string username)
         {
-        }
-
-        public Task<Restaurant> GetRestaurant(int restaurantId)
-        {
-            SendToServer("GetRestaurant",restaurantId.ToString());
+            SendToServer("GetRestaurant",username);
             Restaurant getRestaurant = JsonSerializer.Deserialize<Restaurant>(GetFromServer());
             return Task.FromResult(getRestaurant);
         }
@@ -30,16 +26,16 @@ namespace Food4U_SEP3.SocketHandler
             return Task.FromResult(restaurant);
         }
 
-        public Task<Restaurant> UpdateRestaurant(Restaurant restaurant ,int restaurantId)
+        public Task<Restaurant> UpdateRestaurant(Restaurant restaurant ,string username)
         {
             string serialisedRestaurant = JsonSerializer.Serialize(restaurant);
             SendToServer("UpdateRestaurant",serialisedRestaurant);
             return Task.FromResult(restaurant);
         }
 
-        public Task<Restaurant> RemoveRestaurant(int restaurantId)
+        public Task<Restaurant> RemoveRestaurant(string username)
         {
-            SendToServer("RemoveRestaurant",restaurantId.ToString());
+            SendToServer("RemoveRestaurant",username.ToString());
             Restaurant removeRestaurant = JsonSerializer.Deserialize<Restaurant>(GetFromServer());
             return Task.FromResult(removeRestaurant);
         }

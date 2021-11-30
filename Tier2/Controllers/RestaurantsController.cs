@@ -31,11 +31,11 @@ namespace Food4U_SEP3.Controllers
         }
         
         [HttpPatch]
-        public async Task<ActionResult> UpdateRestaurantAsync([FromBody] Restaurant restaurant, [FromQuery] int restaurantId)
+        public async Task<ActionResult> UpdateRestaurantAsync([FromBody] Restaurant restaurant, [FromQuery] string username)
         {
             try
             {
-                await restaurantService.UpdateRestaurantAsync(restaurant, restaurantId);
+                await restaurantService.UpdateRestaurantAsync(restaurant, username);
                 return Ok();
             }
             catch (Exception e)
@@ -45,11 +45,11 @@ namespace Food4U_SEP3.Controllers
         }
         
         [HttpGet]
-        public async Task<ActionResult<Restaurant>> GetRestaurantAsync([FromQuery] int restaurantId)
+        public async Task<ActionResult<Restaurant>> GetRestaurantAsync([FromQuery] string username)
         {
             try
             {
-                Restaurant restaurant = await restaurantService.GetRestaurantAsync(restaurantId);
+                Restaurant restaurant = await restaurantService.GetRestaurantAsync(username);
                 return Ok(restaurant);
             }
             catch (Exception e)
@@ -59,11 +59,11 @@ namespace Food4U_SEP3.Controllers
         }
         
         [HttpDelete]
-        public async Task<ActionResult> DeleteRestaurantAsync([FromQuery] int restaurantId)
+        public async Task<ActionResult> DeleteRestaurantAsync([FromQuery] string username)
         {
             try
             {
-                await restaurantService.RemoveRestaurantAsync(restaurantId);
+                await restaurantService.RemoveRestaurantAsync(username);
                 return Ok();
             }
             catch (Exception e)

@@ -3,7 +3,6 @@ using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Entities;
 using Food4U_SEP3.Models;
 
 namespace Client.Data.UserServices

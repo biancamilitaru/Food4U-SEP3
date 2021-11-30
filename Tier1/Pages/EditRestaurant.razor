@@ -1,44 +1,44 @@
 ﻿@page "/EditRestaurant/{Id:int}"
 @using Entities
 @using Client.Data.RestaurantService
-@inject IRestaurantService _restaurantService;
+@inject IRestaurantService restaurantService;
 
 <h3>EditRestaurant</h3>
-@if (_restaurant.Name != null) {
-    <EditForm Model="_restaurant" OnValidSubmit="EditExistingRestaurant">
+@if (restaurant.Name != null) {
+    <EditForm Model="restaurant" OnValidSubmit="EditExistingRestaurant">
         <DataAnnotationsValidator/>
         <ValidationSummary/>
         <div class="form-group">New name of the restaurant:<br/>
-            <InputText @bind-Value="_restaurant.Name"/></div>
+            <InputText @bind-Value="restaurant.Name"/></div>
     
         <div class="form-group">New address of the restaurant:<br/>
-            <InputText @bind-Value="_restaurant.Address"/></div>
+            <InputText @bind-Value="restaurant.Address"/></div>
     
         <div class="form-group">New phone number of the restaurant:<br/>
-            <InputText @bind-Value="_restaurant.PhoneNumber"/></div>
+            <InputText @bind-Value="restaurant.PhoneNumber"/></div>
     
         <div class="form-group">New opening hours: <br/>
-            <p> Monday:<InputText @bind-Value="_restaurant.OpeningHoursMonday"></InputText><br/>
-                Tuesday:<InputText @bind-Value="_restaurant.OpeningHoursTuesday"></InputText><br/>
-                Wednesday:<InputText @bind-Value="_restaurant.OpeningHoursWednesday"></InputText><br/>
-                Thursday:<InputText @bind-Value="_restaurant.OpeningHoursThursday"></InputText><br/>
-                Friday:<InputText @bind-Value="_restaurant.OpeningHoursFriday"></InputText><br/>
-                Saturday:<InputText @bind-Value="_restaurant.OpeningHoursSaturday"></InputText><br/>
-                Sunday:<InputText @bind-Value="_restaurant.OpeningHoursSunday"></InputText><br/>
+            <p> Monday:<InputText @bind-Value="restaurant.OpeningHoursMonday"></InputText><br/>
+                Tuesday:<InputText @bind-Value="restaurant.OpeningHoursTuesday"></InputText><br/>
+                Wednesday:<InputText @bind-Value="restaurant.OpeningHoursWednesday"></InputText><br/>
+                Thursday:<InputText @bind-Value="restaurant.OpeningHoursThursday"></InputText><br/>
+                Friday:<InputText @bind-Value="restaurant.OpeningHoursFriday"></InputText><br/>
+                Saturday:<InputText @bind-Value="restaurant.OpeningHoursSaturday"></InputText><br/>
+                Sunday:<InputText @bind-Value="restaurant.OpeningHoursSunday"></InputText><br/>
             </p>
         </div>
     
         <div class="form-group">New description of restaurant:<br/>
-            <InputText @bind-Value="_restaurant.Description"/></div>
+            <InputText @bind-Value="restaurant.Description"/></div>
     
         <div class="form-group">Delivery options:<br/>
             First:
-            Name: <InputText @bind-Value="_restaurant.DeliveryOption1.DeliveryName"/><br/>
-            Price: <InputNumber @bind-Value="_restaurant.DeliveryOption1.Price"/><br/><br/>
+            Name: <InputText @bind-Value="restaurant.DeliveryOption1.DeliveryName"/><br/>
+            Price: <InputNumber @bind-Value="restaurant.DeliveryOption1.Price"/><br/><br/>
             
             Second:
-            Name: <InputText @bind-Value="_restaurant.DeliveryOption2.DeliveryName"/><br/>
-            Price: <InputNumber @bind-Value="_restaurant.DeliveryOption2.Price"/><br/>
+            Name: <InputText @bind-Value="restaurant.DeliveryOption2.DeliveryName"/><br/>
+            Price: <InputNumber @bind-Value="restaurant.DeliveryOption2.Price"/><br/>
         </div>
     
         <p class="actions"><button class="btn btn-outline-dark" type="submit">Save</button></p>
@@ -48,15 +48,15 @@
 
 @code {
     [Parameter]
-    public int Id { get; set; }
+    public string Username { get; set; }
     
-    private Restaurant _restaurant = new ();
+    private Restaurant restaurant = new ();
     
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            _restaurant = await _restaurantService.GetRestaurantsAsync(Id);
+            restaurant = await restaurantService.GetRestaurantsAsync(Username);
         }
         catch (Exception e)
         {
@@ -66,6 +66,6 @@
     
     private void EditExistingRestaurant()
         {
-            _restaurantService.EditRestaurantAsync(_restaurant);
+            restaurantService.EditRestaurantAsync(restaurant);
         }
 }
