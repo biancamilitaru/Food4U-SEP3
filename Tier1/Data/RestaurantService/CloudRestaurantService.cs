@@ -5,7 +5,6 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Entities;
-using Food4U_SEP3.Models;
 
 namespace Client.Data.RestaurantService
 {
@@ -84,7 +83,6 @@ namespace Client.Data.RestaurantService
             throw new Exception("Restaurant not found");
         }
 
-        public async Task RemoveRestaurantAsync(int restaurantId)
         public async Task RemoveRestaurantAsync(string username)
         {
             await client.DeleteAsync($"{uri}/Restaurants/{username}");
