@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using Food4U_SEP3.Models;
 
 namespace Entities
 {
-    public class Restaurant
+    public class Restaurant : User
     {
         [Required,JsonPropertyName("name"), MaxLength(50)]
         public string Name { get; set; }
