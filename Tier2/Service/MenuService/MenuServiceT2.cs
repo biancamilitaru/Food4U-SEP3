@@ -7,11 +7,11 @@ namespace Food4U_SEP3.Service.MenuService
 {
     public class MenuServiceT2 : IMenuServiceT2
     {
-        private readonly ISocketMenuHandlerT2 menuHandler;
+        private readonly IMenuHandlerT2 menuHandler;
 
-        public MenuServiceT2()
+        public MenuServiceT2(IMenuHandlerT2 menuHandler)
         {
-            menuHandler = new SocketMenuHandlerT2();
+            this.menuHandler = menuHandler;
         }
 
 

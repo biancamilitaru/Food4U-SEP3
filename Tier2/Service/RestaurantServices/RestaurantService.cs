@@ -9,18 +9,18 @@ namespace Food4U_SEP3.RestaurantServices
 {
     public class RestaurantService : IRestaurantService
     {
-        private readonly ISocketRestaurantHandler restaurantHandler;
+        private readonly IRestaurantHandlerT2 _restaurantHandlerT2;
         
-        public RestaurantService()
+        public RestaurantService(IRestaurantHandlerT2 restaurantHandlerT2)
         {
-            restaurantHandler = new SocketRestaurantHandler();
+            this._restaurantHandlerT2 = restaurantHandlerT2;
         }
 
         public async Task<Restaurant> GetRestaurantAsync(int restaurantId)
         {
             try
             {
-                return await restaurantHandler.GetRestaurant(restaurantId);
+                return await _restaurantHandlerT2.GetRestaurant(restaurantId);
             }
             catch (Exception e)
             {
@@ -35,7 +35,7 @@ namespace Food4U_SEP3.RestaurantServices
         {
             try
             {
-                return await restaurantHandler.AddRestaurant(restaurant);
+                return await _restaurantHandlerT2.AddRestaurant(restaurant);
             }
             catch (Exception e)
             {
@@ -49,7 +49,7 @@ namespace Food4U_SEP3.RestaurantServices
         {
             try
             {
-                await restaurantHandler.RemoveRestaurant(restaurantID);
+                await _restaurantHandlerT2.RemoveRestaurant(restaurantID);
             }
             catch (Exception e)
             {
@@ -62,7 +62,7 @@ namespace Food4U_SEP3.RestaurantServices
         {
             try
             {
-                return await restaurantHandler.UpdateRestaurant(restaurant , restaurantId);
+                return await _restaurantHandlerT2.UpdateRestaurant(restaurant , restaurantId);
             }
             catch (Exception e)
             {

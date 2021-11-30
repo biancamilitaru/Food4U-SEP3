@@ -17,6 +17,7 @@ namespace Client.Data.CategoryService
             client = new HttpClient();
         }
         
+        //TODO fix this method and the rest
         public async Task AddCategoryAsync(Category category)
         {
             string categoryAsJson = JsonSerializer.Serialize(category);
@@ -28,12 +29,13 @@ namespace Client.Data.CategoryService
 
             Console.WriteLine(content);
 
-            HttpResponseMessage responseMessage = await client.PostAsync($"{uri}/Categories", content);
+            HttpResponseMessage responseMessage = await client.PostAsync($"{uri}/Categories/{category.CategoryId}", content);
             
             if (!responseMessage.IsSuccessStatusCode)
                 throw new Exception($@"Error: {responseMessage.StatusCode},{responseMessage.ReasonPhrase}");
 
         }
+        
 
         public async Task EditCategoryAsync(Category category)
         {

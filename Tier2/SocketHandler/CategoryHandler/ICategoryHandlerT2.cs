@@ -3,7 +3,7 @@ using Entities;
 
 namespace Food4U_SEP3.SocketHandler
 {
-    public interface ISocketCategoryHandlerT2
+    public interface ICategoryHandlerT2
     {
         Task<Category> AddCategory(Category category);
 

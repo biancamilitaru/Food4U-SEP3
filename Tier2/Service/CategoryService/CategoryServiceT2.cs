@@ -7,18 +7,18 @@ namespace Food4U_SEP3.Service.CategoryService
 {
     public class CategoryServiceT2 : ICategoryServiceT2
     {
-        private readonly ISocketCategoryHandlerT2 socketCategoryHandler;
+        private readonly ICategoryHandlerT2 categoryHandler;
 
-        public CategoryServiceT2()
+        public CategoryServiceT2(ICategoryHandlerT2 categoryHandler)
         {
-           socketCategoryHandler = new SocketCategoryHandlerT2();
+            this.categoryHandler = categoryHandler;
         }
 
         public async Task<Category> AddCategoryAsync(Category category)
         {
             try
             {
-                return await socketCategoryHandler.AddCategory(category);
+                return await categoryHandler.AddCategory(category);
             }
             catch (Exception e)
             {
@@ -31,7 +31,7 @@ namespace Food4U_SEP3.Service.CategoryService
         {
             try
             {
-                return await socketCategoryHandler.UpdateCategory(category, categoryId);
+                return await categoryHandler.UpdateCategory(category, categoryId);
             }
             catch (Exception e)
             {

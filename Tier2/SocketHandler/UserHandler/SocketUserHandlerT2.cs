@@ -5,19 +5,17 @@ using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Transactions;
 using Entities;
 using Food4U_SEP3.Models;
 
 namespace Food4U_SEP3.SocketHandler
 {
-    public class SocketUserHandler : SocketHandler,ISocketUserHandler
+    public class SocketUserHandlerT2 : SocketHandler,IUserHandlerT2
     {
-        private readonly TcpClient _tcpClient = new ("127.0.0.1", 2910);
-        private readonly NetworkStream _stream;
-
-        public SocketUserHandler()
+        
+        public SocketUserHandlerT2() : base()
         {
-            _stream = _tcpClient.GetStream();
         }
 
         public Task<User> GetUser(string username)

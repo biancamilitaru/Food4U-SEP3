@@ -16,24 +16,24 @@ namespace Food4U_SEP3.UserServices
 {
     public class UserService : IUserService
     {
-        private readonly ISocketUserHandler _userHandler;
+        private readonly IUserHandlerT2 userHandlerT2;
 
 
-        public UserService()
+        public UserService(IUserHandlerT2 userHandlerT2)
         {
-            _userHandler = new SocketUserHandler();
+            this.userHandlerT2 = userHandlerT2;
         }
         
         public async Task <User> ValidateLoginAsync(string username)
         {
-            return await _userHandler.GetUser(username);
+            return await userHandlerT2.GetUser(username);
         }
 
         public async Task<User> AddUserAsync(User user)
         {
             try
             {
-                return await _userHandler.AddUser(user);
+                return await userHandlerT2.AddUser(user);
             }
             catch (Exception e)
             {
@@ -46,7 +46,7 @@ namespace Food4U_SEP3.UserServices
         {
             try
             {
-                return await _userHandler.UpdateUser(user, username);
+                return await userHandlerT2.UpdateUser(user, username);
             }
             catch (Exception e)
             {

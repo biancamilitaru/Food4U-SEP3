@@ -5,7 +5,7 @@ using Entities;
 
 namespace Food4U_SEP3.SocketHandler
 {
-    public interface ISocketRestaurantHandler
+    public interface IRestaurantHandlerT2
     {
         Task<Restaurant> GetRestaurant(int restaurantId); 
         Task<Restaurant> AddRestaurant(Restaurant restaurant);

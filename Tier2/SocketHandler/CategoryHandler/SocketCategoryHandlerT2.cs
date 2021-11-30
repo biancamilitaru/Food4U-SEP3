@@ -9,14 +9,11 @@ using Food4U_SEP3.Models;
 
 namespace Food4U_SEP3.SocketHandler
 {
-    public class SocketCategoryHandlerT2 : SocketHandler, ISocketCategoryHandlerT2
+    public class SocketCategoryHandlerT2 : SocketHandler, ICategoryHandlerT2
     {
-        private readonly TcpClient tcpClient = new("127.0.0.1", 2910);
-        private readonly NetworkStream stream;
 
         public SocketCategoryHandlerT2()
         {
-            stream = tcpClient.GetStream();
         }
 
 
