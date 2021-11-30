@@ -11,5 +11,7 @@ namespace Client.Data.RestaurantService
 
         Task<Restaurant> GetRestaurantsAsync(string username);
         Task RemoveRestaurantAsync(string username);
+
+        Task<Restaurant> ValidateRestaurantAsync(string username, string password);
     }
 }

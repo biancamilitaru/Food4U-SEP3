@@ -60,7 +60,31 @@ namespace Client.Data.RestaurantService
                 );
             return restaurant;
         }
+        
+        public async Task<Restaurant> ValidateRestaurantAsync(string username, string password)
+        {
+            // TODO Change the uri if the Restaurant Controller is updated
+            HttpResponseMessage response = await client.GetAsync(uri + "" + username);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                string restaurantAsJson = await response.Content.ReadAsStringAsync();
+                Restaurant resultRestaurant = JsonSerializer.Deserialize<Restaurant>(restaurantAsJson);
+                Console.Write(restaurantAsJson);
 
+                if (resultRestaurant.Password.Equals(password))
+                {
+                    return resultRestaurant;
+                }
+                else
+                {
+                    throw new Exception("Wrong password");
+                }
+            }
+
+            throw new Exception("Restaurant not found");
+        }
+
+        public async Task RemoveRestaurantAsync(int restaurantId)
         public async Task RemoveRestaurantAsync(string username)
         {
             await client.DeleteAsync($"{uri}/Restaurants/{username}");
