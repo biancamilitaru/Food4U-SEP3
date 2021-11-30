@@ -11,5 +11,7 @@ namespace Client.Data.RestaurantService
 
         Task<Restaurant> GetRestaurantsAsync(int restaurantID);
         Task RemoveRestaurantAsync(int restaurantId);
+        
+        Task<Restaurant> ValidateRestaurantsAsync(int restaurantID);
     }
 }
