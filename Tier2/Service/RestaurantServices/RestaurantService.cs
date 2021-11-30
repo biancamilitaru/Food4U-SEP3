@@ -9,18 +9,18 @@ namespace Food4U_SEP3.RestaurantServices
 {
     public class RestaurantService : IRestaurantService
     {
-        private readonly IRestaurantHandlerT2 _restaurantHandlerT2;
+        private readonly IRestaurantHandlerT2 restaurantHandlerT2;
         
         public RestaurantService(IRestaurantHandlerT2 restaurantHandlerT2)
         {
-            this._restaurantHandlerT2 = restaurantHandlerT2;
+            this.restaurantHandlerT2 = restaurantHandlerT2;
         }
 
         public async Task<Restaurant> GetRestaurantAsync(int restaurantId)
         {
             try
             {
-                return await _restaurantHandlerT2.GetRestaurant(restaurantId);
+                return await restaurantHandlerT2.GetRestaurant(restaurantId);
             }
             catch (Exception e)
             {
@@ -35,7 +35,7 @@ namespace Food4U_SEP3.RestaurantServices
         {
             try
             {
-                return await _restaurantHandlerT2.AddRestaurant(restaurant);
+                return await restaurantHandlerT2.AddRestaurant(restaurant);
             }
             catch (Exception e)
             {
@@ -49,7 +49,7 @@ namespace Food4U_SEP3.RestaurantServices
         {
             try
             {
-                await _restaurantHandlerT2.RemoveRestaurant(restaurantID);
+                await restaurantHandlerT2.RemoveRestaurant(restaurantID);
             }
             catch (Exception e)
             {
@@ -62,7 +62,7 @@ namespace Food4U_SEP3.RestaurantServices
         {
             try
             {
-                return await _restaurantHandlerT2.UpdateRestaurant(restaurant , restaurantId);
+                return await restaurantHandlerT2.UpdateRestaurant(restaurant , restaurantId);
             }
             catch (Exception e)
             {
@@ -73,7 +73,7 @@ namespace Food4U_SEP3.RestaurantServices
 
         public async Task<Restaurant> ValidateLoginAsync(string username)
         {
-            return await restaurantHandler.ValidateLogin(username);
+            return await restaurantHandlerT2.ValidateLogin(username);
         }
     }
 }
