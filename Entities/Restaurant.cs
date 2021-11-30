@@ -39,10 +39,7 @@ namespace Entities
         
         [Required,JsonPropertyName("description"),MaxLength(500)]
         public string Description { get; set; }
-        
-        [JsonPropertyName("restaurantID"), Key]
-        public int RestaurantId { get; set; }
-        
+
         [JsonPropertyName("deliveryOption1")]
         public Delivery DeliveryOption1 { get; set; }
         
