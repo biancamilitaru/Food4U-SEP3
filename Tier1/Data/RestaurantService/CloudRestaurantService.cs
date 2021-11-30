@@ -61,7 +61,7 @@ namespace Client.Data.RestaurantService
             return restaurant;
         }
         
-        public async Task<Restaurant> ValidateRestaurantsAsync(string username, string password)
+        public async Task<Restaurant> ValidateRestaurantAsync(string username, string password)
         {
             // TODO Change the uri if the Restaurant Controller is updated
             HttpResponseMessage response = await client.GetAsync(uri + "" + username);
@@ -88,5 +88,6 @@ namespace Client.Data.RestaurantService
         {
             await client.DeleteAsync($"{uri}/Restaurants/{restaurantId}");
         }
+        
     }
 }
