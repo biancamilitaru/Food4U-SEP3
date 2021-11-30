@@ -70,5 +70,10 @@ namespace Food4U_SEP3.RestaurantServices
                 throw;
             }
         }
+
+        public async Task<Restaurant> ValidateLoginAsync(string username)
+        {
+            return await restaurantHandler.ValidateLogin(username);
+        }
     }
 }

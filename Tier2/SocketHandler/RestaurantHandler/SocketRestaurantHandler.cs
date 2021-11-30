@@ -46,5 +46,12 @@ namespace Food4U_SEP3.SocketHandler
             Restaurant removeRestaurant = JsonSerializer.Deserialize<Restaurant>(GetFromServer());
             return Task.FromResult(removeRestaurant);
         }
+
+        public Task<Restaurant> ValidateLogin(string username)
+        {
+            SendToServer("ValidateRestaurant",username);
+            Restaurant restaurant = JsonSerializer.Deserialize<Restaurant>(GetFromServer());
+            return Task.FromResult(restaurant);
+        }
     }
 }
