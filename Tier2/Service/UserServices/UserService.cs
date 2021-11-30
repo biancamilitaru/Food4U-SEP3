@@ -17,8 +17,7 @@ namespace Food4U_SEP3.UserServices
     public class UserService : IUserService
     {
         private readonly ISocketUserHandler _userHandler;
-
-
+        
         public UserService()
         {
             _userHandler = new SocketUserHandler();

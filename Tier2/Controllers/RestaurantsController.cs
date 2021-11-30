@@ -31,8 +31,7 @@ namespace Food4U_SEP3.Controllers
         }
         
         [HttpPatch]
-        [Route("{restaurantID:int}")]
-        public async Task<ActionResult> UpdateRestaurantAsync([FromBody] Restaurant restaurant, int restaurantId)
+        public async Task<ActionResult> UpdateRestaurantAsync([FromBody] Restaurant restaurant, [FromQuery] int restaurantId)
         {
             try
             {
