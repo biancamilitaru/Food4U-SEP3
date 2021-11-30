@@ -36,7 +36,7 @@ namespace Food4U_SEP3.SocketHandler
         public Task<Restaurant> UpdateRestaurant(Restaurant restaurant ,int restaurantId)
         {
             string serialisedRestaurant = JsonSerializer.Serialize(restaurant);
-            SendToServer("UpdateRestaurant",serialisedRestaurant + restaurantId);
+            SendToServer("UpdateRestaurant",serialisedRestaurant);
             return Task.FromResult(restaurant);
         }
 
@@ -45,6 +45,13 @@ namespace Food4U_SEP3.SocketHandler
             SendToServer("RemoveRestaurant",restaurantId.ToString());
             Restaurant removeRestaurant = JsonSerializer.Deserialize<Restaurant>(GetFromServer());
             return Task.FromResult(removeRestaurant);
+        }
+
+        public Task<Restaurant> ValidateLogin(string username)
+        {
+            SendToServer("ValidateRestaurant",username);
+            Restaurant restaurant = JsonSerializer.Deserialize<Restaurant>(GetFromServer());
+            return Task.FromResult(restaurant);
         }
     }
 }
