@@ -2,7 +2,7 @@
 @using Client.Data.RestaurantService
 @using Entities
 @inject IRestaurantService RestaurantService
-<h3>Add Restaurant</h3>
+<h3>Create a new restaurant</h3>
 
 
 <EditForm Model="@addNewRestaurantItem" OnValidSubmit="@AddNewRestaurant">
@@ -10,7 +10,21 @@
     <ValidationSummary/>
     <div class="card" style="margin-bottom: 20px">
       <div class="card-body">
-        <h4>Information:</h4>
+        <h4>Login information:</h4>
+        <div class="form-group">
+          <label>Username:</label>
+          <InputText placeholder="Create a username for login" style="max-width: 50%" class="form-control" @bind-Value="addNewRestaurantItem.Username"/>
+        </div>
+        <div class="form-group">
+          <label>Password:</label>
+          <InputText type="password" placeholder="Create a password that will be used" style="max-width: 50%" class="form-control" @bind-Value="addNewRestaurantItem.Password"/>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" style="margin-bottom: 20px">
+      <div class="card-body">
+        <h4>Restaurant's information:</h4>
         <div class="form-group">
           <label>Name of the restaurant:</label>
           <InputText placeholder="Enter a name of the restaurant" style="max-width: 50%" class="form-control" @bind-Value="addNewRestaurantItem.Name"/>
@@ -136,7 +150,7 @@
               </div>
     </div>
 
-    <p class="actions"><button class="btn btn-outline-dark" type="submit">Save</button></p>
+    <p class="actions"><button class="btn btn-success" type="submit">Create a new restaurant</button></p>
 </EditForm>
 
 
