@@ -41,7 +41,7 @@ namespace Client.Data.RestaurantService
         {
             string restaurantAsJson = JsonSerializer.Serialize(restaurant);
             HttpContent content = new StringContent(restaurantAsJson, Encoding.UTF8, "application/json");
-            await client.PatchAsync($"{uri}/Restaurants/{restaurant.RestaurantId}", content);
+            await client.PatchAsync($"{uri}/Restaurants/{restaurant.Name}", content);
         }
 
         public async Task<Restaurant> GetRestaurantsAsync(int restaurantID)
