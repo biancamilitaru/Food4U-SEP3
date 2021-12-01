@@ -15,11 +15,11 @@ namespace Food4U_SEP3.Service.ItemsService
             this.itemHandler = itemHandler;
         }
         
-        public async Task<Item> AddItemAsync(Item item ,string categoryName)
+        public async Task<Item> AddItemAsync(Item item)
         {
             try
             {
-                return await itemHandler.AddItem(item, categoryName);
+                return await itemHandler.AddItem(item);
             }
             catch (Exception e)
             {

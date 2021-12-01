@@ -6,10 +6,10 @@ namespace Food4U_SEP3.SocketHandler.ItemHandler
 {
     public class SocketItemHandlerT2 : SocketHandler, IItemHandlerT2
     {
-        public Task<Item> AddItem(Item item, string categoryName)
+        public Task<Item> AddItem(Item item)
         {
             string serializedMenu = JsonSerializer.Serialize(item);
-            SendToServer("AddItem", serializedMenu + categoryName);
+            SendToServer("AddItem", serializedMenu);
             return Task.FromResult(item);
         }
     }

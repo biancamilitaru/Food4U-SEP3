@@ -19,11 +19,11 @@ namespace Food4U_SEP3.Controllers
         
         
         [HttpPost]
-        public async Task<ActionResult<Item>> AddItemAsync([FromBody] Item item, string categoryName)
+        public async Task<ActionResult<Item>> AddItemAsync([FromBody] Item item)
         {
             try
             {
-                await itemService.AddItemAsync(item,categoryName);
+                await itemService.AddItemAsync(item);
                 return Created($"/{item}", item);
             } catch (Exception e)
             {

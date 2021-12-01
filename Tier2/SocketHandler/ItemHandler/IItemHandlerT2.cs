@@ -5,6 +5,6 @@ namespace Food4U_SEP3.SocketHandler.ItemHandler
 {
     public interface IItemHandlerT2
     {
-        Task<Item> AddItem(Item item, string categoryName);
+        Task<Item> AddItem(Item item);
     }
 }
