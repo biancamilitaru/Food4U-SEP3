@@ -1,0 +1,111 @@
+@page "/MenuPage"
+@using Entities
+@using Client.Components
+
+<h3>Menu</h3>
+
+<!--if (Menu is not created)-->
+{
+    <div class="card">
+        <div class="card-body">
+            <h5>Menu is not created</h5>
+            <p>Click the button below to create a new one</p>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createMenu">
+                Create a Menu
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="createMenu" tabindex="-1" role="dialog" aria-labelledby="createMenuLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createMenuLabel">New menu</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!--NEED TO INSERT MENU MODEL <EditForm Model="  " OnValidSubmit="@AddMenu"> -->
+                    <div class="modal-body">
+                        <!--NEED TO INSERT _menu.Description in BIND VALUE <InputTextArea type="password" placeholder="Enter description of your menu" class="form-control" @bind-Value="   "/> -->
+                    </div>
+                    <div class="modal-footer">
+                        <p class="actions"><button class="btn btn-secondary" data-dismiss="modal">Not yet</button></p>
+                        <p class="actions"><button class="btn btn-success" type="submit">Create a new menu</button></p>
+                    </div>
+                <!--</EditForm>-->
+            </div>
+        </div>
+    </div>
+}
+
+<!--if (Menu is  created)-->
+{
+<div class="card">
+    <div class="card-body">
+        <h4>Description</h4>
+        <p> <!-- Menu.Description --></p>
+        <hr>
+        <div class="row" style="padding-left: 20px">
+            <div class="column">
+                <h4>Categories</h4>
+            </div>
+            <div class="column" style="padding-left: 10px">
+                <a data-toggle="modal" data-target="#AddCategory">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <hr>
+        <!--
+        Need to implement foreach loop that will create CategoryComponent with Category parameter something as below 
+        <CategoryComponent Category=""></CategoryComponent>
+        -->
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="AddCategory" tabindex="-1" role="dialog" aria-labelledby="AddCategoryLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="AddCategoryLabel">New category</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--NEED TO INSERT CATEGORY MODEL <EditForm Model=" " OnValidSubmit="@AddCategory">-->
+                <div class="modal-body">
+                    <div style="padding-bottom: 10px">
+                        <!--NEED TO INSERT BIND VALUE Category.Name <InputText placeholder="Enter name of category" class="form-control" @bind-Value="  "/>-->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p class="actions"><button class="btn btn-secondary" data-dismiss="modal">Cancel</button></p>
+                    <p class="actions"><button class="btn btn-success" type="submit">Add Category</button></p>
+                </div>
+            <!--</EditForm>-->
+        </div>
+    </div>
+</div>
+}
+
+
+
+@code
+{
+
+    private void AddMenu()
+    {
+        //TODO method that will create new menu and probably reload this page
+    }
+    
+    private void AddCategory()
+    {
+        //TODO method that will create new category and probably reload this page
+    }
+}

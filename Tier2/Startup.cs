@@ -1,4 +1,5 @@
 using Food4U_SEP3.RestaurantServices;
+using Food4U_SEP3.SocketHandler;
 using Food4U_SEP3.Service.MenuService;
 using Food4U_SEP3.UserServices;
 using Microsoft.AspNetCore.Builder;
@@ -31,6 +32,8 @@ namespace Food4U_SEP3
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRestaurantService, RestaurantService>();
             services.AddScoped<IMenuServiceT2, MenuServiceT2>();
+            services.AddScoped<IRestaurantHandlerT2, SocketRestaurantHandlerT2>();
+            services.AddScoped<IUserHandlerT2, SocketUserHandlerT2>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

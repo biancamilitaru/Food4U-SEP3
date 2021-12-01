@@ -1,0 +1,54 @@
+@using Entities
+<div class="column" style="margin:10px ;min-width: 200px;max-width: 200px;">
+    <div class="card" style="min-height: 300px; max-height: 300px">
+        <div class="card-body">
+            <a data-toggle="modal" data-target="#@Item.Name.Replace(" ","")modal"><h6>@Item.Name</h6></a>
+            <hr>
+            <p style="min-height: 160px">@Item.Description</p>
+            <hr>
+            <h6>@Item.Price dkk</h6>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="@Item.Name.Replace(" ","")modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit @Item.Name</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <EditForm Model="@Item" OnValidSubmit="@EditItem">
+                <div class="modal-body">
+                    <div style="padding-bottom: 10px">
+                        <InputText placeholder="Enter name of item" class="form-control" @bind-Value="Item.Name"/>
+                    </div>
+                    <div style="padding-bottom: 10px">
+                        <InputTextArea placeholder="Enter its description" class="form-control" @bind-Value="Item.Description"/>
+                    </div>
+                    <div style="padding-bottom: 10px">
+                        <InputText placeholder="Enter the price" class="form-control" @bind-Value="Item.Price"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p class="actions"><button class="btn btn-secondary" data-dismiss="modal">Cancel</button></p>
+                    <p class="actions"><button class="btn btn-success" type="submit">Edit item</button></p>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Item Item { get; set; }
+
+    public void EditItem()
+    {
+        //TODO method that will edit item and probably reload this page
+    }
+    
+}

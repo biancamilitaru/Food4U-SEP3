@@ -1,0 +1,69 @@
+@using Entities
+<div class="row" style="padding-left: 20px">
+    <div class="column">
+        <a data-toggle="collapse" data-target="#@Category.Name.Replace(" ","")" role="button" aria-expanded="false" aria-controls="@Category.Name.Replace(" ","")">
+            <h5>@Category.Name</h5>
+        </a>
+    </div>
+    <div class="column" style="padding-left: 10px">
+        <a data-toggle="modal" data-target="#@Category.Name.Replace(" ","")modal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+            </svg>
+        </a>
+    </div>
+</div>
+<div class="collapse" id="@Category.Name.Replace(" ","")">
+    <div class="row" style="padding-left: 20px">
+        
+        <!--
+        Need to implement foreach loop that will create ItemComponent with Item parameter something as below 
+        <ItemComponent Item=" "></ItemComponent>
+        -->
+    </div>
+</div>
+<hr>
+
+<!-- Modal for creating new Item -->
+<div class="modal fade" id="@Category.Name.Replace(" ","")modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New item into @Category.Name</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--NEED TO INSERT ITEM MODEL <EditForm Model="   " OnValidSubmit="@AddItem"> -->
+                <div class="modal-body">
+                    <div style="padding-bottom: 10px">
+                        <!--NEED TO INSERT BIND VALUE newItem.Name <InputText placeholder="Enter name of item" class="form-control" @bind-Value="   "/> -->
+                    </div>
+                    <div style="padding-bottom: 10px">
+                        <!--NEED TO INSERT BIND VALUE newItem.Description <InputTextArea placeholder="Enter its description" class="form-control" @bind-Value="   "/> -->
+                    </div>
+                    <div style="padding-bottom: 10px">
+                        <!--NEED TO INSERT BIND VALUE newItem.Price <InputText placeholder="Enter the price" class="form-control" @bind-Value="   "/> -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p class="actions"><button class="btn btn-secondary" data-dismiss="modal">Cancel</button></p>
+                    <p class="actions"><button class="btn btn-success" type="submit">Add item</button></p>
+                </div>
+            <!-- </EditForm> -->
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public Category Category { get; set; }
+    
+    
+    private void AddItem()
+    {
+        //TODO method that will create new item and probably reload this page
+    }
+}
