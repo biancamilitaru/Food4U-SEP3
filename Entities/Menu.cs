@@ -10,5 +10,7 @@ namespace Entities
         
         [Required, JsonPropertyName("description")]
         public string Description { get; set; }
+        [Required, JsonPropertyName("userName")]
+        public string UserName { get; set; }
     }
 }

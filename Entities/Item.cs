@@ -16,5 +16,8 @@ namespace Entities
         
         [Required, JsonPropertyName("price")]
         public string Price { get; set; }
+        
+        [Required, JsonPropertyName("categoryName")]
+        public string CategoryName { get; set; }   
     }
 }
