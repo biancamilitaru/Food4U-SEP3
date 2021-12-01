@@ -27,5 +27,17 @@ namespace Food4U_SEP3.Service.ItemsService
                 throw;
             }
         }
+        public async Task<Item> UpdateItemAsync(Item item, int itemId)
+        {
+            try
+            {
+                return await itemHandler.UpdateItem(item , itemId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }
