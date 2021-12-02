@@ -63,7 +63,7 @@ namespace Food4U_SEP3.Controllers
         {
             try
             {
-                await restaurantService.RemoveRestaurantAsync(username);
+                await restaurantService.DeleteRestaurantAsync(username);
                 return Ok();
             }
             catch (Exception e)
