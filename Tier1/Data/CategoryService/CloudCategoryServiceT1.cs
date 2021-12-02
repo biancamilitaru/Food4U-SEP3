@@ -29,7 +29,7 @@ namespace Client.Data.CategoryService
 
             Console.WriteLine(content);
 
-            HttpResponseMessage responseMessage = await client.PostAsync($"{uri}/Categories/{category.CategoryId}", content);
+            HttpResponseMessage responseMessage = await client.PostAsync($"{uri}/Categories/{category.Name}", content);
             
             if (!responseMessage.IsSuccessStatusCode)
                 throw new Exception($@"Error: {responseMessage.StatusCode},{responseMessage.ReasonPhrase}");
@@ -41,7 +41,7 @@ namespace Client.Data.CategoryService
         {
             string categoryAsJson = JsonSerializer.Serialize(category);
             HttpContent content = new StringContent(categoryAsJson, Encoding.UTF8, "application/json");
-            await client.PatchAsync($"{uri}/Categories/{category.CategoryId}", content);
+            await client.PatchAsync($"{uri}/Categories/{category.Name}", content);
         
         }
     }
