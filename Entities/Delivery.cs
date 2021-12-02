@@ -9,9 +9,11 @@ namespace Entities
         public int DeliveryId { get; set; }
         [Required,MaxLength(50), JsonPropertyName("deliveryName")]
         public string DeliveryName { get; set; }
+        
         [Required, JsonPropertyName("price")]
         public double Price { get; set; }
-        [Required, JsonPropertyName("userName")]
+        
+        [Required, JsonPropertyName("username")]
         public string UserName { get; set; }
 
     }
