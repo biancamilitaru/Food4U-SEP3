@@ -39,6 +39,19 @@ namespace Food4U_SEP3.Service.ItemsService
                 throw;
             }
         }
+
+        public async Task DeleteItemAsync(int itemId)
+        {
+            try
+            {
+                await itemHandler.DeleteItem(itemId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
         
     }
 }
