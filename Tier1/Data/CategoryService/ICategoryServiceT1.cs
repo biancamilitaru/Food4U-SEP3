@@ -9,5 +9,9 @@ namespace Client.Data.CategoryService
 
         Task EditCategoryAsync(Category category);
 
+        Task RemoveCategoryAsync(string categoryName);
+
+
+
     }
 }
