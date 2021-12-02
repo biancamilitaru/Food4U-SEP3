@@ -9,6 +9,6 @@ namespace Food4U_SEP3.SocketHandler
 
         Task<Category> UpdateCategory(Category category, int categoryId);
         
-        Task<Category> RemoveCategory(string categoryId);
+        Task<Category> RemoveCategory(string categoryName);
     }
 }
