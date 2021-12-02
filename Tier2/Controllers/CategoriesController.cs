@@ -43,6 +43,20 @@ namespace Food4U_SEP3.Controllers
             }
         }
        
+       [HttpDelete]
+       public async Task<ActionResult> DeleteCategoriesAsync([FromQuery] string categoryName)
+       {
+           try
+           {
+               await categoryService.DeleteCategoryAsync(categoryName);
+               return Ok();
+
+           }
+           catch (Exception e)
+           {
+               return StatusCode(500, e.Message);
+           }
+       }
 
     }
 }
