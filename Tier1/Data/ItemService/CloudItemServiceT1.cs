@@ -41,5 +41,10 @@ namespace Client.Data.ItemService
             await client.PatchAsync($"{uri}/Items/{item.ItemId}", content);
         
         }
+
+        public async Task DeleteItemAsync(Item item)
+        {
+            await client.DeleteAsync($"{uri}/Items/{item.ItemId}");
+        }
     }
 }
