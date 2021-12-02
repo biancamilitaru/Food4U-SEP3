@@ -44,5 +44,19 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
+        [HttpDelete]
+        public async Task<ActionResult> DeleteItemAsync([FromQuery] string itemId)
+        {
+            try
+            {
+                //await itemService.DeleteItemAsync(itemId);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
     }
 }
