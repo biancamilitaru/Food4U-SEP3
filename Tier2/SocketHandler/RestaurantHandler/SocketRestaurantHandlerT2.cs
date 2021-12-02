@@ -33,11 +33,11 @@ namespace Food4U_SEP3.SocketHandler
             return Task.FromResult(restaurant);
         }
 
-        public Task<Restaurant> RemoveRestaurant(string username)
+        public Task<Restaurant> DeleteRestaurant(string username)
         {
-            SendToServer("RemoveRestaurant",username.ToString());
-            Restaurant removeRestaurant = JsonSerializer.Deserialize<Restaurant>(GetFromServer());
-            return Task.FromResult(removeRestaurant);
+            SendToServer("DeleteRestaurant",username.ToString());
+            Restaurant deleteRestaurant = JsonSerializer.Deserialize<Restaurant>(GetFromServer());
+            return Task.FromResult(deleteRestaurant);
         }
 
         public Task<Restaurant> ValidateLogin(string username)

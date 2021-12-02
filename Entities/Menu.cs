@@ -8,9 +8,12 @@ namespace Entities
         [JsonPropertyName("menuID"), Key]
         public int MenuId { get; set; }
         
+        
         [Required, JsonPropertyName("description")]
         public string Description { get; set; }
-        [Required, JsonPropertyName("userName")]
+        
+        
+        [Required, JsonPropertyName("username")]
         public string UserName { get; set; }
     }
 }

@@ -45,11 +45,11 @@ namespace Food4U_SEP3.RestaurantServices
             
         }
 
-        public async Task RemoveRestaurantAsync(string username)
+        public async Task DeleteRestaurantAsync(string username)
         {
             try
             {
-                await restaurantHandlerT2.RemoveRestaurant(username);
+                await restaurantHandlerT2.DeleteRestaurant(username);
             }
             catch (Exception e)
             {
