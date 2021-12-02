@@ -25,11 +25,11 @@ namespace Food4U_SEP3.SocketHandler
             SendToServer("UpdateCategory", serializedCategory + categoryId);
             return Task.FromResult(category);
         }
-        public Task<Category> RemoveCategory(string categoryName)
+        public Task<Category> DeleteCategory(string categoryName)
         {
-            SendToServer("RemoveCategory",categoryName);
-            Category removeCategory = JsonSerializer.Deserialize<Category>(GetFromServer());
-            return Task.FromResult(removeCategory);
+            SendToServer("DeleteCategory",categoryName);
+            Category deleteCategory = JsonSerializer.Deserialize<Category>(GetFromServer());
+            return Task.FromResult(deleteCategory);
         }
     }
 }
