@@ -9,7 +9,7 @@
 }
 
 .sidebar {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    background: linear-gradient(#FA5B45, #822249);;
 }
 
 .top-row {
@@ -75,7 +75,7 @@
 
 .top-row {
     height: 3.5rem;
-    background-color: rgba(0,0,0,0.4);
+    background-color: #837D7D;
 }
 
 .navbar-brand {
@@ -102,7 +102,8 @@
     padding-bottom: 1rem;
 }
 
-.nav-item ::deep a {
+.nav-item a {
+    background-color: rgba(255,255,255,0.15);
     color: #d7d7d7;
     border-radius: 4px;
     height: 3rem;
@@ -111,14 +112,24 @@
     line-height: 3rem;
 }
 
-.nav-item ::deep a.active {
-    background-color: rgba(255,255,255,0.25);
+.nav-item a.active {
+    background-color: rgba(255,255,255,0.3);
     color: white;
 }
 
-.nav-item ::deep a:hover {
-    background-color: rgba(255,255,255,0.1);
+.nav-item a:hover {
+    background-color: rgba(255,255,255,0.05);
     color: white;
+}
+
+.btn-primary {
+    background-color: #DF504B;
+    border: 0;
+}
+
+.btn-success {
+    background-color: #862649;
+    border: 0;
 }
 
 @media (min-width: 641px) {
