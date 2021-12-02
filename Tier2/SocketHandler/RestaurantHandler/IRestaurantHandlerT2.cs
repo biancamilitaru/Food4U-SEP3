@@ -10,7 +10,7 @@ namespace Food4U_SEP3.SocketHandler
         Task<Restaurant> GetRestaurant(string username); 
         Task<Restaurant> AddRestaurant(Restaurant restaurant);
         Task<Restaurant> UpdateRestaurant(Restaurant restaurant, string username);
-        Task<Restaurant> RemoveRestaurant(string username);
+        Task<Restaurant> DeleteRestaurant(string username);
         Task<Restaurant> ValidateLogin(string username);
 
 

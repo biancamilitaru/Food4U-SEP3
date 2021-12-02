@@ -83,7 +83,7 @@ namespace Client.Data.RestaurantService
             throw new Exception("Restaurant not found");
         }
 
-        public async Task RemoveRestaurantAsync(string username)
+        public async Task DeleteRestaurantAsync(string username)
         {
             await client.DeleteAsync($"{uri}/Restaurants/{username}");
         }
