@@ -6,7 +6,7 @@ namespace Entities
     public class Item
     {
         [JsonPropertyName("itemID"), Key]
-        public string ItemId { get; set; }
+        public int ItemId { get; set; }
         
         [Required, JsonPropertyName("name")]
         public string Name { get; set; }

@@ -9,7 +9,7 @@ namespace Client.Data.ItemService
         
         Task EditItemAsync(Item item);
 
-        Task DeleteItemAsync(Item item);
+        Task DeleteItemAsync(int itemId);
 
     }
 }

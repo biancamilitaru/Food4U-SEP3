@@ -42,9 +42,9 @@ namespace Client.Data.ItemService
         
         }
 
-        public async Task DeleteItemAsync(Item item)
+        public async Task DeleteItemAsync(int itemId)
         {
-            await client.DeleteAsync($"{uri}/Items/{item.ItemId}");
+            await client.DeleteAsync($"{uri}/Items/{itemId}");
         }
     }
 }
