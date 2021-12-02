@@ -7,5 +7,6 @@ namespace Food4U_SEP3.SocketHandler.ItemHandler
     {
         Task<Item> AddItem(Item item);
         Task<Item> UpdateItem(Item item, int itemId);
+        Task<Item> DeleteItem(int itemId);
     }
 }
