@@ -11,6 +11,8 @@ namespace Entities
         public string DeliveryName { get; set; }
         [Required, JsonPropertyName("price")]
         public double Price { get; set; }
+        [Required, JsonPropertyName("userName")]
+        public string UserName { get; set; }
 
     }
 }

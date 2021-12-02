@@ -1,131 +1,172 @@
-<form>
-  <h4>Information:</h4>
-  <div class="form-group">
-    <label for="Name">Name of the restaurant:</label>
-    <input type="text" class="form-control" id="Name" aria-describedby="emailHelp" placeholder="Enter restaurant name">
-  </div>
-  <div class="form-group">
-    <label for="Description">Description of the restaurant:</label>
-    <input type="text" class="form-control" id="Description" aria-describedby="emailHelp" placeholder="Enter short description">
-  </div>
-  <div class="form-group">
-    <label >Phone number:</label>
-    <input type="text" class="form-control" placeholder="Enter phone number">
-  </div>
-  <h4>Address:</h4>
-  <div class="row">
-    <div class="column" style="margin-right: 10px">
-      <div class="form-group" style="margin-left: 15px">
-        <label >Street:</label>
-        <input type="text" class="form-control" placeholder="Enter street">
+@using Microsoft.AspNetCore.Components
+@using Client.Data.RestaurantService
+@using Entities
+@inject IRestaurantService RestaurantService
+<h3>Create a new restaurant</h3>
+
+
+<EditForm Model="@addNewRestaurantItem" OnValidSubmit="@AddNewRestaurant">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+    <div class="card" style="margin-bottom: 20px">
+      <div class="card-body">
+        <h4>Login information:</h4>
+        <div class="form-group">
+          <label>Username:</label>
+          <InputText placeholder="Create a username for login" style="max-width: 50%" class="form-control" @bind-Value="addNewRestaurantItem.Username"/>
+        </div>
+        <div class="form-group">
+          <label>Password:</label>
+          <InputText type="password" placeholder="Create a password that will be used" style="max-width: 50%" class="form-control" @bind-Value="addNewRestaurantItem.Password"/>
+        </div>
       </div>
     </div>
-    <div class="column">
-      <div class="form-group">
-        <label >Number:</label>
-        <input type="text" class="form-control" placeholder="Enter number">
+  
+    <div class="card" style="margin-bottom: 20px">
+      <div class="card-body">
+        <h4>Restaurant's information:</h4>
+        <div class="form-group">
+          <label>Name of the restaurant:</label>
+          <InputText placeholder="Enter a name of the restaurant" style="max-width: 50%" class="form-control" @bind-Value="addNewRestaurantItem.Name"/>
+        </div>
+    
+        <div class="form-group">
+          <label>Description:</label>
+          <InputText placeholder="Enter a description of the restaurant" style="max-width: 50%" class="form-control" @bind-Value="addNewRestaurantItem.Description"/>
+        </div>
+
+        <div class="form-group">
+          <label>Address of the restaurant:</label>
+          <InputText placeholder="Enter an address of the restaurant" style="max-width: 50%" class="form-control" @bind-Value="addNewRestaurantItem.Address"/>
+        </div>
+    
+        <div class="form-group">
+          <label>Phone number:</label>
+          <InputText placeholder="Enter a phone number of the restaurant"  style="max-width: 50%" class="form-control" @bind-Value="addNewRestaurantItem.PhoneNumber"/>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label >City:</label>
-    <input type="text" class="form-control" placeholder="Enter city">
-  </div>
-  <h4>Opening hours:</h4>
-  <div class="form-group">
-    <div class="row">
-      <div class="column">
-        <label style="margin-left: 20px; min-width: 90px">Monday:</label>
-      </div>
-      <div class="column">
-        <input style="margin-left: 10px; max-width: 40px" type="text" class="form-control">
-      </div>
-      <div class="column">
-        <input style="margin-left: 10px; max-width: 40px" type="text" class="form-control">
-      </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="row">
-      <div class="column">
-        <label style="margin-left: 20px; min-width: 90px">Tuesday:</label>
-      </div>
-      <div class="column">
-        <input style="margin-left: 10px; max-width: 40px" type="text" class="form-control">
-      </div>
-      <div class="column">
-        <input style="margin-left: 10px; max-width: 40px" type="text" class="form-control">
-      </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="row">
-      <div class="column">
-        <label style="margin-left: 20px; min-width: 90px">Wednesday:</label>
-      </div>
-      <div class="column">
-        <input style="margin-left: 10px; max-width: 40px" type="text" class="form-control">
-      </div>
-      <div class="column">
-        <input style="margin-left: 10px; max-width: 40px" type="text" class="form-control">
-      </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="row">
-      <div class="column">
-        <label style="margin-left: 20px; min-width: 90px">Thursday:</label>
-      </div>
-      <div class="column">
-        <input style="margin-left: 10px; max-width: 40px" type="text" class="form-control">
-      </div>
-      <div class="column">
-        <input style="margin-left: 10px; max-width: 40px" type="text" class="form-control">
-      </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="row">
-      <div class="column">
-        <label style="margin-left: 20px; min-width: 90px">Friday:</label>
-      </div>
-      <div class="column">
-        <input style="margin-left: 10px; max-width: 40px" type="text" class="form-control">
-      </div>
-      <div class="column">
-        <input style="margin-left: 10px; max-width: 40px" type="text" class="form-control">
-      </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="row">
-      <div class="column">
-        <label style="margin-left: 20px; min-width: 90px">Saturday:</label>
-      </div>
-      <div class="column">
-        <input style="margin-left: 10px; max-width: 40px" type="text" class="form-control">
-      </div>
-      <div class="column">
-        <input style="margin-left: 10px; max-width: 40px" type="text" class="form-control">
+    
+    <div class="card" style="margin-bottom: 20px">
+      <div class="card-body">
+        <h4>Opening hours:</h4>
+        <div class="form-group">
+          <div class="row">
+            <div class="column">
+              <label style="margin-left: 20px; min-width: 90px">Monday:</label>
+            </div>
+            <div class="column">
+              <InputText placeholder="8:00 - 20:00"  class="form-control" @bind-Value="addNewRestaurantItem.OpeningHoursMonday"></InputText>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="column">
+              <label style="margin-left: 20px; min-width: 90px">Tuesday:</label>
+            </div>
+            <div class="column">
+              <InputText placeholder="8:00 - 20:00"  class="form-control" @bind-Value="addNewRestaurantItem.OpeningHoursTuesday"></InputText>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="column">
+              <label style="margin-left: 20px; min-width: 90px">Wednesday:</label>
+            </div>
+            <div class="column">
+              <InputText placeholder="8:00 - 20:00"  class="form-control" @bind-Value="addNewRestaurantItem.OpeningHoursWednesday"></InputText>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="column">
+              <label style="margin-left: 20px; min-width: 90px">Thursday:</label>
+            </div>
+            <div class="column">
+              <InputText placeholder="8:00 - 20:00"  class="form-control" @bind-Value="addNewRestaurantItem.OpeningHoursThursday"></InputText>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="column">
+              <label style="margin-left: 20px; min-width: 90px">Friday:</label>
+            </div>
+            <div class="column">
+              <InputText placeholder="8:00 - 20:00"  class="form-control" @bind-Value="addNewRestaurantItem.OpeningHoursFriday"></InputText>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="column">
+              <label style="margin-left: 20px; min-width: 90px">Saturday:</label>
+            </div>
+            <div class="column">
+              <InputText placeholder="8:00 - 20:00"  class="form-control" @bind-Value="addNewRestaurantItem.OpeningHoursSaturday"></InputText>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="column">
+              <label style="margin-left: 20px; min-width: 90px">Sunday:</label>
+            </div>
+            <div class="column">
+              <InputText placeholder="8:00 - 20:00" class="form-control" @bind-Value="addNewRestaurantItem.OpeningHoursSunday"></InputText>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="form-group">
-    <div class="row">
-      <div class="column">
-        <label style="margin-left: 20px; min-width: 90px">Sunday:</label>
-      </div>
-      <div class="column">
-        <input style="margin-left: 10px; max-width: 40px" type="text" class="form-control">
-      </div>
-      <div class="column">
-        <input style="margin-left: 10px; max-width: 40px" type="text" class="form-control">
-      </div>
+    
+    
+    <div class="card" style="margin-bottom: 20px">
+              <div class="card-body">
+    <h4>Delivery options:</h4>
+                <div class="row">
+                  <div class="column" style="padding: 20px">
+                    <div class="card">
+                      <div class="card-body">
+                        <h6>Delivery option 1</h6>
+                        <InputText placeholder="Delivery name" class="form-control" @bind-Value="addNewRestaurantItem.DeliveryOption1.DeliveryName"/>
+                        <InputNumber class="form-control" @bind-Value="addNewRestaurantItem.DeliveryOption1.Price"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="column" style="padding: 20px">
+                    <div class="card">
+                      <div class="card-body">
+                        <h6>Delivery option 2</h6>
+                        <InputText placeholder="Delivery name" class="form-control" @bind-Value="addNewRestaurantItem.DeliveryOption2.DeliveryName"/>
+                        <InputNumber class="form-control" @bind-Value="addNewRestaurantItem.DeliveryOption2.Price"/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
     </div>
-  </div>
-  <button style="margin: 10px" type="submit" class="btn btn-success">Sign up restaurant</button>
-</form>
+
+    <p class="actions"><button class="btn btn-success" type="submit">Create a new restaurant</button></p>
+</EditForm>
+
+
+
 
 @code {
-    
+    private Restaurant addNewRestaurantItem = new ()
+    {
+        DeliveryOption1 = new Delivery(),
+        DeliveryOption2 = new Delivery()
+    };
+
+    private void AddNewRestaurant()
+    {
+        Console.WriteLine("Sending");
+        RestaurantService.AddRestaurantAsync(addNewRestaurantItem);
+    }
+
 }

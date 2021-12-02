@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+ using System;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -15,27 +14,32 @@ namespace Client.Data.ItemService
 
         public CloudItemServiceT1()
         {
-            //Is this okay?
             client = new HttpClient();
         }
-
-
-        public async Task AddItemToCategoryAsync(Item item)
+        
+        public async Task AddItemAsync(Item item)
         {
-            string itemAsJson = JsonSerializer.Serialize(item);
+            string menuAsJson = JsonSerializer.Serialize(item);
             
             StringContent content = new StringContent(
-                itemAsJson,
+                menuAsJson,
                 Encoding.UTF8,
                 "application/json");
 
             Console.WriteLine(content);
 
-            HttpResponseMessage responseMessage = await client.PostAsync($"{uri}/Menus", content);
+            HttpResponseMessage responseMessage = await client.PostAsync($"{uri}/Items/{item.ItemId}", content);
             
             if (!responseMessage.IsSuccessStatusCode)
                 throw new Exception($@"Error: {responseMessage.StatusCode},{responseMessage.ReasonPhrase}");
-
+            
+        }
+        public async Task EditItemAsync(Item item)
+        {
+            string categoryAsJson = JsonSerializer.Serialize(item);
+            HttpContent content = new StringContent(categoryAsJson, Encoding.UTF8, "application/json");
+            await client.PatchAsync($"{uri}/Items/{item.ItemId}", content);
+        
         }
     }
 }
