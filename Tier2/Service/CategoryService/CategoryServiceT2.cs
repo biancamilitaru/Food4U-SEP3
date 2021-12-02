@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Entities;
 using Food4U_SEP3.SocketHandler;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Food4U_SEP3.Service.CategoryService
 {
@@ -39,5 +40,18 @@ namespace Food4U_SEP3.Service.CategoryService
                 throw;
             }
         }
+        
+        public async Task DeleteCategoryAsync(string categoryName)
+        {
+            try
+            {
+                await categoryHandler.DeleteCategory(categoryName);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
+    }
     }

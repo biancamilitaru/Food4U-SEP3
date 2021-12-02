@@ -25,6 +25,7 @@ namespace Food4U_SEP3.SocketHandler
             SendToServer("UpdateCategory", serializedCategory + categoryId);
             return Task.FromResult(category);
         }
+
         public Task<Category> DeleteCategory(string categoryName)
         {
             SendToServer("DeleteCategory",categoryName);

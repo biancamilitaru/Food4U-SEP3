@@ -49,7 +49,7 @@ namespace Food4U_SEP3.Controllers
         {
             try
             {
-                Restaurant restaurant = await restaurantService.GetRestaurantAsync(username);
+                Restaurant restaurant = await restaurantService.ValidateLoginAsync(username);
                 return Ok(restaurant);
             }
             catch (Exception e)

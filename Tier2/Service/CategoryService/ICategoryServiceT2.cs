@@ -8,5 +8,7 @@ namespace Food4U_SEP3.Service.CategoryService
         Task<Category> AddCategoryAsync(Category category);
 
         Task<Category> UpdateCategoryAsync(Category category, int categoryId);
+
+        Task DeleteCategoryAsync(string categoryName);
     }
 }
