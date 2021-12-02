@@ -1,0 +1,57 @@
+@using Entities
+<div class="column" style="margin:10px ;min-width: 200px;max-width: 200px;">
+    <div class="card" style="min-height: 300px; max-height: 300px">
+        <div class="card-body">
+            <a><h6>Add new item</h6></a>
+            <hr>
+            <div style="min-height: 160px; max-height: 160px">
+                <a data-toggle="modal" data-target="#TestModal"><svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="#888787" class="bi bi-hand-index-thumb" viewBox="0 0 16 16">
+                  <path d="M6.75 1a.75.75 0 0 1 .75.75V8a.5.5 0 0 0 1 0V5.467l.086-.004c.317-.012.637-.008.816.027.134.027.294.096.448.182.077.042.15.147.15.314V8a.5.5 0 0 0 1 0V6.435l.106-.01c.316-.024.584-.01.708.04.118.046.3.207.486.43.081.096.15.19.2.259V8.5a.5.5 0 1 0 1 0v-1h.342a1 1 0 0 1 .995 1.1l-.271 2.715a2.5 2.5 0 0 1-.317.991l-1.395 2.442a.5.5 0 0 1-.434.252H6.118a.5.5 0 0 1-.447-.276l-1.232-2.465-2.512-4.185a.517.517 0 0 1 .809-.631l2.41 2.41A.5.5 0 0 0 6 9.5V1.75A.75.75 0 0 1 6.75 1zM8.5 4.466V1.75a1.75 1.75 0 1 0-3.5 0v6.543L3.443 6.736A1.517 1.517 0 0 0 1.07 8.588l2.491 4.153 1.215 2.43A1.5 1.5 0 0 0 6.118 16h6.302a1.5 1.5 0 0 0 1.302-.756l1.395-2.441a3.5 3.5 0 0 0 .444-1.389l.271-2.715a2 2 0 0 0-1.99-2.199h-.581a5.114 5.114 0 0 0-.195-.248c-.191-.229-.51-.568-.88-.716-.364-.146-.846-.132-1.158-.108l-.132.012a1.26 1.26 0 0 0-.56-.642 2.632 2.632 0 0 0-.738-.288c-.31-.062-.739-.058-1.05-.046l-.048.002zm2.094 2.025z"/>
+                </svg></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal for creating new Item -->
+<div class="modal fade" id="TestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New item</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <EditForm Model="@newItem" OnValidSubmit="@AddItem">
+            <div class="modal-body">
+                <div style="padding-bottom: 10px">
+                    <InputText placeholder="Enter name of item" class="form-control" @bind-Value="newItem.Name"/>
+                </div>
+                <div style="padding-bottom: 10px">
+                    <InputTextArea placeholder="Enter its description" class="form-control" @bind-Value="newItem.Description"/>
+                </div>
+                <div style="padding-bottom: 10px">
+                    <InputText placeholder="Enter the price" class="form-control" @bind-Value="newItem.Price"/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <p class="actions"><button class="btn btn-secondary" data-dismiss="modal">Cancel</button></p>
+                <p class="actions"><button class="btn btn-success" type="submit">Add item</button></p>
+            </div>
+            </EditForm>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    private Item newItem = new Item();
+    
+    private void AddItem()
+    {
+    //TODO method that will create new item and probably reload this page
+    }
+
+}

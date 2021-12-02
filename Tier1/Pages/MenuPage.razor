@@ -1,10 +1,10 @@
 @page "/MenuPage"
 @using Entities
-@using Client.Components
+@using Client.Components.MenuPageComponents
 
 <h3>Menu</h3>
 
-<!--if (Menu is not created)-->
+@if (5==4)
 {
     <div class="card">
         <div class="card-body">
@@ -40,12 +40,14 @@
     </div>
 }
 
-<!--if (Menu is  created)-->
+@if (5==5)
 {
 <div class="card">
     <div class="card-body">
         <h4>Description</h4>
-        <p> <!-- Menu.Description --></p>
+        <a data-toggle="modal" data-target="#EditMenu">
+            <div><p>@menu.Description</p></div>
+        </a>
         <hr>
         <div class="row" style="padding-left: 20px">
             <div class="column">
@@ -65,20 +67,22 @@
         Need to implement foreach loop that will create CategoryComponent with Category parameter something as below 
         <CategoryComponent Category=""></CategoryComponent>
         -->
+        
+        <CategoryComponent Category="@_category1"></CategoryComponent>
     </div>
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="AddCategory" tabindex="-1" role="dialog" aria-labelledby="AddCategoryLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="AddCategoryLabel">New category</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <!--NEED TO INSERT CATEGORY MODEL <EditForm Model=" " OnValidSubmit="@AddCategory">-->
+    <div class="modal fade" id="AddCategory" tabindex="-1" role="dialog" aria-labelledby="AddCategoryLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AddCategoryLabel">New category</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!--NEED TO INSERT CATEGORY MODEL <EditForm Model=" " OnValidSubmit="@AddCategory">-->
                 <div class="modal-body">
                     <div style="padding-bottom: 10px">
                         <!--NEED TO INSERT BIND VALUE Category.Name <InputText placeholder="Enter name of category" class="form-control" @bind-Value="  "/>-->
@@ -88,16 +92,50 @@
                     <p class="actions"><button class="btn btn-secondary" data-dismiss="modal">Cancel</button></p>
                     <p class="actions"><button class="btn btn-success" type="submit">Add Category</button></p>
                 </div>
-            <!--</EditForm>-->
+                <!--</EditForm>-->
+            </div>
         </div>
     </div>
-</div>
 }
+
+<!-- Modal for editing menu -->
+    <div class="modal fade" id="EditMenu" tabindex="-1" role="dialog" aria-labelledby="EditMenuLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AddCategoryLabel">Edit Menu</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <EditForm Model="menu" OnValidSubmit="@AddCategory">
+                <div class="modal-body">
+                    <div style="padding-bottom: 10px">
+                        <InputTextArea placeholder="Enter name of category" class="form-control" @bind-Value="menu.Description"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p class="actions"><button class="btn btn-secondary" data-dismiss="modal">Cancel</button></p>
+                    <p class="actions"><button class="btn btn-success" type="submit">Edit menu</button></p>
+                </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>
 
 
 
 @code
 {
+    Menu menu = new Menu()
+    {
+        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore"
+    };
+
+    private Category _category1 = new Category()
+    {
+        Name = "Starters"
+    };
 
     private void AddMenu()
     {
