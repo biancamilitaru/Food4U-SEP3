@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
+using System.Security.Policy;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -81,6 +82,15 @@ namespace Client.Data.RestaurantService
             }
 
             throw new Exception("Restaurant not found");
+        }
+
+        public async Task MakeRestaurantPublicAsync(Restaurant restaurant)
+        {
+            restaurant.Visibility = true;
+            string restaurantAsJson = JsonSerializer.Serialize(restaurant);
+            HttpContent content = new StringContent(restaurantAsJson, Encoding.UTF8, "application/json");
+            await client.PatchAsync($"{uri}/Restaurants/{restaurant.Username}", content);
+
         }
 
         public async Task DeleteRestaurantAsync(string username)
