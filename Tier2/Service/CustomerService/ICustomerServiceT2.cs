@@ -6,5 +6,7 @@ namespace Food4U_SEP3.Service.CustomerService
     public interface ICustomerServiceT2
     {
         Task<Customer> AddCustomerAsync(Customer customer);
+
+        Task<Customer> ValidateLoginAsync(string username);
     }
 }

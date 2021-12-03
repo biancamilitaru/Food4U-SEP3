@@ -25,5 +25,10 @@ namespace Food4U_SEP3.Service.CustomerService
                 throw;
             }
         }
+
+        public async Task<Customer> ValidateLoginAsync(string username)
+        {
+            return await customerHandlerT2.ValidateLogin(username);
+        }
     }
 }
