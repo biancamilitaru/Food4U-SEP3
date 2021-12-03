@@ -11,7 +11,7 @@ namespace Entities
         
         public string FirstName { get; set; }
 
-        [Required,JsonPropertyName("firstName"),MaxLength(50)]
+        [Required,JsonPropertyName("lastName"),MaxLength(50)]
         public string LastName { get; set; }
 
         [Required,JsonPropertyName("phoneNumber"),MaxLength(12)]
