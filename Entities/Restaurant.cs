@@ -48,6 +48,9 @@ namespace Entities
         
         [JsonPropertyName("menu")]
         public Menu Menu { get; set; }
+        
+        [JsonPropertyName("visibility")]
+        public bool Visibility { get; set; }
 
     }
 }
