@@ -26,5 +26,12 @@ namespace Food4U_SEP3.SocketHandler.CustomerHandler
             Customer getCustomer = JsonSerializer.Deserialize<Customer>(GetFromServer());
             return Task.FromResult(getCustomer);
         }
+
+        public Task<Customer> UpdateCustomer(Customer customer)
+        {
+            string customerAsJson = JsonSerializer.Serialize(customer);
+            SendToServer("UpdateCustomer",customerAsJson);
+            return Task.FromResult(customer);
+        }
     }
 }
