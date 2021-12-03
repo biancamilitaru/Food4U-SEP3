@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -35,7 +36,27 @@ namespace Client.Data.CustomerService
                 throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
             }
         }
-        
-        
+
+        public async Task<Customer> ValidateCustomerAsync(string username, string password)
+        {
+            // TODO Change the uri when the Customer Controller is updated
+            HttpResponseMessage response = await client.GetAsync(uri + "/Customers" + "" + username);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                string customerAsJson = await response.Content.ReadAsStringAsync();
+                Customer resultCustomer = JsonSerializer.Deserialize<Customer>(customerAsJson);
+                
+                if (resultCustomer.Password.Equals(password))
+                {
+                    return resultCustomer;
+                }
+                else
+                {
+                    throw new Exception("Wrong password");
+                }
+            }
+
+            throw new Exception("Customer not found");
+        }
     }
 }
