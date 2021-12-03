@@ -46,5 +46,13 @@ namespace Client.Data.ItemService
         {
             await client.DeleteAsync($"{uri}/Items/{itemId}");
         }
+
+        public async Task AddDiscountAsync(Item item, int discount)
+        {
+            item.Discount = discount;
+            string itemAsJson = JsonSerializer.Serialize(item);
+            HttpContent content = new StringContent(itemAsJson, Encoding.UTF8, "application/json");
+            await client.PatchAsync($"{uri}/Items/{item.ItemId}", content);
+        }
     }
 }
