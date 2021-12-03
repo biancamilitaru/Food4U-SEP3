@@ -4,7 +4,7 @@ using Entities;
 
 namespace Food4U_SEP3.SocketHandler.CustomerHandler
 {
-    public class CustomerSocketHandlerT2 :SocketHandler, ICustomerHandler
+    public class CustomerSocketHandlerT2T2 :SocketHandler, ICustomerHandlerT2
     {
         public Task<Customer> AddCustomer(Customer customer)
         {
