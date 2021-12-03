@@ -86,6 +86,7 @@ namespace Client.Data.RestaurantService
 
         public async Task MakeRestaurantPublicAsync(Restaurant restaurant)
         {
+            restaurant.Visibility = true;
             string restaurantAsJson = JsonSerializer.Serialize(restaurant);
             HttpContent content = new StringContent(restaurantAsJson, Encoding.UTF8, "application/json");
             await client.PatchAsync($"{uri}/Restaurants/{restaurant.Username}", content);
