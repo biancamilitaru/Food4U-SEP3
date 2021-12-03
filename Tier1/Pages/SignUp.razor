@@ -1,6 +1,5 @@
 @page "/SignUp"
-@using Components
-@using Client.Components
+@using Client.Components.SignUpComponents
 
   <h3 style="margin-bottom: 20px">Would you like to Sign up as ?</h3>
 <EditForm Model="model">
@@ -31,7 +30,7 @@
 
 @if (model.SelectedUser.Equals("Customer"))
 {
-    <h3>Create a new customer</h3>
+    <CustomerSignUp></CustomerSignUp>
 }
 
 @if (model.SelectedUser.Equals("Driver"))
