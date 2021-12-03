@@ -18,6 +18,9 @@ namespace Entities
         public string Price { get; set; }
         
         [Required, JsonPropertyName("categoryName")]
-        public string CategoryName { get; set; }   
+        public string CategoryName { get; set; } 
+        
+        [JsonPropertyName("discount")]
+        public int Discount { get; set; }
     }
 }
