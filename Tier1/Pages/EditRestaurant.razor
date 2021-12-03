@@ -1,6 +1,11 @@
 ﻿@page "/EditRestaurant/{Id:int}"
 @using Entities
 @using Client.Data.RestaurantService
+@using Microsoft.AspNetCore.Components
+@using System
+@using System.Threading.Tasks
+@using Entities
+@using Microsoft.AspNetCore.Components
 @inject IRestaurantService restaurantService;
 
 <h3>EditRestaurant</h3>
@@ -40,10 +45,32 @@
             Name: <InputText @bind-Value="restaurant.DeliveryOption2.DeliveryName"/><br/>
             Price: <InputNumber @bind-Value="restaurant.DeliveryOption2.Price"/><br/>
         </div>
-    
+        
+        <div class="form-group">Make my profile:<br/>
+            <InputRadioGroup @bind-Value="@restaurant.Name">
+                <div class="row">
+                    <div class="column" style="padding-right: 10px">
+                        Public
+                    </div>
+                    <div class="column" style="padding-right: 10px">
+                        <InputRadio Value="@true"/>
+                    </div>
+                    
+                    <div class="column" style="padding-right: 10px">
+                        Private
+                    </div>
+                    <div class="column" style="padding-right: 10px">
+                        <InputRadio Value="@false"/>
+                    </div>
+                </div>
+            </InputRadioGroup>
+        </div>
+
         <p class="actions"><button class="btn btn-outline-dark" type="submit">Save</button></p>
         <p class="actions"><button class="btn btn-warning" >Delete my profile</button></p>
     </EditForm>
+    
+    
 }
 
 
