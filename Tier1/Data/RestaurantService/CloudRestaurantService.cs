@@ -37,7 +37,7 @@ namespace Client.Data.RestaurantService
             }
         }
 
-        public async Task EditRestaurantAsync(Restaurant restaurant)
+        public async Task UpdateRestaurantAsync(Restaurant restaurant)
         {
             string restaurantAsJson = JsonSerializer.Serialize(restaurant);
             HttpContent content = new StringContent(restaurantAsJson, Encoding.UTF8, "application/json");

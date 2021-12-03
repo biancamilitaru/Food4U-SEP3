@@ -3,9 +3,11 @@ using Entities;
 
 namespace Client.Data.CustomerService
 {
-    public interface ICustomerService
+    public interface ICustomerServiceT1
     {
         Task AddCustomerAsync(Customer customer);
         Task<Customer> ValidateCustomerAsync(string username, string password);
+
+        Task UpdateCustomerAsync(Customer customer);
     }
 }

@@ -10,7 +10,7 @@ namespace Food4U_SEP3.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        private readonly ICustomerService customerService;
+        private readonly ICustomerServiceT1 _customerServiceT1;
 
 
         [HttpPost]
@@ -18,7 +18,7 @@ namespace Food4U_SEP3.Controllers
         {
             try
             {
-                await customerService.AddCustomerAsync(customer);
+                await _customerServiceT1.AddCustomerAsync(customer);
                 return Created($"/{customer}", customer);
             }
             catch (Exception e)

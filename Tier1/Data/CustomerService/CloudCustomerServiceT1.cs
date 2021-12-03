@@ -8,13 +8,13 @@ using Entities;
 
 namespace Client.Data.CustomerService
 {
-    public class CloudCustomerService : ICustomerService
+    public class CloudCustomerServiceT1 : ICustomerServiceT1
     {
         private string uri = "https://localhost:5003";
         private readonly HttpClient client;
 
 
-        public CloudCustomerService()
+        public CloudCustomerServiceT1()
         {
             client = new HttpClient();
         }
@@ -57,6 +57,13 @@ namespace Client.Data.CustomerService
             }
 
             throw new Exception("Customer not found");
+        }
+
+        public async Task UpdateCustomerAsync(Customer customer)
+        {
+            string customerAsJson = JsonSerializer.Serialize(customer);
+            HttpContent content = new StringContent(customerAsJson, Encoding.UTF8, "application/json");
+            await client.PatchAsync($"{uri}/Customer/{customer.Username}", content);
         }
     }
 }
