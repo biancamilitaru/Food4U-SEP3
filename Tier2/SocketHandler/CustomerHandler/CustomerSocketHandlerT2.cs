@@ -12,5 +12,11 @@ namespace Food4U_SEP3.SocketHandler.CustomerHandler
             SendToServer("AddRestaurant",customerAsJson);
             return Task.FromResult(customer);
         }
+        public Task<Customer> ValidateLogin(string username)
+        {
+            SendToServer("ValidateCustomer",username);
+            Customer customer = JsonSerializer.Deserialize<Customer>(GetFromServer());
+            return Task.FromResult(customer);
+        }
     }
 }
