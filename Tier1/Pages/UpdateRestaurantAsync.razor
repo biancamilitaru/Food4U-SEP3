@@ -67,7 +67,7 @@
         </div>
 
         <p class="actions"><button class="btn btn-outline-dark" type="submit">Save</button></p>
-        <p class="actions"><button class="btn btn-warning" >Delete my profile</button></p>
+        <p class="actions"><button @onclick="DeleteProfile" class="btn btn-warning" >Delete my profile</button></p>
     </EditForm>
     
     
@@ -99,6 +99,6 @@
     
     private void DeleteProfile()
     {
-        
+         restaurantService.DeleteRestaurantAsync(restaurant.Username);
     }
 }

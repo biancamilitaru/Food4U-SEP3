@@ -16,7 +16,7 @@ namespace Food4U_SEP3.Controllers
         public CustomersController(ICustomerServiceT2 customerService) => this.customerService = customerService;
 
         [HttpPost]
-        public async Task<ActionResult<Customer>> AddRestaurantAsync([FromBody] Customer customer)
+        public async Task<ActionResult<Customer>> AddCustomerAsync([FromBody] Customer customer)
         {
             try
             {
@@ -27,6 +27,21 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+        [HttpPatch]
+        public async Task<ActionResult> UpdateCustomerAsync([FromBody] Customer customer, [FromQuery] string username)
+        {
+            try
+            {
+                await customerService.UpdateCustomerAsync(customer, username);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+        
+        
         [HttpGet]
         public async Task<ActionResult<Customer>> GetCustomerAsync([FromQuery] string username)
         {

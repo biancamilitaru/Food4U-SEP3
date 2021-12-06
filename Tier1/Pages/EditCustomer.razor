@@ -60,6 +60,7 @@
     </div>
   </div>
   <p class="actions"><button class="btn btn-success" type="submit">Edit profile</button></p>
+  <p class="actions"><button @onclick="DeleteProfile" class="btn btn-warning" >Delete my profile</button></p>
   
   
 </EditForm>
@@ -85,7 +86,12 @@
 
   private void Edit()
   {
-    //await customerService.UpdateCustomer(customer);
+    customerService.UpdateCustomerAsync(customer);
+  }
+  
+  private void DeleteProfile()
+  {
+    customerService.DeleteCustomerAsync(customer.Username);
   }
     
 }

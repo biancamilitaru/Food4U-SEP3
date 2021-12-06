@@ -33,5 +33,12 @@ namespace Food4U_SEP3.SocketHandler.CustomerHandler
             SendToServer("UpdateCustomer",customerAsJson);
             return Task.FromResult(customer);
         }
+        
+        public Task<Customer> DeleteCustomer(string username)
+        {
+            SendToServer("DeleteCustomer",username);
+            Customer deleteCustomer = JsonSerializer.Deserialize<Customer>(GetFromServer());
+            return Task.FromResult(deleteCustomer);
+        }
     }
 }
