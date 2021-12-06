@@ -13,13 +13,15 @@
 
 
 <!-- RESTAURANT MENU COMPONENT -->
-<div class="card">
+<div class="card" style="padding-top: 20px">
     <div class="card-body">
-        <h4>Description</h4>
-        <p>@restaurant.Menu.Description</p>
+        <a data-toggle="collapse" data-target="#collapseDescription"><h4>Description</h4></a>
+        <div class="collapse" id="collapseDescription">
+            <p>@restaurant.Menu.Description</p>
+        </div>
         <hr>
         <h4>Categories</h4>
-
+        
         <hr>
         <!-- RESTAURANT CATEGORY COMPONENT - ALREADY CREATED -->
         <CategoryComponent Category="category1"></CategoryComponent>

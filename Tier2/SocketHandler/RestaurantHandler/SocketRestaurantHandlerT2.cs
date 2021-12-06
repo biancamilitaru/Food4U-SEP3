@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
@@ -46,11 +48,11 @@ namespace Food4U_SEP3.SocketHandler
             Restaurant restaurant = JsonSerializer.Deserialize<Restaurant>(GetFromServer());
             return Task.FromResult(restaurant);
         }
-        public Task<IList<Restaurant>> GetRestaurants()
+        public Task<List<Restaurant>> GetRestaurants()
         {
             SendToServer("GetRestaurants",null);
             IList<Restaurant> getRestaurants = JsonSerializer.Deserialize<IList<Restaurant>>(GetFromServer());
-            return Task.FromResult(getRestaurants);
+            return Task.FromResult(getRestaurants.ToList());
         }
         
     }

@@ -72,12 +72,14 @@ namespace Food4U_SEP3.Controllers
             }
         }
 
-        public async Task<ActionResult<Restaurant>> GetRestaurantsAsync()
+        [HttpGet]
+        [Route("/AllRestaurants")]
+        public async Task<ActionResult<List<Restaurant>>> GetRestaurantsAsync()
         {
             try
             {
-                await restaurantService.GetRestaurantsAsync();
-                return Ok();
+                //await restaurantService.GetRestaurantsAsync();
+                return Ok(await restaurantService.GetRestaurantsAsync());
             }
             catch (Exception e)
             {
