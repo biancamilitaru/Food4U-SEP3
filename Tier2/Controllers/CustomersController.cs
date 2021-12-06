@@ -56,5 +56,19 @@ namespace Food4U_SEP3.Controllers
             }
         }
         
+        [HttpDelete]
+        public async Task<ActionResult> DeleteCustomerAsync([FromQuery] string username)
+        {
+            try
+            {
+                await customerService.DeleteCustomerAsync(username);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+        
     }
 }
