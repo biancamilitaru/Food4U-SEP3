@@ -1,0 +1,45 @@
+@page "/Restaurants/"
+@using Client.Components
+@using Client.Data.RestaurantService
+@using Entities
+@inject IRestaurantService restaurantService;
+
+<h3>Restaurants</h3>
+
+@if (restaurants == null)
+{
+    <div class="alert alert-warning" role="alert">
+        Loading
+    </div>
+}
+else if (!restaurants.Any())
+{
+    <div class="alert alert-warning" role="alert">
+        There are not created restaurants
+    </div>
+}
+@if (restaurants != null)
+{
+    <div class="row" style="padding-left: 20px">
+        @foreach (var restaurant in restaurants)
+        {
+            <RestaurantCard Restaurant="restaurant"></RestaurantCard>
+        }
+    </div>
+}
+
+@code{
+    private IList<Restaurant> restaurants;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            //restaurants = await restaurantService.GetRestaurantsAsync();
+        }
+        catch (Exception e)
+        {
+            // update some error label here, or show popup..
+        }
+    }
+}
