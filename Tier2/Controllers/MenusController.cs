@@ -47,7 +47,7 @@ namespace Food4U_SEP3.Controllers
         {
             try
             {
-                Menu menu = await menuService.GetMenu(restaurantId);
+                Menu menu = await menuService.GetMenuAsync(restaurantId);
                 return Ok(menu);
             }
             catch (Exception e)
