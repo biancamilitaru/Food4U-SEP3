@@ -12,6 +12,8 @@ namespace Food4U_SEP3.SocketHandler
         Task<Restaurant> UpdateRestaurant(Restaurant restaurant, string username);
         Task<Restaurant> DeleteRestaurant(string username);
         Task<Restaurant> ValidateLogin(string username);
+        
+        Task<IList<Restaurant>> GetRestaurants(); 
 
 
     }

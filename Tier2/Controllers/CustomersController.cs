@@ -28,11 +28,11 @@ namespace Food4U_SEP3.Controllers
             }
         }
         [HttpPatch]
-        public async Task<ActionResult> UpdateCustomerAsync([FromBody] Customer customer, [FromQuery] string username)
+        public async Task<ActionResult> UpdateCustomerAsync([FromBody] Customer customer)
         {
             try
             {
-                await customerService.UpdateCustomerAsync(customer, username);
+                await customerService.UpdateCustomerAsync(customer);
                 return Ok();
             }
             catch (Exception e)
