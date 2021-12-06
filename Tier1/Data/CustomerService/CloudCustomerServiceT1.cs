@@ -39,8 +39,7 @@ namespace Client.Data.CustomerService
 
         public async Task<Customer> ValidateCustomerAsync(string username, string password)
         {
-            // TODO Change the uri when the Customer Controller is updated
-            HttpResponseMessage response = await client.GetAsync(uri + "/Customers" + "" + username);
+            HttpResponseMessage response = await client.GetAsync(uri + "/Customers?username=" + username);
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 string customerAsJson = await response.Content.ReadAsStringAsync();

@@ -1,0 +1,75 @@
+@page "/SRestaurant/"
+@using Entities
+@using Client.Components
+@using Client.Components.RestaurantPageComponents
+
+
+<h3>@restaurant.Name</h3>
+<p>@restaurant.Description</p>
+
+<!-- RESTAURANT INFO COMPONENT -->
+<RestaurantInfoComponent restaurant="restaurant"></RestaurantInfoComponent>
+<!-- RESTAURANT INFO COMPONENT -->
+
+
+<!-- RESTAURANT MENU COMPONENT -->
+<div class="card">
+    <div class="card-body">
+        <h4>Description</h4>
+        <p>@restaurant.Menu.Description</p>
+        <hr>
+        <h4>Categories</h4>
+
+        <hr>
+        <!-- RESTAURANT CATEGORY COMPONENT - ALREADY CREATED -->
+        <CategoryComponent Category="category1"></CategoryComponent>
+        <!-- RESTAURANT CATEGORY COMPONENT - ALREADY CREATED -->
+
+    </div>
+</div>
+<!-- RESTAURANT MENU COMPONENT -->
+
+
+
+
+@code
+{
+    Restaurant restaurant = new Restaurant()
+    {
+        Name = "Santa Restaurant aps.",
+        Address = "Vestergade 12 8700 Horsens",
+        DeliveryOption1 = new Delivery()
+        {
+            DeliveryName = "Takeaway",
+            Price = 15,
+        },
+        DeliveryOption2 = new Delivery()
+        {
+            DeliveryName = "Delivery",
+            Price = 100,
+        },
+        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.",
+        OpeningHoursMonday = "9:00 - 21:00",
+        OpeningHoursTuesday = "9:00 - 21:00",
+        OpeningHoursWednesday = "9:00 - 21:00",
+        OpeningHoursThursday = "9:00 - 21:00",
+        OpeningHoursFriday = "9:00 - 21:00",
+        OpeningHoursSaturday = "9:00 - 21:00",
+        OpeningHoursSunday = "9:00 - 21:00",
+        Visibility = true,
+        Menu = new Menu()
+        {
+            Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.",
+        }
+    };
+
+    Category category1 = new Category()
+    {
+        Name = "Starters"
+    };
+    
+    Category category2 = new Category()
+    {
+        Name = "Main Menu"
+    };
+}

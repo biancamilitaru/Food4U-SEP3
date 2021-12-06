@@ -113,15 +113,15 @@
 
 @code {
     [Parameter]
-    public string Username { get; set; }
+    public Restaurant restaurant { get; set; }
     
-    private Restaurant restaurant = new ();
+    //private Restaurant restaurant = new ();
     
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            restaurant = await restaurantService.GetRestaurantsAsync(Username);
+            //restaurant = await restaurantService.GetRestaurantsAsync(Username);
         }
         catch (Exception e)
         {

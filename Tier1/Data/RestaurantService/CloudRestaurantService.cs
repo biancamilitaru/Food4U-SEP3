@@ -64,8 +64,7 @@ namespace Client.Data.RestaurantService
         
         public async Task<Restaurant> ValidateRestaurantAsync(string username, string password)
         {
-            // TODO Change the uri if the Restaurant Controller is updated
-            HttpResponseMessage response = await client.GetAsync(uri + "" + username);
+            HttpResponseMessage response = await client.GetAsync(uri + "/Restaurants?username=" + username);
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 string restaurantAsJson = await response.Content.ReadAsStringAsync();

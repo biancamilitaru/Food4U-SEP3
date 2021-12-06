@@ -1,4 +1,5 @@
 using Food4U_SEP3.RestaurantServices;
+using Food4U_SEP3.Service.CustomerService;
 using Food4U_SEP3.SocketHandler;
 using Food4U_SEP3.Service.MenuService;
 using Food4U_SEP3.SocketHandler.CustomerHandler;
@@ -38,6 +39,8 @@ namespace Food4U_SEP3
             services.AddScoped<IMenuServiceT2,MenuServiceT2>();
             services.AddScoped<IMenuHandlerT2,SocketMenuHandlerT2>();
             services.AddScoped<ICustomerHandlerT2,CustomerSocketHandlerT2T2>();
+            services.AddScoped<ICustomerServiceT2,CustomerServiceT2>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
