@@ -42,11 +42,11 @@ namespace Food4U_SEP3.UserServices
             }
         }
 
-        public async Task<User> UpdateUserAsync(User user, string username)
+        public async Task<User> UpdateUserAsync(User user)
         {
             try
             {
-                return await userHandlerT2.UpdateUser(user, username);
+                return await userHandlerT2.UpdateUser(user);
             }
             catch (Exception e)
             {

@@ -48,11 +48,11 @@ namespace Food4U_SEP3.Controllers
 
         [HttpPatch]
         [Route("{username}")]
-        public async Task<ActionResult> UpdateUserAsync([FromBody] User user, string username)
+        public async Task<ActionResult> UpdateUserAsync([FromBody] User user)
         {
             try
             {
-                await userService.UpdateUserAsync(user, username);
+                await userService.UpdateUserAsync(user);
                 return Ok();
             }
             catch (Exception e)
