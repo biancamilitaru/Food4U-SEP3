@@ -7,5 +7,6 @@ namespace Food4U_SEP3.Service.MenuService
     {
         Task<Menu> AddMenuAsync(Menu menu);
         Task<Menu> UpdateMenuAsync(Menu menu, int menuId);
+        Task<Menu> GetMenuAsync(int menuId);
     }
 }
