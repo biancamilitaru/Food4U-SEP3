@@ -1,0 +1,25 @@
+@using Entities
+<div class="column" style="margin:10px ; min-width: 200px;max-width: 200px;">
+        <div class="card" style="min-height: 350px; max-height: 350px">
+            <div class="card-body">
+                <ą><h5 style="padding-bottom: 10px;">@Restaurant.Name</h5></ą>
+                <div style="padding-bottom: 10px;">
+                    <label>@Restaurant.Address</label>
+                    <label>@Restaurant.PhoneNumber</label>
+                </div>
+                <div style="padding-bottom: 10px;">
+                    <p style="font-weight: 300;">@Restaurant.Description</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@code {
+    [Parameter]
+    public Restaurant Restaurant { get; set; }
+    
+    public void OnRestaurant()
+    {
+    //Navigate to specific restaurant page
+    }
+}
