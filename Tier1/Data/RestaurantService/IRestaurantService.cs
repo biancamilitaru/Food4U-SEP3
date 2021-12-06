@@ -16,6 +16,6 @@ namespace Client.Data.RestaurantService
 
         Task MakeRestaurantPublicAsync(Restaurant restaurant);
 
-        Task<List<Restaurant>> GetRestaurants();
+        Task<List<Restaurant>> GetRestaurantsAsync();
     }
 }

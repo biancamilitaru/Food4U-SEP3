@@ -95,7 +95,7 @@ namespace Client.Data.RestaurantService
 
         }
 
-        public async Task<List<Restaurant>> GetRestaurants()
+        public async Task<List<Restaurant>> GetRestaurantsAsync()
         {
             HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Restaurants");
 
