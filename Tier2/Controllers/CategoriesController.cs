@@ -30,11 +30,11 @@ namespace Food4U_SEP3.Controllers
         }
         [HttpPatch]
        // [Route("{name:string}")]
-        public async Task<ActionResult> UpdateCategoryAsync([FromBody] Category category, int categoryid)
+        public async Task<ActionResult> UpdateCategoryAsync([FromBody] Category category)
         {
             try
             {
-                await categoryService.UpdateCategoryAsync(category, categoryid);
+                await categoryService.UpdateCategoryAsync(category);
                 return Ok();
             }
             catch (Exception e)

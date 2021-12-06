@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Security.Policy;
@@ -91,6 +92,23 @@ namespace Client.Data.RestaurantService
             HttpContent content = new StringContent(restaurantAsJson, Encoding.UTF8, "application/json");
             await client.PatchAsync($"{uri}/Restaurants/{restaurant.Username}", content);
 
+        }
+
+        public async Task<List<Restaurant>> GetRestaurantsAsync()
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Restaurants");
+
+            if (!responseMessage.IsSuccessStatusCode)
+                throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+
+            string result = await responseMessage.Content.ReadAsStringAsync();
+            
+           List<Restaurant> restaurants = JsonSerializer.Deserialize<List<Restaurant>>(result,new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                }
+            );
+            return restaurants;
         }
 
         public async Task DeleteRestaurantAsync(string username)

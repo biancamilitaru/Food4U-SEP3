@@ -34,7 +34,7 @@ namespace Client.Data.ItemService
                 throw new Exception($@"Error: {responseMessage.StatusCode},{responseMessage.ReasonPhrase}");
             
         }
-        public async Task EditItemAsync(Item item)
+        public async Task UpdateItemAsync(Item item)
         {
             string categoryAsJson = JsonSerializer.Serialize(item);
             HttpContent content = new StringContent(categoryAsJson, Encoding.UTF8, "application/json");

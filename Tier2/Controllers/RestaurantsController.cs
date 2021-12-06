@@ -31,11 +31,11 @@ namespace Food4U_SEP3.Controllers
         }
         
         [HttpPatch]
-        public async Task<ActionResult> UpdateRestaurantAsync([FromBody] Restaurant restaurant, [FromQuery] string username)
+        public async Task<ActionResult> UpdateRestaurantAsync([FromBody] Restaurant restaurant)
         {
             try
             {
-                await restaurantService.UpdateRestaurantAsync(restaurant, username);
+                await restaurantService.UpdateRestaurantAsync(restaurant);
                 return Ok();
             }
             catch (Exception e)
@@ -71,7 +71,23 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-        
+
+        public async Task<ActionResult<Restaurant>> GetRestaurantsAsync()
+        {
+            try
+            {
+                await restaurantService.GetRestaurantsAsync();
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+
+
+
 
     }
 }

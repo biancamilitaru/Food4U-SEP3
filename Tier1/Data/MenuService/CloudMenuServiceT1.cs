@@ -34,11 +34,28 @@ namespace Client.Data.MenuService
                 throw new Exception($@"Error: {responseMessage.StatusCode},{responseMessage.ReasonPhrase}");
             
         }
-        public async Task EditMenuAsync(Menu menu)
+        public async Task UpdateMenuAsync(Menu menu)
         {
             string menuAsJson = JsonSerializer.Serialize(menu);
             HttpContent content = new StringContent(menuAsJson, Encoding.UTF8, "application/json");
             await client.PatchAsync($"{uri}/Restaurants/{menu.MenuId}", content);
+        }
+
+        public async Task<Menu> GetMenuAsync(int restaurantId)
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Menu?restaurantId={restaurantId}");
+
+            if (!responseMessage.IsSuccessStatusCode)
+                throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+
+            string result = await responseMessage.Content.ReadAsStringAsync();
+            
+            Menu menu = JsonSerializer.Deserialize<Menu>(result,new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                }
+            );
+            return menu;
         }
     }
 }

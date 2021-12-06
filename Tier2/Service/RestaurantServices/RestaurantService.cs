@@ -58,11 +58,11 @@ namespace Food4U_SEP3.RestaurantServices
             }
         }
 
-        public async Task<Restaurant> UpdateRestaurantAsync(Restaurant restaurant, string username)
+        public async Task<Restaurant> UpdateRestaurantAsync(Restaurant restaurant)
         {
             try
             {
-                return await restaurantHandlerT2.UpdateRestaurant(restaurant , username);
+                return await restaurantHandlerT2.UpdateRestaurant(restaurant);
             }
             catch (Exception e)
             {
@@ -75,5 +75,20 @@ namespace Food4U_SEP3.RestaurantServices
         {
             return await restaurantHandlerT2.ValidateLogin(username);
         }
+
+        public async Task<IList<Restaurant>> GetRestaurantsAsync()
+        {
+            try
+            {
+                return await restaurantHandlerT2.GetRestaurants();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+       
     }
 }

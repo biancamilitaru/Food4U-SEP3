@@ -28,11 +28,11 @@ namespace Food4U_SEP3.Service.MenuService
             }
         }
 
-        public async Task<Menu> UpdateMenuAsync(Menu menu, int menuId)
+        public async Task<Menu> UpdateMenuAsync(Menu menu)
         {
             try
             {
-                return await menuHandler.UpdateMenu(menu , menuId);
+                return await menuHandler.UpdateMenu(menu);
             }
             catch (Exception e)
             {
@@ -40,5 +40,20 @@ namespace Food4U_SEP3.Service.MenuService
                 throw;
             }
         }
+
+        public async Task<Menu> GetMenuAsync(int menuId)
+        
+            {
+                try
+                {
+                    return await menuHandler.GetMenu(menuId);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+            }
+        
     }
 }

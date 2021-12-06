@@ -8,7 +8,7 @@ namespace Food4U_SEP3.SocketHandler
     {
         Task<User> GetUser(string username);
         Task<User> AddUser(User user);
-        Task<User> UpdateUser(User user, string username);
+        Task<User> UpdateUser(User user);
         
 
     }
