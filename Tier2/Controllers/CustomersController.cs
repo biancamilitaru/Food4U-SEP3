@@ -16,7 +16,7 @@ namespace Food4U_SEP3.Controllers
         public CustomersController(ICustomerServiceT2 customerService) => this.customerService = customerService;
 
         [HttpPost]
-        public async Task<ActionResult<Customer>> AddRestaurantAsync([FromBody] Customer customer)
+        public async Task<ActionResult<Customer>> AddCustomerAsync([FromBody] Customer customer)
         {
             try
             {

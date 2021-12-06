@@ -65,5 +65,11 @@ namespace Client.Data.CustomerService
             HttpContent content = new StringContent(customerAsJson, Encoding.UTF8, "application/json");
             await client.PatchAsync($"{uri}/Customer/{customer.Username}", content);
         }
+
+        public async Task DeleteCustomerAsync(string username)
+        {
+            //TODO need to check the uri
+            await client.DeleteAsync($"{uri}/Customer?customer="+username);
+        }
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Food4U_SEP3.Controllers
 {
-    [Route("[controller")]
+    [Route("[controller]")]
     [ApiController]
     public class CustomerController : ControllerBase
     {
