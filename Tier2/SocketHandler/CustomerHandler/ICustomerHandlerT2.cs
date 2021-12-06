@@ -11,5 +11,7 @@ namespace Food4U_SEP3.SocketHandler.CustomerHandler
         Task<Customer> GetCustomer(string username);
 
         Task<Customer> UpdateCustomer(Customer customer);
+        
+        Task<Customer> DeleteCustomer(string username);
     }
 }
