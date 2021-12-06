@@ -76,7 +76,7 @@ namespace Food4U_SEP3.RestaurantServices
             return await restaurantHandlerT2.ValidateLogin(username);
         }
 
-        public async Task<IList<Restaurant>> GetRestaurants()
+        public async Task<IList<Restaurant>> GetRestaurantsAsync()
         {
             try
             {
