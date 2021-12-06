@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Entities;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace Client.Data.RestaurantService
 {
@@ -96,6 +97,7 @@ namespace Client.Data.RestaurantService
         public async Task DeleteRestaurantAsync(string username)
         {
             await client.DeleteAsync($"{uri}/Restaurants/{username}");
+
         }
     }
 }

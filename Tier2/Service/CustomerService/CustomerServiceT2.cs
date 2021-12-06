@@ -30,5 +30,18 @@ namespace Food4U_SEP3.Service.CustomerService
         {
             return await customerHandlerT2.ValidateLogin(username);
         }
+
+        public async Task<Customer> UpdateCustomerAsync(Customer customer, string username)
+        {
+            try
+            {
+                return await customerHandlerT2.UpdateCustomer(customer, username);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }
