@@ -28,11 +28,11 @@ namespace Food4U_SEP3.Controllers
             }
         }
         [HttpPatch]
-        public async Task<ActionResult> UpdateCustomerAsync([FromBody] Customer customer, [FromQuery] string username)
+        public async Task<ActionResult> UpdateCustomerAsync([FromBody] Customer customer)
         {
             try
             {
-                await customerService.UpdateCustomerAsync(customer, username);
+                await customerService.UpdateCustomerAsync(customer);
                 return Ok();
             }
             catch (Exception e)
@@ -49,6 +49,20 @@ namespace Food4U_SEP3.Controllers
             {
                 Customer customer = await customerService.ValidateLoginAsync(username);
                 return Ok(customer);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+        
+        [HttpDelete]
+        public async Task<ActionResult> DeleteCustomerAsync([FromQuery] string username)
+        {
+            try
+            {
+                await customerService.DeleteCustomerAsync(username);
+                return Ok();
             }
             catch (Exception e)
             {

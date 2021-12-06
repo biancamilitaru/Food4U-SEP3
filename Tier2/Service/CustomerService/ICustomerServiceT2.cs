@@ -9,6 +9,8 @@ namespace Food4U_SEP3.Service.CustomerService
 
         Task<Customer> ValidateLoginAsync(string username);
 
-        Task<Customer> UpdateCustomerAsync(Customer customer, string username);
+        Task<Customer> UpdateCustomerAsync(Customer customer);
+        
+        Task DeleteCustomerAsync(string username);
     }
 }
