@@ -58,11 +58,11 @@ namespace Food4U_SEP3.RestaurantServices
             }
         }
 
-        public async Task<Restaurant> UpdateRestaurantAsync(Restaurant restaurant, string username)
+        public async Task<Restaurant> UpdateRestaurantAsync(Restaurant restaurant)
         {
             try
             {
-                return await restaurantHandlerT2.UpdateRestaurant(restaurant , username);
+                return await restaurantHandlerT2.UpdateRestaurant(restaurant);
             }
             catch (Exception e)
             {

@@ -17,10 +17,10 @@ namespace Food4U_SEP3.SocketHandler
             return Task.FromResult(menu);
         }
 
-        public Task<Menu> UpdateMenu(Menu menu, int menuId)
+        public Task<Menu> UpdateMenu(Menu menu)
         {
             string serialisedMenu = JsonSerializer.Serialize(menu);
-            SendToServer("UpdateMenu",serialisedMenu + menuId);
+            SendToServer("UpdateMenu",serialisedMenu);
             return Task.FromResult(menu);
         }
         

@@ -27,11 +27,11 @@ namespace Food4U_SEP3.Service.ItemsService
                 throw;
             }
         }
-        public async Task<Item> UpdateItemAsync(Item item, int itemId)
+        public async Task<Item> UpdateItemAsync(Item item)
         {
             try
             {
-                return await itemHandler.UpdateItem(item , itemId);
+                return await itemHandler.UpdateItem(item);
             }
             catch (Exception e)
             {

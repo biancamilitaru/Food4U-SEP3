@@ -37,7 +37,7 @@ namespace Client.Data.CategoryService
         }
         
 
-        public async Task EditCategoryAsync(Category category)
+        public async Task UpdateCategoryAsync(Category category)
         {
             string categoryAsJson = JsonSerializer.Serialize(category);
             HttpContent content = new StringContent(categoryAsJson, Encoding.UTF8, "application/json");

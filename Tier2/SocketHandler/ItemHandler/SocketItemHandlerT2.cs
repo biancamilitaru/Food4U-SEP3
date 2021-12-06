@@ -12,10 +12,10 @@ namespace Food4U_SEP3.SocketHandler.ItemHandler
             SendToServer("AddItem", serializedMenu);
             return Task.FromResult(item);
         }
-        public Task<Item> UpdateItem(Item item, int itemId)
+        public Task<Item> UpdateItem(Item item)
         {
             string serialisedItem = JsonSerializer.Serialize(item);
-            SendToServer("UpdateItem",serialisedItem + itemId);
+            SendToServer("UpdateItem",serialisedItem);
             return Task.FromResult(item);
         }
         public Task<Item> DeleteItem(int itemId)

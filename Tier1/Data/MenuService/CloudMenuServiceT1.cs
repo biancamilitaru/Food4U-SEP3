@@ -34,7 +34,7 @@ namespace Client.Data.MenuService
                 throw new Exception($@"Error: {responseMessage.StatusCode},{responseMessage.ReasonPhrase}");
             
         }
-        public async Task EditMenuAsync(Menu menu)
+        public async Task UpdateMenuAsync(Menu menu)
         {
             string menuAsJson = JsonSerializer.Serialize(menu);
             HttpContent content = new StringContent(menuAsJson, Encoding.UTF8, "application/json");
