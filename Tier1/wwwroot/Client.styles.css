@@ -132,6 +132,37 @@
     border: 0;
 }
 
+.a-user {
+    fill:white;
+}
+
+.a-user:hover {
+    fill:#E9ECEF;
+}
+
+.a-user-active {
+    fill:#DDDDDD;
+}
+
+input.invalid{
+    background-color: #F5E9EB;
+    outline: 0;
+}
+
+input.valid.modified:not([type="checkbox"]){
+    background-color: white;
+    outline: 0;
+}
+
+.validation-message{
+    color: #6C757D;
+    background-color: #F5E9EB;
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border-radius: .25rem;
+}
+
 @media (min-width: 641px) {
     .navbar-toggler {
         display: none;

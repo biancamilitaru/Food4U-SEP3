@@ -1,10 +1,14 @@
 @using Entities
 @using Microsoft.AspNetCore.Components
-<h3>Create a new customer</h3>
+<div style="padding-bottom: 10px; position: sticky; z-index: 2; top: 56px; background-color: white">
+  <h3>Create a new customer</h3>
+
+  <div class="progress">
+    <div style="background-color: #862649;" id="myBar" class="progress-bar"></div>
+  </div>
+</div>
 
 <EditForm Model="@newCustomer" OnValidSubmit="@AddNewCustomer">
-  <DataAnnotationsValidator/>
-  <ValidationSummary/>
   <div class="card" style="margin-bottom: 20px">
     <div class="card-body">
       <h4>Login information:</h4>
@@ -55,9 +59,12 @@
       </div>
     </div>
   </div>
+  
+  <DataAnnotationsValidator/>
+  <ValidationSummary/>
+  
   <p class="actions"><button class="btn btn-success" type="submit">Create a profile</button></p>
-  
-  
+
 </EditForm>
 
 

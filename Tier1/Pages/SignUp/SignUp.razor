@@ -1,0 +1,85 @@
+@page "/SignUp"
+@using Client.Components.SignUpComponents
+
+
+    <h3>Would you like to Sign up as ?</h3>
+
+
+    <div class="row">
+            <div class="column" style="min-width: 150px; padding: 40px">
+                <div class="row">
+                    <div class="column" style="padding-right: 50px">
+                        <a class="@buttonRestaurant" @onclick="RestaurantClick">
+                            <RestaurantIcon Size="100"></RestaurantIcon>
+                        </a>
+                    </div>
+                    <div class="column" style="padding-right: 50px">
+                        <a class="@buttonCustomer" @onclick="CustomerClick">
+                            <CustomerIcon Size="100"></CustomerIcon>
+                        </a>
+                    </div>
+                    <div @onclick="DriverClick" class="@buttonDriver" style="padding-right: 50px">
+                        <a class="@buttonDriver" @onclick="DriverClick">
+                            <DriverIcon Size="100"></DriverIcon>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+    </div>
+
+
+@if (selected.Equals("Restaurant"))
+{
+    <RestaurantSignUp></RestaurantSignUp>
+}
+
+@if (selected.Equals("Customer"))
+{
+    <CustomerSignUp></CustomerSignUp>
+}
+
+@if (selected.Equals("Driver"))
+{
+    <h3>Create a new driver</h3>
+}
+
+
+
+@code {
+    String restaurant = "Restaurant";
+    String customer = "Customer";
+    String driver = "Driver";
+
+    String buttonRestaurant = "a-user-active";
+    String buttonCustomer = "a-user";
+    String buttonDriver = "a-user";
+
+    String selected = "Restaurant";
+
+    private void RestaurantClick()
+    {
+        selected = "Restaurant";
+        buttonRestaurant = "a-user-active";
+        buttonCustomer = "a-user";
+        buttonDriver = "a-user";
+    }
+    
+    private void CustomerClick()
+    {
+        selected = "Customer";
+        buttonRestaurant = "a-user";
+        buttonCustomer = "a-user-active";
+        buttonDriver = "a-user";
+    }
+    
+    private void DriverClick()
+    {
+        selected = "Driver";
+        buttonRestaurant = "a-user";
+        buttonCustomer = "a-user";
+        buttonDriver = "a-user-active";
+    }
+    
+}

@@ -2,13 +2,17 @@
 @using Client.Data.RestaurantService
 @using Entities
 @inject IRestaurantService RestaurantService
-<h3>Create a new restaurant</h3>
 
+<div style="padding-bottom: 10px; position: sticky; z-index: 2; top: 56px; background-color: white">
+  <h3>Create a new restaurant</h3>
+
+  <div class="progress">
+    <div style="background-color: #862649;" id="myBar" class="progress-bar"></div>
+  </div>
+</div>
 
 <EditForm Model="@addNewRestaurantItem" OnValidSubmit="@AddNewRestaurant">
-    <DataAnnotationsValidator/>
-    <ValidationSummary/>
-    <div class="card" style="margin-bottom: 20px">
+  <div class="card" style="margin-bottom: 20px">
       <div class="card-body">
         <h4>Login information:</h4>
         <div class="form-group">
@@ -124,31 +128,34 @@
     </div>
     
     
-    <div class="card" style="margin-bottom: 20px">
-              <div class="card-body">
-    <h4>Delivery options:</h4>
-                <div class="row">
-                  <div class="column" style="padding: 20px">
-                    <div class="card">
-                      <div class="card-body">
-                        <h6>Delivery option 1</h6>
-                        <InputText placeholder="Delivery name" class="form-control" @bind-Value="addNewRestaurantItem.DeliveryOption1.DeliveryName"/>
-                        <InputNumber class="form-control" @bind-Value="addNewRestaurantItem.DeliveryOption1.Price"/>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="column" style="padding: 20px">
-                    <div class="card">
-                      <div class="card-body">
-                        <h6>Delivery option 2</h6>
-                        <InputText placeholder="Delivery name" class="form-control" @bind-Value="addNewRestaurantItem.DeliveryOption2.DeliveryName"/>
-                        <InputNumber class="form-control" @bind-Value="addNewRestaurantItem.DeliveryOption2.Price"/>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+  <div class="card" style="margin-bottom: 20px">
+    <div class="card-body">
+      <h4>Delivery options:</h4>
+      <div class="row">
+        <div class="column" style="padding: 20px">
+          <div class="card">
+            <div class="card-body">
+              <h6>Delivery option 1</h6>
+              <InputText placeholder="Delivery name" class="form-control" @bind-Value="addNewRestaurantItem.DeliveryOption1.DeliveryName"/>
+              <InputNumber class="form-control" @bind-Value="addNewRestaurantItem.DeliveryOption1.Price"/>
+            </div>
+          </div>
+        </div>
+        <div class="column" style="padding: 20px">
+          <div class="card">
+            <div class="card-body">
+              <h6>Delivery option 2</h6>
+              <InputText placeholder="Delivery name" class="form-control" @bind-Value="addNewRestaurantItem.DeliveryOption2.DeliveryName"/>
+              <InputNumber class="form-control" @bind-Value="addNewRestaurantItem.DeliveryOption2.Price"/>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+  
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
 
     <p class="actions"><button class="btn btn-success" type="submit">Create a new restaurant</button></p>
 </EditForm>

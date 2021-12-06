@@ -3,7 +3,7 @@
 @using Entities
 @using Microsoft.AspNetCore.Components
 @using Client.Data.CustomerService
-@inject ICustomerService customerService;
+@inject ICustomerServiceT1 customerService;
 <h3>Create a new customer</h3>
 
 <EditForm Model="@customer" OnValidSubmit="@Edit">
