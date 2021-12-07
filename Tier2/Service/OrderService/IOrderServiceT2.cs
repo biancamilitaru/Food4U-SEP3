@@ -10,5 +10,6 @@ namespace Food4U_SEP3.Service.OrderService
 
         Task<List<Order>> GetIncomingOrdersAsync(string restaurantUsername);
         Task<Order> UpdateOrderAsync(Order order);
+        Task DeleteOrderAsync(int orderId);
     }
 }
