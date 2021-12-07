@@ -11,11 +11,11 @@ namespace Food4U_SEP3.Controllers
     [Route("[controller]")]
     [ApiController]
     
-    public class ItemsController : ControllerBase
+    public class ItemController : ControllerBase
     {
         private readonly IItemServiceT2 itemService;
 
-        public ItemsController(IItemServiceT2 itemService) => this.itemService = itemService;
+        public ItemController(IItemServiceT2 itemService) => this.itemService = itemService;
         
         
         [HttpPost]

@@ -9,11 +9,11 @@ namespace Food4U_SEP3.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly IUserService userService;
 
-        public UsersController(IUserService userService)
+        public UserController(IUserService userService)
         {
             this.userService = userService;
         }

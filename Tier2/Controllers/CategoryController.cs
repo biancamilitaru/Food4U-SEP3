@@ -10,11 +10,11 @@ namespace Food4U_SEP3.Controllers
     [Route("[controller]")]
     [ApiController]
     
-    public class CategoriesController : ControllerBase
+    public class CategoryController : ControllerBase
     {
         private readonly ICategoryServiceT2 categoryService;
 
-        public CategoriesController(ICategoryServiceT2 categoryService) => this.categoryService = categoryService;
+        public CategoryController(ICategoryServiceT2 categoryService) => this.categoryService = categoryService;
 
         [HttpPost]
         public async Task<ActionResult<Category>> AddCategoryAsync([FromBody] Category category)

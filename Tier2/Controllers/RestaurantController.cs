@@ -11,11 +11,11 @@ namespace Food4U_SEP3.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class RestaurantsController : ControllerBase
+    public class RestaurantController : ControllerBase
     {
         private readonly IRestaurantService restaurantService;
 
-        public RestaurantsController(IRestaurantService restaurantService) => this.restaurantService = restaurantService;
+        public RestaurantController(IRestaurantService restaurantService) => this.restaurantService = restaurantService;
 
         [HttpPost]
         public async Task<ActionResult<Restaurant>> AddRestaurantAsync([FromBody] Restaurant restaurant)

@@ -11,11 +11,11 @@ namespace Food4U_SEP3.Controllers
     [Route("[controller]")]
     [ApiController]
     
-    public class OrdersController : ControllerBase
+    public class OrderController : ControllerBase
     {
         private readonly IOrderServiceT2 orderService;
         
-        public OrdersController(IOrderServiceT2 orderService) => this.orderService = orderService;
+        public OrderController(IOrderServiceT2 orderService) => this.orderService = orderService;
         
         [HttpPost]
         public async Task<ActionResult<Order>> AddOrderAsync([FromBody] Order order)

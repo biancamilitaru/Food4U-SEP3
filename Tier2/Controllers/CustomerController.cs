@@ -12,11 +12,11 @@ namespace Food4U_SEP3.Controllers
     [Route("[controller]")]
     [ApiController]
     
-    public class CustomersController : ControllerBase
+    public class CustomerController : ControllerBase
     {
         private readonly ICustomerServiceT2 customerService;
 
-        public CustomersController(ICustomerServiceT2 customerService) => this.customerService = customerService;
+        public CustomerController(ICustomerServiceT2 customerService) => this.customerService = customerService;
 
         [HttpPost]
         public async Task<ActionResult<Customer>> AddCustomerAsync([FromBody] Customer customer)
