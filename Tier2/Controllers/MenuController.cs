@@ -43,6 +43,7 @@ namespace Food4U_SEP3.Controllers
         }
 
         [HttpGet]
+        [Route("/Menus")]
         public async Task<ActionResult<Menu>> GetMenuAsync([FromBody] int restaurantId)
         {
             try

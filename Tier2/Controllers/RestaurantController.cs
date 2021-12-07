@@ -73,7 +73,7 @@ namespace Food4U_SEP3.Controllers
         }
 
         [HttpGet]
-        [Route("/AllRestaurants")]
+        [Route("/Restaurants")]
         public async Task<ActionResult<List<Restaurant>>> GetRestaurantsAsync()
         {
             try

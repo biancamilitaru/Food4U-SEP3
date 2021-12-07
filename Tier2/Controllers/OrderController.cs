@@ -29,8 +29,22 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+        [HttpDelete]
+        public async Task<ActionResult> DeleteOrderAsync([FromQuery] int orderId)
+        {
+            try
+            {
+                await orderService.DeleteOrderAsync(orderId);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
         
         [HttpGet]
+        [Route("/IncomingOrders")]
         public async Task<ActionResult<List<Order>>> GetIncomingOrders([FromQuery] string restaurantUsername)
         {
             try
