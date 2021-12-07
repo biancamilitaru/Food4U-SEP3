@@ -28,6 +28,19 @@ namespace Food4U_SEP3.Service.CategoryService
             }
         }
 
+        public async Task<Category> GetCategoryAsync(int categoryId)
+        {
+            try
+            {
+                return await categoryHandler.GetCategory(categoryId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
         public async Task<Category> UpdateCategoryAsync(Category category)
         {
             try
