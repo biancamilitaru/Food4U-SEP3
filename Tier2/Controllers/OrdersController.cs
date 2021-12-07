@@ -43,5 +43,19 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
+        [HttpPatch]
+        public async Task<ActionResult> UpdateOrderAsync([FromBody] Order order)
+        {
+            try
+            {
+                //await orderService.UpdateOrderAsync(order);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
     }
 }
