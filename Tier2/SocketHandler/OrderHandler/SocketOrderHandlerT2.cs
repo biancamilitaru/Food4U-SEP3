@@ -29,5 +29,11 @@ namespace Food4U_SEP3.SocketHandler.OrderHandler
             SendToServer("UpdateCategory", serializedOrder);
             return Task.FromResult(order);
         }
+        public Task<Order> DeleteOrder(int orderId)
+        {
+            SendToServer("DeleteOrder",orderId.ToString());
+            Order deleteOrder = JsonSerializer.Deserialize<Order>(GetFromServer());
+            return Task.FromResult(deleteOrder);
+        }
     }
 }
