@@ -19,6 +19,13 @@ namespace Food4U_SEP3.SocketHandler
             return Task.FromResult(category);
         }
 
+        public Task<Category> GetCategory(int categoryId)
+        {
+            SendToServer("GetCategory",categoryId.ToString());
+            Category getCategory = JsonSerializer.Deserialize<Category>(GetFromServer());
+            return Task.FromResult(getCategory);
+        }
+
         public Task<Category> UpdateCategory(Category category)
         {
             string serializedCategory = JsonSerializer.Serialize(category);

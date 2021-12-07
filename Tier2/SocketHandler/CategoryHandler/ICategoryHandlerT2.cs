@@ -6,6 +6,8 @@ namespace Food4U_SEP3.SocketHandler
     public interface ICategoryHandlerT2
     {
         Task<Category> AddCategory(Category category);
+        
+        Task<Category> GetCategory(int categoryId);
 
         Task<Category> UpdateCategory(Category category);
 

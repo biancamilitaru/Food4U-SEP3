@@ -28,6 +28,21 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+        
+        [HttpGet]
+        public async Task<ActionResult<Category>> GetCategoryAsync([FromQuery] int categoryId)
+        {
+            try
+            {
+                Category category = await categoryService.GetCategoryAsync(categoryId);
+                return Ok(category);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+        
         [HttpPatch]
        // [Route("{name:string}")]
         public async Task<ActionResult> UpdateCategoryAsync([FromBody] Category category)

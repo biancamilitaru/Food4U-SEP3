@@ -11,7 +11,7 @@ namespace Entities
         [Required, JsonPropertyName("name")]
         public string Name { get; set; }
         
-        [JsonPropertyName("menuID")]
+        [JsonPropertyName("menuId")]
         public int MenuId { get; set; }
     }
 }
