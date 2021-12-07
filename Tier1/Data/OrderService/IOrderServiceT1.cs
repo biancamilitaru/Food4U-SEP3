@@ -8,8 +8,8 @@ namespace Client.Data.OrderService
     public interface IOrderServiceT1
     {
         Task AddOrderAsync(Order order);
-        Task<List<Order>> GetIncomingOrders(string restaurantUsername);
+        Task<List<Order>> GetIncomingOrdersAsync(string restaurantUsername);
 
-
+        Task<List<Order>> GetAcceptedOrdersAsync(string restaurantUsername);
     }
 }

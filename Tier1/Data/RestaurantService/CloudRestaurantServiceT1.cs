@@ -46,9 +46,9 @@ namespace Client.Data.RestaurantService
             await client.PatchAsync($"{uri}/Restaurants/{restaurant.Username}", content);
         }
 
-        public async Task<Restaurant> GetRestaurantsAsync(string username)
+        public async Task<Restaurant> GetRestaurantAsync(string username)
         {
-            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Restaurants?restaurantId={username}");
+            HttpResponseMessage responseMessage = await client.GetAsync(uri+"/Restaurant?username"+username);
 
             if (!responseMessage.IsSuccessStatusCode)
                 throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");

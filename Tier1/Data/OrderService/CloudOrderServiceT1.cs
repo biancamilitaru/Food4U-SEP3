@@ -37,9 +37,9 @@ namespace Client.Data.OrderService
             
         }
 
-        public async Task <List<Order>> GetIncomingOrders(string restaurantUsername)
+        public async Task <List<Order>> GetIncomingOrdersAsync(string restaurantUsername)
         {
-            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Orders?restaurantUsername={restaurantUsername}");
+            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Orders/Incoming?restaurantUsername={restaurantUsername}");
 
             if (!responseMessage.IsSuccessStatusCode)
                 throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
@@ -54,6 +54,21 @@ namespace Client.Data.OrderService
             return order;
         }
 
-       
+        public async Task<List<Order>> GetAcceptedOrdersAsync(string restaurantUsername)
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Orders/Accepted?restaurantUsername={restaurantUsername}");
+
+            if (!responseMessage.IsSuccessStatusCode)
+                throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+
+            string result = await responseMessage.Content.ReadAsStringAsync();
+            
+            List<Order> order = JsonSerializer.Deserialize<List<Order>>(result, new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                }
+            );
+            return order;
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace Client.Data.RestaurantService
         Task AddRestaurantAsync(Restaurant restaurant);
         Task UpdateRestaurantAsync(Restaurant restaurant);
 
-        Task<Restaurant> GetRestaurantsAsync(string username);
+        Task<Restaurant> GetRestaurantAsync(string username);
         Task DeleteRestaurantAsync(string username);
 
         Task<Restaurant> ValidateRestaurantAsync(string username, string password);
