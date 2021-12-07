@@ -35,7 +35,24 @@ namespace Client.Data.CategoryService
                 throw new Exception($@"Error: {responseMessage.StatusCode},{responseMessage.ReasonPhrase}");
 
         }
-        
+
+        public async Task<Category>  GetCategoryAsync(int categoryId)
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync(uri+"/Category?categoryId="+categoryId);
+
+            if (!responseMessage.IsSuccessStatusCode)
+                throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+
+            string result = await responseMessage.Content.ReadAsStringAsync();
+            
+            Category category = JsonSerializer.Deserialize<Category>(result,new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                }
+            );
+            return category;
+        }
+
 
         public async Task UpdateCategoryAsync(Category category)
         {

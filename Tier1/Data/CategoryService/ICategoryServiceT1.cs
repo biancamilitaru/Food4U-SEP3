@@ -7,6 +7,8 @@ namespace Client.Data.CategoryService
     {
         Task AddCategoryAsync(Category category);
 
+        Task<Category>  GetCategoryAsync(int categoryId);
+
         Task UpdateCategoryAsync(Category category);
 
         Task RemoveCategoryAsync(int categoryId);
