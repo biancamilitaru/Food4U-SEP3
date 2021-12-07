@@ -30,7 +30,7 @@ namespace Client.Data.OrderService
 
             Console.WriteLine(content);
 
-            HttpResponseMessage responseMessage = await client.PostAsync($"{uri}/Orders", content);
+            HttpResponseMessage responseMessage = await client.PostAsync($"{uri}/Order", content);
             
             if (!responseMessage.IsSuccessStatusCode)
                 throw new Exception($@"Error: {responseMessage.StatusCode},{responseMessage.ReasonPhrase}");
@@ -39,7 +39,7 @@ namespace Client.Data.OrderService
 
         public async Task <List<Order>> GetIncomingOrdersAsync(string restaurantUsername)
         {
-            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Orders/Incoming?restaurantUsername={restaurantUsername}");
+            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Order/Incoming?restaurantUsername={restaurantUsername}");
 
             if (!responseMessage.IsSuccessStatusCode)
                 throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
@@ -56,7 +56,7 @@ namespace Client.Data.OrderService
 
         public async Task<List<Order>> GetAcceptedOrdersAsync(string restaurantUsername)
         {
-            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Orders/Accepted?restaurantUsername={restaurantUsername}");
+            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Order/Accepted?restaurantUsername={restaurantUsername}");
 
             if (!responseMessage.IsSuccessStatusCode)
                 throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");

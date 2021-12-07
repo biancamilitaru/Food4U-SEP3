@@ -24,7 +24,9 @@ namespace Food4U_SEP3.SocketHandler
                 Type = type,
                 Context = context
             };
+            
             string serialisedRequest = JsonSerializer.Serialize(newRequest);
+            Console.WriteLine(serialisedRequest);
             byte[] dataToServer = Encoding.ASCII.GetBytes(serialisedRequest);
             stream.Write(dataToServer, 0, dataToServer.Length);
             //stream.Close();

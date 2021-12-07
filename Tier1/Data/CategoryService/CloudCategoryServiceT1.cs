@@ -29,7 +29,7 @@ namespace Client.Data.CategoryService
 
             Console.WriteLine(content);
 
-            HttpResponseMessage responseMessage = await client.PostAsync($"{uri}/Categories/{category.Name}", content);
+            HttpResponseMessage responseMessage = await client.PostAsync($"{uri}/Category/{category.Name}", content);
             
             if (!responseMessage.IsSuccessStatusCode)
                 throw new Exception($@"Error: {responseMessage.StatusCode},{responseMessage.ReasonPhrase}");
@@ -38,7 +38,8 @@ namespace Client.Data.CategoryService
 
         public async Task<Category>  GetCategoryAsync(int categoryId)
         {
-            HttpResponseMessage responseMessage = await client.GetAsync(uri+"/Category?categoryId="+categoryId);
+            Console.WriteLine(uri+"/Category?categoryId="+categoryId);
+            HttpResponseMessage responseMessage = await client.GetAsync(uri+"/Category?categoryId="+categoryId.ToString());
 
             if (!responseMessage.IsSuccessStatusCode)
                 throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
@@ -58,13 +59,13 @@ namespace Client.Data.CategoryService
         {
             string categoryAsJson = JsonSerializer.Serialize(category);
             HttpContent content = new StringContent(categoryAsJson, Encoding.UTF8, "application/json");
-            await client.PatchAsync($"{uri}/Categories/{category.Name}", content);
+            await client.PatchAsync($"{uri}/Category/{category.Name}", content);
         
         }
 
         public async Task RemoveCategoryAsync(int categoryId)
         {
-            await client.DeleteAsync($"{uri}/Categories/{categoryId}");
+            await client.DeleteAsync($"{uri}/Category/{categoryId}");
         }
     }
 }

@@ -1,5 +1,6 @@
 @using Entities
 @using System.Text.Json
+@using Food4U_SEP3.Models
 @inject IJSRuntime jsRuntime;
 
 <div class="modal fade" id="ShoppingCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -35,36 +36,7 @@
                     }
                     
                     //Comment section
-                    <textarea class="form-control"  rows="3" placeholder="Any comment or wishes?"></textarea>
-                    
-                    //Delivery options
-                    //TODO Implement the method that will find the restaurant based on item and display restaurants delivery options
-                    <a data-toggle="collapse" data-target="#collapseDeliveryOption"><h6 style="padding-top: 20px">Delivery options</h6></a>
-                    
-                    <div class="collapse" id="collapseDeliveryOption">
-                        <div class="row">
-                            <div class="column">
-                                <div class="card" style="margin: 20px">
-                                    <div class="card-body">
-                                        <p>Delivery name</p>
-                                        <p>100 dkk</p>
-                                        <p class="actions"><button class="btn btn-success btn-sm">Select delivery</button></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="column">
-                                <div class="card" style="margin: 20px">
-                                    <div class="card-body">
-                                        <p>Delivery name</p>
-                                        <p>100 dkk</p>
-                                        <p class="actions"><button class="btn btn-success btn-sm">Select delivery</button></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-
+                    <input  class="form-control" @bind-value="comment"  rows="3" placeholder="Any comment or wishes?">
 
                 }
                 else
@@ -89,6 +61,7 @@
     public NavigationManager NavigationManager { get; set; }
 
     private Customer customer;
+    private String comment;
     
     public async Task ReadCustomer()
     {
@@ -100,10 +73,20 @@
             customer = JsonSerializer.Deserialize<Customer>(customerAsJson);
         }
     }
+    
+    
+    
+    public async Task SaveComment()
+    {
+        string serialisedData = JsonSerializer.Serialize(comment);
+        await jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "orderComment", serialisedData);
+    }
+    
 
     private async Task onContinue()
     {
         await ReadCustomer();
+        await SaveComment();
         NavigationManager.NavigateTo("Order/"+customer.Username);
     }
     

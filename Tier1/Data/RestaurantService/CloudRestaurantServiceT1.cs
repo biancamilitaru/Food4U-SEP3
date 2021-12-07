@@ -32,7 +32,7 @@ namespace Client.Data.RestaurantService
             
             Console.WriteLine(content);
 
-            HttpResponseMessage responseMessage = await client.PostAsync(uri+"/Restaurants", content);
+            HttpResponseMessage responseMessage = await client.PostAsync(uri+"/Restaurant", content);
             if (!responseMessage.IsSuccessStatusCode)
             {
                 throw new Exception($@"Error: {responseMessage.StatusCode},{responseMessage.ReasonPhrase}");
@@ -43,12 +43,12 @@ namespace Client.Data.RestaurantService
         {
             string restaurantAsJson = JsonSerializer.Serialize(restaurant);
             HttpContent content = new StringContent(restaurantAsJson, Encoding.UTF8, "application/json");
-            await client.PatchAsync($"{uri}/Restaurants/{restaurant.Username}", content);
+            await client.PatchAsync($"{uri}/Restaurant/{restaurant.Username}", content);
         }
 
         public async Task<Restaurant> GetRestaurantAsync(string username)
         {
-            HttpResponseMessage responseMessage = await client.GetAsync(uri+"/Restaurant?username"+username);
+            HttpResponseMessage responseMessage = await client.GetAsync(uri+"/Restaurant?username="+username);
 
             if (!responseMessage.IsSuccessStatusCode)
                 throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
@@ -65,7 +65,7 @@ namespace Client.Data.RestaurantService
         
         public async Task<Restaurant> ValidateRestaurantAsync(string username, string password)
         {
-            HttpResponseMessage response = await client.GetAsync(uri + "/Restaurants?username=" + username);
+            HttpResponseMessage response = await client.GetAsync(uri + "/Restaurant?username=" + username);
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 string restaurantAsJson = await response.Content.ReadAsStringAsync();
@@ -90,7 +90,7 @@ namespace Client.Data.RestaurantService
             restaurant.Visibility = true;
             string restaurantAsJson = JsonSerializer.Serialize(restaurant);
             HttpContent content = new StringContent(restaurantAsJson, Encoding.UTF8, "application/json");
-            await client.PatchAsync($"{uri}/Restaurants/{restaurant.Username}", content);
+            await client.PatchAsync($"{uri}/Restaurant/{restaurant.Username}", content);
 
         }
 
@@ -116,13 +116,13 @@ namespace Client.Data.RestaurantService
             order.Status = "Accepted";
             string orderAsJson = JsonSerializer.Serialize(order);
             HttpContent content = new StringContent(orderAsJson, Encoding.UTF8, "application/json");
-            await client.PatchAsync($"{uri}/Orders/{order.OrderId}", content);
+            await client.PatchAsync($"{uri}/Order/{order.OrderId}", content);
         }
 
 
         public async Task DeleteRestaurantAsync(string username)
         {
-            await client.DeleteAsync($"{uri}/Restaurants/{username}");
+            await client.DeleteAsync($"{uri}/Restaurant/{username}");
 
         }
         
@@ -132,7 +132,7 @@ namespace Client.Data.RestaurantService
             order.Status = "Rejected";
             string orderAsJson = JsonSerializer.Serialize(order);
             HttpContent content = new StringContent(orderAsJson, Encoding.UTF8, "application/json");
-            await client.PatchAsync($"{uri}/Orders/{order.OrderId}", content);
+            await client.PatchAsync($"{uri}/Order/{order.OrderId}", content);
         }
     }
 }

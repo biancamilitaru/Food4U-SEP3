@@ -28,7 +28,7 @@ namespace Client.Data.ItemService
 
             Console.WriteLine(content);
 
-            HttpResponseMessage responseMessage = await client.PostAsync($"{uri}/Items/{item.ItemId}", content);
+            HttpResponseMessage responseMessage = await client.PostAsync($"{uri}/Item/{item.ItemId}", content);
             
             if (!responseMessage.IsSuccessStatusCode)
                 throw new Exception($@"Error: {responseMessage.StatusCode},{responseMessage.ReasonPhrase}");
@@ -38,13 +38,13 @@ namespace Client.Data.ItemService
         {
             string categoryAsJson = JsonSerializer.Serialize(item);
             HttpContent content = new StringContent(categoryAsJson, Encoding.UTF8, "application/json");
-            await client.PatchAsync($"{uri}/Items/{item.ItemId}", content);
+            await client.PatchAsync($"{uri}/Item/{item.ItemId}", content);
         
         }
 
         public async Task DeleteItemAsync(int itemId)
         {
-            await client.DeleteAsync($"{uri}/Items/{itemId}");
+            await client.DeleteAsync($"{uri}/Item/{itemId}");
         }
 
         public async Task AddDiscountAsync(Item item, int discount)
@@ -52,7 +52,7 @@ namespace Client.Data.ItemService
             item.Discount = discount;
             string itemAsJson = JsonSerializer.Serialize(item);
             HttpContent content = new StringContent(itemAsJson, Encoding.UTF8, "application/json");
-            await client.PatchAsync($"{uri}/Items/{item.ItemId}", content);
+            await client.PatchAsync($"{uri}/Item/{item.ItemId}", content);
         }
     }
 }

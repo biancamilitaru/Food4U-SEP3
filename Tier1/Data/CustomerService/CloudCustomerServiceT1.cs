@@ -30,7 +30,7 @@ namespace Client.Data.CustomerService
 
             Console.WriteLine(content);
 
-            HttpResponseMessage responseMessage = await client.PostAsync(uri + "/Customers", content);
+            HttpResponseMessage responseMessage = await client.PostAsync(uri + "/Customer", content);
             if (!responseMessage.IsSuccessStatusCode)
             {
                 throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
@@ -39,7 +39,7 @@ namespace Client.Data.CustomerService
 
         public async Task<Customer> GetCustomerAsync(string username)
         {
-            HttpResponseMessage responseMessage = await client.GetAsync(uri + "/Customers?username=" + username);
+            HttpResponseMessage responseMessage = await client.GetAsync(uri + "/Customer?username=" + username);
 
             if (!responseMessage.IsSuccessStatusCode)
                 throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
@@ -56,7 +56,7 @@ namespace Client.Data.CustomerService
 
         public async Task<Customer> ValidateCustomerAsync(string username, string password)
         {
-            HttpResponseMessage response = await client.GetAsync(uri + "/Customers?username=" + username);
+            HttpResponseMessage response = await client.GetAsync(uri + "/Customer?username=" + username);
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 string customerAsJson = await response.Content.ReadAsStringAsync();

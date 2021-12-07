@@ -19,7 +19,7 @@ namespace Client.Data.UserServices
 
         public async Task<User> ValidateLoginAsync(string username, string password)
         {
-            HttpResponseMessage response = await client.GetAsync(uri + "/Users?username=" + username);
+            HttpResponseMessage response = await client.GetAsync(uri + "/User?username=" + username);
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 string userAsJson = await response.Content.ReadAsStringAsync();
@@ -41,7 +41,7 @@ namespace Client.Data.UserServices
 
         public async Task DeleteUser(string username)
         {
-            await client.DeleteAsync($"{uri}/Users?username="+username);
+            await client.DeleteAsync($"{uri}/User?username="+username);
         }
     }
 }

@@ -32,6 +32,7 @@ namespace Food4U_SEP3.Service.CategoryService
         {
             try
             {
+                Console.WriteLine("Service" + categoryId);
                 return await categoryHandler.GetCategory(categoryId);
             }
             catch (Exception e)

@@ -28,7 +28,7 @@ namespace Client.Data.MenuService
 
             Console.WriteLine(content);
 
-            HttpResponseMessage responseMessage = await client.PostAsync($"{uri}/Menus", content);
+            HttpResponseMessage responseMessage = await client.PostAsync($"{uri}/Menu", content);
             
             if (!responseMessage.IsSuccessStatusCode)
                 throw new Exception($@"Error: {responseMessage.StatusCode},{responseMessage.ReasonPhrase}");
@@ -38,12 +38,12 @@ namespace Client.Data.MenuService
         {
             string menuAsJson = JsonSerializer.Serialize(menu);
             HttpContent content = new StringContent(menuAsJson, Encoding.UTF8, "application/json");
-            await client.PatchAsync($"{uri}/Restaurants/{menu.MenuId}", content);
+            await client.PatchAsync($"{uri}/Restaurant/{menu.MenuId}", content);
         }
 
         public async Task<Menu> GetMenuAsync(int restaurantId)
         {
-            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Menu?restaurantId={restaurantId}");
+            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Menu?menuId={restaurantId}");
 
             if (!responseMessage.IsSuccessStatusCode)
                 throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");

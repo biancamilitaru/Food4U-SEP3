@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
@@ -21,6 +22,7 @@ namespace Food4U_SEP3.SocketHandler
 
         public Task<Category> GetCategory(int categoryId)
         {
+            Console.WriteLine("Handler" + categoryId.ToString());
             SendToServer("GetCategory",categoryId.ToString());
             Category getCategory = JsonSerializer.Deserialize<Category>(GetFromServer());
             return Task.FromResult(getCategory);

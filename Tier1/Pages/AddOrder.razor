@@ -1,9 +1,17 @@
 @page "/Order/{username}"
 @using System.Collections
 @using System.Text.Json
+@using Client.Data.CategoryService
 @using Client.Data.CustomerService
+@using Client.Data.MenuService
+@using Client.Data.RestaurantService
 @using Entities
 @inject ICustomerServiceT1 customerService;
+@using Client.Pages.SignUp
+@inject ICategoryServiceT1 categoryService;
+@inject IMenuServiceT1 menuService;
+@inject IRestaurantService restaurantService;
+
 @inject IJSRuntime jsRuntime;
 
 <h3>Create an Order</h3>
@@ -25,25 +33,40 @@
             </div>
             <hr>
         }
+        <div class="row">
+            <div class="column" style="width: 90%; padding-left: 20px">
+                <h6>Total price</h6>
+            </div>
+            <div class="column" style="width: 10%">
+                <h6>@totalPrice</h6>
+            </div>
+        </div>
     </div>
 </div>
 
 <!-- Restaurant and Customer info -->
 <h3 style="padding-top: 20px">Infromation</h3>
 <div class="row" style="padding-left: 16px">
-    <div class="column">
+        <div class="column" style="min-width: 40%">
             <div class="card">
                 <div class="card-body">
                     <div>
-                        <h5>From Santa Restaurant aps.</h5>
                         <div class="row" style="padding-left: 20px;">
-                            <div class="column" style="padding-left: 20px">
-                                <label>00450000000</label>
+                            <div style="fill: white" class="column">
+                                <RestaurantIcon Size="90"></RestaurantIcon>
                             </div>
-                        </div>
-                        <div class="row" style="padding-left: 20px;">
                             <div class="column" style="padding-left: 20px">
-                                <label>Fredensgade 11 8700 Horsens</label>
+                                <h5>@restaurant.Name</h5>
+                                <div class="row" style="padding-left: 20px;">
+                                    <div class="column" style="padding-left: 20px">
+                                        <label>@restaurant.PhoneNumber</label>
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-left: 20px;">
+                                    <div class="column" style="padding-left: 20px">
+                                        <label>@restaurant.Address</label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -51,38 +74,77 @@
             </div>
         </div>
 
-        <div class="column" style=" padding-left: 20px">
+        <div class="column" style="min-width: 40%; padding-left: 20px">
             <div class="card">
                 <div class="card-body">
-                    <h5>To @customer.FirstName @customer.LastName</h5>
+                    <div>
                         <div class="row" style="padding-left: 20px;">
+                            <div style="fill: white" class="column">
+                                <CustomerIcon Size="90"></CustomerIcon>
+                            </div>
                             <div class="column" style="padding-left: 20px">
-                                <label>@customer.PhoneNumber</label>
+                                <h5>@customer.FirstName @customer.LastName</h5>
+                                <div class="row" style="padding-left: 20px;">
+                                    <div class="column" style="padding-left: 20px">
+                                        <label>@customer.PhoneNumber</label>
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-left: 20px;">
+                                    <div class="column" style="padding-left: 20px">
+                                        <label>@customer.Address</label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="row" style="padding-left: 20px;">
-                            <div class="column" style="padding-left: 20px">
-                                <label>@customer.Address</label>
-                            </div>
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-</div>
+    </div>
+
 <!-- Restaurant and Customer info -->
 
-<!-- Delivery -->
 <h3 style="padding-top: 20px">Delivery</h3>
-<div class="card">
-    <div class="card-body">
-        <h5>Choosen delivery</h5>
-        <div style="padding-left: 20px;">
-            <p>Home delivery</p>
-            <p>150 dkk</p>
+<!-- Delivery -->
+<div>
+    <div class="row" style="padding-left: 16px">
+        <div class="column" style="min-width: 40%">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="column" style="padding-left: 16px">
+                            <h5>@restaurant.DeliveryOption1.DeliveryName</h5>
+                        </div>
+                        @if (selectedDelivery.DeliveryName.Equals(restaurant.DeliveryOption1.DeliveryName))
+                        {
+                         <div class="column" style="padding-left: 10px">
+                             <span class="badge bg-secondary" style="color: white">Selected</span>
+                         </div>   
+                        }
+                    </div>
+                    <p>@restaurant.DeliveryOption1.Price dkk</p>
+                    <p class="actions"><button @onclick="OnDelivery1" class="btn btn-success btn-sm">Select delivery</button></p>
+                </div>
+            </div>
         </div>
-        <div style="padding-left: 20px;">
-            <input class="form-control" placeholder="Address of delivery">
-            <small>Enter the adress if it's different than in your profile</small>
+        <div class="column" style="min-width: 40%; padding-left: 20px">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="column" style="padding-left: 16px">
+                            <h5>@restaurant.DeliveryOption2.DeliveryName</h5>
+                        </div>
+                        @if (selectedDelivery.DeliveryName.Equals(restaurant.DeliveryOption2.DeliveryName))
+                        {
+                            <div class="column" style="padding-left: 10px">
+                                <span class="badge bg-secondary" style="color: white">Selected</span>
+                            </div>   
+                        }
+                    </div>
+                    <p>@restaurant.DeliveryOption2.Price dkk</p>
+                    <p class="actions"><button @onclick="OnDelivery2" class="btn btn-success btn-sm">Select delivery</button></p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -90,29 +152,48 @@
 
 
 <!-- Wishes -->
-<h3 style="padding-top: 20px">Delivery</h3>
-<div class="card">
-    <div class="card-body">
-        <p>Your wishes</p>
+@if (comment != null)
+{
+  
+  <h3 style="padding-top: 20px">Comment</h3>
+    <div class="card">
+        <div class="card-body">
+            <p>@comment</p>
+        </div>
     </div>
-</div>
-<!-- Wishes -->
+}
+<!-- Wishes -->  
 
-<p style="padding: 20px" class="actions"><button class="btn btn-primary" data-dismiss="modal">Confirm an order</button></p>
+
+<p style="padding: 20px" class="actions"><button @onclick="OnCreateOrder" class="btn btn-primary" data-dismiss="modal">Confirm an order</button></p>
 
 @code{
     [Parameter]
     public string username { get; set; }
 
     private Customer customer = new ();
+    private Restaurant restaurant = new ()
+    {
+        DeliveryOption1 = new Delivery(),
+        DeliveryOption2 = new Delivery(),
+    };
     private IList<Item> shoppingList = new List<Item>();
+
+    private double totalPrice;
+    private String comment;
+    
+    Delivery selectedDelivery = new Delivery()
+    {
+        DeliveryName = "",
+    };
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
             customer = await customerService.GetCustomerAsync(username);
-            await ReadShoppingList();
+            await ReadData();
+            CalculateTotalPrice();
         }
         catch (Exception e)
         {
@@ -120,8 +201,9 @@
         }
     }
     
-    public async Task ReadShoppingList()
+    public async Task ReadData()
     {
+        //READING ITEMS
         string itemsAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "shoppingCart");
         Console.WriteLine(itemsAsJson);
         
@@ -129,8 +211,68 @@
         {
             shoppingList = JsonSerializer.Deserialize<IList<Item>>(itemsAsJson);
         }
+        
+        //READING COMMENT
+        string wishesAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "orderComment");
+        Console.WriteLine(wishesAsJson);
+        
+        if (!string.IsNullOrEmpty(wishesAsJson))
+        {
+            comment = JsonSerializer.Deserialize<String>(wishesAsJson);
+        }
+        
+        //READING RESTAURANT
+        if (shoppingList!=null)
+        {
+            Category category = await categoryService.GetCategoryAsync(Convert.ToInt32(shoppingList[0].CategoryId));
+            Menu menu = await menuService.GetMenuAsync(category.MenuId);
+            restaurant = await restaurantService.GetRestaurantAsync(menu.UserName);
+        }
+    }
+
+    private void CalculateTotalPrice()
+    {
+        totalPrice = 0;
+        foreach (Item item in shoppingList)
+        {
+            totalPrice += Convert.ToDouble(item.Price);
+        }
+        if (selectedDelivery.DeliveryName.Equals(restaurant.DeliveryOption1.DeliveryName))
+        {
+            totalPrice += restaurant.DeliveryOption1.Price;
+        }
+        else if (selectedDelivery.DeliveryName.Equals(restaurant.DeliveryOption2.DeliveryName))
+        {
+            totalPrice += restaurant.DeliveryOption2.Price;
+        }
     }
     
-    // READ RESTAURANT BY APIS CALLS
+    private void OnDelivery1()
+    {
+        selectedDelivery = restaurant.DeliveryOption1;
+        CalculateTotalPrice();
+    }
     
+    private void OnDelivery2()
+    {
+        selectedDelivery = restaurant.DeliveryOption2;
+        CalculateTotalPrice();
+    }
+
+    private void OnCreateOrder()
+    {
+        Order order = new Order()
+        {
+            Address = customer.Address,
+            Comment = comment,
+            CustomerUsername = customer.Username,
+            DeliveryOption = selectedDelivery,
+            RestaurantUsername = restaurant.Username,
+            Status = "Incomming",
+            TotalPrice = totalPrice,
+            Date = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")
+        };
+        
+        Console.WriteLine(JsonSerializer.Serialize(order));
+    }
 }

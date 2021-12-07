@@ -43,12 +43,12 @@ namespace Food4U_SEP3.Controllers
         }
 
         [HttpGet]
-        [Route("/Menus")]
-        public async Task<ActionResult<Menu>> GetMenuAsync([FromBody] int restaurantId)
+        //[Route("/Menus")]
+        public async Task<ActionResult<Menu>> GetMenuAsync([FromQuery] int menuId)
         {
             try
             {
-                Menu menu = await menuService.GetMenuAsync(restaurantId);
+                Menu menu = await menuService.GetMenuAsync(menuId);
                 return Ok(menu);
             }
             catch (Exception e)
