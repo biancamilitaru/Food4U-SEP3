@@ -47,5 +47,17 @@ namespace Food4U_SEP3.Service.OrderService
                 throw;
             }
         }
+        public async Task DeleteOrderAsync(int orderId)
+        {
+            try
+            {
+                await orderHandlerT2.DeleteOrder(orderId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

@@ -75,7 +75,7 @@
             </div>
             <div class="modal-footer">
                 <p class="actions"><button class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button></p>
-                <p class="actions"><button class="btn btn-primary btn-sm" data-dismiss="modal">Continue</button></p>
+                <p class="actions"><button @onclick="onContinue" class="btn btn-primary btn-sm" data-dismiss="modal">Continue</button></p>
             </div>
         </div>
     </div>
@@ -84,5 +84,28 @@
 @code{
     [Parameter]
     public IList<Item> ShoppingCartList { get; set; }
+    
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
 
+    private Customer customer;
+    
+    public async Task ReadCustomer()
+    {
+        string customerAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "currentCustomer");
+        Console.WriteLine(customerAsJson);
+        
+        if (!string.IsNullOrEmpty(customerAsJson))
+        {
+            customer = JsonSerializer.Deserialize<Customer>(customerAsJson);
+        }
+    }
+
+    private async Task onContinue()
+    {
+        await ReadCustomer();
+        NavigationManager.NavigateTo("Order/"+customer.Username);
+    }
+    
+    
 }
