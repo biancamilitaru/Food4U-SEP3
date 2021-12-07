@@ -9,7 +9,7 @@ namespace Client.Data.CategoryService
 
         Task UpdateCategoryAsync(Category category);
 
-        Task RemoveCategoryAsync(string categoryName);
+        Task RemoveCategoryAsync(int categoryId);
 
 
 
