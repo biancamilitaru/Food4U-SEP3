@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using Food4U_SEP3.Models;
 
 namespace Entities
 {
@@ -20,6 +22,15 @@ namespace Entities
         [JsonPropertyName("date")]
         public string Date { get; set; }
         
+        [JsonPropertyName("customerUsername"), ForeignKey("username")]
+        public string CustomerUsername { get; set; }
         
+        [JsonPropertyName("restaurantUsername"), ForeignKey("username")]
+        public string RestaurantUsername { get; set; }
+        
+        [JsonPropertyName("deliveryOption"), ForeignKey("delivery_id")]
+        public Delivery DeliveryOption { get; set; }
+
+
     }
 }

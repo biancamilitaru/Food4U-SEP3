@@ -34,16 +34,48 @@
                         <!-- Card with item -->
                     }
                     
+                    //Comment section
+                    <textarea class="form-control"  rows="3" placeholder="Any comment or wishes?"></textarea>
+                    
+                    //Delivery options
+                    //TODO Implement the method that will find the restaurant based on item and display restaurants delivery options
+                    <a data-toggle="collapse" data-target="#collapseDeliveryOption"><h6 style="padding-top: 20px">Delivery options</h6></a>
+                    
+                    <div class="collapse" id="collapseDeliveryOption">
+                        <div class="row">
+                            <div class="column">
+                                <div class="card" style="margin: 20px">
+                                    <div class="card-body">
+                                        <p>Delivery name</p>
+                                        <p>100 dkk</p>
+                                        <p class="actions"><button class="btn btn-success btn-sm">Select delivery</button></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="card" style="margin: 20px">
+                                    <div class="card-body">
+                                        <p>Delivery name</p>
+                                        <p>100 dkk</p>
+                                        <p class="actions"><button class="btn btn-success btn-sm">Select delivery</button></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+
                 }
                 else
                 {
                     <h6>Shopping cart is empty</h6>
                 }
-                
 
             </div>
             <div class="modal-footer">
                 <p class="actions"><button class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button></p>
+                <p class="actions"><button class="btn btn-primary btn-sm" data-dismiss="modal">Continue</button></p>
             </div>
         </div>
     </div>
