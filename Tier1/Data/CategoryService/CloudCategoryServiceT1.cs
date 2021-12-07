@@ -45,9 +45,9 @@ namespace Client.Data.CategoryService
         
         }
 
-        public async Task RemoveCategoryAsync(string categoryName)
+        public async Task RemoveCategoryAsync(int categoryId)
         {
-            await client.DeleteAsync($"{uri}/Categories/{categoryName}");
+            await client.DeleteAsync($"{uri}/Categories/{categoryId}");
         }
     }
 }

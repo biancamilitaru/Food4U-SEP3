@@ -41,11 +41,12 @@ namespace Food4U_SEP3.Service.CategoryService
             }
         }
         
-        public async Task DeleteCategoryAsync(string categoryName)
+
+        public async Task DeleteCategoryAsync(int categoryId)
         {
             try
             {
-                await categoryHandler.DeleteCategory(categoryName);
+                await categoryHandler.DeleteCategory(categoryId);
             }
             catch (Exception e)
             {

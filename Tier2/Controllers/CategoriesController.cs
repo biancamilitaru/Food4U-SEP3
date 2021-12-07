@@ -44,11 +44,11 @@ namespace Food4U_SEP3.Controllers
         }
        
        [HttpDelete]
-       public async Task<ActionResult> DeleteCategoriesAsync([FromQuery] string categoryName)
+       public async Task<ActionResult> DeleteCategoriesAsync([FromQuery] Category category)
        {
            try
            {
-               await categoryService.DeleteCategoryAsync(categoryName);
+               await categoryService.DeleteCategoryAsync(category.CategoryId);
                return Ok();
 
            }
