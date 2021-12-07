@@ -34,5 +34,17 @@ namespace Food4U_SEP3.Service.OrderService
                 throw;
             }
         }
+        public async Task<Order> UpdateOrderAsync(Order order)
+        {
+            try
+            {
+                return await orderHandlerT2.UpdateOrder(order);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }
