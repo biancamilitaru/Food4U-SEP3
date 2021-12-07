@@ -113,7 +113,7 @@ namespace Client.Data.RestaurantService
 
         public async Task AcceptOrderAsync(Order order)
         {
-            order.Status = true;
+            order.Status = "Accepted";
             string orderAsJson = JsonSerializer.Serialize(order);
             HttpContent content = new StringContent(orderAsJson, Encoding.UTF8, "application/json");
             await client.PatchAsync($"{uri}/Orders/{order.OrderId}", content);
@@ -124,6 +124,15 @@ namespace Client.Data.RestaurantService
         {
             await client.DeleteAsync($"{uri}/Restaurants/{username}");
 
+        }
+        
+        public async Task RejectOrderAsync(Order order)
+        {
+            //TODO can someone check if this is okay? -Kyra
+            order.Status = "Rejected";
+            string orderAsJson = JsonSerializer.Serialize(order);
+            HttpContent content = new StringContent(orderAsJson, Encoding.UTF8, "application/json");
+            await client.PatchAsync($"{uri}/Orders/{order.OrderId}", content);
         }
     }
 }

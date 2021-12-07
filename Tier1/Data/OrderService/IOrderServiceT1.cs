@@ -10,5 +10,6 @@ namespace Client.Data.OrderService
         Task AddOrderAsync(Order order);
         Task<List<Order>> GetIncomingOrders(string restaurantUsername);
 
+
     }
 }
