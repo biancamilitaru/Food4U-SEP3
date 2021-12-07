@@ -111,6 +111,15 @@ namespace Client.Data.RestaurantService
             return restaurants;
         }
 
+        public async Task AcceptOrderAsync(Order order)
+        {
+            order.Status = true;
+            string orderAsJson = JsonSerializer.Serialize(order);
+            HttpContent content = new StringContent(orderAsJson, Encoding.UTF8, "application/json");
+            await client.PatchAsync($"{uri}/Orders/{order.OrderId}", content);
+        }
+
+
         public async Task DeleteRestaurantAsync(string username)
         {
             await client.DeleteAsync($"{uri}/Restaurants/{username}");
