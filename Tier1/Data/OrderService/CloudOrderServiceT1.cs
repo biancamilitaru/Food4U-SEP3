@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -34,6 +35,23 @@ namespace Client.Data.OrderService
             if (!responseMessage.IsSuccessStatusCode)
                 throw new Exception($@"Error: {responseMessage.StatusCode},{responseMessage.ReasonPhrase}");
             
+        }
+
+        public async Task <List<Order>> GetIncomingOrders(string restaurantUsername)
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Orders?restaurantUsername={restaurantUsername}");
+
+            if (!responseMessage.IsSuccessStatusCode)
+                throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+
+            string result = await responseMessage.Content.ReadAsStringAsync();
+            
+            List<Order> order = JsonSerializer.Deserialize<List<Order>>(result, new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                }
+            );
+            return order;
         }
     }
 }
