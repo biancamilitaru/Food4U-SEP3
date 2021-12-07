@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Entities;
@@ -12,6 +14,13 @@ namespace Food4U_SEP3.SocketHandler.OrderHandler
             SendToServer("AddOrder", serializedOrder);
             return Task.FromResult(order);
         }
-        
+
+        public Task<List<Order>> GetIncomingOrders(string restaurantUsername)
+        {
+            SendToServer("GetIncomingOrders",restaurantUsername);
+            IList<Order> orders = JsonSerializer.Deserialize<IList<Order>>(GetFromServer());
+            
+            return Task.FromResult(orders.ToList());
+        }
     }
 }
