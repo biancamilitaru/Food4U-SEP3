@@ -35,7 +35,7 @@ namespace Food4U_SEP3.Controllers
         {
             try
             {
-                Order order = await orderService.GetIncomingOrders(restaurantUsername);
+                List<Order> order = await orderService.GetIncomingOrdersAsync(restaurantUsername);
                 return Ok(order);
             }
             catch (Exception e)
