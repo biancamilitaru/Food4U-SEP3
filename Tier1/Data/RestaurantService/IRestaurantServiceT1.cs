@@ -15,5 +15,7 @@ namespace Client.Data.RestaurantService
         Task<Restaurant> ValidateRestaurantAsync(string username, string password);
 
         Task MakeRestaurantPublicAsync(Restaurant restaurant);
+
+        Task<List<Restaurant>> GetRestaurantsAsync();
     }
 }

@@ -41,6 +41,22 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
+        [HttpGet]
+        public async Task<ActionResult<Menu>> GetMenuAsync([FromBody] int restaurantId)
+        {
+            try
+            {
+                Menu menu = await menuService.GetMenuAsync(restaurantId);
+                return Ok(menu);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+        
+
         
 
     }

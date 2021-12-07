@@ -33,7 +33,7 @@
         errorMessage = "";
         try
         {
-            await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(username, password);
+            await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(username, password,"Restaurant");
         }
         catch (Exception e)
         {

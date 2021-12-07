@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Client.Authentication;
+using Client.Data.CustomerService;
 using Client.Data.RestaurantService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
@@ -34,6 +35,7 @@ namespace Client
             services.AddScoped<IUserServices, CloudUserServices>();
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
             services.AddScoped<IRestaurantService, CloudRestaurantService>();
+            services.AddScoped<ICustomerServiceT1, CloudCustomerServiceT1>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

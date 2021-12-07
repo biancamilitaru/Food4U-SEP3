@@ -1,4 +1,11 @@
 @inherits LayoutComponentBase
+@inject AuthenticationStateProvider AuthenticationStateProvider;
+@using Client.Authentication
+@using Client.Pages.SignUp
+@using Client.Components
+@using Entities
+@using System.Text.Json
+@inject IJSRuntime jsRuntime;
 
 <div class="page">
     <div class="sidebar">
@@ -7,8 +14,16 @@
 
     <div class="main">
         <div class="top-row px-4">
-             <a href="/LogIn"><button style="margin: 10px" type="button" class="btn btn-primary">LogIn</button></a>
-            <a href="/SignUp"><button style="margin: 10px" type="button" class="btn btn-success">SignUp</button></a>
+            <AuthorizeView>
+                <NotAuthorized>
+                    <a data-toggle="modal" data-target="#LoginModal"><button style="margin: 10px" type="button" class="btn btn-primary">LogIn</button></a>
+                    <a href="/SignUp"><button style="margin: 10px" type="button" class="btn btn-success">SignUp</button></a>
+                </NotAuthorized>
+                <Authorized>
+                    <ShoppingCart></ShoppingCart>
+                    <a data-toggle="modal" data-target="#LoginModal"><button style="margin: 10px" type="button" class="btn btn-primary">Profile</button></a>
+                </Authorized>
+            </AuthorizeView>
         </div>
 
         <div class="content px-4">
@@ -16,3 +31,184 @@
         </div>
     </div>
 </div>
+
+<!--MODAL LOGIN-->
+<div class="modal fade" id="LoginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <AuthorizeView>
+                    <NotAuthorized>
+                        <h5 class="modal-title" id="exampleModalLabel">LogIn</h5>
+                    </NotAuthorized>
+                    <Authorized>
+                        <h5 class="modal-title" id="exampleModalLabel">LogOut</h5>
+                    </Authorized>
+                </AuthorizeView>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                
+                
+                <!--BODY-->
+                <AuthorizeView>
+                    <NotAuthorized>
+                        <div class="row">
+                            <div class="column" style="min-width: 150px; padding: 40px">
+                                <div class="row">
+                                    <div class="column" style="padding-right: 50px">
+                                        <a class="@buttonRestaurant" @onclick="RestaurantClick">
+                                            <RestaurantIcon Size="80"></RestaurantIcon>
+                                        </a>
+                                    </div>
+                                    <div class="column" style="padding-right: 50px">
+                                        <a class="@buttonCustomer" @onclick="CustomerClick">
+                                            <CustomerIcon Size="80"></CustomerIcon>
+                                        </a>
+                                    </div>
+                                    <div @onclick="DriverClick" class="@buttonDriver" style="padding-right: 50px">
+                                        <a class="@buttonDriver" @onclick="DriverClick">
+                                            <DriverIcon Size="80"></DriverIcon>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form>
+                            <div class="form-group">
+                                <label>Username</label>
+                                <input type="text" class="form-control" @bind-value="username" placeholder="Enter username">
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" class="form-control" @bind-value="password" placeholder="Enter password">
+                            </div>
+                        </form>
+                    </NotAuthorized>
+                    <Authorized>
+                        @if (_restaurant.Name != null)
+                        {
+                            <p>You are logged as Restaurant</p>
+                            <p>@_restaurant.Name</p>
+                        }
+                        
+                        @if (_customer.FirstName != null)
+                        {
+                            <p>You are logged as Customer</p>
+                            <p>@_customer.FirstName @_customer.LastName</p>
+                        }
+                    </Authorized>
+                </AuthorizeView>
+                <!--BODY-->
+                
+            </div>
+            <div class="modal-footer">
+                
+                <!--Footer-->
+                <AuthorizeView>
+                    <NotAuthorized>
+                        <p class="actions"><button @onclick="PerformLogin" class="btn btn-success">Login</button></p>
+                    </NotAuthorized>
+                    <Authorized>
+                        <p class="actions"><button @onclick="PerformLogout" class="btn btn-success">Logout</button></p>
+                    </Authorized>
+                </AuthorizeView>
+                <!--Footer-->
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string username;
+    private string password;
+    private string errorMessage;
+    
+    String restaurant = "Restaurant";
+    String customer = "Customer";
+    String driver = "Driver";
+
+    String buttonRestaurant = "a-user-active";
+    String buttonCustomer = "a-user";
+    String buttonDriver = "a-user";
+
+    String selected = "Restaurant";
+
+    private void RestaurantClick()
+    {
+        selected = "Restaurant";
+        buttonRestaurant = "a-user-active";
+        buttonCustomer = "a-user";
+        buttonDriver = "a-user";
+    }
+    
+    private void CustomerClick()
+    {
+        selected = "Customer";
+        buttonRestaurant = "a-user";
+        buttonCustomer = "a-user-active";
+        buttonDriver = "a-user";
+    }
+    
+    private void DriverClick()
+    {
+        selected = "Driver";
+        buttonRestaurant = "a-user";
+        buttonCustomer = "a-user";
+        buttonDriver = "a-user-active";
+    }
+    
+    public async Task PerformLogin()
+    {
+        errorMessage = "";
+        try
+        {
+            await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(username, password,selected);
+            await ReadRestaurant();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+    private Restaurant _restaurant = new Restaurant();
+    private Customer _customer = new Customer();
+    
+    public async Task ReadRestaurant()
+    {
+        string restaurantAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "currentRestaurant");
+        string customerAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "currentCustomer");
+        
+        if (!string.IsNullOrEmpty(restaurantAsJson))
+        {
+            _restaurant = JsonSerializer.Deserialize<Restaurant>(restaurantAsJson);
+        }
+        
+        if (!string.IsNullOrEmpty(customerAsJson))
+        {
+            _customer = JsonSerializer.Deserialize<Customer>(customerAsJson);
+        }
+    }
+
+    public async Task PerformLogout()
+    {
+        errorMessage = "";
+        try
+        {
+            await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+        
+        _restaurant = new();
+        _customer = new();
+    }
+}

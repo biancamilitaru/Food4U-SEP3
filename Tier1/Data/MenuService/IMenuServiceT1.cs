@@ -7,5 +7,6 @@ namespace Client.Data.MenuService
     {
         Task AddMenuAsync(Menu menu);
         Task UpdateMenuAsync(Menu menu);
+        Task<Menu> GetMenuAsync(int restaurantId);
     }
 }

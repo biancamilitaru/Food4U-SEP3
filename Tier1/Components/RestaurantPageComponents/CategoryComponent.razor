@@ -1,0 +1,41 @@
+@using Entities
+<div class="row" style="padding-left: 20px" xmlns="http://www.w3.org/1999/html">
+    <div class="column">
+        <a data-toggle="collapse" data-target="#@Category.Name.Replace(" ","")" role="button" aria-expanded="false" aria-controls="@Category.Name.Replace(" ","")">
+            <h5>@Category.Name</h5>
+        </a>
+    </div>
+</div>
+<div class="collapse" id="@Category.Name.Replace(" ","")">
+    <div class="row" style="padding-left: 20px">
+        <ItemComponent Item="@_item1"></ItemComponent>
+        <ItemComponent Item="@_item2"></ItemComponent>
+        <ItemComponent Item="@_item2"></ItemComponent>
+        <ItemComponent Item="@_item2"></ItemComponent>
+        <ItemComponent Item="@_item2"></ItemComponent>
+        <ItemComponent Item="@_item2"></ItemComponent>
+        <ItemComponent Item="@_item2"></ItemComponent>
+        <ItemComponent Item="@_item2"></ItemComponent>
+    </div>
+</div>
+<hr>
+
+
+@code {
+    [Parameter]
+    public Category Category { get; set; }
+
+    private Item _item1 = new Item()
+    {
+        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        Name = "Something delicious",
+        Price = "150",
+    };
+    
+    private Item _item2 = new Item()
+    {
+        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        Name = "Something delicious",
+        Price = "150",
+    };
+}
