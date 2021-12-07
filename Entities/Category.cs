@@ -5,8 +5,10 @@ namespace Entities
 {
     public class Category
     {
+        [Key, Required, JsonPropertyName("categoryId")]
+        public int CategoryId;
         
-        [Key, Required, JsonPropertyName("name")]
+        [Required, JsonPropertyName("name")]
         public string Name { get; set; }
         
         [JsonPropertyName("menuID")]
