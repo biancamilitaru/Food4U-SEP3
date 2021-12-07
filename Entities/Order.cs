@@ -22,6 +22,9 @@ namespace Entities
         [JsonPropertyName("date")]
         public string Date { get; set; }
         
+        [JsonPropertyName("status")]
+        public bool Status { get; set; }
+        
         [JsonPropertyName("customerUsername"), ForeignKey("username")]
         public string CustomerUsername { get; set; }
         
