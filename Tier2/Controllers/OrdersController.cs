@@ -49,7 +49,7 @@ namespace Food4U_SEP3.Controllers
         {
             try
             {
-                //await orderService.UpdateOrderAsync(order);
+                await orderService.UpdateOrderAsync(order);
                 return Ok();
             }
             catch (Exception e)
