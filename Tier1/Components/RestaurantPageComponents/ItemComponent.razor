@@ -1,4 +1,7 @@
 @using Entities
+@using System.Text.Json
+@inject IJSRuntime jsRuntime;
+
 <div class="column" style="margin:10px ;min-width: 200px;max-width: 200px;">
     <div class="card" style="min-height: 370px; max-height: 370px">
         <div class="card-body">
@@ -9,7 +12,7 @@
             <p style="min-height: 160px">@Item.Description</p>
             <hr>
             <div class="container-fluid">
-                <button style="width: 100%" class="btn btn-success">Add</button>
+                <button style="width: 100%" @onclick="Add" class="btn btn-success">Add</button>
             </div>
         </div>
     </div>
@@ -20,9 +23,25 @@
     [Parameter]
     public Item Item { get; set; }
 
-    public void EditItem()
+    private IList<Item> shoppingCart = new List<Item>();
+
+    public async Task Read()
     {
-        //TODO method that will edit item and probably reload this page
+        string itemsAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "shoppingCart");
+        
+        if (!string.IsNullOrEmpty(itemsAsJson))
+        {
+            shoppingCart = JsonSerializer.Deserialize<IList<Item>>(itemsAsJson);
+        }
+    }
+    
+    
+    public async Task Add()
+    {
+        await Read();
+        shoppingCart.Add(Item);
+        string serialisedData = JsonSerializer.Serialize(shoppingCart);
+        await jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "shoppingCart", serialisedData);
     }
     
 }

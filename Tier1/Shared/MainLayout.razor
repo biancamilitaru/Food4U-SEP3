@@ -20,7 +20,7 @@
                     <a href="/SignUp"><button style="margin: 10px" type="button" class="btn btn-success">SignUp</button></a>
                 </NotAuthorized>
                 <Authorized>
-                    <ShoppingCart></ShoppingCart>
+                    <a @onclick="ReadShoppingCart" data-toggle="modal" data-target="#ShoppingCart"><ShoppingCartIcon></ShoppingCartIcon></a>
                     <a data-toggle="modal" data-target="#LoginModal"><button style="margin: 10px" type="button" class="btn btn-primary">Profile</button></a>
                 </Authorized>
             </AuthorizeView>
@@ -122,6 +122,11 @@
     </div>
 </div>
 
+<!-- Modal for Shopping cart -->
+<ShoppingCart ShoppingCartList="@ShoppingCart"></ShoppingCart>
+
+
+
 @code {
     private string username;
     private string password;
@@ -136,6 +141,19 @@
     String buttonDriver = "a-user";
 
     String selected = "Restaurant";
+    
+    public IList<Item> ShoppingCart;
+    
+    public async Task ReadShoppingCart()
+    {
+        string itemsAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "shoppingCart");
+        Console.WriteLine(itemsAsJson);
+        
+        if (!string.IsNullOrEmpty(itemsAsJson))
+        {
+            ShoppingCart = JsonSerializer.Deserialize<IList<Item>>(itemsAsJson);
+        }
+    }
 
     private void RestaurantClick()
     {
