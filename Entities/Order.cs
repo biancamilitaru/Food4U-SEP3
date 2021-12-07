@@ -31,6 +31,6 @@ namespace Entities
         [JsonPropertyName("deliveryOption"), ForeignKey("delivery_id")]
         public Delivery DeliveryOption { get; set; }
 
-
+        
     }
 }

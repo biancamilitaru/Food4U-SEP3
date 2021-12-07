@@ -1,52 +1,30 @@
-@page "/Order"
+@page "/Order/{username}"
+@using System.Collections
+@using System.Text.Json
+@using Client.Data.CustomerService
+@using Entities
+@inject ICustomerServiceT1 customerService;
+@inject IJSRuntime jsRuntime;
 
 <h3>Create an Order</h3>
 
 <div class="card">
     <div class="card-body">
-        <!-- FOR EACH -->
-        <!-- Card with item -->
-        <div class="row">
-            <div class="column" style="width: 30%; padding-left: 20px">
-                <h6>Something delicious</h6>
+        @foreach (Item item in shoppingList)
+        {
+            <div class="row">
+                <div class="column" style="width: 30%; padding-left: 20px">
+                    <h6>@item.Name</h6>
+                </div>
+                <div class="column" style="width: 60%">
+                    <small>@item.Description</small>
+                </div>
+                <div class="column" style="width: 10%">
+                    <label>@item.Price</label>
+                </div>
             </div>
-            <div class="column" style="width: 60%">
-                <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>
-            </div>
-            <div class="column" style="width: 10%">
-                <label>100 dkk</label>
-            </div>
-        </div>
-        <hr>
-        <!-- Card with item -->
-        <!-- Card with item -->
-        <div class="row">
-            <div class="column" style="width: 30%; padding-left: 20px">
-                <h6>Something delicious</h6>
-            </div>
-            <div class="column" style="width: 60%">
-                <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>
-            </div>
-            <div class="column" style="width: 10%">
-                <label>100 dkk</label>
-            </div>
-        </div>
-        <hr>
-        <!-- Card with item -->
-        <!-- Card with item -->
-        <div class="row">
-            <div class="column" style="width: 30%; padding-left: 20px">
-                <h6>Something delicious</h6>
-            </div>
-            <div class="column" style="width: 60%">
-                <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>
-            </div>
-            <div class="column" style="width: 10%">
-                <label>100 dkk</label>
-            </div>
-        </div>
-        <hr>
-        <!-- Card with item -->
+            <hr>
+        }
     </div>
 </div>
 
@@ -76,15 +54,15 @@
         <div class="column" style=" padding-left: 20px">
             <div class="card">
                 <div class="card-body">
-                    <h5>To Radovan Santa</h5>
+                    <h5>To @customer.FirstName @customer.LastName</h5>
                         <div class="row" style="padding-left: 20px;">
                             <div class="column" style="padding-left: 20px">
-                                <label>00450000000</label>
+                                <label>@customer.PhoneNumber</label>
                             </div>
                         </div>
                         <div class="row" style="padding-left: 20px;">
                             <div class="column" style="padding-left: 20px">
-                                <label>Vestergade 12 8700 Horsens</label>
+                                <label>@customer.Address</label>
                             </div>
                         </div>
                 </div>
@@ -122,3 +100,35 @@
 
 <p style="padding: 20px" class="actions"><button class="btn btn-primary" data-dismiss="modal">Confirm an order</button></p>
 
+@code{
+    [Parameter]
+    public string username { get; set; }
+
+    private Customer customer = new ();
+    private IList<Item> shoppingList = new List<Item>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            customer = await customerService.GetCustomerAsync(username);
+            await ReadShoppingList();
+        }
+        catch (Exception e)
+        {
+    // update some error label here, or show popup..
+        }
+    }
+    
+    public async Task ReadShoppingList()
+    {
+        string itemsAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "shoppingCart");
+        Console.WriteLine(itemsAsJson);
+        
+        if (!string.IsNullOrEmpty(itemsAsJson))
+        {
+            shoppingList = JsonSerializer.Deserialize<IList<Item>>(itemsAsJson);
+        }
+    }
+    
+}
