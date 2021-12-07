@@ -78,8 +78,8 @@ namespace Food4U_SEP3.Controllers
         {
             try
             {
-                //await restaurantService.GetRestaurantsAsync();
-                return Ok(await restaurantService.GetRestaurantsAsync());
+                List<Restaurant> restaurants = await restaurantService.GetRestaurantsAsync();
+                return Ok(restaurants);
             }
             catch (Exception e)
             {

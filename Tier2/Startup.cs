@@ -3,7 +3,9 @@ using Food4U_SEP3.Service.CategoryService;
 using Food4U_SEP3.Service.CustomerService;
 using Food4U_SEP3.SocketHandler;
 using Food4U_SEP3.Service.MenuService;
+using Food4U_SEP3.Service.OrderService;
 using Food4U_SEP3.SocketHandler.CustomerHandler;
+using Food4U_SEP3.SocketHandler.OrderHandler;
 using Food4U_SEP3.UserServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -43,6 +45,8 @@ namespace Food4U_SEP3
             services.AddScoped<ICustomerServiceT2,CustomerServiceT2>();
             services.AddScoped<ICategoryHandlerT2, SocketCategoryHandlerT2>();
             services.AddScoped<ICategoryServiceT2, CategoryServiceT2>();
+            services.AddScoped<IOrderServiceT2, OrderServiceT2>();
+            services.AddScoped<IOrderHandlerT2, SocketOrderHandlerT2>();
 
         }
 
