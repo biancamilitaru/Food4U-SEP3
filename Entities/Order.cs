@@ -23,7 +23,7 @@ namespace Entities
         public string Date { get; set; }
         
         [JsonPropertyName("status")]
-        public bool Status { get; set; }
+        public string Status { get; set; }
         
         [JsonPropertyName("customerUsername"), ForeignKey("username")]
         public string CustomerUsername { get; set; }
@@ -34,6 +34,6 @@ namespace Entities
         [JsonPropertyName("deliveryOption"), ForeignKey("delivery_id")]
         public Delivery DeliveryOption { get; set; }
 
-
+        
     }
 }

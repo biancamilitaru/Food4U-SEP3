@@ -37,6 +37,23 @@ namespace Client.Data.CustomerService
             }
         }
 
+        public async Task<Customer> GetCustomerAsync(string username)
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync(uri + "/Customers?username=" + username);
+
+            if (!responseMessage.IsSuccessStatusCode)
+                throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+
+            string result = await responseMessage.Content.ReadAsStringAsync();
+            
+            Customer customer = JsonSerializer.Deserialize<Customer>(result,new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                }
+            );
+            return customer;
+        }
+
         public async Task<Customer> ValidateCustomerAsync(string username, string password)
         {
             HttpResponseMessage response = await client.GetAsync(uri + "/Customers?username=" + username);
