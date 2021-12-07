@@ -22,5 +22,12 @@ namespace Food4U_SEP3.SocketHandler.OrderHandler
             
             return Task.FromResult(orders.ToList());
         }
+
+        public Task<Order> UpdateOrder(Order order)
+        {
+            string serializedOrder = JsonSerializer.Serialize(order);
+            SendToServer("UpdateCategory", serializedOrder);
+            return Task.FromResult(order);
+        }
     }
 }
