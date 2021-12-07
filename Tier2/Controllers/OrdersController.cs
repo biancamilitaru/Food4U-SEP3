@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Entities;
 using Food4U_SEP3.Service.OrderService;
@@ -24,6 +25,20 @@ namespace Food4U_SEP3.Controllers
                 await orderService.AddOrderAsync(order);
                 return Created($"/{order}", order);
             } catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+        
+        [HttpGet]
+        public async Task<ActionResult<List<Order>>> GetIncomingOrders([FromQuery] string restaurantUsername)
+        {
+            try
+            {
+                List<Order> order = await orderService.GetIncomingOrdersAsync(restaurantUsername);
+                return Ok(order);
+            }
+            catch (Exception e)
             {
                 return StatusCode(500, e.Message);
             }
