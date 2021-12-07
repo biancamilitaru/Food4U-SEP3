@@ -17,5 +17,7 @@ namespace Client.Data.RestaurantService
         Task MakeRestaurantPublicAsync(Restaurant restaurant);
 
         Task<List<Restaurant>> GetRestaurantsAsync();
+
+        Task AcceptOrderAsync(Order order);
     }
 }
