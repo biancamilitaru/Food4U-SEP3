@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Entities;
 
 namespace Client.Data.CategoryService
@@ -8,6 +9,8 @@ namespace Client.Data.CategoryService
         Task AddCategoryAsync(Category category);
 
         Task<Category>  GetCategoryAsync(int categoryId);
+        
+        Task<IList<Category>>  GetCategoriesAsync(int menuId);
 
         Task UpdateCategoryAsync(Category category);
 

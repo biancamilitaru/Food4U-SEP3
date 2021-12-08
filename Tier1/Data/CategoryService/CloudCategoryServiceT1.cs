@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -38,7 +39,6 @@ namespace Client.Data.CategoryService
 
         public async Task<Category>  GetCategoryAsync(int categoryId)
         {
-            Console.WriteLine(uri+"/Category?categoryId="+categoryId);
             HttpResponseMessage responseMessage = await client.GetAsync(uri+"/Category?categoryId="+categoryId.ToString());
 
             if (!responseMessage.IsSuccessStatusCode)
@@ -52,6 +52,23 @@ namespace Client.Data.CategoryService
                 }
             );
             return category;
+        }
+
+        public async Task<IList<Category>> GetCategoriesAsync(int menuId)
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync(uri+"/Categories?menuId="+menuId);
+
+            if (!responseMessage.IsSuccessStatusCode)
+                throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+
+            string result = await responseMessage.Content.ReadAsStringAsync();
+            
+            IList<Category> categories = JsonSerializer.Deserialize<IList<Category>>(result,new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                }
+            );
+            return categories;
         }
 
 

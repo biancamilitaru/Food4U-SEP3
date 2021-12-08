@@ -30,7 +30,10 @@
         
         <hr>
         <!-- RESTAURANT CATEGORY COMPONENT - ALREADY CREATED -->
-        
+        @foreach (Category category in categories)
+        {
+            <CategoryComponent Category="category"></CategoryComponent>
+        }
         <!-- RESTAURANT CATEGORY COMPONENT - ALREADY CREATED -->
 
     </div>
@@ -61,7 +64,7 @@
         try
         {
             restaurant = await restaurantService.GetRestaurantAsync(username);
-            //categories = await categoryService.GetCategory();
+            categories = await categoryService.GetCategoriesAsync(restaurant.Menu.MenuId);
         }
         catch (Exception e)
         {
