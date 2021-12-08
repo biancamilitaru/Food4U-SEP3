@@ -157,8 +157,9 @@
 }
 
 .restaurant:hover{
-    background-color: #DF504B;
-    color: white;
+    background-color: #E9ECEF;
+    color: #DF504B;
+    border-color: transparent;
 }
 
 input.invalid{
