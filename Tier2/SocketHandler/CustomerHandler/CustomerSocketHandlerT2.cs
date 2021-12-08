@@ -9,7 +9,7 @@ namespace Food4U_SEP3.SocketHandler.CustomerHandler
         public Task<Customer> AddCustomer(Customer customer)
         {
             string customerAsJson = JsonSerializer.Serialize(customer);
-            SendToServer("AddRestaurant",customerAsJson);
+            SendToServer("AddCustomer",customerAsJson);
             return Task.FromResult(customer);
         }
         public Task<Customer> ValidateLogin(string username)
