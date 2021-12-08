@@ -140,6 +140,18 @@
     fill:#E9ECEF;
 }
 
+.div-category {
+    fill: #F95945;
+    color: #F95945;
+    background-color: #E9ECEF;
+    padding: 10px;
+    border-radius: 10px
+}
+
+.div-category:hover {
+    background-color: #DDDDDD;
+}
+
 .a-user-active {
     fill:#DDDDDD;
 }
