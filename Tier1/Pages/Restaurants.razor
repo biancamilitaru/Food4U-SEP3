@@ -35,7 +35,7 @@ else if (!restaurants.Any())
     {
         try
         {
-            //restaurants = await restaurantService.GetRestaurantsAsync();
+            restaurants = await restaurantService.GetRestaurantsAsync();
         }
         catch (Exception e)
         {

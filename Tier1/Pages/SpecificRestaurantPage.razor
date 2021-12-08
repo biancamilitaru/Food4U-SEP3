@@ -1,7 +1,13 @@
-@page "/SRestaurant/"
+@page "/SRestaurant/{username}"
 @using Entities
 @using Client.Components
 @using Client.Components.RestaurantPageComponents
+@using Client.Data.CategoryService
+@using Client.Data.MenuService
+@using Client.Data.RestaurantService
+@inject ICategoryServiceT1 categoryService;
+@inject IMenuServiceT1 menuService;
+@inject IRestaurantService restaurantService;
 
 
 <h3>@restaurant.Name</h3>
@@ -24,7 +30,7 @@
         
         <hr>
         <!-- RESTAURANT CATEGORY COMPONENT - ALREADY CREATED -->
-        <CategoryComponent Category="category1"></CategoryComponent>
+        
         <!-- RESTAURANT CATEGORY COMPONENT - ALREADY CREATED -->
 
     </div>
@@ -36,6 +42,37 @@
 
 @code
 {
+    [Parameter]
+    public string username { get; set; }
+
+    private Restaurant restaurant = new Restaurant()
+    {
+        DeliveryOption1 = new Delivery(),
+        DeliveryOption2 = new Delivery(),
+        Menu = new Menu(),
+    };
+
+    private IList<Category> categories = new List<Category>();
+
+    private Menu menu = new Menu();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            restaurant = await restaurantService.GetRestaurantAsync(username);
+            //categories = await categoryService.GetCategory();
+        }
+        catch (Exception e)
+        {
+    // update some error label here, or show popup..
+        }
+    }
+    
+    
+    
+    /*
+
     Restaurant restaurant = new Restaurant()
     {
         Username = "test",
@@ -79,4 +116,6 @@
     {
         Name = "Main Menu"
     };
+    
+    */
 }

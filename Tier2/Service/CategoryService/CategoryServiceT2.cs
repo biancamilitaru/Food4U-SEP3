@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Entities;
 using Food4U_SEP3.SocketHandler;
@@ -32,8 +33,20 @@ namespace Food4U_SEP3.Service.CategoryService
         {
             try
             {
-                Console.WriteLine("Service" + categoryId);
                 return await categoryHandler.GetCategory(categoryId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public async Task<IList<Category>> GetCategoriesAsync(int menuId)
+        {
+            try
+            {
+                return await categoryHandler.GetCategories(menuId);
             }
             catch (Exception e)
             {

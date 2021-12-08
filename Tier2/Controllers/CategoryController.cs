@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Entities;
 using Food4U_SEP3.Service.CategoryService;
@@ -36,6 +38,21 @@ namespace Food4U_SEP3.Controllers
             {
                 Category category = await categoryService.GetCategoryAsync(categoryId);
                 return Ok(category);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+        
+        [HttpGet]
+        [Route("/Categories")]
+        public async Task<ActionResult<IList<Category>>> GetCategoryByMenuIdAsync([FromQuery] int menuId)
+        {
+            try
+            {
+                IList<Category> categories = await categoryService.GetCategoriesAsync(menuId);
+                return Ok(categories);
             }
             catch (Exception e)
             {

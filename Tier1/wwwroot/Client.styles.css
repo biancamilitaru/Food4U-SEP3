@@ -144,6 +144,11 @@
     fill:#DDDDDD;
 }
 
+.restaurant:hover{
+    background-color: #DF504B;
+    color: white;
+}
+
 input.invalid{
     background-color: #F5E9EB;
     outline: 0;
