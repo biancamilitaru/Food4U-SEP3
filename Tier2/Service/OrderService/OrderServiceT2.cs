@@ -10,6 +10,11 @@ namespace Food4U_SEP3.Service.OrderService
     {
         private readonly IOrderHandlerT2 orderHandlerT2;
         
+        public OrderServiceT2(IOrderHandlerT2 orderHandlerT2)
+        {
+            this.orderHandlerT2 = orderHandlerT2;
+        }
+        
         public async Task<Order> AddOrderAsync(Order order)
         {
             try
