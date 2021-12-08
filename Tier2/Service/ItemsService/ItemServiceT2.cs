@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Entities;
 using Food4U_SEP3.SocketHandler.ItemHandler;
@@ -27,6 +28,20 @@ namespace Food4U_SEP3.Service.ItemsService
                 throw;
             }
         }
+
+        public async Task<IList<Item>> GetItemsAsync(int categoryId)
+        {
+            try
+            {
+                return await itemHandler.GetItems(categoryId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
         public async Task<Item> UpdateItemAsync(Item item)
         {
             try

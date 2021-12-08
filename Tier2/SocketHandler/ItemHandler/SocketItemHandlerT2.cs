@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Entities;
@@ -12,6 +13,14 @@ namespace Food4U_SEP3.SocketHandler.ItemHandler
             SendToServer("AddItem", serializedMenu);
             return Task.FromResult(item);
         }
+
+        public Task<IList<Item>> GetItems(int categoryId)
+        {
+            SendToServer("GetItems",categoryId.ToString());
+            IList<Item> items = JsonSerializer.Deserialize<IList<Item>>(GetFromServer());
+            return Task.FromResult(items);
+        }
+
         public Task<Item> UpdateItem(Item item)
         {
             string serialisedItem = JsonSerializer.Serialize(item);
