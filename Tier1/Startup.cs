@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Client.Authentication;
 using Client.Data.CategoryService;
 using Client.Data.CustomerService;
+using Client.Data.ItemService;
 using Client.Data.MenuService;
 using Client.Data.RestaurantService;
 using Microsoft.AspNetCore.Builder;
@@ -40,7 +41,8 @@ namespace Client
             services.AddScoped<ICustomerServiceT1, CloudCustomerServiceT1>();
             services.AddScoped<IMenuServiceT1, CloudMenuServiceT1>();
             services.AddScoped<ICategoryServiceT1,CloudCategoryServiceT1>();
-            
+            services.AddScoped<IItemServiceT1, CloudItemServiceT1>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -18,21 +18,25 @@
 
 <div class="card">
     <div class="card-body">
-        @foreach (Item item in shoppingList)
+        @if (shoppingList != null)
         {
-            <div class="row">
-                <div class="column" style="width: 30%; padding-left: 20px">
-                    <h6>@item.Name</h6>
-                </div>
-                <div class="column" style="width: 60%">
-                    <small>@item.Description</small>
-                </div>
-                <div class="column" style="width: 10%">
-                    <label>@item.Price</label>
-                </div>
-            </div>
-            <hr>
+          @foreach (Item item in shoppingList)
+                  {
+                      <div class="row">
+                          <div class="column" style="width: 30%; padding-left: 20px">
+                              <h6>@item.Name</h6>
+                          </div>
+                          <div class="column" style="width: 60%">
+                              <small>@item.Description</small>
+                          </div>
+                          <div class="column" style="width: 10%">
+                              <label>@item.Price</label>
+                          </div>
+                      </div>
+                      <hr>
+                  }  
         }
+        
         <div class="row">
             <div class="column" style="width: 90%; padding-left: 20px">
                 <h6>Total price</h6>
@@ -210,6 +214,8 @@
         if (!string.IsNullOrEmpty(itemsAsJson))
         {
             shoppingList = JsonSerializer.Deserialize<IList<Item>>(itemsAsJson);
+            Console.WriteLine("SHOPPINGLIST:" + shoppingList[0].Name);
+            Console.WriteLine("SHOPPINGLIST:" + shoppingList[0].CategoryId);
         }
         
         //READING COMMENT

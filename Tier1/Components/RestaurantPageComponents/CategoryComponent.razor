@@ -1,4 +1,7 @@
 @using Entities
+@using Client.Data.ItemService
+@inject IItemServiceT1 itemService;
+
 <div class="row" style="padding-left: 20px" xmlns="http://www.w3.org/1999/html">
     <div class="column">
         <a data-toggle="collapse" data-target="#@Category.Name.Replace(" ","")" role="button" aria-expanded="false" aria-controls="@Category.Name.Replace(" ","")">
@@ -8,14 +11,10 @@
 </div>
 <div class="collapse" id="@Category.Name.Replace(" ","")">
     <div class="row" style="padding-left: 20px">
-        <ItemComponent Item="@_item2"></ItemComponent>
-        <ItemComponent Item="@_item2"></ItemComponent>
-        <ItemComponent Item="@_item2"></ItemComponent>
-        <ItemComponent Item="@_item2"></ItemComponent>
-        <ItemComponent Item="@_item2"></ItemComponent>
-        <ItemComponent Item="@_item2"></ItemComponent>
-        <ItemComponent Item="@_item2"></ItemComponent>
-        <ItemComponent Item="@_item2"></ItemComponent>
+        @foreach (Item item in items)
+        {
+            <ItemComponent Item="@item"></ItemComponent>
+        }
     </div>
 </div>
 <hr>
@@ -25,19 +24,17 @@
     [Parameter]
     public Category Category { get; set; }
 
-    private Item _item1 = new Item()
+    private IList<Item> items = new List<Item>();
+
+    protected override async Task OnInitializedAsync()
     {
-        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        Name = "Something delicious",
-        Price = 150,
-        CategoryId = "1",
-    };
-    
-    private Item _item2 = new Item()
-    {
-        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        Name = "Something delicious",
-        Price = 150,
-        CategoryId = "1",
-    };
+        try
+        {
+            items = await itemService.GetItemsAsync(Category.CategoryId);
+        }
+        catch (Exception e)
+        {
+    // update some error label here, or show popup..
+        }
+    }
 }

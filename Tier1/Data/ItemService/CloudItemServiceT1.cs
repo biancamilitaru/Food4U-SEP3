@@ -1,5 +1,6 @@
  using System;
-using System.Net.Http;
+ using System.Collections.Generic;
+ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -34,6 +35,24 @@ namespace Client.Data.ItemService
                 throw new Exception($@"Error: {responseMessage.StatusCode},{responseMessage.ReasonPhrase}");
             
         }
+
+        public async Task<IList<Item>> GetItemsAsync(int categoryId)
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync(uri+"/Items?categoryId="+categoryId);
+
+            if (!responseMessage.IsSuccessStatusCode)
+                throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+
+            string result = await responseMessage.Content.ReadAsStringAsync();
+            
+            IList<Item> items = JsonSerializer.Deserialize<IList<Item>>(result,new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                }
+            );
+            return items;
+        }
+
         public async Task UpdateItemAsync(Item item)
         {
             string categoryAsJson = JsonSerializer.Serialize(item);
