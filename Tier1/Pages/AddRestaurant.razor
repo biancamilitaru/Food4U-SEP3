@@ -11,7 +11,7 @@
   </div>
 </div>
 
-<EditForm Model="@addNewRestaurantItem" OnValidSubmit="@AddNewRestaurant">
+<EditForm Model="@addNewRestaurantItem" OnValidSubmit="@addNewRestaurant">
     <DataAnnotationsValidator/>
     <ValidationSummary/>
     <div class="card" style="margin-bottom: 20px">
@@ -169,7 +169,7 @@
         DeliveryOption2 = new Delivery()
     };
 
-    private void AddNewRestaurant()
+    private void addNewRestaurant()
     {
         Console.WriteLine("Sending");
         RestaurantService.AddRestaurantAsync(addNewRestaurantItem);

@@ -9,10 +9,11 @@ namespace Food4U_SEP3.Service.OrderService
     {
         Task<Order> AddOrderAsync(Order order);
 
-        Task<List<Order>> GetIncomingOrdersAsync(string restaurantUsername);
+        Task<IList<Order>> GetIncomingOrdersAsync(string restaurantUsername);
+        
         Task<IList<Order>> GetAcceptedOrdersAsync(string restaurantUsername);
 
-        Task<IList<Order>> GetPreviousOrderAsync(string customerUsername);
+        Task<IList<Order>> GetPreviousOrdersAsync(string customerUsername);
         Task<Order> UpdateOrderAsync(Order order);
         Task DeleteOrderAsync(int orderId);
     }

@@ -129,7 +129,7 @@
 <p>@restaurant.Description</p>
 -->
 <!-- RESTAURANT INFO COMPONENT -->
-<!--<RestaurantInfoComponent restaurant="restaurant"></RestaurantInfoComponent>-->
+<!--<RestaurantInfoComponent Restaurant="restaurant"></RestaurantInfoComponent>-->
 <!-- RESTAURANT INFO COMPONENT -->
 
 
@@ -167,7 +167,7 @@
 @code
 {
     [Parameter]
-    public string username { get; set; }
+    public string Username { get; set; }
 
     private Restaurant restaurant = new Restaurant()
     {
@@ -184,7 +184,7 @@
     {
         try
         {
-            restaurant = await restaurantService.GetRestaurantAsync(username);
+            restaurant = await restaurantService.GetRestaurantAsync(Username);
             categories = await categoryService.GetCategoriesAsync(restaurant.Menu.MenuId);
         }
         catch (Exception e)

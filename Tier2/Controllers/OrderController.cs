@@ -49,7 +49,7 @@ namespace Food4U_SEP3.Controllers
         {
             try
             {
-                List<Order> order = await orderService.GetIncomingOrdersAsync(restaurantUsername);
+                IList<Order> order = await orderService.GetIncomingOrdersAsync(restaurantUsername);
                 return Ok(order);
             }
             catch (Exception e)
@@ -74,12 +74,28 @@ namespace Food4U_SEP3.Controllers
         
         [HttpGet]
         [Route("/Orders/Accepted")]
-        public async Task<ActionResult<IList<Order>>> GetAcceptedOrdersAsync(Restaurant restaurant)
+        public async Task<ActionResult<IList<Order>>> GetAcceptedOrders([FromQuery] string restaurantUsername)
         {
             try
             {
-                IList<Order> orders = await orderService.GetAcceptedOrdersAsync(restaurant.Username);
-                return Ok();
+                IList<Order> order = await orderService.GetAcceptedOrdersAsync(restaurantUsername);
+                return Ok(order);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+        
+        [HttpGet]
+        [Route("/Orders/Previous")]
+        
+        public async Task<ActionResult<IList<Order>>> GetPreviousOrders([FromQuery] string customerUsername)
+        {
+            try
+            {
+                IList<Order> order = await orderService.GetPreviousOrdersAsync(customerUsername);
+                return Ok(order);
             }
             catch (Exception e)
             {
