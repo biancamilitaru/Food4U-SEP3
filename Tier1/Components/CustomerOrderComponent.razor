@@ -1,0 +1,103 @@
+@using Entities
+@using Client.Data.RestaurantService
+@inject IRestaurantService restaurantService;
+
+<div class="row" style="padding-left: 40px">
+        <div class="column" style=" padding-right: 20px">
+            <a data-toggle="collapse" data-target="#collapseOrder">
+                <div class="div-category" style="max-width: 27px; max-height: 27px; min-width: 27px; min-height: 27px; margin: 0;padding: 0; padding-left: 4px; border-radius: 5px">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="" class="bi bi-info-square" viewBox="0 0 16 16">
+                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                    </svg>
+                </div>
+            </a>
+        </div>
+        <div class="column" style="min-width: 22.5%">
+            <small>@Order.Date</small>
+        </div>
+        <div class="column" style="min-width: 22.5%">
+            <small>@restaurant.Name</small>
+        </div>
+        <div class="column" style="min-width: 10%">
+            <small>@Order.TotalPrice</small>
+        </div>
+        <div class="column" style="min-width: 22.5%">
+            <small>@Order.DeliveryId @Order.Address</small>
+        </div>
+    </div>
+    
+    <div class="collapse" id="collapseOrder" style="padding-top: 10px">
+        <!-- COLLAPSE-->
+        <div class="card" style="margin-bottom: 20px;">
+            <div class="card-body">
+                <div class="row" style="padding-left: 20px">
+                    <div class="column" style="width:30%; padding-left: 20px">
+                        <div class="row" style="padding-left: 20px">
+                            <div class="column" style="padding-right: 15px">
+                                <small style="font-weight: bold">Items:</small>
+                            </div>
+                            <div class="column">
+                                <small>Grilled Salmon</small><br/>
+                                <small>Mashed potatoes</small><br/>
+                                <small>Mineral water</small><br/>
+    
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="column" style="width: 30%">
+    
+                        <div class="column" style="padding-left: 20px">
+    
+                            <div class="row" style="padding-left: 20px">
+                                <div class="column" style="padding-right: 15px">
+                                    <small style="font-weight: bold">Restaurant:</small>
+                                </div>
+                                <div class="column">
+                                    <small>@restaurant.Name</small><br/>
+                                    <small>@restaurant.Address</small><br/>
+                                    <small>@restaurant.PhoneNumber</small><br/>
+                                </div>
+    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column" style="width: 40%">
+                        <div class="row" style="padding-left: 20px">
+                            <div class="column" style="padding-right: 15px">
+                                <small style="font-weight: bold">My comments or wishes:</small>
+                            </div>
+                            <div class="column">
+                                <p><small>@Order.Comment</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+        <!-- COLLAPSE-->
+    </div>
+<hr>
+
+@code {
+    [Parameter]
+    public Order Order { get; set; }
+
+    private Restaurant restaurant = new Restaurant();
+    private Delivery delivery = new Delivery();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            restaurant = await restaurantService.GetRestaurantAsync(Order.RestaurantUsername);
+            //TODO We need to create Api to GetDelivery by Id to be able to display delivery option
+        }
+        catch (Exception e)
+        {
+    // update some error label here, or show popup..
+        }
+    }
+}

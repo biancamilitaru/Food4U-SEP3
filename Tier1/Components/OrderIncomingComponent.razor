@@ -109,6 +109,7 @@
         {
             //TODO 10.12.2021 Problem - after running GetIncomingOrders it's not possible to run any REST
             customer = await customerService.GetCustomerAsync(Order.CustomerUsername);
+            //TODO We need to create Api to GetDelivery by Id to be able to display delivery option
         }
         catch (Exception e)
         {

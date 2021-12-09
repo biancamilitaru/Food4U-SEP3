@@ -1,0 +1,70 @@
+@page "/Customer/Orders"
+@using Entities
+@using System.Text.Json
+@using Client.Data.OrderService
+@using Client.Components
+@inject IOrderServiceT1 orderService;
+@inject IJSRuntime jsRuntime;
+
+<a data-toggle="collapse">
+    <div class="div-category">
+        <div class="row" style="padding-left: 20px" xmlns="http://www.w3.org/1999/html">
+            <div class="column" style="padding-right: 20px">
+                
+            </div>
+
+            <div class="column">
+                <a>
+                    <h5>Your previous orders</h5>
+                </a>
+            </div>
+        </div>
+    </div>
+</a>
+
+<div style="padding-top: 20px">
+    @foreach (Order order in previousOrders)
+    {
+        <CustomerOrderComponent Order="order"></CustomerOrderComponent>
+    }
+</div>
+
+
+@code{
+    //[Parameter]
+    //public string username { get; set; }
+
+    private Customer customer = new Customer();
+
+    //private Restaurant restaurant =  new Restaurant()
+    //{
+    //    DeliveryOption1 = new Delivery(),
+    //    DeliveryOption2 = new Delivery(),
+    //};
+
+    private IList<Order> previousOrders = new List<Order>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await ReadCustomer();
+            previousOrders = await orderService.GetPreviousOrdersAsync(customer.Username);
+        }
+        catch (Exception e)
+        {
+    // update some error label here, or show popup..
+        }
+    }
+    
+    public async Task ReadCustomer()
+    {
+        string customerAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "currentCustomer");
+
+        if (!string.IsNullOrEmpty(customerAsJson))
+        {
+            customer = JsonSerializer.Deserialize<Customer>(customerAsJson);
+        }
+    }
+}
+
