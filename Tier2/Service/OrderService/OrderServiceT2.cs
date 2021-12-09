@@ -54,12 +54,12 @@ namespace Food4U_SEP3.Service.OrderService
             }
         }
 
-        public Task<IList<Order>> GetPreviousOrderAsync(string customerUsername)
+        public async Task<IList<Order>> GetPreviousOrderAsync(string customerUsername)
         {
             try
             {
-               // return await orderHandlerT2.GetPreviousOrder(customerUsername);
-               return null;
+               return await orderHandlerT2.GetPreviousOrders(customerUsername);
+               
             }
             catch (Exception e)
             {
