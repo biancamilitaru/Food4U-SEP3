@@ -8,16 +8,25 @@ namespace Food4U_SEP3.Service.CustomerService
     public class CustomerServiceT2 : ICustomerServiceT2
     {
         private readonly ICustomerHandlerT2 customerHandlerT2;
+        private readonly IEmailService emailService;
 
-        public CustomerServiceT2(ICustomerHandlerT2 customerHandlerT2)
+        public CustomerServiceT2(ICustomerHandlerT2 customerHandlerT2, IEmailService emailService)
         {
             this.customerHandlerT2 = customerHandlerT2;
+            this.emailService = emailService;
         }
+
         public async Task<Customer> AddCustomerAsync(Customer customer)
         {
             try
             {
-                return await customerHandlerT2.AddCustomer(customer);
+                Customer addedCustomer = await customerHandlerT2.AddCustomer(customer);
+                if (addedCustomer != null)
+                {
+                    emailService.SendEmail("Welcome to Food4U", addedCustomer.FirstName + ", your account is created!",
+                        addedCustomer.Email);    
+                }
+                return addedCustomer;
             }
             catch (Exception e)
             {

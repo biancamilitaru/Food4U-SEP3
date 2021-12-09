@@ -1,4 +1,5 @@
 using Food4U_SEP3.RestaurantServices;
+using Food4U_SEP3.Service;
 using Food4U_SEP3.Service.CategoryService;
 using Food4U_SEP3.Service.CustomerService;
 using Food4U_SEP3.Service.ItemsService;
@@ -51,6 +52,7 @@ namespace Food4U_SEP3
             services.AddScoped<IOrderHandlerT2, SocketOrderHandlerT2>();
             services.AddScoped<IItemServiceT2, ItemServiceT2>();
             services.AddScoped<IItemHandlerT2,SocketItemHandlerT2>();
+            services.AddScoped<IEmailService,EmailService>();
 
         }
 
