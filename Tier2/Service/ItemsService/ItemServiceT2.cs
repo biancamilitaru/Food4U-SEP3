@@ -67,6 +67,18 @@ namespace Food4U_SEP3.Service.ItemsService
                 throw;
             }
         }
+        public async Task<Item> GetItemAsync(int itemId)
+        {
+            try
+            {
+                return await itemHandler.GetItem(itemId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
         
     }
 }

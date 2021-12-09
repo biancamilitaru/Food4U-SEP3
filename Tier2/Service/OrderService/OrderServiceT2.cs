@@ -40,6 +40,19 @@ namespace Food4U_SEP3.Service.OrderService
                 throw;
             }
         }
+        
+        public async Task<IList<Order>> GetAcceptedOrdersAsync(string restaurantUsername)
+        {
+            try
+            {
+                return await orderHandlerT2.GetAcceptedOrders(restaurantUsername);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
         public async Task<Order> UpdateOrderAsync(Order order)
         {
             try
