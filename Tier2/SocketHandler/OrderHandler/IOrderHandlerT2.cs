@@ -14,5 +14,7 @@ namespace Food4U_SEP3.SocketHandler.OrderHandler
         Task<Order> UpdateOrder(Order order);
         
         Task<Order> DeleteOrder(int orderId);
+
+        Task<IList<Order>> GetAcceptedOrders(string restaurantUsername);
     }
 }
