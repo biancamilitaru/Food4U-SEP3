@@ -15,6 +15,7 @@ namespace Client.Data.ItemService
         Task DeleteItemAsync(int itemId);
 
         Task AddDiscountAsync(Item item,int discount);
+        Task<Item> GetItemAsync(int itemId);
 
     }
 }

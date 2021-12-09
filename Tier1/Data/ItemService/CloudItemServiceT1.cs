@@ -73,5 +73,22 @@ namespace Client.Data.ItemService
             HttpContent content = new StringContent(itemAsJson, Encoding.UTF8, "application/json");
             await client.PatchAsync($"{uri}/Item/{item.ItemId}", content);
         }
+        
+        public async Task<Item> GetItemAsync(int itemId)
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync(uri+"/Item?itemId="+itemId);
+
+            if (!responseMessage.IsSuccessStatusCode)
+                throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+
+            string result = await responseMessage.Content.ReadAsStringAsync();
+            
+            Item item = JsonSerializer.Deserialize<Item>(result,new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                }
+            );
+            return item;
+        }
     }
 }
