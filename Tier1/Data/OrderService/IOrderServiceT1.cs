@@ -9,7 +9,7 @@ namespace Client.Data.OrderService
     {
         Task AddOrderAsync(Order order);
         Task<IList<Order>> GetIncomingOrdersAsync(string restaurantUsername);
-
         Task<IList<Order>> GetAcceptedOrdersAsync(string restaurantUsername);
+        Task<IList<Order>> GetPreviousOrdersAsync(string customerUsername);
     }
 }

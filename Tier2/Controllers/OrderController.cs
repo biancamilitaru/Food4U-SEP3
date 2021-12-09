@@ -44,8 +44,8 @@ namespace Food4U_SEP3.Controllers
         }
         
         [HttpGet]
-        [Route("/IncomingOrders")]
-        public async Task<ActionResult<IList<Order>>> GetIncomingOrders([FromQuery] string restaurantUsername)
+        [Route("/Orders/Incoming")]
+        public async Task<ActionResult<List<Order>>> GetIncomingOrders([FromQuery] string restaurantUsername)
         {
             try
             {
@@ -64,6 +64,21 @@ namespace Food4U_SEP3.Controllers
             try
             {
                 await orderService.UpdateOrderAsync(order);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+        
+        [HttpGet]
+        [Route("/Orders/Accepted")]
+        public async Task<ActionResult<IList<Order>>> GetAcceptedOrdersAsync(Restaurant restaurant)
+        {
+            try
+            {
+                IList<Order> orders = await orderService.GetAcceptedOrdersAsync(restaurant.Username);
                 return Ok();
             }
             catch (Exception e)

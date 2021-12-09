@@ -43,5 +43,13 @@ namespace Food4U_SEP3.SocketHandler.OrderHandler
             IList<Order> getOrders = JsonSerializer.Deserialize<IList<Order>>(GetFromServer());
             return Task.FromResult(getOrders);
         }
+        
+        public Task<IList<Order>> GetPreviousOrders(string customerUsername)
+        {
+            SendToServer("GetPreviousOrders",customerUsername);
+            IList<Order> getOrders = JsonSerializer.Deserialize<IList<Order>>(GetFromServer());
+            
+            return Task.FromResult(getOrders);
+        }
     }
 }
