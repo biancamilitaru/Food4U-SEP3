@@ -59,17 +59,17 @@
                             <div class="column" style="min-width: 150px; padding: 40px">
                                 <div class="row">
                                     <div class="column" style="padding-right: 50px">
-                                        <a class="@buttonRestaurant" @onclick="RestaurantClick">
+                                        <a class="@buttonRestaurant" @onclick="restaurantClick">
                                             <RestaurantIcon Size="80"></RestaurantIcon>
                                         </a>
                                     </div>
                                     <div class="column" style="padding-right: 50px">
-                                        <a class="@buttonCustomer" @onclick="CustomerClick">
+                                        <a class="@buttonCustomer" @onclick="customerClick">
                                             <CustomerIcon Size="80"></CustomerIcon>
                                         </a>
                                     </div>
-                                    <div @onclick="DriverClick" class="@buttonDriver" style="padding-right: 50px">
-                                        <a class="@buttonDriver" @onclick="DriverClick">
+                                    <div @onclick="driverClick" class="@buttonDriver" style="padding-right: 50px">
+                                        <a class="@buttonDriver" @onclick="driverClick">
                                             <DriverIcon Size="80"></DriverIcon>
                                         </a>
                                     </div>
@@ -155,7 +155,7 @@
         }
     }
 
-    private void RestaurantClick()
+    private void restaurantClick()
     {
         selected = "Restaurant";
         buttonRestaurant = "a-user-active";
@@ -163,7 +163,7 @@
         buttonDriver = "a-user";
     }
     
-    private void CustomerClick()
+    private void customerClick()
     {
         selected = "Customer";
         buttonRestaurant = "a-user";
@@ -171,7 +171,7 @@
         buttonDriver = "a-user";
     }
     
-    private void DriverClick()
+    private void driverClick()
     {
         selected = "Driver";
         buttonRestaurant = "a-user";

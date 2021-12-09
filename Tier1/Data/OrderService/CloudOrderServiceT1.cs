@@ -37,7 +37,7 @@ namespace Client.Data.OrderService
             
         }
 
-        public async Task <List<Order>> GetIncomingOrdersAsync(string restaurantUsername)
+        public async Task <IList<Order>> GetIncomingOrdersAsync(string restaurantUsername)
         {
             HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Order/Incoming?restaurantUsername={restaurantUsername}");
 
@@ -46,7 +46,7 @@ namespace Client.Data.OrderService
 
             string result = await responseMessage.Content.ReadAsStringAsync();
             
-            List<Order> order = JsonSerializer.Deserialize<List<Order>>(result, new JsonSerializerOptions
+            IList<Order> order = JsonSerializer.Deserialize<IList<Order>>(result, new JsonSerializerOptions
                 {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 }
@@ -54,7 +54,7 @@ namespace Client.Data.OrderService
             return order;
         }
 
-        public async Task<List<Order>> GetAcceptedOrdersAsync(string restaurantUsername)
+        public async Task<IList<Order>> GetAcceptedOrdersAsync(string restaurantUsername)
         {
             HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Order/Accepted?restaurantUsername={restaurantUsername}");
 
@@ -63,7 +63,7 @@ namespace Client.Data.OrderService
 
             string result = await responseMessage.Content.ReadAsStringAsync();
             
-            List<Order> order = JsonSerializer.Deserialize<List<Order>>(result, new JsonSerializerOptions
+            IList<Order> order = JsonSerializer.Deserialize<IList<Order>>(result, new JsonSerializerOptions
                 {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 }
@@ -71,7 +71,7 @@ namespace Client.Data.OrderService
             return order;
         }
         
-        public async Task <List<Order>> GetPreviousOrdersAsync(string customerUsername)
+        public async Task <IList<Order>> GetPreviousOrdersAsync(string customerUsername)
         {
             HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Order/Previous?customerUsername={customerUsername}");
 

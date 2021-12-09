@@ -16,12 +16,12 @@ namespace Food4U_SEP3.SocketHandler.OrderHandler
             return Task.FromResult(order);
         }
 
-        public Task<List<Order>> GetIncomingOrders(string restaurantUsername)
+        public Task<IList<Order>> GetIncomingOrders(string restaurantUsername)
         {
             SendToServer("GetIncomingOrders",restaurantUsername);
             IList<Order> orders = JsonSerializer.Deserialize<IList<Order>>(GetFromServer());
             
-            return Task.FromResult(orders.ToList());
+            return Task.FromResult(orders);
         }
 
         public Task<Order> UpdateOrder(Order order)

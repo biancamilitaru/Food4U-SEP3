@@ -48,11 +48,11 @@ namespace Food4U_SEP3.SocketHandler
             Restaurant restaurant = JsonSerializer.Deserialize<Restaurant>(GetFromServer());
             return Task.FromResult(restaurant);
         }
-        public Task<List<Restaurant>> GetRestaurants()
+        public Task<IList<Restaurant>> GetRestaurants()
         {
             SendToServer("GetRestaurants",null);
             IList<Restaurant> getRestaurants = JsonSerializer.Deserialize<IList<Restaurant>>(GetFromServer());
-            return Task.FromResult(getRestaurants.ToList());
+            return Task.FromResult(getRestaurants);
         }
         
     }

@@ -9,13 +9,13 @@
 {
     <h1>Welcome @restaurant.Name</h1>
 }
-<RestaurantInfoComponent Username=@username> </RestaurantInfoComponent>  
+<RestaurantInfoComponent Username=@Username> </RestaurantInfoComponent>  
 
 <button @onclick="NavigateToAddMenu">Add Menu</button>
 
 @code {
     [Parameter]
-    public string username { get; set; }
+    public string Username { get; set; }
     
     
     private Restaurant restaurant = new ();
@@ -24,7 +24,7 @@
     {
         try
         {
-            restaurant = await restaurantService.GetRestaurantAsync(username);
+            restaurant = await restaurantService.GetRestaurantAsync(Username);
         }
         catch (Exception e)
         {

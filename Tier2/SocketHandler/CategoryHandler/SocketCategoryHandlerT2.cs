@@ -44,8 +44,8 @@ namespace Food4U_SEP3.SocketHandler
 
         public Task<Category> DeleteCategory(int categoryId)
         {
-            string categoryID = JsonSerializer.Serialize(categoryId);
-            SendToServer("DeleteCategory",categoryID);
+            string toDeleteCategoryId = JsonSerializer.Serialize(categoryId);
+            SendToServer("DeleteCategory",toDeleteCategoryId);
             Category deleteCategory = JsonSerializer.Deserialize<Category>(GetFromServer());
             return Task.FromResult(deleteCategory);
         }
