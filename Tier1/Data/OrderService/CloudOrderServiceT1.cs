@@ -71,7 +71,7 @@ namespace Client.Data.OrderService
             return order;
         }
         
-        public async Task <List<Order>> GetPreviousOrdersAsync(string customerUsername)
+        public async Task <IList<Order>> GetPreviousOrdersAsync(string customerUsername)
         {
             HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Order/Previous?customerUsername={customerUsername}");
 

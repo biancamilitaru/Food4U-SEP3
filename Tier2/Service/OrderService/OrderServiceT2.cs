@@ -67,7 +67,6 @@ namespace Food4U_SEP3.Service.OrderService
             try
             {
                return await orderHandlerT2.GetPreviousOrders(customerUsername);
-               
             }
             catch (Exception e)
             {
@@ -80,7 +79,7 @@ namespace Food4U_SEP3.Service.OrderService
         {
             try
             {
-                return await orderHandlerT2.UpdateOrder(order);
+                await orderHandlerT2.UpdateOrder(order);
                 Order editedOrder = await orderHandlerT2.UpdateOrder(order);
                 Customer customer = await customerHandlerT2.GetCustomer(order.CustomerUsername);
                 Restaurant restaurant = await restaurantHandlerT2.GetRestaurant(order.RestaurantUsername);
