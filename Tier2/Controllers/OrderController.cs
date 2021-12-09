@@ -71,5 +71,20 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+        
+        [HttpGet]
+        [Route("/Orders")]
+        public async Task<ActionResult<IList<Order>>> GetAcceptedOrdersAsync(Restaurant restaurant)
+        {
+            try
+            {
+                IList<Order> orders = await orderService.GetAcceptedOrdersAsync(restaurant.Username);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
     }
 }
