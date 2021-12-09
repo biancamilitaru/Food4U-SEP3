@@ -61,6 +61,21 @@ namespace Food4U_SEP3.Service.OrderService
                 throw;
             }
         }
+
+        public async Task<IList<Order>> GetPreviousOrderAsync(string customerUsername)
+        {
+            try
+            {
+               return await orderHandlerT2.GetPreviousOrders(customerUsername);
+               
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
         public async Task<Order> UpdateOrderAsync(Order order)
         {
             try
