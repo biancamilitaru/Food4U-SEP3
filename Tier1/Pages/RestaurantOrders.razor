@@ -29,7 +29,7 @@
     
     @foreach (Order order in incomingOrders)
     {
-        <OrderComponent Order="@order"></OrderComponent>
+        <OrderIncomingComponent Order="@order"></OrderIncomingComponent>
     }
 </div>
 
@@ -50,6 +50,14 @@
     </div>
 </a>
 
+<div style="padding-top: 20px">
+    
+    @foreach (Order order in acceptedOrders)
+    {
+        <OrderAceptedComponent Order="@order"></OrderAceptedComponent>
+    }
+</div>
+
 @code{
     //[Parameter]
     //public string username { get; set; }
@@ -63,6 +71,7 @@
     //};
 
     private IList<Order> incomingOrders = new List<Order>();
+    private IList<Order> acceptedOrders = new List<Order>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -71,6 +80,7 @@
             await ReadRestaurant();
             //restaurant = await restaurantService.GetRestaurantAsync(username);
             incomingOrders = await orderService.GetIncomingOrdersAsync(restaurant.Username);
+            acceptedOrders = await orderService.GetAcceptedOrdersAsync(restaurant.Username);
         }
         catch (Exception e)
         {
