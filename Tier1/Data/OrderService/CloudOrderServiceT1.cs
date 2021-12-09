@@ -70,5 +70,22 @@ namespace Client.Data.OrderService
             );
             return order;
         }
+        
+        public async Task <List<Order>> GetPreviousOrdersAsync(string customerUsername)
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Order/Previous?customerUsername={customerUsername}");
+
+            if (!responseMessage.IsSuccessStatusCode)
+                throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+
+            string result = await responseMessage.Content.ReadAsStringAsync();
+            
+            List<Order> order = JsonSerializer.Deserialize<List<Order>>(result, new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                }
+            );
+            return order;
+        }
     }
 }

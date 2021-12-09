@@ -11,5 +11,6 @@ namespace Client.Data.OrderService
         Task<List<Order>> GetIncomingOrdersAsync(string restaurantUsername);
 
         Task<List<Order>> GetAcceptedOrdersAsync(string restaurantUsername);
+        Task<List<Order>> GetPreviousOrdersAsync(string customerUsername);
     }
 }
