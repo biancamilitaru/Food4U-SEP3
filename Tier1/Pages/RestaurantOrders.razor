@@ -1,4 +1,13 @@
 @page "/Orders"
+@using Entities
+@using Client.Data.RestaurantService
+@using Client.Data.OrderService
+@using Client.Components
+@using System.Text.Json
+@inject IRestaurantService restaurantService;
+@inject IOrderServiceT1 orderService;
+@inject IJSRuntime jsRuntime;
+
 
 <a data-toggle="collapse">
     <div class="div-category">
@@ -17,132 +26,11 @@
 </a>
 
 <div style="padding-top: 20px">
-    <!-- Start-->
-    <div class="row" style="padding-left: 40px">
-        <div class="column" style=" padding-right: 20px">
-            <a data-toggle="collapse" data-target="#collapseOrder">
-                <div class="div-category" style="max-width: 27px; max-height: 27px; min-width: 27px; min-height: 27px; margin: 0;padding: 0; padding-left: 4px; border-radius: 5px">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="" class="bi bi-info-square" viewBox="0 0 16 16">
-                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
-                    </svg>
-                </div>
-            </a>
-        </div>
-        <div class="column" style="min-width: 22.5%">
-            <small style="font-weight: bold">09/12/2021 13:11:24</small>
-        </div>
-        <div class="column" style="min-width: 22.5%">
-            <small>Radovan Santa</small>
-        </div>
-        <div class="column" style="min-width: 10%">
-            <small>130 dkk</small>
-        </div>
-        <div class="column" style="min-width: 22.5%">
-            <small style="font-weight: bold">Delivery</small>
-        </div>
-        <div class="column" style="min-width: 10%">
-            <div class="row">
-                <div class="column" style="padding-right: 20px">
-                    <p class="actions"><button class="btn btn-secondary btn-sm" data-dismiss="modal">Reject</button></p>
-                </div>
-                <div class="column">
-                    <p class="actions"><button class="btn btn-primary btn-sm" data-dismiss="modal">Accept</button></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="collapse" id="collapseOrder">
-        <!-- COLLAPSE-->
-        <div class="card" style="margin-bottom: 20px;">
-            <div class="card-body">
-                <div class="row" style="padding-left: 20px">
-                    <div class="column" style="width:30%; padding-left: 20px">
-                        <div class="row" style="padding-left: 20px">
-                            <div class="column" style="padding-right: 15px">
-                                <small style="font-weight: bold">Items:</small>
-                            </div>
-                            <div class="column">
-                                <small>Grilled Salmon</small><br/>
-                                <small>Mashed potatoes</small><br/>
-                                <small>Mineral water</small><br/>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="column" style="width: 30%">
-
-                        <div class="column" style="padding-left: 20px">
-
-                            <div class="row" style="padding-left: 20px">
-                                <div class="column" style="padding-right: 15px">
-                                    <small style="font-weight: bold">Customer:</small>
-                                </div>
-                                <div class="column">
-                                    <small>Radovan Santa</small><br/>
-                                    <small>Vestergade 12 3th 8700</small><br/>
-                                    <small>00 421 915 864 397</small><br/>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column" style="width: 40%">
-                        <div class="row" style="padding-left: 20px">
-                            <div class="column" style="padding-right: 15px">
-                                <small style="font-weight: bold">Comment or wishes:</small>
-                            </div>
-                            <div class="column">
-                                <p><small>Please bring as fast as possble :)</small></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-        </div>
-        <!-- COLLAPSE-->
-    </div>
     
-    <hr>
-    <!-- End-->
-
-    <div class="row" style="padding-left: 40px">
-        <div class="column" style=" padding-right: 20px">
-            <div class="div-category" style="max-width: 27px; max-height: 27px; min-width: 27px; min-height: 27px; margin: 0;padding: 0; padding-left: 4px; border-radius: 5px">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="" class="bi bi-info-square" viewBox="0 0 16 16">
-                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
-                </svg>
-            </div>
-        </div>
-        <div class="column" style="min-width: 22.5%">
-            <small>09/12/2021 13:11:24</small>
-        </div>
-        <div class="column" style="min-width: 22.5%">
-            <small>Radovan Santa</small>
-        </div>
-        <div class="column" style="min-width: 10%">
-            <small>130 dkk</small>
-        </div>
-        <div class="column" style="min-width: 22.5%">
-            <small>Delivery</small>
-        </div>
-        <div class="column" style="min-width: 10%">
-            <div class="row">
-                <div class="column" style="padding-right: 20px">
-                    <p class="actions"><button class="btn btn-primary btn-sm" data-dismiss="modal">Reject</button></p>
-                </div>
-                <div class="column">
-                    <p class="actions"><button class="btn btn-primary btn-sm" data-dismiss="modal">Accept</button></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <hr>
-
+    @foreach (Order order in incomingOrders)
+    {
+        <OrderComponent Order="@order"></OrderComponent>
+    }
 </div>
 
 
@@ -161,3 +49,42 @@
         </div>
     </div>
 </a>
+
+@code{
+    //[Parameter]
+    //public string username { get; set; }
+
+    private Restaurant restaurant = new Restaurant();
+
+    //private Restaurant restaurant =  new Restaurant()
+    //{
+    //    DeliveryOption1 = new Delivery(),
+    //    DeliveryOption2 = new Delivery(),
+    //};
+
+    private IList<Order> incomingOrders = new List<Order>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await ReadRestaurant();
+            //restaurant = await restaurantService.GetRestaurantAsync(username);
+            incomingOrders = await orderService.GetIncomingOrdersAsync(restaurant.Username);
+        }
+        catch (Exception e)
+        {
+    // update some error label here, or show popup..
+        }
+    }
+    
+    public async Task ReadRestaurant()
+    {
+        string restaurantAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "currentRestaurant");
+
+        if (!string.IsNullOrEmpty(restaurantAsJson))
+        {
+            restaurant = JsonSerializer.Deserialize<Restaurant>(restaurantAsJson);
+        }
+    }
+}

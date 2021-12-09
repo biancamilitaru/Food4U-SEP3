@@ -1,4 +1,7 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
+﻿@using Entities
+@using System.Text.Json
+@inject IJSRuntime jsRuntime;
+<div class="top-row pl-4 navbar navbar-dark">
     <a class="navbar-brand" href="">Food4U</a>
 </div>
 
@@ -20,7 +23,7 @@
             </NavLink>
         </li>
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="/Orders" Match="NavLinkMatch.All">
+           <NavLink class="nav-link" href="/Orders" Match="NavLinkMatch.All">
                 Orders
             </NavLink>
         </li>
@@ -28,5 +31,25 @@
 </div>
 
 @code {
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
     
+    private Restaurant restaurant;
+    
+    public async Task ReadRestaurant()
+    {
+        string restaurantAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "currentRestaurant");
+
+        if (!string.IsNullOrEmpty(restaurantAsJson))
+        {
+            restaurant = JsonSerializer.Deserialize<Restaurant>(restaurantAsJson);
+        }
+    }
+    
+    
+    private async Task OnOrders()
+    {
+        await ReadRestaurant();
+        NavigationManager.NavigateTo("Orders/"+restaurant.Username);
+    }
 }

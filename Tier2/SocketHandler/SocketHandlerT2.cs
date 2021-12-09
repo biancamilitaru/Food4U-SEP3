@@ -34,7 +34,7 @@ namespace Food4U_SEP3.SocketHandler
         
         protected string GetFromServer()
         {
-            byte[] fromServer = new byte[1024*6];
+            byte[] fromServer = new byte[1024*10];
             int bytesRead = stream.Read(fromServer, 0, fromServer.Length);
             string response = Encoding.ASCII.GetString(fromServer, 0, bytesRead);
             Console.WriteLine(response);
