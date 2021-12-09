@@ -44,7 +44,7 @@ namespace Food4U_SEP3.Controllers
         }
         
         [HttpGet]
-        [Route("/IncomingOrders")]
+        [Route("/Orders/Incoming")]
         public async Task<ActionResult<List<Order>>> GetIncomingOrders([FromQuery] string restaurantUsername)
         {
             try
@@ -73,7 +73,7 @@ namespace Food4U_SEP3.Controllers
         }
         
         [HttpGet]
-        [Route("/Orders")]
+        [Route("/Orders/Accepted")]
         public async Task<ActionResult<IList<Order>>> GetAcceptedOrdersAsync(Restaurant restaurant)
         {
             try
