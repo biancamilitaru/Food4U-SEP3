@@ -36,5 +36,12 @@ namespace Food4U_SEP3.SocketHandler.OrderHandler
             Order deleteOrder = JsonSerializer.Deserialize<Order>(GetFromServer());
             return Task.FromResult(deleteOrder);
         }
+
+        public Task<IList<Order>> GetAcceptedOrders(string restaurantUsername)
+        {
+            SendToServer("GetAcceptedOrders",restaurantUsername);
+            IList<Order> getOrders = JsonSerializer.Deserialize<IList<Order>>(GetFromServer());
+            return Task.FromResult(getOrders);
+        }
     }
 }
