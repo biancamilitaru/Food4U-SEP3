@@ -7,6 +7,7 @@ using Client.Data.CategoryService;
 using Client.Data.CustomerService;
 using Client.Data.ItemService;
 using Client.Data.MenuService;
+using Client.Data.OrderService;
 using Client.Data.RestaurantService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
@@ -42,6 +43,7 @@ namespace Client
             services.AddScoped<IMenuServiceT1, CloudMenuServiceT1>();
             services.AddScoped<ICategoryServiceT1,CloudCategoryServiceT1>();
             services.AddScoped<IItemServiceT1, CloudItemServiceT1>();
+            services.AddScoped<IOrderServiceT1, CloudOrderServiceT1>();
 
         }
 

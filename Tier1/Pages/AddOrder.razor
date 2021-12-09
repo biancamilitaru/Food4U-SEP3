@@ -4,6 +4,7 @@
 @using Client.Data.CategoryService
 @using Client.Data.CustomerService
 @using Client.Data.MenuService
+@using Client.Data.OrderService
 @using Client.Data.RestaurantService
 @using Entities
 @inject ICustomerServiceT1 customerService;
@@ -11,6 +12,7 @@
 @inject ICategoryServiceT1 categoryService;
 @inject IMenuServiceT1 menuService;
 @inject IRestaurantService restaurantService;
+@inject IOrderServiceT1 orderServiceT1;
 
 @inject IJSRuntime jsRuntime;
 
@@ -272,13 +274,13 @@
             Address = customer.Address,
             Comment = comment,
             CustomerUsername = customer.Username,
-            DeliveryOption = selectedDelivery,
+            DeliveryId = selectedDelivery.DeliveryId,
             RestaurantUsername = restaurant.Username,
-            Status = "Incomming",
+            Status = "Incoming",
             TotalPrice = totalPrice,
             Date = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")
         };
-        
-        Console.WriteLine(JsonSerializer.Serialize(order));
+
+        orderServiceT1.AddOrderAsync(order);
     }
 }
