@@ -41,7 +41,7 @@ namespace Food4U_SEP3.Service.OrderService
             }
         }
         
-        public async Task<List<Order>> GetAcceptedOrdersAsync(string restaurantUsername)
+        public async Task<IList<Order>> GetAcceptedOrdersAsync(string restaurantUsername)
         {
             try
             {
