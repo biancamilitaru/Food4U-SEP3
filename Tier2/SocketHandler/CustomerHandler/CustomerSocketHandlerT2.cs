@@ -1,6 +1,8 @@
 ﻿using System.Text.Json;
 using System.Threading.Tasks;
 using Entities;
+using System.Net;
+using System.Net.Mail;
 
 namespace Food4U_SEP3.SocketHandler.CustomerHandler
 {
