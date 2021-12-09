@@ -62,7 +62,7 @@ namespace Food4U_SEP3.Service.OrderService
             }
         }
 
-        public async Task<IList<Order>> GetPreviousOrderAsync(string customerUsername)
+        public async Task<IList<Order>> GetPreviousOrdersAsync(string customerUsername)
         {
             try
             {
