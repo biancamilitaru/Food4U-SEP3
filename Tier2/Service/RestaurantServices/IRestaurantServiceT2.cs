@@ -12,7 +12,7 @@ namespace Food4U_SEP3.RestaurantServices
         Task DeleteRestaurantAsync(string username);
         Task<Restaurant> UpdateRestaurantAsync(Restaurant restaurant);
         Task <Restaurant> ValidateLoginAsync(string username);
-        Task<List<Restaurant>> GetRestaurantsAsync();
+        Task<IList<Restaurant>> GetRestaurantsAsync();
 
     }
 }

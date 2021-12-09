@@ -45,11 +45,11 @@ namespace Food4U_SEP3.Controllers
         
         [HttpGet]
         [Route("/IncomingOrders")]
-        public async Task<ActionResult<List<Order>>> GetIncomingOrders([FromQuery] string restaurantUsername)
+        public async Task<ActionResult<IList<Order>>> GetIncomingOrders([FromQuery] string restaurantUsername)
         {
             try
             {
-                List<Order> order = await orderService.GetIncomingOrdersAsync(restaurantUsername);
+                IList<Order> order = await orderService.GetIncomingOrdersAsync(restaurantUsername);
                 return Ok(order);
             }
             catch (Exception e)

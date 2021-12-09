@@ -28,7 +28,7 @@ namespace Food4U_SEP3.Service.OrderService
             }
         }
 
-        public async Task<List<Order>> GetIncomingOrdersAsync(string restaurantUsername)
+        public async Task<IList<Order>> GetIncomingOrdersAsync(string restaurantUsername)
         {
             try
             {

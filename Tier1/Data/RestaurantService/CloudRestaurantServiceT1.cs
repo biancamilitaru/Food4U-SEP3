@@ -94,7 +94,7 @@ namespace Client.Data.RestaurantService
 
         }
 
-        public async Task<List<Restaurant>> GetRestaurantsAsync()
+        public async Task<IList<Restaurant>> GetRestaurantsAsync()
         {
             HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/Restaurants");
 
@@ -103,7 +103,7 @@ namespace Client.Data.RestaurantService
 
             string result = await responseMessage.Content.ReadAsStringAsync();
             
-           List<Restaurant> restaurants = JsonSerializer.Deserialize<List<Restaurant>>(result,new JsonSerializerOptions
+           IList<Restaurant> restaurants = JsonSerializer.Deserialize<IList<Restaurant>>(result,new JsonSerializerOptions
                 {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 }

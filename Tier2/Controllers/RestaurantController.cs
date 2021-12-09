@@ -74,11 +74,11 @@ namespace Food4U_SEP3.Controllers
 
         [HttpGet]
         [Route("/Restaurants")]
-        public async Task<ActionResult<List<Restaurant>>> GetRestaurantsAsync()
+        public async Task<ActionResult<IList<Restaurant>>> GetRestaurantsAsync()
         {
             try
             {
-                List<Restaurant> restaurants = await restaurantService.GetRestaurantsAsync();
+                IList<Restaurant> restaurants = await restaurantService.GetRestaurantsAsync();
                 return Ok(restaurants);
             }
             catch (Exception e)

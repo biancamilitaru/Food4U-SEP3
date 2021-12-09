@@ -6,7 +6,7 @@
 @inject ICustomerServiceT1 customerService;
 <h3>Create a new customer</h3>
 
-<EditForm Model="@customer" OnValidSubmit="@Edit">
+<EditForm Model="@customer" OnValidSubmit="@edit">
   <DataAnnotationsValidator/>
   <ValidationSummary/>
   <div class="card" style="margin-bottom: 20px">
@@ -60,7 +60,7 @@
     </div>
   </div>
   <p class="actions"><button class="btn btn-success" type="submit">Edit profile</button></p>
-  <p class="actions"><button @onclick="DeleteProfile" class="btn btn-warning" >Delete my profile</button></p>
+  <p class="actions"><button @onclick="deleteProfile" class="btn btn-warning" >Delete my profile</button></p>
   
   
 </EditForm>
@@ -84,12 +84,12 @@
     }
   }
 
-  private void Edit()
+  private void edit()
   {
     customerService.UpdateCustomerAsync(customer);
   }
   
-  private void DeleteProfile()
+  private void deleteProfile()
   {
     customerService.DeleteCustomerAsync(customer.Username);
   }
