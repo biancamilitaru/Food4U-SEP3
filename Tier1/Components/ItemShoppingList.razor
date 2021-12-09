@@ -1,0 +1,29 @@
+@using Entities
+<div class="row">
+                            <div class="column" style="width: 80%">
+                                <div style="margin: 15px;">
+                                    <h6>@Item.Name</h6>
+                                    <small>@Item.Description</small>
+                                </div>
+                            </div>
+                            <div class="column" style="width: 20%">
+                                <label>@Item.Price</label>
+                                <p class="actions"><button @onclick="@(() => OnClick.InvokeAsync(Item))" class="btn btn-success btn-sm">Delete</button></p>
+                            </div>
+                        </div>
+<hr>
+
+
+
+
+
+
+<!-- Card with item -->
+
+@code {
+    [Parameter]
+    public Item Item { get; set; }
+    
+    [Parameter] 
+    public EventCallback<Item> OnClick { get; set; }
+}

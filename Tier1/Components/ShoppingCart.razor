@@ -16,30 +16,28 @@
                 
                 @if (ShoppingCartList != null)
                 {
-                    foreach (Item item in ShoppingCartList)
+                    @if (ShoppingCartList.Count > 0)
                     {
-                        <!-- Card with item -->
-                        <div class="row">
-                            <div class="column" style="width: 80%">
-                                <div style="margin: 15px;">
-                                    <h6>@item.Name</h6>
-                                    <small>@item.Description</small>
-                                </div>
-                            </div>
-                            <div class="column" style="width: 20%">
-                                <label>@item.Price</label>
-                                <p class="actions"><button class="btn btn-success btn-sm">Delete</button></p>
-                            </div>
-                        </div>
-                        <hr>
-                        <!-- Card with item -->
+                            foreach (Item item in ShoppingCartList)
+                        {
+                            <!-- Card with item -->
+                            <ItemShoppingList Item="item" OnClick="ClickDelete"></ItemShoppingList>
+                            
+                            
+                            
+                            <!-- Card with item -->
+                        }
+                        
+                        //Comment section
+                        <input  class="form-control" @bind-value="comment"  rows="3" placeholder="Any comment or wishes?">
+                        
                     }
-                    
-                    //Comment section
-                    <input  class="form-control" @bind-value="comment"  rows="3" placeholder="Any comment or wishes?">
-
+                    else 
+                    {
+                        <h6>Shopping cart is empty</h6>
+                    }
                 }
-                else
+                else 
                 {
                     <h6>Shopping cart is empty</h6>
                 }
@@ -47,7 +45,14 @@
             </div>
             <div class="modal-footer">
                 <p class="actions"><button class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button></p>
-                <p class="actions"><button @onclick="onContinue" class="btn btn-primary btn-sm" data-dismiss="modal">Continue</button></p>
+                @if (ShoppingCartList != null)
+                {
+                    @if (ShoppingCartList.Count > 0)
+                    {
+                        <p class="actions"><button @onclick="OnContinue" class="btn btn-primary btn-sm" data-dismiss="modal">Continue</button></p>
+                    }
+                    
+                }
             </div>
         </div>
     </div>
@@ -83,12 +88,20 @@
     }
     
 
-    private async Task onContinue()
+    private async Task OnContinue()
     {
         await ReadCustomer();
         await SaveComment();
         NavigationManager.NavigateTo("Order/"+customer.Username);
     }
+
+    async void ClickDelete(Item item)
+    {
+        ShoppingCartList.RemoveAt(ShoppingCartList.IndexOf(item));
+        string serialisedData = JsonSerializer.Serialize(ShoppingCartList);
+        await jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "shoppingCart", serialisedData);
+    }
     
-    
+
+
 }
