@@ -24,9 +24,9 @@ namespace Food4U_SEP3.SocketHandler.OrderHandler
             return Task.FromResult(orders);
         }
         
-        public Task<IList<Order>> GetReadyForPickupOrders(string driverUsername)
+        public Task<IList<Order>> GetReadyForPickupOrders()
         {
-            SendToServer("GetReadyForPickupOrders",driverUsername);
+            SendToServer("GetReadyForPickupOrders",null);
             IList<Order> orders = JsonSerializer.Deserialize<IList<Order>>(GetFromServer());
             
             return Task.FromResult(orders);
