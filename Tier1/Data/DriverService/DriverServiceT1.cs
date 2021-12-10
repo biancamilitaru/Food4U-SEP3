@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -33,6 +34,28 @@ namespace Client.Data.DriverService
             {
                 throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
             }
+        }
+
+        public async Task<Driver> ValidateDriverAsync(string username, string password)
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync(uri + "/Driver?username=" + username);
+            if (responseMessage.StatusCode == HttpStatusCode.OK)
+            {
+                string driverAsJson = await responseMessage.Content.ReadAsStringAsync();
+                Driver resultDriver = JsonSerializer.Deserialize<Driver>(driverAsJson);
+                Console.WriteLine(driverAsJson);
+
+                if (resultDriver.Password.Equals(password))
+                {
+                    return resultDriver;
+                }
+                else
+                {
+                    throw new Exception("Wrong password");
+                }
+            }
+
+            throw new Exception("Driver not found");
         }
     }
 }
