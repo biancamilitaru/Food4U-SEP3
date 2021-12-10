@@ -64,5 +64,10 @@ namespace Client.Data.DriverService
             HttpContent content = new StringContent(driverAsJson, Encoding.UTF8, "application/json");
             await client.PatchAsync($"{uri}/Driver/{driver.Username}", content);
         }
+
+        public async Task DeleteDriverAsync(string username)
+        {
+            await client.DeleteAsync($"{uri}/Driver/{username}");
+        }
     }
 }
