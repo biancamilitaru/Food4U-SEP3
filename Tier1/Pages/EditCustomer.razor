@@ -3,10 +3,15 @@
 @using Entities
 @using Microsoft.AspNetCore.Components
 @using Client.Data.CustomerService
+@using System.Text.Json
 @inject ICustomerServiceT1 customerService;
-<h3>Edit a customer</h3>
+@inject IJSRuntime jsRuntime;
 
-<EditForm Model="@customer" OnValidSubmit="@edit">
+<div style="padding-bottom: 10px; position: sticky; z-index: 2; top: 56px; background-color: white">
+  <h3>Edit my customer profile</h3>
+</div>
+
+<EditForm Model="@customer" OnValidSubmit="@Edit">
   <DataAnnotationsValidator/>
   <ValidationSummary/>
   <div class="card" style="margin-bottom: 20px">
@@ -59,37 +64,52 @@
       </div>
     </div>
   </div>
-  <p class="actions"><button class="btn btn-success" type="submit">Edit profile</button></p>
-  <p class="actions"><button @onclick="deleteProfile" class="btn btn-warning" >Delete my profile</button></p>
-  
-  
+  <div style="padding: 20px">
+    <div class="row">
+      <div class="column" style="padding-right: 20px">
+        <a @onclick="DeleteProfile" class="actions"><button class="btn btn-secondary">Delete my profile</button></a>
+      </div>
+      <div class="column" style="padding-right: 20px">
+        <p class="actions"><button class="btn btn-success" type="submit">Edit my profile</button></p>
+      </div>
+    </div>
+  </div>
+
+
 </EditForm>
 
 
 @code {
-  [Parameter]
-  public string Username { get; set; }
-    
   private Customer customer = new ();
     
   protected override async Task OnInitializedAsync()
   {
     try
     {
-      //customer = await customerService.GetCustomer(Username);
+      await ReadCustomer();
     }
     catch (Exception e)
     {
   // update some error label here, or show popup..
     }
   }
+  
+  public async Task ReadCustomer()
+  {
+    string customerAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "currentCustomer");
 
-  private void edit()
+    if (!string.IsNullOrEmpty(customerAsJson))
+    {
+      customer = JsonSerializer.Deserialize<Customer>(customerAsJson);
+    }
+  }
+  
+  private void Edit()
   {
     customerService.UpdateCustomerAsync(customer);
   }
   
-  private void deleteProfile()
+  private void DeleteProfile()
   {
     customerService.DeleteCustomerAsync(customer.Username);
   }

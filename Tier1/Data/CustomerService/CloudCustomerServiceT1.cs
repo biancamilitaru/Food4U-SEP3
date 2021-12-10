@@ -79,13 +79,12 @@ namespace Client.Data.CustomerService
         {
             string customerAsJson = JsonSerializer.Serialize(customer);
             HttpContent content = new StringContent(customerAsJson, Encoding.UTF8, "application/json");
-            await client.PatchAsync($"{uri}/Customer/{customer.Username}", content);
+            await client.PatchAsync($"{uri}/Customer", content);
         }
 
         public async Task DeleteCustomerAsync(string username)
         {
-            //TODO need to check the uri
-            await client.DeleteAsync($"{uri}/Customer?customer="+username);
+            await client.DeleteAsync(uri+"/Customer?username="+username);
         }
     }
 }
