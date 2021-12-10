@@ -27,5 +27,10 @@ namespace Food4U_SEP3.Service.DriverService
                 throw;
             }
         }
+
+        public async Task<Driver> ValidateLoginAsync(string username)
+        {
+            return await driverHandlerT2.ValidateLogin(username);
+        }
     }
 }
