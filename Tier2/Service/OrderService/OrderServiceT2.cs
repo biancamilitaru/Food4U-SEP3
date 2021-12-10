@@ -110,5 +110,20 @@ namespace Food4U_SEP3.Service.OrderService
                 throw;
             }
         }
+
+        public async Task<IList<Order>> GetReadyForPickUpOrdersAsync()
+        {
+            try
+            {
+                //TODO uncomment this
+                //return await orderHandlerT2.GetReadyForPickUpOrders();
+                return null;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace Client.Data.DriverService
 
         Task DeleteDriverAsync(string username);
 
-        Task<IList<Order>> GetReadyForPickUpOrdersAsync();
+       
 
     }
 }

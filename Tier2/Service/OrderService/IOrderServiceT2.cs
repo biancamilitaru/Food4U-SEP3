@@ -16,5 +16,7 @@ namespace Food4U_SEP3.Service.OrderService
         Task<IList<Order>> GetPreviousOrdersAsync(string customerUsername);
         Task<Order> UpdateOrderAsync(Order order);
         Task DeleteOrderAsync(int orderId);
+
+        Task<IList<Order>> GetReadyForPickUpOrdersAsync();
     }
 }

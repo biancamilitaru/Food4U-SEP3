@@ -87,5 +87,22 @@ namespace Client.Data.OrderService
             );
             return order;
         }
+        
+        public async Task<IList<Order>> GetReadyForPickUpOrdersAsync()
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync($"{uri}/ReadyForPickUpDriverOrders");
+
+            if (!responseMessage.IsSuccessStatusCode)
+                throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+
+            string result = await responseMessage.Content.ReadAsStringAsync();
+            
+            IList<Order> orders = JsonSerializer.Deserialize<IList<Order>>(result,new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                }
+            );
+            return orders;
+        }
     }
 }
