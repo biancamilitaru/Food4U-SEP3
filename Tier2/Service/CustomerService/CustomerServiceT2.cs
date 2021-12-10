@@ -23,7 +23,9 @@ namespace Food4U_SEP3.Service.CustomerService
                 Customer addedCustomer = await customerHandlerT2.AddCustomer(customer);
                 if (addedCustomer != null)
                 {
-                    emailService.SendEmail("Welcome to Food4U", addedCustomer.FirstName + ", your account is created!",
+                    string htmlBody = "Welcome "+customer.FirstName+" , you are now able to sign in!";
+                    
+                    emailService.SendEmail("Welcome to Food4U", htmlBody,
                         addedCustomer.Email);    
                 }
                 return addedCustomer;
