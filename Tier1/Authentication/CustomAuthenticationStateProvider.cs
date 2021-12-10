@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Client.Data.CustomerService;
+using Client.Data.DriverService;
 using Client.Data.RestaurantService;
 using Client.Data.UserServices;
 using Entities;
@@ -19,15 +20,18 @@ namespace Client.Authentication
         
         private readonly ICustomerServiceT1 customerService;
         private readonly IRestaurantService restaurantService;
+        private readonly IDriverServiceT1 driverService;
         
         private Restaurant cachedRestaurant;
         private Customer cachedCustomer;
+        private Driver cachedDriver;
 
-        public CustomAuthenticationStateProvider(IJSRuntime jsRuntime, IRestaurantService restaurantService, ICustomerServiceT1 customerService)
+        public CustomAuthenticationStateProvider(IJSRuntime jsRuntime, IRestaurantService restaurantService, ICustomerServiceT1 customerService, IDriverServiceT1 driverService)
         {
             this.jsRuntime = jsRuntime;
             this.restaurantService = restaurantService;
             this.customerService = customerService;
+            this.driverService = driverService;
         }
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
@@ -49,20 +53,6 @@ namespace Client.Authentication
                 identity = SetupClaimsForRestaurant(cachedRestaurant);
             }
             
-            //CUSTOMER
-            if (cachedCustomer == null)
-            {
-                string userAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "currentCustomer");
-                if (!string.IsNullOrEmpty(userAsJson))
-                {
-                    cachedCustomer = JsonSerializer.Deserialize<Customer>(userAsJson);
-                    identity = SetupClaimsForCustomer(cachedCustomer);
-                }
-            }
-            else
-            {
-                identity = SetupClaimsForCustomer(cachedCustomer);
-            }
 
             ClaimsPrincipal cachedClaimsPrincipal = new ClaimsPrincipal(identity);
             return await Task.FromResult(new AuthenticationState(cachedClaimsPrincipal));
@@ -114,6 +104,26 @@ namespace Client.Authentication
                 }
             }
             
+            //Driver
+            if (userType.Equals("Driver"))
+            {
+                try
+                {
+                    Driver driver = await driverService.ValidateDriverAsync(username, password);
+                    if (driver.Username!=null)
+                    {
+                        identity = SetupClaimsForDriver(driver);
+                        string serialisedData = JsonSerializer.Serialize(driver);
+                        await jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentDriver", serialisedData);
+                        cachedDriver = driver;
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(new ClaimsPrincipal(identity))));
         }
 
@@ -121,9 +131,11 @@ namespace Client.Authentication
         {
             cachedCustomer = null;
             cachedRestaurant = null;
+            cachedDriver = null;
             var user = new ClaimsPrincipal(new ClaimsIdentity());
             await jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentRestaurant", "");
             await jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentCustomer", "");
+            await jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentDriver", "");
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(user)));
         }
 
@@ -135,6 +147,13 @@ namespace Client.Authentication
         }
         
         private ClaimsIdentity SetupClaimsForCustomer(Customer user)
+        {
+            List<Claim> claims = new List<Claim>();
+            ClaimsIdentity identity = new ClaimsIdentity(claims, "apiauth_type");
+            return identity;
+        }
+        
+        private ClaimsIdentity SetupClaimsForDriver(Driver driver)
         {
             List<Claim> claims = new List<Claim>();
             ClaimsIdentity identity = new ClaimsIdentity(claims, "apiauth_type");
