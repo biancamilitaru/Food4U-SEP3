@@ -7,16 +7,16 @@ namespace Entities
     public class Driver : User
     {
         [Required,JsonPropertyName("firstName"),MaxLength(50)]
-        public string FirstName;
+        public string FirstName { get; set; }
         [Required,JsonPropertyName("lastName"),MaxLength(50)]
-        public string LastName;
+        public string LastName { get; set; }
         [Required,JsonPropertyName("address"), MaxLength(100)]
-        public string Address;
+        public string Address { get; set; }
         [Required,JsonPropertyName("phoneNumber"),MaxLength(12)]
-        public string PhoneNumber;
+        public string PhoneNumber { get; set; }
         [Required,JsonPropertyName("email"),MaxLength(100)]
-        public string Email;
+        public string Email { get; set; }
         [Required,JsonPropertyName("licenseNumber"),MaxLength(50)]
-        public string LicenseNumber;
+        public string LicenseNumber { get; set; }
     }
 }

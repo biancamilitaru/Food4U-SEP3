@@ -33,7 +33,6 @@ namespace Entities
         
         [JsonPropertyName("deliveryID"), ForeignKey("delivery_id")]
         public int DeliveryId { get; set; }
-
         
     }
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Client.Authentication;
 using Client.Data.CategoryService;
 using Client.Data.CustomerService;
+using Client.Data.DriverService;
 using Client.Data.ItemService;
 using Client.Data.MenuService;
 using Client.Data.OrderService;
@@ -44,6 +45,7 @@ namespace Client
             services.AddScoped<ICategoryServiceT1,CloudCategoryServiceT1>();
             services.AddScoped<IItemServiceT1, CloudItemServiceT1>();
             services.AddScoped<IOrderServiceT1, CloudOrderServiceT1>();
+            services.AddScoped<IDriverServiceT1, CloudDriverServiceT1>();
 
         }
 

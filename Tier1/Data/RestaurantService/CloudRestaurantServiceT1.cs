@@ -43,7 +43,7 @@ namespace Client.Data.RestaurantService
         {
             string restaurantAsJson = JsonSerializer.Serialize(restaurant);
             HttpContent content = new StringContent(restaurantAsJson, Encoding.UTF8, "application/json");
-            await client.PatchAsync($"{uri}/Restaurant/{restaurant.Username}", content);
+            await client.PatchAsync(uri+"/Restaurant", content);
         }
 
         public async Task<Restaurant> GetRestaurantAsync(string username)
@@ -122,7 +122,8 @@ namespace Client.Data.RestaurantService
 
         public async Task DeleteRestaurantAsync(string username)
         {
-            await client.DeleteAsync($"{uri}/Restaurant/{username}");
+            Console.WriteLine(uri+"Restaurant?username="+username);
+            await client.DeleteAsync(uri+"/Restaurant?username="+username);
 
         }
         
