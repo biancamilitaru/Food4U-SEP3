@@ -65,6 +65,7 @@
   <ValidationSummary/>
   
   <p class="actions"><button class="btn btn-success" type="submit">Edit a profile</button></p>
+  <p class="actions"><button @onclick="OnDeleteProfile" class="btn btn-warning" >Delete my profile</button></p>
 
 </EditForm>
 
@@ -96,6 +97,11 @@
 
   private async void OnEditDriver()
   {
-    //await driverService.UpdateDriverAsync(driver);
+    await driverService.UpdateDriverAsync(driver);
+  }
+
+  private async void OnDeleteProfile()
+  {
+    //await driverService.DeleteDriverAsync(driver.Username);
   }
 }
