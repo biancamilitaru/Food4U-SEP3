@@ -54,6 +54,7 @@ namespace Client.Authentication
             }
             
 
+
             ClaimsPrincipal cachedClaimsPrincipal = new ClaimsPrincipal(identity);
             return await Task.FromResult(new AuthenticationState(cachedClaimsPrincipal));
         }
@@ -142,6 +143,7 @@ namespace Client.Authentication
         private ClaimsIdentity SetupClaimsForRestaurant(Restaurant user)
         {
             List<Claim> claims = new List<Claim>();
+            claims.Add(new Claim("User", "Restaurant"));
             ClaimsIdentity identity = new ClaimsIdentity(claims, "apiauth_type");
             return identity;
         }
@@ -149,6 +151,7 @@ namespace Client.Authentication
         private ClaimsIdentity SetupClaimsForCustomer(Customer user)
         {
             List<Claim> claims = new List<Claim>();
+            claims.Add(new Claim("User", "Customer"));
             ClaimsIdentity identity = new ClaimsIdentity(claims, "apiauth_type");
             return identity;
         }
@@ -156,6 +159,7 @@ namespace Client.Authentication
         private ClaimsIdentity SetupClaimsForDriver(Driver driver)
         {
             List<Claim> claims = new List<Claim>();
+            claims.Add(new Claim("User", "Driver"));
             ClaimsIdentity identity = new ClaimsIdentity(claims, "apiauth_type");
             return identity;
         }

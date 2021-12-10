@@ -46,6 +46,13 @@ namespace Client
             services.AddScoped<IItemServiceT1, CloudItemServiceT1>();
             services.AddScoped<IOrderServiceT1, CloudOrderServiceT1>();
             services.AddScoped<IDriverServiceT1, CloudDriverServiceT1>();
+            
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("MustBeRestaurant", a => a.RequireAuthenticatedUser().RequireClaim("User","Restaurant"));
+                options.AddPolicy("MustBeCustomer", a => a.RequireAuthenticatedUser().RequireClaim("User","Customer"));
+                options.AddPolicy("MustBeDriver", a => a.RequireAuthenticatedUser().RequireClaim("User","Driver"));
+            });
 
         }
 
