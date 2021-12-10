@@ -32,5 +32,33 @@ namespace Food4U_SEP3.Service.DriverService
         {
             return await driverHandlerT2.ValidateLogin(username);
         }
+
+        public async Task<Driver> UpdateDriverAsync(Driver driver)
+        {
+            try
+            {
+                return await driverHandlerT2.UpdateDriver(driver);
+                
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public async Task DeleteDriverAsync(string username)
+        {
+            try
+            {
+                //TODO uncomment this once deleteDriver method is done in handler
+                //await driverHandlerT2.DeleteDriver(username);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

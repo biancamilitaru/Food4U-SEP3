@@ -8,12 +8,12 @@ using Entities;
 
 namespace Client.Data.DriverService
 {
-    public class DriverServiceT1 : IDriverServiceT1
+    public class CloudDriverServiceT1 : IDriverServiceT1
     {
         private string uri = "https://localhost:5003";
         private readonly HttpClient client;
 
-        public DriverServiceT1()
+        public CloudDriverServiceT1()
         {
             client = new HttpClient();
         }
@@ -56,6 +56,18 @@ namespace Client.Data.DriverService
             }
 
             throw new Exception("Driver not found");
+        }
+
+        public async Task UpdateDriverAsync(Driver driver)
+        {
+            string driverAsJson = JsonSerializer.Serialize(driver);
+            HttpContent content = new StringContent(driverAsJson, Encoding.UTF8, "application/json");
+            await client.PatchAsync($"{uri}/Driver/{driver.Username}", content);
+        }
+
+        public async Task DeleteDriverAsync(string username)
+        {
+            await client.DeleteAsync($"{uri}/Driver/{username}");
         }
     }
 }
