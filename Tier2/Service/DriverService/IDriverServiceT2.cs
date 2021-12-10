@@ -9,5 +9,7 @@ namespace Food4U_SEP3.Service.DriverService
 
         Task<Driver> ValidateLoginAsync(string username);
 
+        Task<Driver> UpdateDriverAsync(Driver driver);
+
     }
 }
