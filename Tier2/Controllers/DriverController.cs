@@ -46,7 +46,7 @@ namespace Food4U_SEP3.Controllers
         {
             try
             {
-                await driverService.UpdateCustomerAsync(driver);
+                await driverService.UpdateDriverAsync(driver);
                 return Ok();
             }
             catch (Exception e)
