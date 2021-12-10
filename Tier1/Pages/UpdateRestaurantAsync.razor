@@ -3,102 +3,241 @@
 @using Client.Data.RestaurantService
 @using Microsoft.AspNetCore.Components
 @using System
+@using System.Text.Json
 @using System.Threading.Tasks
 @using Entities
 @using Microsoft.AspNetCore.Components
 @inject IRestaurantService restaurantService;
+@inject IJSRuntime jsRuntime;
 
-<h3>EditRestaurant</h3>
-@if (Restaurant.Name != null) {
-    <EditForm Model="Restaurant" OnValidSubmit="EditExistingRestaurant">
-        <DataAnnotationsValidator/>
-        <ValidationSummary/>
-        <div class="form-group">New name of the restaurant:<br/>
-            <InputText @bind-Value="Restaurant.Name"/></div>
-    
-        <div class="form-group">New address of the restaurant:<br/>
-            <InputText @bind-Value="Restaurant.Address"/></div>
-    
-        <div class="form-group">New phone number of the restaurant:<br/>
-            <InputText @bind-Value="Restaurant.PhoneNumber"/></div>
-    
-        <div class="form-group">New opening hours: <br/>
-            <p> Monday:<InputText @bind-Value="Restaurant.OpeningHoursMonday"></InputText><br/>
-                Tuesday:<InputText @bind-Value="Restaurant.OpeningHoursTuesday"></InputText><br/>
-                Wednesday:<InputText @bind-Value="Restaurant.OpeningHoursWednesday"></InputText><br/>
-                Thursday:<InputText @bind-Value="Restaurant.OpeningHoursThursday"></InputText><br/>
-                Friday:<InputText @bind-Value="Restaurant.OpeningHoursFriday"></InputText><br/>
-                Saturday:<InputText @bind-Value="Restaurant.OpeningHoursSaturday"></InputText><br/>
-                Sunday:<InputText @bind-Value="Restaurant.OpeningHoursSunday"></InputText><br/>
-            </p>
+<div style="padding-bottom: 10px; position: sticky; z-index: 2; top: 56px; background-color: white">
+  <h3>Edit my restaurant profile</h3>
+</div>
+
+@if(restaurant.Username!=null){
+<EditForm Model="@restaurant" OnValidSubmit="@EditExistingRestaurant">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+    <div class="card" style="margin-bottom: 20px">
+      <div class="card-body">
+        <h4>Login information:</h4>
+        <div class="form-group">
+          <label>Username:</label>
+          <InputText placeholder="Create a username for login" style="max-width: 50%" class="form-control" @bind-Value="restaurant.Username"/>
+        </div>
+        <div class="form-group">
+          <label>Password:</label>
+          <InputText type="password" placeholder="Create a password that will be used" style="max-width: 50%" class="form-control" @bind-Value="restaurant.Password"/>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card" style="margin-bottom: 20px">
+      <div class="card-body">
+        <h4>Restaurant's information:</h4>
+        <div class="form-group">
+          <label>Name of the restaurant:</label>
+          <InputText placeholder="Enter a name of the restaurant" style="max-width: 50%" class="form-control" @bind-Value="restaurant.Name"/>
         </div>
     
-        <div class="form-group">New description of restaurant:<br/>
-            <InputText @bind-Value="Restaurant.Description"/></div>
+        <div class="form-group">
+          <label>Description:</label>
+          <InputText placeholder="Enter a description of the restaurant" style="max-width: 50%" class="form-control" @bind-Value="restaurant.Description"/>
+        </div>
+
+        <div class="form-group">
+          <label>Address of the restaurant:</label>
+          <InputText placeholder="Enter an address of the restaurant" style="max-width: 50%" class="form-control" @bind-Value="restaurant.Address"/>
+        </div>
     
-        <div class="form-group">Delivery options:<br/>
-            First:
-            Name: <InputText @bind-Value="Restaurant.DeliveryOption1.DeliveryName"/><br/>
-            Price: <InputNumber @bind-Value="Restaurant.DeliveryOption1.Price"/><br/><br/>
+        <div class="form-group">
+          <label>Phone number:</label>
+          <InputText placeholder="Enter a phone number of the restaurant"  style="max-width: 50%" class="form-control" @bind-Value="restaurant.PhoneNumber"/>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card" style="margin-bottom: 20px">
+      <div class="card-body">
+        <h4>Opening hours:</h4>
+        <div class="form-group">
+          <div class="row">
+            <div class="column">
+              <label style="margin-left: 20px; min-width: 90px">Monday:</label>
+            </div>
+            <div class="column">
+              <InputText placeholder="8:00 - 20:00"  class="form-control" @bind-Value="restaurant.OpeningHoursMonday"></InputText>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="column">
+              <label style="margin-left: 20px; min-width: 90px">Tuesday:</label>
+            </div>
+            <div class="column">
+              <InputText placeholder="8:00 - 20:00"  class="form-control" @bind-Value="restaurant.OpeningHoursTuesday"></InputText>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="column">
+              <label style="margin-left: 20px; min-width: 90px">Wednesday:</label>
+            </div>
+            <div class="column">
+              <InputText placeholder="8:00 - 20:00"  class="form-control" @bind-Value="restaurant.OpeningHoursWednesday"></InputText>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="column">
+              <label style="margin-left: 20px; min-width: 90px">Thursday:</label>
+            </div>
+            <div class="column">
+              <InputText placeholder="8:00 - 20:00"  class="form-control" @bind-Value="restaurant.OpeningHoursThursday"></InputText>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="column">
+              <label style="margin-left: 20px; min-width: 90px">Friday:</label>
+            </div>
+            <div class="column">
+              <InputText placeholder="8:00 - 20:00"  class="form-control" @bind-Value="restaurant.OpeningHoursFriday"></InputText>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="column">
+              <label style="margin-left: 20px; min-width: 90px">Saturday:</label>
+            </div>
+            <div class="column">
+              <InputText placeholder="8:00 - 20:00"  class="form-control" @bind-Value="restaurant.OpeningHoursSaturday"></InputText>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="column">
+              <label style="margin-left: 20px; min-width: 90px">Sunday:</label>
+            </div>
+            <div class="column">
+              <InputText placeholder="8:00 - 20:00"  class="form-control" @bind-Value="restaurant.OpeningHoursSunday"></InputText>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="card" style="margin-bottom: 20px">
+      <div class="card-body">
+        <h4>Delivery options:</h4>
+        <div class="row">
+          <div class="column" style="padding: 20px">
+            <div class="card">
+              <div class="card-body">
+                <h6>Delivery option 1</h6>
+                <InputText placeholder="Delivery name" class="form-control" @bind-Value="restaurant.DeliveryOption1.DeliveryName"/>
+                <InputNumber class="form-control" @bind-Value="restaurant.DeliveryOption1.Price"/>
+              </div>
+            </div>
+          </div>
+          <div class="column" style="padding: 20px">
+            <div class="card">
+              <div class="card-body">
+                <h6>Delivery option 2</h6>
+                <InputText placeholder="Delivery name" class="form-control" @bind-Value="restaurant.DeliveryOption2.DeliveryName"/>
+                <InputNumber class="form-control" @bind-Value="restaurant.DeliveryOption2.Price"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="column">
+      <div class="card">
+        @if (restaurant.Visibility)
+            {
+              <div style="padding: 20px">
+                <p>My profile is visible to other users.</p>
+                <a style="padding-top: 10px" @onclick="OnPrivate" class="actions"><button class="btn btn-primary btn-sm">Change to private</button></a>
+              </div>
+            }
             
-            Second:
-            Name: <InputText @bind-Value="Restaurant.DeliveryOption2.DeliveryName"/><br/>
-            Price: <InputNumber @bind-Value="Restaurant.DeliveryOption2.Price"/><br/>
-        </div>
-        
-        <div class="form-group">Make my profile:<br/>
-            <InputRadioGroup @bind-Value="@Restaurant.Name">
-                <div class="row">
-                    <div class="column" style="padding-right: 10px">
-                        Public
-                    </div>
-                    <div class="column" style="padding-right: 10px">
-                        <InputRadio Value="@true"/>
-                    </div>
-                    
-                    <div class="column" style="padding-right: 10px">
-                        Private
-                    </div>
-                    <div class="column" style="padding-right: 10px">
-                        <InputRadio Value="@false"/>
-                    </div>
-                </div>
-            </InputRadioGroup>
-        </div>
-
-        <p class="actions"><button class="btn btn-outline-dark" type="submit">Save</button></p>
-        <p class="actions"><button @onclick="DeleteProfile" class="btn btn-warning" >Delete my profile</button></p>
-    </EditForm>
+            @if (!restaurant.Visibility)
+            {
+              <div style="padding: 20px">
+                <p>My profile is private. Other users cannot see it.</p>
+                <a style="padding-top: 10px" @onclick="OnPublic" class="actions"><button class="btn btn-primary btn-sm">Change to public</button></a>
+              </div>
+            }
+      </div>
+    </div>
     
-    
+    <div style="padding: 20px">
+      <div class="row">
+        <div class="column" style="padding-right: 20px">
+          <a @onclick="DeleteProfile" class="actions"><button class="btn btn-secondary">Delete restaurant</button></a>
+        </div>
+        <div class="column" style="padding-right: 20px">
+          <p class="actions"><button class="btn btn-success" type="submit">Edit restaurant</button></p>
+        </div>
+      </div>
+    </div>
+</EditForm>
 }
 
 
 @code {
-    [Parameter]
-    public Restaurant Restaurant { get; set; }
-    
-    //private Restaurant restaurant = new ();
-    
-    protected override async Task OnInitializedAsync()
+  private Restaurant restaurant = new();
+  private Boolean visible = true;
+  private Boolean non_visible = false;
+  
+
+  protected override async Task OnInitializedAsync()
+  {
+    try
     {
-        try
+      await ReadRestaurant();
+    }
+    catch (Exception e)
+    {
+  // update some error label here, or show popup
+    }
+  }
+  public async Task ReadRestaurant()
+    {
+        string restaurantAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "currentRestaurant");
+
+        if (!string.IsNullOrEmpty(restaurantAsJson))
         {
-            //restaurant = await restaurantService.GetRestaurantsAsync(Username);
-        }
-        catch (Exception e)
-        {
-    // update some error label here, or show popup..
+            restaurant = JsonSerializer.Deserialize<Restaurant>(restaurantAsJson);
         }
     }
     
     private void EditExistingRestaurant()
-        {
-            restaurantService.UpdateRestaurantAsync(Restaurant);
-        }
+    {
+      restaurantService.UpdateRestaurantAsync(restaurant);
+    }
     
     private void DeleteProfile()
     {
-         restaurantService.DeleteRestaurantAsync(Restaurant.Username);
+        Console.WriteLine("Deleting restaurant...");
+         restaurantService.DeleteRestaurantAsync(restaurant.Username);
     }
+
+  private void OnPrivate()
+  {
+    restaurant.Visibility = false;
+  }
+  private void OnPublic()
+  {
+    restaurant.Visibility = true;
+  }
 }
