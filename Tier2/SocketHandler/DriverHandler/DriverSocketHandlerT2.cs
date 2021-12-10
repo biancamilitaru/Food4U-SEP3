@@ -12,5 +12,12 @@ namespace Food4U_SEP3.SocketHandler.DriverHandler
             SendToServer("AddDriver",driverAsJson);
             return Task.FromResult(driver);
         }
+
+        public Task<Driver> ValidateLogin(string username)
+        {
+            SendToServer("ValidateDriver", username);
+            Driver driver = JsonSerializer.Deserialize<Driver>(GetFromServer());
+            return Task.FromResult<Driver>(driver);
+        }
     }
 }

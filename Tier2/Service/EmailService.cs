@@ -26,6 +26,7 @@ namespace Food4U_SEP3.Service
                 Body = body
             })
             {
+                message.IsBodyHtml = true;
                 smtp.Send(message);
             }
         }

@@ -7,5 +7,7 @@ namespace Client.Data.DriverService
     {
         Task AddDriverAsync(Driver driver);
 
+        Task<Driver> ValidateDriverAsync(string username, string password);
+
     }
 }
