@@ -1,43 +1,41 @@
-@using Entities
 @using Microsoft.AspNetCore.Components
-@using Client.Data.CustomerService
-@inject ICustomerServiceT1 customerServiceT1
+@using Entities
 
 <div style="padding-bottom: 10px; position: sticky; z-index: 2; top: 56px; background-color: white">
-  <h3>Create a new customer</h3>
+  <h3>Create a new driver</h3>
 
   <div class="progress">
     <div style="background-color: #862649;" id="myBar" class="progress-bar"></div>
   </div>
 </div>
 
-<EditForm Model="@newCustomer" OnValidSubmit="@AddNewCustomer">
+<EditForm Model="@newDriver" OnValidSubmit="@AddNewCustomer">
   <div class="card" style="margin-bottom: 20px">
     <div class="card-body">
       <h4>Login information:</h4>
       <div class="form-group">
         <label>Username:</label>
-        <InputText placeholder="Create a username for login" style="max-width: 50%" class="form-control" @bind-Value="newCustomer.Username"/>
+        <InputText placeholder="Create a username for login" style="max-width: 50%" class="form-control" @bind-Value="newDriver.Username"/>
       </div>
       <div class="form-group">
         <label>Password:</label>
-        <InputText type="password" placeholder="Create a password that you will use" style="max-width: 50%" class="form-control" @bind-Value="newCustomer.Password"/>
+        <InputText type="password" placeholder="Create a password that you will use" style="max-width: 50%" class="form-control" @bind-Value="newDriver.Password"/>
       </div>
     </div>
   </div>
   
   <div class="card" style="margin-bottom: 20px">
     <div class="card-body">
-      <h4>Customers's information:</h4>
+      <h4>Driver's information:</h4>
       
       <div class="form-group">
         <label>First name:</label>
-        <InputText placeholder="Enter your first name" style="max-width: 50%" class="form-control" @bind-Value="newCustomer.FirstName"/>
+        <InputText placeholder="Enter your first name" style="max-width: 50%" class="form-control" @bind-Value="newDriver.FirstName"/>
       </div>
       
       <div class="form-group">
         <label>Last name:</label>
-        <InputText placeholder="Enter your last name" style="max-width: 50%" class="form-control" @bind-Value="newCustomer.LastName"/>
+        <InputText placeholder="Enter your last name" style="max-width: 50%" class="form-control" @bind-Value="newDriver.LastName"/>
       </div>
     </div>
   </div>
@@ -48,17 +46,17 @@
         
       <div class="form-group">
         <label>Email address:</label>
-        <InputText placeholder="Enter email" style="max-width: 50%" class="form-control" @bind-Value="newCustomer.Email"/>
+        <InputText placeholder="Enter email" style="max-width: 50%" class="form-control" @bind-Value="newDriver.Email"/>
       </div>
         
       <div class="form-group">
         <label>Phone number</label>
-        <InputText placeholder="Enter phone number" style="max-width: 50%" class="form-control" @bind-Value="newCustomer.PhoneNumber"/>
+        <InputText placeholder="Enter phone number" style="max-width: 50%" class="form-control" @bind-Value="newDriver.PhoneNumber"/>
       </div>
       
       <div class="form-group">
         <label>Address</label>
-        <InputText placeholder="Enter address" style="max-width: 50%" class="form-control" @bind-Value="newCustomer.Address"/>
+        <InputText placeholder="Enter address" style="max-width: 50%" class="form-control" @bind-Value="newDriver.Address"/>
       </div>
     </div>
   </div>
@@ -70,14 +68,11 @@
 
 </EditForm>
 
-
 @code {
+  private Driver newDriver = new Driver();
 
-  private Customer newCustomer = new Customer();
-
-  private void AddNewCustomer()
+  private async void AddNewCustomer()
   {
-      customerServiceT1.AddCustomerAsync(newCustomer);
-  }
     
+  }
 }
