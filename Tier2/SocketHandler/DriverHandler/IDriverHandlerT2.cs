@@ -8,5 +8,9 @@ namespace Food4U_SEP3.SocketHandler.DriverHandler
         Task<Driver> AddDriver(Driver driver);
 
         Task<Driver> ValidateLogin(string username);
+
+        Task<Driver> UpdateDriver(Driver driver);
+
+        Task<Driver> GetDriver(string username);
     }
 }
