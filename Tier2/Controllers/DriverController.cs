@@ -41,6 +41,19 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+        [HttpPatch]
+        public async Task<ActionResult> UpdateDriverAsync([FromBody] Driver driver)
+        {
+            try
+            {
+                await driverService.UpdateDriverAsync(driver);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
 
         [HttpDelete]
         public async Task<ActionResult> DeleteDriverAsync([FromQuery] string username)

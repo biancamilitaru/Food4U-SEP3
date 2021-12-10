@@ -33,12 +33,5 @@ namespace Food4U_SEP3.SocketHandler.DriverHandler
             Driver getDriver = JsonSerializer.Deserialize<Driver>(GetFromServer());
             return Task.FromResult(getDriver);
         }
-
-        public Task<Driver> DeleteDriver(string username)
-        {
-            SendToServer("DeleteDriver", username);
-            Driver deletedDriver = JsonSerializer.Deserialize<Driver>(GetFromServer());
-            return Task.FromResult(deletedDriver);
-        }
     }
 }
