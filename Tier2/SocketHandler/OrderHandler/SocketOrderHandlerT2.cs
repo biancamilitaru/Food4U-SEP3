@@ -23,6 +23,14 @@ namespace Food4U_SEP3.SocketHandler.OrderHandler
             
             return Task.FromResult(orders);
         }
+        
+        public Task<IList<Order>> GetReadyForPickupOrders(string driverUsername)
+        {
+            SendToServer("GetReadyForPickupOrders",driverUsername);
+            IList<Order> orders = JsonSerializer.Deserialize<IList<Order>>(GetFromServer());
+            
+            return Task.FromResult(orders);
+        }
 
         public Task<Order> UpdateOrder(Order order)
         {

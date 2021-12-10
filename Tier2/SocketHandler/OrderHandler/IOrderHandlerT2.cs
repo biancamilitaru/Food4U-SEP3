@@ -18,5 +18,6 @@ namespace Food4U_SEP3.SocketHandler.OrderHandler
         Task<IList<Order>> GetAcceptedOrders(string restaurantUsername);
         
         Task<IList<Order>> GetPreviousOrders(string customerUsername);
+        Task<IList<Order>> GetReadyForPickupOrders(string driverUsername);
     }
 }
