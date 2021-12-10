@@ -163,15 +163,20 @@
 
 
 @code {
-    private Restaurant addNewRestaurantItem = new ()
+  private Restaurant addNewRestaurantItem = new ()
     {
         DeliveryOption1 = new Delivery(),
-        DeliveryOption2 = new Delivery()
+        DeliveryOption2 = new Delivery(),
+        Menu = new Menu(),
+        Visibility = false
     };
 
-    private void addNewRestaurant()
+    private async void addNewRestaurant()
     {
-        Console.WriteLine("Sending");
-        RestaurantService.AddRestaurantAsync(addNewRestaurantItem);
+      String username = addNewRestaurantItem.Username;
+      addNewRestaurantItem.DeliveryOption1.UserName = username;
+      addNewRestaurantItem.DeliveryOption2.UserName = username;
+      Console.WriteLine("Sending");
+      await RestaurantService.AddRestaurantAsync(addNewRestaurantItem);
     }
 }

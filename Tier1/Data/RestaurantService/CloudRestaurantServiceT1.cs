@@ -30,7 +30,7 @@ namespace Client.Data.RestaurantService
                 Encoding.UTF8,
                 "application/json");
             
-            Console.WriteLine(content);
+            Console.WriteLine(restaurantAsJson);
 
             HttpResponseMessage responseMessage = await client.PostAsync(uri+"/Restaurant", content);
             if (!responseMessage.IsSuccessStatusCode)

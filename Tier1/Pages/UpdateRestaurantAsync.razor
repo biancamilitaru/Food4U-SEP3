@@ -221,15 +221,15 @@
         }
     }
     
-    private void EditExistingRestaurant()
+    private async void EditExistingRestaurant()
     {
-      restaurantService.UpdateRestaurantAsync(restaurant);
+      await restaurantService.UpdateRestaurantAsync(restaurant);
     }
     
-    private void DeleteProfile()
+    private async void DeleteProfile()
     {
         Console.WriteLine("Deleting restaurant...");
-         restaurantService.DeleteRestaurantAsync(restaurant.Username);
+      await restaurantService.DeleteRestaurantAsync(restaurant.Username);
     }
 
   private void OnPrivate()
