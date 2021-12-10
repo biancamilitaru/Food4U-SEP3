@@ -109,7 +109,7 @@ namespace Client.Authentication
             {
                 try
                 {
-                    Driver driver = new Driver(); //await driverService.ValidateDriverAsync(username, password);
+                    Driver driver = await driverService.ValidateDriverAsync(username, password);
                     if (driver.Username!=null)
                     {
                         identity = SetupClaimsForDriver(driver);
