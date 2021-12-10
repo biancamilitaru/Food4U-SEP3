@@ -19,9 +19,7 @@ namespace Food4U_SEP3.Service.DriverService
         {
             try
             {
-                Driver addedDriver = await driverHandlerT2.AddDriver(driver);
-               
-                return addedDriver;
+                return await driverHandlerT2.AddDriver(driver);
             }
             catch (Exception e)
             {
