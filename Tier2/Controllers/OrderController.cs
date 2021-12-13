@@ -45,7 +45,7 @@ namespace Food4U_SEP3.Controllers
         
         [HttpGet]
         [Route("/Orders/Incoming")]
-        public async Task<ActionResult<List<Order>>> GetIncomingOrders([FromQuery] string restaurantUsername)
+        public async Task<ActionResult<List<Order>>> GetIncomingOrdersAsync([FromQuery] string restaurantUsername)
         {
             try
             {
@@ -74,7 +74,7 @@ namespace Food4U_SEP3.Controllers
         
         [HttpGet]
         [Route("/Orders/Accepted")]
-        public async Task<ActionResult<IList<Order>>> GetAcceptedOrders([FromQuery] string restaurantUsername)
+        public async Task<ActionResult<IList<Order>>> GetAcceptedOrdersAsync([FromQuery] string restaurantUsername)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace Food4U_SEP3.Controllers
         [HttpGet]
         [Route("/Orders/Previous")]
         
-        public async Task<ActionResult<IList<Order>>> GetPreviousOrders([FromQuery] string customerUsername)
+        public async Task<ActionResult<IList<Order>>> GetPreviousOrdersAsync([FromQuery] string customerUsername)
         {
             try
             {
@@ -105,7 +105,7 @@ namespace Food4U_SEP3.Controllers
 
         [HttpGet]
 
-        public async Task<ActionResult<Order>> GetOrder([FromQuery] int orderId)
+        public async Task<ActionResult<Order>> GetOrderAsync([FromQuery] int orderId)
         {
             try
             {

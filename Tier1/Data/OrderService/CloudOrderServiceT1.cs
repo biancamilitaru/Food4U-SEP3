@@ -121,5 +121,30 @@ namespace Client.Data.OrderService
             
             return order;
         }
+
+        public async Task DriverPickUpOrderAsync(Order order)
+        {
+            order.Status = "Out for delivery";
+            string orderAsJson = JsonSerializer.Serialize(order);
+            HttpContent content = new StringContent(orderAsJson, Encoding.UTF8, "application/json");
+            await client.PatchAsync($"{uri}/Order/{order.OrderId}", content);
+        }
+
+        public async Task AcceptOrderAsync(Order order)
+        {
+            order.Status = "Accepted";
+            string orderAsJson = JsonSerializer.Serialize(order);
+            HttpContent content = new StringContent(orderAsJson, Encoding.UTF8, "application/json");
+            await client.PatchAsync($"{uri}/Order/{order.OrderId}", content);
+        }
+        
+        public async Task RejectOrderAsync(Order order)
+        {
+            //TODO can someone check if this is okay? -Kyra
+            order.Status = "Rejected";
+            string orderAsJson = JsonSerializer.Serialize(order);
+            HttpContent content = new StringContent(orderAsJson, Encoding.UTF8, "application/json");
+            await client.PatchAsync($"{uri}/Order/{order.OrderId}", content);
+        }
     }
 }
