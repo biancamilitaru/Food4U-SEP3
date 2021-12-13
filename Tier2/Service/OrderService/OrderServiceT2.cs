@@ -125,5 +125,17 @@ namespace Food4U_SEP3.Service.OrderService
                 throw;
             }
         }
+        public async Task<IList<Order>> GetOrderAsync(int orderId)
+        {
+            try
+            {
+                return await orderHandlerT2.GetOrder(orderId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }
