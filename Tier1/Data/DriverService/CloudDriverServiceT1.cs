@@ -70,6 +70,14 @@ namespace Client.Data.DriverService
         {
             await client.DeleteAsync($"{uri}/Driver/{username}");
         }
-        
+
+        public async Task DeliveredOrderAsync(Order order)
+        {
+            order.Status = "Delivered";
+            string orderAsJson = JsonSerializer.Serialize(order);
+            HttpContent content = new StringContent(orderAsJson, Encoding.UTF8, "application/json");
+            await client.PatchAsync($"{uri}/Order/{order.OrderId}", content);
+            
+        }
     }
 }

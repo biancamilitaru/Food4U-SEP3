@@ -40,5 +40,6 @@ namespace Food4U_SEP3.SocketHandler.DriverHandler
             Order getOrder = JsonSerializer.Deserialize<Order>(GetFromServer());
             return Task.FromResult<Order>(getOrder);
         }
+        
     }
 }
