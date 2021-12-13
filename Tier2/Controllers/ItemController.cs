@@ -8,8 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Food4U_SEP3.Controllers
 {
-    //TODO GetItem by itemID
-    
+
     [Route("[controller]")]
     [ApiController]
     
@@ -70,6 +69,19 @@ namespace Food4U_SEP3.Controllers
             {
                await itemService.DeleteItemAsync(itemId);
                 return Ok();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+        [HttpGet]
+        public async Task<ActionResult<Item>> GetMenuAsync([FromQuery] int itemId)
+        {
+            try
+            {
+                Item item = await itemService.GetItemAsync(itemId);
+                return Ok(item);
             }
             catch (Exception e)
             {

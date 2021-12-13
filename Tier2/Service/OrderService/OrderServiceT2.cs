@@ -115,9 +115,9 @@ namespace Food4U_SEP3.Service.OrderService
         {
             try
             {
-                //TODO uncomment this
-                //return await orderHandlerT2.GetReadyForPickUpOrders();
-                return null;
+                
+                return await orderHandlerT2.GetReadyForPickupOrders();
+                
             }
             catch (Exception e)
             {

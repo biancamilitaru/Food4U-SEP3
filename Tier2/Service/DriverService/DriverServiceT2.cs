@@ -52,8 +52,8 @@ namespace Food4U_SEP3.Service.DriverService
         {
             try
             {
-                //TODO uncomment this once deleteDriver method is done in handler
-                //await driverHandlerT2.DeleteDriver(username);
+
+                await driverHandlerT2.DeleteDriver(username);
             }
             catch (Exception e)
             {
