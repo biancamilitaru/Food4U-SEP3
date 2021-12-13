@@ -102,5 +102,20 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
+        [HttpGet]
+
+        public async Task<ActionResult<Order>> GetOrder([FromQuery] int orderId)
+        {
+            try
+            {
+                Order order = await orderService.GetOrderAsync(orderId);
+                return Ok(order);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
     }
 }

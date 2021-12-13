@@ -104,5 +104,22 @@ namespace Client.Data.OrderService
             );
             return orders;
         }
+
+        public async Task<Order> GetOrderAsync(int orderId)
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync(uri + "/Order?orderId=" + orderId);
+
+            if (responseMessage.IsSuccessStatusCode)
+                throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
+
+            string result = await responseMessage.Content.ReadAsStringAsync();
+
+            Order order = JsonSerializer.Deserialize<Order>(result, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            
+            return order;
+        }
     }
 }
