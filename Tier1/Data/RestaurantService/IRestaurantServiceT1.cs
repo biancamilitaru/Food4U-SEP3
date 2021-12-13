@@ -18,8 +18,6 @@ namespace Client.Data.RestaurantService
 
         Task<IList<Restaurant>> GetRestaurantsAsync();
 
-        Task AcceptOrderAsync(Order order);
-        
-        Task RejectOrderAsync(Order order);
+     
     }
 }

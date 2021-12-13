@@ -125,7 +125,7 @@ namespace Food4U_SEP3.Service.OrderService
                 throw;
             }
         }
-        public async Task<IList<Order>> GetOrderAsync(int orderId)
+        public async Task<Order> GetOrderAsync(int orderId)
         {
             try
             {
