@@ -130,6 +130,14 @@ namespace Client.Data.OrderService
             await client.PatchAsync($"{uri}/Order/{order.OrderId}", content);
         }
 
+        public async Task DriverDeliversOrder(Order order)
+        {
+            order.Status = "Delivered";
+            string orderAsJson = JsonSerializer.Serialize(order);
+            HttpContent content = new StringContent(orderAsJson, Encoding.UTF8, "application/json");
+            await client.PatchAsync($"{uri}/Order/{order.OrderId}", content);
+        }
+
         public async Task AcceptOrderAsync(Order order)
         {
             order.Status = "Accepted";

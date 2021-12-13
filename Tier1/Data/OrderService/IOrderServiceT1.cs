@@ -16,6 +16,8 @@ namespace Client.Data.OrderService
         Task<Order> GetOrderAsync(int orderId);
 
         Task DriverPickUpOrderAsync(Order order);
+
+        Task DriverDeliversOrder(Order order);
         
         Task AcceptOrderAsync(Order order);
         
