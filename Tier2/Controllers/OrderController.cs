@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Entities;
@@ -110,6 +111,21 @@ namespace Food4U_SEP3.Controllers
             try
             {
                 Order order = await orderService.GetOrderAsync(orderId);
+                return Ok(order);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+        
+        [HttpGet]
+        [Route("/Orders/ReadyForPickup")]
+        public async Task<ActionResult<List<Order>>> GetReadyForPickupOrders()
+        {
+            try
+            {
+                IList<Order> order = await orderService.GetReadyForPickUpOrdersAsync();
                 return Ok(order);
             }
             catch (Exception e)

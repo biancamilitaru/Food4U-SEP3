@@ -12,5 +12,7 @@ namespace Food4U_SEP3.SocketHandler.DriverHandler
         Task<Driver> UpdateDriver(Driver driver);
 
         Task<Driver> GetDriver(string username);
+
+        Task<Order> GetOrder(string orderId);
     }
 }
