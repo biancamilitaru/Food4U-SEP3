@@ -85,10 +85,18 @@ namespace Food4U_SEP3.Service.OrderService
                 Restaurant restaurant = await restaurantHandlerT2.GetRestaurant(order.RestaurantUsername);
                 if (editedOrder != null)
                 {
-                    emailService.SendEmail("Order info - " + restaurant.Name, 
-                        "There is a change in your order. Your status has been updated to,<\\br>"+
-                        "Status of your order: " +order.Status,
-                        customer.Email);    
+                    if (editedOrder.TimeEstimation!=0)
+                    {
+                        emailService.SendEmail("Order info - " + restaurant.Name, 
+                            "There is a change in your order. Estimation time for preparation is " +order.TimeEstimation+ " minutes",
+                            customer.Email);
+                    }
+                    else
+                    {
+                       emailService.SendEmail("Order info - " + restaurant.Name, 
+                                               "There is a change in your order. Your status has been updated to " +order.Status,
+                                               customer.Email);     
+                    }
                 }
                 return editedOrder;
             }
