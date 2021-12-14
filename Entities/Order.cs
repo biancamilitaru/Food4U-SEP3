@@ -25,6 +25,9 @@ namespace Entities
 
         [JsonPropertyName("restaurantUsername"), ForeignKey("username")]
         public string RestaurantUsername { get; set; }
+        
+        [JsonPropertyName("driverUsername"), ForeignKey("username")]
+        public string DriverUsername { get; set; }
 
         [JsonPropertyName("deliveryID"), ForeignKey("delivery_id")]
         public int DeliveryId { get; set; }
