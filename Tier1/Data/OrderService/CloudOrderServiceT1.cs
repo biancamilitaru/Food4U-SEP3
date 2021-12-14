@@ -52,7 +52,7 @@ namespace Client.Data.OrderService
                 }
             );
             return order;
-        }
+        } 
 
         public async Task<IList<Order>> GetAcceptedOrdersAsync(string restaurantUsername)
         {
