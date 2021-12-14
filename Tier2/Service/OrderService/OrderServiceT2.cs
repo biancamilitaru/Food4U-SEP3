@@ -115,9 +115,21 @@ namespace Food4U_SEP3.Service.OrderService
         {
             try
             {
-                //TODO uncomment this
-                //return await orderHandlerT2.GetReadyForPickUpOrders();
-                return null;
+                
+                return await orderHandlerT2.GetReadyForPickupOrders();
+                
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+        public async Task<Order> GetOrderAsync(int orderId)
+        {
+            try
+            {
+                return await orderHandlerT2.GetOrder(orderId);
             }
             catch (Exception e)
             {

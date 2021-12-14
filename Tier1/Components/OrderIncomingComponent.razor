@@ -1,8 +1,9 @@
 @using Entities
 @using Client.Data.CustomerService
+@using Client.Data.OrderService
 @using Client.Data.RestaurantService
 @inject ICustomerServiceT1 customerService;
-@inject IRestaurantService restaurantService;
+@inject IOrderServiceT1 orderServiceT1;
 
 <!-- Start-->
         <div class="row" style="padding-left: 40px">
@@ -119,12 +120,12 @@
 
     private async void OnReject()
     {
-        await restaurantService.RejectOrderAsync(Order);
+        await orderServiceT1.RejectOrderAsync(Order);
     }
     
     private async void OnAccept()
     {
-        await restaurantService.AcceptOrderAsync(Order);
+        await orderServiceT1.AcceptOrderAsync(Order);
     }
 
 }

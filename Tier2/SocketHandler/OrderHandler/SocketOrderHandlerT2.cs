@@ -59,5 +59,11 @@ namespace Food4U_SEP3.SocketHandler.OrderHandler
             
             return Task.FromResult(getOrders);
         }
+        public Task<Order> GetOrder(int orderId)
+        {
+            SendToServer("GetOrder", orderId.ToString());
+            Order getOrder = JsonSerializer.Deserialize<Order>(GetFromServer());
+            return Task.FromResult<Order>(getOrder);
+        }
     }
 }

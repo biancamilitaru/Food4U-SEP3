@@ -19,5 +19,6 @@ namespace Food4U_SEP3.SocketHandler.OrderHandler
         
         Task<IList<Order>> GetPreviousOrders(string customerUsername);
         Task<IList<Order>> GetReadyForPickupOrders();
+        Task<Order> GetOrder(int orderId);
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Entities;
@@ -45,7 +46,7 @@ namespace Food4U_SEP3.Controllers
         
         [HttpGet]
         [Route("/Orders/Incoming")]
-        public async Task<ActionResult<List<Order>>> GetIncomingOrders([FromQuery] string restaurantUsername)
+        public async Task<ActionResult<List<Order>>> GetIncomingOrdersAsync([FromQuery] string restaurantUsername)
         {
             try
             {
@@ -74,7 +75,7 @@ namespace Food4U_SEP3.Controllers
         
         [HttpGet]
         [Route("/Orders/Accepted")]
-        public async Task<ActionResult<IList<Order>>> GetAcceptedOrders([FromQuery] string restaurantUsername)
+        public async Task<ActionResult<IList<Order>>> GetAcceptedOrdersAsync([FromQuery] string restaurantUsername)
         {
             try
             {
@@ -90,11 +91,41 @@ namespace Food4U_SEP3.Controllers
         [HttpGet]
         [Route("/Orders/Previous")]
         
-        public async Task<ActionResult<IList<Order>>> GetPreviousOrders([FromQuery] string customerUsername)
+        public async Task<ActionResult<IList<Order>>> GetPreviousOrdersAsync([FromQuery] string customerUsername)
         {
             try
             {
                 IList<Order> order = await orderService.GetPreviousOrdersAsync(customerUsername);
+                return Ok(order);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpGet]
+
+        public async Task<ActionResult<Order>> GetOrderAsync([FromQuery] int orderId)
+        {
+            try
+            {
+                Order order = await orderService.GetOrderAsync(orderId);
+                return Ok(order);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+        
+        [HttpGet]
+        [Route("/Orders/ReadyForPickup")]
+        public async Task<ActionResult<List<Order>>> GetReadyForPickupOrders()
+        {
+            try
+            {
+                IList<Order> order = await orderService.GetReadyForPickUpOrdersAsync();
                 return Ok(order);
             }
             catch (Exception e)
