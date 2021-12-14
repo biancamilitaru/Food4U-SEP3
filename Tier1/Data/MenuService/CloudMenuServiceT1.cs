@@ -38,7 +38,8 @@ namespace Client.Data.MenuService
         {
             string menuAsJson = JsonSerializer.Serialize(menu);
             HttpContent content = new StringContent(menuAsJson, Encoding.UTF8, "application/json");
-            await client.PatchAsync($"{uri}/Restaurant/{menu.MenuId}", content);
+            Console.WriteLine(uri+"/Menu/"+menu.MenuId);
+            await client.PatchAsync(uri+"/Menu/"+menu.MenuId, content);
         }
 
         public async Task<Menu> GetMenuAsync(int restaurantId)

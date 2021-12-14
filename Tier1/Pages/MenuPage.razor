@@ -1,8 +1,15 @@
 @page "/MenuPage"
 @using Entities
+@using Client.Components
 @using Client.Components.MenuPageComponents
+@using Microsoft.AspNetCore.Components
+@using System.Text.Json
+@using Client.Data.CategoryService
+@using Client.Data.MenuService
+@inject IJSRuntime jsRuntime;
+@inject ICategoryServiceT1 categoryService;
+@inject IMenuServiceT1 menuService;
 
-<h3>Menu</h3>
 
 @if (5==4)
 {
@@ -40,110 +47,141 @@
     </div>
 }
 
-@if (5==5)
+
+
+    
+
+<!--NEW MENU-->
+<!--NEW MENU-->
+<!--NEW MENU-->
+@if (restaurant.Name != null)
 {
-<div class="card">
+    <!--Main EDIT-->
+<div class="card" style="background-color: #E9ECEF; min-height: 100px; border: 0" xmlns="http://www.w3.org/1999/html">
     <div class="card-body">
-        <h4>Description</h4>
-        <a data-toggle="modal" data-target="#EditMenu">
-            <div><p>@menu.Description</p></div>
-        </a>
-        <hr>
-        <div class="row" style="padding-left: 20px">
-            <div class="column">
-                <h4>Categories</h4>
-            </div>
-            <div class="column" style="padding-left: 10px">
-                <a data-toggle="modal" data-target="#AddCategory">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                    </svg>
-                </a>
-            </div>
+        <div style="color: #F65A4B; padding-right: 15px">
+            <h3>Your Menu</h3>
         </div>
-        <hr>
-        <!--
-        Need to implement foreach loop that will create CategoryComponent with Category parameter something as below 
-        <CategoryComponent Category=""></CategoryComponent>
-        -->
-        
-        <CategoryComponent Category="@_category1"></CategoryComponent>
+        <a data-toggle="modal" data-target="#EditMenu"><p style="padding-left: 20px">@restaurant.Menu.Description</p></a>
     </div>
 </div>
+<!--Main EDIT-->
 
-<!-- Modal -->
-    <div class="modal fade" id="AddCategory" tabindex="-1" role="dialog" aria-labelledby="AddCategoryLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="AddCategoryLabel">New category</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <!--NEED TO INSERT CATEGORY MODEL <EditForm Model=" " OnValidSubmit="@AddCategory">-->
-                <div class="modal-body">
-                    <div style="padding-bottom: 10px">
-                        <!--NEED TO INSERT BIND VALUE Category.Name <InputText placeholder="Enter name of category" class="form-control" @bind-Value="  "/>-->
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <p class="actions"><button class="btn btn-secondary" data-dismiss="modal">Cancel</button></p>
-                    <p class="actions"><button class="btn btn-success" type="submit">Add Category</button></p>
-                </div>
-                <!--</EditForm>-->
-            </div>
+<br/>
+
+<!--Categories ADD NEW-->
+<div class="div-category">
+    <div class="row" style="padding-left: 20px" xmlns="http://www.w3.org/1999/html">
+        <div class="column" style="padding-right: 20px">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="" class="bi bi-arrow-down-right-square" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.854 3.146a.5.5 0 1 0-.708.708L9.243 9.95H6.475a.5.5 0 1 0 0 1h3.975a.5.5 0 0 0 .5-.5V6.475a.5.5 0 1 0-1 0v2.768L5.854 5.146z"/>
+            </svg>
+        </div>
+
+        <div class="column" style="padding-right: 20px">
+            <h4>Categories</h4>
+        </div>
+        <div class="column">
+            <a data-toggle="modal" data-target="#AddCategory">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="" class="bi bi-clipboard-plus" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7z"/>
+                    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                </svg>
+            </a>
         </div>
     </div>
+</div>
+<!--Categories ADD NEW-->
+
+@foreach (Category category in categories)
+{
+    <CategoryComponent Category="category"></CategoryComponent>
 }
 
-<!-- Modal for editing menu -->
-    <div class="modal fade" id="EditMenu" tabindex="-1" role="dialog" aria-labelledby="EditMenuLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="AddCategoryLabel">Edit Menu</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <EditForm Model="menu" OnValidSubmit="@AddCategory">
+
+
+
+
+<!--NEW MENU-->
+<!--NEW MENU-->
+<!--NEW MENU-->
+
+
+<!--MODAL TO EDIT MENU DESCRIPTION-->
+<div class="modal fade" id="EditMenu" tabindex="-1" role="dialog" aria-labelledby="EditMenuLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="AddCategoryLabel">Edit Menu</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <EditForm Model="restaurant.Menu" OnValidSubmit="@EditMenuDescription">
                 <div class="modal-body">
                     <div style="padding-bottom: 10px">
-                        <InputTextArea placeholder="Enter name of category" class="form-control" @bind-Value="menu.Description"/>
+                        <InputTextArea placeholder="Enter menu description" class="form-control" @bind-Value="restaurant.Menu.Description"/>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <p class="actions"><button class="btn btn-secondary" data-dismiss="modal">Cancel</button></p>
                     <p class="actions"><button class="btn btn-success" type="submit">Edit menu</button></p>
                 </div>
-                </EditForm>
-            </div>
+            </EditForm>
         </div>
     </div>
+</div>
+    <!--MODAL TO EDIT MENU DESCRIPTION-->
+}
+
 
 
 
 @code
 {
-    Menu menu = new Menu()
+    private Restaurant restaurant = new Restaurant();
+    private IList<Category> categories = null;
+    
+    
+    protected override async Task OnInitializedAsync()
     {
-        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore"
-    };
+        try
+        {
+            await ReadRestaurant();
+            categories = await categoryService.GetCategoriesAsync(restaurant.Menu.MenuId);
+        }
+        catch (Exception e)
+        {
+    // update some error label here, or show popup..
+        }
+    }
+    
+    public async Task ReadRestaurant()
+    {
+        string restaurantAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "currentRestaurant");
 
-    private Category _category1 = new Category()
-    {
-        Name = "Starters"
-    };
+        if (!string.IsNullOrEmpty(restaurantAsJson))
+        {
+            restaurant = JsonSerializer.Deserialize<Restaurant>(restaurantAsJson);
+        }
+    }
+
 
     private void AddMenu()
     {
         //TODO method that will create new menu and probably reload this page
     }
+
+    private async void EditMenuDescription()
+    {
+        await menuService.UpdateMenuAsync(restaurant.Menu);
+    }
     
+    private Category newCategory = new Category();
     private void AddCategory()
     {
-        //TODO method that will create new category and probably reload this page
+        newCategory.MenuId = restaurant.Menu.MenuId;
+        categoryService.AddCategoryAsync(newCategory);
     }
 }

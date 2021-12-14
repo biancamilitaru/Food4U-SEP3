@@ -116,7 +116,7 @@ namespace Client.Data.RestaurantService
             order.Status = "Accepted";
             string orderAsJson = JsonSerializer.Serialize(order);
             HttpContent content = new StringContent(orderAsJson, Encoding.UTF8, "application/json");
-            await client.PatchAsync($"{uri}/Order/{order.OrderId}", content);
+            await client.PatchAsync($"{uri}/Order", content);
         }
 
 
@@ -133,7 +133,7 @@ namespace Client.Data.RestaurantService
             order.Status = "Rejected";
             string orderAsJson = JsonSerializer.Serialize(order);
             HttpContent content = new StringContent(orderAsJson, Encoding.UTF8, "application/json");
-            await client.PatchAsync($"{uri}/Order/{order.OrderId}", content);
+            await client.PatchAsync($"{uri}/Order", content);
         }
     }
 }

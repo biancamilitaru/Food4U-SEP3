@@ -1,88 +1,98 @@
 @using Entities
-<div class="row" style="padding-left: 20px" xmlns="http://www.w3.org/1999/html">
-    <div class="column">
-        <a data-toggle="collapse" data-target="#@Category.Name.Replace(" ","")" role="button" aria-expanded="false" aria-controls="@Category.Name.Replace(" ","")">
-            <h5>@Category.Name</h5>
-        </a>
-    </div>
-</div>
-<div class="collapse" id="@Category.Name.Replace(" ","")">
-    <a data-toggle="modal" data-target="#@Category.Name.Replace(" ", "")modal">
-        <div>
-            <span class="badge bg-secondary" style="color: white">EDIT CATEGORY</span>
-        </div>
-    </a>
-    <div class="row" style="padding-left: 20px">
-        <!--
-        Need to implement foreach loop that will create ItemComponent with Item parameter something as below 
-        <ItemComponent Item=" "></ItemComponent>
-        -->
-        <AddItemComponent></AddItemComponent>
-        <ItemComponent Item="@_item1"></ItemComponent>
-        <ItemComponent Item="@_item2"></ItemComponent>
-        <ItemComponent Item="@_item2"></ItemComponent>
-        <ItemComponent Item="@_item2"></ItemComponent>
-        <ItemComponent Item="@_item2"></ItemComponent>
-        <ItemComponent Item="@_item2"></ItemComponent>
-        <ItemComponent Item="@_item2"></ItemComponent>
-        <ItemComponent Item="@_item2"></ItemComponent>
-    </div>
-</div>
-<hr>
+@using Client.Data.ItemService
+@using Client.Data.CategoryService
+@inject IItemServiceT1 itemsService;
+@inject ICategoryServiceT1 categoryService;
 
-<!-- Modal for Editing Category -->
-<div class="modal fade" id="@Category.Name.Replace(" ","")modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+<!--Category-->
+<br/>
+<div class="div-category">
+    <div class="row" style="padding-left: 20px" xmlns="http://www.w3.org/1999/html">
+        <div class="column" style="padding-right: 20px">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="" class="bi bi-arrow-down-right-square" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.854 3.146a.5.5 0 1 0-.708.708L9.243 9.95H6.475a.5.5 0 1 0 0 1h3.975a.5.5 0 0 0 .5-.5V6.475a.5.5 0 1 0-1 0v2.768L5.854 5.146z"/>
+            </svg>
+        </div>
+
+        <div class="column" style="padding-right: 20px">
+            <h6>@Category.Name</h6>
+        </div>
+    </div>
+</div>
+<a data-toggle="modal" data-target="#EditCategory">
+    <div style="padding-left: 20px">
+        <span class="badge bg-secondary" style="color: white">EDIT CATEGORY</span>
+    </div>
+</a>
+<!--Category-->
+
+<!--Items-->
+<div class="row" style="padding-left: 20px">
+    <AddItemComponent CategoryId="Category.CategoryId"></AddItemComponent>
+    @if (items != null)
+    {
+      @foreach (Item item in items)
+          {
+             <RestaurantViewItemComponent Item="item"></RestaurantViewItemComponent> 
+          }  
+    }
+</div>
+<!--Items-->
+
+<!--MODAL TO EDIT CATEGORY-->
+<div class="modal fade" id="EditCategory" tabindex="-1" role="dialog" aria-labelledby="EditMenuLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New item into @Category.Name</h5>
+                <h5 class="modal-title" id="AddCategoryLabel">Add new category</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <EditForm Model="@Category" OnValidSubmit="@EditCategory">
+            <EditForm Model="Category" OnValidSubmit="@EditCategory">
                 <div class="modal-body">
                     <div style="padding-bottom: 10px">
-                        <InputText placeholder="Enter name of item" class="form-control" @bind-Value="Category.Name"/>
+                        <InputText placeholder="Enter name of category" class="form-control" @bind-Value="Category.Name"/>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <p class="actions"><button class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button></p>
-                    <p class="actions"><button class="btn btn-primary btn-sm" data-dismiss="modal">Delete Category</button></p>
-                    <p class="actions"><button class="btn btn-success btn-sm" type="submit">Edit Category</button></p>
+                    <p class="actions"><button class="btn btn-secondary" data-dismiss="modal">Cancel</button></p>
+                    <p class="actions" @onclick="DeleteCategory"><button class="btn btn-secondary">Delete</button></p>
+                    <p class="actions"><button class="btn btn-success" type="submit">Edit category</button></p>
                 </div>
             </EditForm>
         </div>
     </div>
 </div>
+<!--MODAL TO EDIT CATEGORY-->
 
 
 @code {
     [Parameter]
     public Category Category { get; set; }
-
-    private Item _item1 = new Item()
-    {
-        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        Name = "Something delicious",
-        Price = 150,
-    };
+    private IList<Item> items;
     
-    private Item _item2 = new Item()
+    protected override async Task OnInitializedAsync()
     {
-        Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        Name = "Something delicious",
-        Price = 150,
-    };
+        try
+        {
+            items = await itemsService.GetItemsAsync(Category.CategoryId);
+        }
+        catch (Exception e)
+        {
+    // update some error label here, or show popup..
+        }
+    }
 
-    public void EditCategory()
+    private async void EditCategory()
     {
-        
+        await categoryService.UpdateCategoryAsync(Category);
     }
     
-    public void DeleteCategory()
+    private async void DeleteCategory()
     {
-        
+        await categoryService.RemoveCategoryAsync(Category.CategoryId);
     }
     
     
