@@ -29,13 +29,16 @@
             <div class="column" style="min-width: 22.5%">
                 <small>Delivery</small>
             </div>
+            <div class="column" style="min-width: 22.5%">
+                 <input placeholder="Enter time estimation" @bind-value="Order.TimeEstimation"/>
+            </div>
             <div class="column" style="min-width: 10%">
                 <div class="row">
                     <div class="column" style="padding-right: 20px">
                         <p class="actions"><button @onclick="OnReject" class="btn btn-secondary btn-sm" data-dismiss="modal">Reject</button></p>
                     </div>
                     <div class="column">
-                        <p class="actions"><button @onclick="OnAccept" class="btn btn-primary btn-sm" data-dismiss="modal">Accept</button></p>
+                        <p class="actions" ><button @onclick="OnAccept" class="btn btn-primary btn-sm" data-dismiss="modal">Accept</button></p>
                     </div>
                 </div>
             </div>
@@ -95,6 +98,7 @@
         </div>
 
 <hr>
+
 
 @code {
     [Parameter]
