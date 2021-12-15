@@ -20,14 +20,13 @@ namespace Food4U_SEP3.Service.OrderService
         private readonly IDriverHandlerT2 driverHandlerT2;
         private readonly IItemHandlerT2 itemHandlerT2;
         
-        public OrderServiceT2(IOrderHandlerT2 orderHandlerT2, IEmailService emailService,
-            ICustomerHandlerT2 customerHandlerT2, IRestaurantHandlerT2 restaurantHandlerT2, IItemHandlerT2 itemHandlerT2)
+        public OrderServiceT2(HandlerFactory handlerFactory, IEmailService emailService)
         {
-            this.orderHandlerT2 = orderHandlerT2;
+            orderHandlerT2 = handlerFactory.GetOrderHandlerT2();
+            customerHandlerT2 = handlerFactory.GetCustomerHandlerT2();
+            restaurantHandlerT2 = handlerFactory.GetRestaurantHandlerT2();
+            itemHandlerT2 = handlerFactory.GetItemHandlerT2();
             this.emailService = emailService;
-            this.customerHandlerT2 = customerHandlerT2;
-            this.restaurantHandlerT2 = restaurantHandlerT2;
-            this.itemHandlerT2 = itemHandlerT2;
         }
 
         public async Task<Order> AddOrderAsync(Order order)
@@ -49,7 +48,12 @@ namespace Food4U_SEP3.Service.OrderService
         {
             try
             {
-                return await orderHandlerT2.GetIncomingOrders(restaurantUsername);
+                IList<Order> incomingOrders = await orderHandlerT2.GetIncomingOrders(restaurantUsername);
+                foreach (Order order in incomingOrders)
+                {
+                    order.Items = await itemHandlerT2.GetOrderedItems(order.OrderId);
+                }
+                return incomingOrders;
             }
             catch (Exception e)
             {
@@ -62,6 +66,11 @@ namespace Food4U_SEP3.Service.OrderService
         {
             try
             {
+                IList<Order> acceptedOrders = await orderHandlerT2.GetAcceptedOrders(restaurantUsername);
+                foreach (Order order in acceptedOrders)
+                {
+                    order.Items = await itemHandlerT2.GetOrderedItems(order.OrderId);
+                }
                 return await orderHandlerT2.GetAcceptedOrders(restaurantUsername);
             }
             catch (Exception e)
@@ -75,7 +84,12 @@ namespace Food4U_SEP3.Service.OrderService
         {
             try
             {
-                return await orderHandlerT2.GetPreviousOrders(customerUsername);
+                IList<Order> previousOrders = await orderHandlerT2.GetPreviousOrders(customerUsername);
+                foreach (Order order in previousOrders)
+                {
+                    order.Items = await itemHandlerT2.GetOrderedItems(order.OrderId);
+                }
+                return previousOrders;
             }
             catch (Exception e)
             {
@@ -135,7 +149,12 @@ namespace Food4U_SEP3.Service.OrderService
         {
             try
             {
-                return await orderHandlerT2.GetReadyForPickupOrders();
+                IList<Order> readyForPickupOrders = await orderHandlerT2.GetReadyForPickupOrders();
+                foreach (Order order in readyForPickupOrders)
+                {
+                    order.Items = await itemHandlerT2.GetOrderedItems(order.OrderId);
+                }
+                return readyForPickupOrders;
             }
             catch (Exception e)
             {

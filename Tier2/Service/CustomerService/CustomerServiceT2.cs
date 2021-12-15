@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Entities;
+using Food4U_SEP3.SocketHandler;
 using Food4U_SEP3.SocketHandler.CustomerHandler;
 
 namespace Food4U_SEP3.Service.CustomerService
@@ -10,9 +11,9 @@ namespace Food4U_SEP3.Service.CustomerService
         private readonly ICustomerHandlerT2 customerHandlerT2;
         private readonly IEmailService emailService;
 
-        public CustomerServiceT2(ICustomerHandlerT2 customerHandlerT2, IEmailService emailService)
+        public CustomerServiceT2(HandlerFactory handlerFactory, IEmailService emailService)
         {
-            this.customerHandlerT2 = customerHandlerT2;
+            customerHandlerT2 = handlerFactory.GetCustomerHandlerT2();
             this.emailService = emailService;
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Entities;
 using Food4U_SEP3.SocketHandler;
+using Food4U_SEP3.SocketHandler.ItemHandler;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Food4U_SEP3.Service.CategoryService
@@ -10,17 +11,28 @@ namespace Food4U_SEP3.Service.CategoryService
     public class CategoryServiceT2 : ICategoryServiceT2
     {
         private readonly ICategoryHandlerT2 categoryHandlerT2;
+        private readonly IItemHandlerT2 itemHandlerT2;
 
-        public CategoryServiceT2(ICategoryHandlerT2 categoryHandlerT2)
+        public CategoryServiceT2(HandlerFactory handlerFactory)
         {
-            this.categoryHandlerT2 = categoryHandlerT2;
+            categoryHandlerT2 = handlerFactory.GetCategoryHandlerT2();
+            itemHandlerT2 = handlerFactory.GetItemHandlerT2();
         }
 
         public async Task<Category> AddCategoryAsync(Category category)
         {
             try
             {
-                return await categoryHandlerT2.AddCategory(category);
+                Category categoryAdded = await categoryHandlerT2.AddCategory(category);
+                if (category.Items.Count > 0)
+                {
+                    foreach (Item item in category.Items)
+                    {
+                        await itemHandlerT2.AddItem(item);
+                    }
+                }
+
+                return categoryAdded;
             }
             catch (Exception e)
             {
@@ -33,7 +45,10 @@ namespace Food4U_SEP3.Service.CategoryService
         {
             try
             {
-                return await categoryHandlerT2.GetCategory(categoryId);
+                IList<Item> items = await itemHandlerT2.GetItems(categoryId);
+                Category category = await categoryHandlerT2.GetCategory(categoryId);
+                category.Items = items;
+                return category;
             }
             catch (Exception e)
             {
@@ -46,7 +61,13 @@ namespace Food4U_SEP3.Service.CategoryService
         {
             try
             {
-                return await categoryHandlerT2.GetCategories(menuId);
+                IList<Category> categories =  await categoryHandlerT2.GetCategories(menuId);
+                foreach (Category category in categories)
+                {
+                    IList<Item> items = await itemHandlerT2.GetItems(category.CategoryId);
+                    category.Items = items;
+                }
+                return categories;
             }
             catch (Exception e)
             {
@@ -59,6 +80,13 @@ namespace Food4U_SEP3.Service.CategoryService
         {
             try
             {
+                if (category.Items.Count > 0)
+                {
+                    foreach (Item item in category.Items)
+                    {
+                        await itemHandlerT2.UpdateItem(item);
+                    }
+                }
                 return await categoryHandlerT2.UpdateCategory(category);
             }
             catch (Exception e)

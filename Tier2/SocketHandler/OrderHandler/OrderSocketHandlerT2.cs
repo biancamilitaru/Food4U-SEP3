@@ -7,7 +7,7 @@ using Entities;
 
 namespace Food4U_SEP3.SocketHandler.OrderHandler
 {
-    public class OrderSocketHAndlerT2 : SocketHandler, IOrderHandlerT2
+    public class OrderSocketHandlerT2 : SocketHandler, IOrderHandlerT2
     {
         public Task<Order> AddOrder(Order order)
         {

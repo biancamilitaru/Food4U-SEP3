@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Entities;
+using Food4U_SEP3.SocketHandler;
 using Food4U_SEP3.SocketHandler.DriverHandler;
 
 namespace Food4U_SEP3.Service.DriverService
@@ -10,9 +11,9 @@ namespace Food4U_SEP3.Service.DriverService
     {
         private readonly IDriverHandlerT2 driverHandlerT2;
 
-        public DriverServiceT2(IDriverHandlerT2 driverHandlerT2)
+        public DriverServiceT2(HandlerFactory handlerFactory)
         {
-            this.driverHandlerT2 = driverHandlerT2;
+            driverHandlerT2 = handlerFactory.GetDriverHandlerT2();
         }
         
         public async Task<Driver> GetDriverAsync(string username)

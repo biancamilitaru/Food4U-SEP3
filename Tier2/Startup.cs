@@ -2,12 +2,14 @@ using Food4U_SEP3.RestaurantServices;
 using Food4U_SEP3.Service;
 using Food4U_SEP3.Service.CategoryService;
 using Food4U_SEP3.Service.CustomerService;
+using Food4U_SEP3.Service.DeliveryService;
 using Food4U_SEP3.Service.DriverService;
 using Food4U_SEP3.Service.ItemsService;
 using Food4U_SEP3.SocketHandler;
 using Food4U_SEP3.Service.MenuService;
 using Food4U_SEP3.Service.OrderService;
 using Food4U_SEP3.SocketHandler.CustomerHandler;
+using Food4U_SEP3.SocketHandler.DeliveryHandler;
 using Food4U_SEP3.SocketHandler.DriverHandler;
 using Food4U_SEP3.SocketHandler.ItemHandler;
 using Food4U_SEP3.SocketHandler.OrderHandler;
@@ -48,12 +50,14 @@ namespace Food4U_SEP3
             services.AddScoped<ICategoryHandlerT2, CategorySocketHandlerT2>();
             services.AddScoped<ICategoryServiceT2, CategoryServiceT2>();
             services.AddScoped<IOrderServiceT2, OrderServiceT2>();
-            services.AddScoped<IOrderHandlerT2, OrderSocketHAndlerT2>();
+            services.AddScoped<IOrderHandlerT2, OrderSocketHandlerT2>();
             services.AddScoped<IItemServiceT2, ItemServiceT2>();
             services.AddScoped<IItemHandlerT2, ItemSocketHandlerT2>();
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IDriverHandlerT2, DriverSocketHandlerT2>();
             services.AddScoped<IDriverServiceT2, DriverServiceT2>();
+            services.AddScoped<IDeliveryHandlerT2, DeliverySocketHandlerT2>();
+            services.AddScoped<IDeliveryServiceT2, DeliveryServiceT2>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

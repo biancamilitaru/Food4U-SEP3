@@ -30,5 +30,12 @@ namespace Food4U_SEP3.SocketHandler
             Menu getMenu = JsonSerializer.Deserialize<Menu>(GetFromServer());
             return Task.FromResult(getMenu);
         }
+
+        public Task<Menu> GetMenuByRestaurant(string username)
+        {
+            SendToServer("GetMenuByRestaurant", username);
+            Menu menu = JsonSerializer.Deserialize<Menu>(GetFromServer());
+            return Task.FromResult(menu);
+        }
     }
 }

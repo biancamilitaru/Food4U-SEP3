@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Entities;
+using Food4U_SEP3.SocketHandler;
 using Food4U_SEP3.SocketHandler.ItemHandler;
 
 namespace Food4U_SEP3.Service.ItemsService
@@ -10,9 +11,9 @@ namespace Food4U_SEP3.Service.ItemsService
     {
         private readonly IItemHandlerT2 itemHandlerT2;
 
-        public ItemServiceT2(IItemHandlerT2 itemHandler)
+        public ItemServiceT2(HandlerFactory handlerFactory)
         {
-            this.itemHandlerT2 = itemHandler;
+            itemHandlerT2 = handlerFactory.GetItemHandlerT2();
         }
 
         public async Task<Item> AddItemAsync(Item item)
