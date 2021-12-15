@@ -25,7 +25,7 @@ namespace Food4U_SEP3.SocketHandler
             return instance;
         }
         
-        private HandlerFactory(){}
+        public HandlerFactory(){}
 
         public CategorySocketHandlerT2 GetCategoryHandlerT2()
         {

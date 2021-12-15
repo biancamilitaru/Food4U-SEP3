@@ -43,7 +43,7 @@ namespace Food4U_SEP3.SocketHandler
 
         public Task<Restaurant> ValidateLogin(string username)
         {
-            SendToServer("ValidateRestaurant", username);
+            SendToServer("GetRestaurant", username);
             Restaurant restaurant = JsonSerializer.Deserialize<Restaurant>(GetFromServer());
             return Task.FromResult(restaurant);
         }

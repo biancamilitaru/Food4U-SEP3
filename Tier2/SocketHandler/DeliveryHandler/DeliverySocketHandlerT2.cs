@@ -10,7 +10,7 @@ namespace Food4U_SEP3.SocketHandler.DeliveryHandler
     {
         public Task<Delivery> GetDelivery(int deliveryId)
         {
-            SendToServer("GetDelivery", deliveryId.ToString());
+            SendToServer("GetDeliveryOption", deliveryId.ToString());
             Delivery getDelivery = JsonSerializer.Deserialize<Delivery>(GetFromServer());
             return Task.FromResult(getDelivery);
         }
@@ -24,7 +24,7 @@ namespace Food4U_SEP3.SocketHandler.DeliveryHandler
 
         public Task<IList<Delivery>> GetDeliveryOptionsByUsername(string username)
         {
-            SendToServer("GetDelivery", username);
+            SendToServer("GetDeliveryOptionsByUsername", username);
             IList<Delivery> getDeliveries = JsonSerializer.Deserialize<IList<Delivery>>(GetFromServer());
             return Task.FromResult(getDeliveries);
         }

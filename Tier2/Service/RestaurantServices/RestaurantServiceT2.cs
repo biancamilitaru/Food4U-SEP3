@@ -7,6 +7,7 @@ using Food4U_SEP3.SocketHandler;
 using Food4U_SEP3.SocketHandler.DeliveryHandler;
 using Food4U_SEP3.SocketHandler.ItemHandler;
 using Microsoft.AspNetCore.Mvc;
+  
 
 namespace Food4U_SEP3.RestaurantServices
 {
@@ -44,7 +45,7 @@ namespace Food4U_SEP3.RestaurantServices
 
                 menu.Categories = categories;
                 restaurant.DeliveryOption1 = deliveries[0];
-                restaurant.DeliveryOption2 = deliveries[2];
+                restaurant.DeliveryOption2 = deliveries[1];
                 restaurant.Menu = menu;
                 return restaurant;
             }
@@ -163,7 +164,7 @@ namespace Food4U_SEP3.RestaurantServices
 
                     menu.Categories = categories;
                     restaurant.DeliveryOption1 = deliveries[0];
-                    restaurant.DeliveryOption2 = deliveries[2];
+                    restaurant.DeliveryOption2 = deliveries[1];
                     restaurant.Menu = menu;
                 }
                 return restaurants;

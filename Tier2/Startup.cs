@@ -40,6 +40,8 @@ namespace Food4U_SEP3
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "Food4U_SEP3", Version = "v1"});
             });
+            services.AddScoped<HandlerFactory>();
+            
             services.AddScoped<IRestaurantService, RestaurantService>();
             services.AddScoped<IMenuServiceT2, MenuServiceT2>();
             services.AddScoped<IRestaurantHandlerT2, RestaurantSocketHandlerT2>();
