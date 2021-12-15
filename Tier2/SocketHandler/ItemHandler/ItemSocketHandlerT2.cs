@@ -9,8 +9,8 @@ namespace Food4U_SEP3.SocketHandler.ItemHandler
     {
         public Task<Item> AddItem(Item item)
         {
-            string serializedMenu = JsonSerializer.Serialize(item);
-            SendToServer("AddItem", serializedMenu);
+            string serializedItem = JsonSerializer.Serialize(item);
+            SendToServer("AddItem", serializedItem);
             return Task.FromResult(item);
         }
 
@@ -40,6 +40,20 @@ namespace Food4U_SEP3.SocketHandler.ItemHandler
             SendToServer("GetItem", itemId.ToString());
             Item getItem = JsonSerializer.Deserialize<Item>(GetFromServer());
             return Task.FromResult(getItem);
+        }
+
+        public Task<Order> OrderItems(Order order)
+        {
+            string serializedOrder = JsonSerializer.Serialize(order);
+            SendToServer("OrderItems", serializedOrder);
+            return Task.FromResult(order);
+        }
+
+        public Task<IList<Item>> GetOrderedItems(int orderId)
+        {
+            SendToServer("GetOrderedItems", orderId.ToString());
+            IList<Item> items = JsonSerializer.Deserialize<IList<Item>>(GetFromServer());
+            return Task.FromResult(items);
         }
     }
 }

@@ -6,6 +6,7 @@ using Food4U_SEP3.SocketHandler;
 using Food4U_SEP3.SocketHandler.CustomerHandler;
 using Food4U_SEP3.SocketHandler.DriverHandler;
 using Food4U_SEP3.SocketHandler.DriverHandler;
+using Food4U_SEP3.SocketHandler.ItemHandler;
 using Food4U_SEP3.SocketHandler.OrderHandler;
 
 namespace Food4U_SEP3.Service.OrderService
@@ -17,21 +18,25 @@ namespace Food4U_SEP3.Service.OrderService
         private readonly IEmailService emailService;
         private readonly IRestaurantHandlerT2 restaurantHandlerT2;
         private readonly IDriverHandlerT2 driverHandlerT2;
+        private readonly IItemHandlerT2 itemHandlerT2;
         
         public OrderServiceT2(IOrderHandlerT2 orderHandlerT2, IEmailService emailService,
-            ICustomerHandlerT2 customerHandlerT2, IRestaurantHandlerT2 restaurantHandlerT2)
+            ICustomerHandlerT2 customerHandlerT2, IRestaurantHandlerT2 restaurantHandlerT2, IItemHandlerT2 itemHandlerT2)
         {
             this.orderHandlerT2 = orderHandlerT2;
             this.emailService = emailService;
             this.customerHandlerT2 = customerHandlerT2;
             this.restaurantHandlerT2 = restaurantHandlerT2;
+            this.itemHandlerT2 = itemHandlerT2;
         }
 
         public async Task<Order> AddOrderAsync(Order order)
         {
             try
             {
-                return await orderHandlerT2.AddOrder(order);
+                Order orderAdded = await orderHandlerT2.AddOrder(order);
+                await itemHandlerT2.OrderItems(order);
+                return orderAdded;
             }
             catch (Exception e)
             {
@@ -143,7 +148,9 @@ namespace Food4U_SEP3.Service.OrderService
         {
             try
             {
-                return await orderHandlerT2.GetOrder(orderId);
+                Order order = await orderHandlerT2.GetOrder(orderId);
+                order.Items = await itemHandlerT2.GetOrderedItems(orderId);
+                return order;
             }
             catch (Exception e)
             {

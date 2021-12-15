@@ -20,6 +20,13 @@ namespace Food4U_SEP3.SocketHandler.DriverHandler
             return Task.FromResult(driver);
         }
 
+        public Task<Driver> GetDriver(string username)
+        {
+            SendToServer("GetDriver", username);
+            Driver driver = JsonSerializer.Deserialize<Driver>(GetFromServer());
+            return Task.FromResult(driver);
+        }
+
         public Task<Driver> UpdateDriver(Driver driver)
         {
             string serializedDriver = JsonSerializer.Serialize(driver);
