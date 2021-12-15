@@ -105,7 +105,7 @@ namespace Food4U_SEP3.Service.OrderService
                 await orderHandlerT2.UpdateOrder(order);
                 Order editedOrder = await orderHandlerT2.UpdateOrder(order);
                 Customer customer = await customerHandlerT2.GetCustomer(order.CustomerUsername);
-                Driver driver = await driverHandlerT2.GetDriver(order.DriverUsername);
+                //Driver driver = await driverHandlerT2.GetDriver(order.DriverUsername);
                 Restaurant restaurant = await restaurantHandlerT2.GetRestaurant(order.RestaurantUsername);
                 if (editedOrder != null)
                 {

@@ -30,7 +30,7 @@ namespace Client.Data.DriverService
 
             Console.WriteLine(content);
 
-            HttpResponseMessage responseMessage = await client.PostAsync(uri + "/Customer", content);
+            HttpResponseMessage responseMessage = await client.PostAsync(uri + "/Driver", content);
             if (!responseMessage.IsSuccessStatusCode)
             {
                 throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");
@@ -63,12 +63,12 @@ namespace Client.Data.DriverService
         {
             string driverAsJson = JsonSerializer.Serialize(driver);
             HttpContent content = new StringContent(driverAsJson, Encoding.UTF8, "application/json");
-            await client.PatchAsync($"{uri}/Driver/{driver.Username}", content);
+            await client.PatchAsync($"{uri}/Driver", content);
         }
 
         public async Task DeleteDriverAsync(string username)
         {
-            await client.DeleteAsync($"{uri}/Driver/{username}");
+            await client.DeleteAsync(uri+"/Driver?username="+username);
         }
         
     }

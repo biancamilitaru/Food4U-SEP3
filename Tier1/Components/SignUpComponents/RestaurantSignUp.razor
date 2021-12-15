@@ -170,13 +170,16 @@
         DeliveryOption2 = new Delivery(),
         Visibility = false,
     };
+  
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
 
     private async void AddNewRestaurant()
-    {
-      addNewRestaurantItem.DeliveryOption1.UserName = addNewRestaurantItem.Username;
-      addNewRestaurantItem.DeliveryOption2.UserName = addNewRestaurantItem.Username;
-      Console.WriteLine("Sending");
-      await RestaurantService.AddRestaurantAsync(addNewRestaurantItem);
-    }
+      {
+        addNewRestaurantItem.DeliveryOption1.UserName = addNewRestaurantItem.Username;
+        addNewRestaurantItem.DeliveryOption2.UserName = addNewRestaurantItem.Username;
+        await RestaurantService.AddRestaurantAsync(addNewRestaurantItem);
+        NavigationManager.NavigateTo("/");
+      }
 
 }

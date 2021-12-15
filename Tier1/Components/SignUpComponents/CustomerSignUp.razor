@@ -72,12 +72,15 @@
 
 
 @code {
-
   private Customer newCustomer = new Customer();
+  
+  [Inject]
+  public NavigationManager NavigationManager { get; set; }
 
-  private void AddNewCustomer()
+  private async void AddNewCustomer()
   {
-      customerServiceT1.AddCustomerAsync(newCustomer);
+      await customerServiceT1.AddCustomerAsync(newCustomer);
+      NavigationManager.NavigateTo("/");
   }
     
 }
