@@ -5,7 +5,6 @@ using Entities;
 using Food4U_SEP3.SocketHandler;
 using Food4U_SEP3.SocketHandler.CustomerHandler;
 using Food4U_SEP3.SocketHandler.DriverHandler;
-using Food4U_SEP3.SocketHandler.DriverHandler;
 using Food4U_SEP3.SocketHandler.ItemHandler;
 using Food4U_SEP3.SocketHandler.OrderHandler;
 
