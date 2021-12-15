@@ -30,7 +30,7 @@ namespace Client.Data.DriverService
 
             Console.WriteLine(content);
 
-            HttpResponseMessage responseMessage = await client.PostAsync(uri + "/Customer", content);
+            HttpResponseMessage responseMessage = await client.PostAsync(uri + "/Driver", content);
             if (!responseMessage.IsSuccessStatusCode)
             {
                 throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");

@@ -2,11 +2,13 @@ using Food4U_SEP3.RestaurantServices;
 using Food4U_SEP3.Service;
 using Food4U_SEP3.Service.CategoryService;
 using Food4U_SEP3.Service.CustomerService;
+using Food4U_SEP3.Service.DriverService;
 using Food4U_SEP3.Service.ItemsService;
 using Food4U_SEP3.SocketHandler;
 using Food4U_SEP3.Service.MenuService;
 using Food4U_SEP3.Service.OrderService;
 using Food4U_SEP3.SocketHandler.CustomerHandler;
+using Food4U_SEP3.SocketHandler.DriverHandler;
 using Food4U_SEP3.SocketHandler.ItemHandler;
 using Food4U_SEP3.SocketHandler.OrderHandler;
 using Food4U_SEP3.UserServices;
@@ -53,6 +55,8 @@ namespace Food4U_SEP3
             services.AddScoped<IItemServiceT2, ItemServiceT2>();
             services.AddScoped<IItemHandlerT2,SocketItemHandlerT2>();
             services.AddScoped<IEmailService,EmailService>();
+            services.AddScoped<IDriverHandlerT2, DriverSocketHandlerT2>();
+            services.AddScoped<IDriverServiceT2,DriverServiceT2>();
 
         }
 

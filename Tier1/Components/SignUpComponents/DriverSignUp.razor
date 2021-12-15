@@ -1,5 +1,7 @@
 @using Microsoft.AspNetCore.Components
 @using Entities
+@using Client.Data.DriverService
+@inject IDriverServiceT1 driverServiceT1
 
 <div style="padding-bottom: 10px; position: sticky; z-index: 2; top: 56px; background-color: white">
   <h3>Create a new driver</h3>
@@ -9,7 +11,7 @@
   </div>
 </div>
 
-<EditForm Model="@newDriver" OnValidSubmit="@AddNewCustomer">
+<EditForm Model="@newDriver" OnValidSubmit="@AddNewDriver">
   <div class="card" style="margin-bottom: 20px">
     <div class="card-body">
       <h4>Login information:</h4>
@@ -36,6 +38,11 @@
       <div class="form-group">
         <label>Last name:</label>
         <InputText placeholder="Enter your last name" style="max-width: 50%" class="form-control" @bind-Value="newDriver.LastName"/>
+      </div>
+      
+      <div class="form-group">
+        <label>License number:</label>
+        <InputText placeholder="Enter your license number" style="max-width: 50%" class="form-control" @bind-Value="newDriver.LicenseNumber"/>
       </div>
     </div>
   </div>
@@ -71,8 +78,8 @@
 @code {
   private Driver newDriver = new Driver();
 
-  private async void AddNewCustomer()
+  private async void AddNewDriver()
   {
-    
+    await driverServiceT1.AddDriverAsync(newDriver);
   }
 }
