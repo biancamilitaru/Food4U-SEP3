@@ -77,9 +77,13 @@
 
 @code {
   private Driver newDriver = new Driver();
+  
+  [Inject]
+  public NavigationManager NavigationManager { get; set; }
 
   private async void AddNewDriver()
   {
     await driverServiceT1.AddDriverAsync(newDriver);
+    NavigationManager.NavigateTo("/");
   }
 }
