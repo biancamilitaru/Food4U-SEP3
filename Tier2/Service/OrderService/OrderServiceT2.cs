@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Entities;
 using Food4U_SEP3.SocketHandler;
 using Food4U_SEP3.SocketHandler.CustomerHandler;
+using Food4U_SEP3.SocketHandler.DriverHandler;
+using Food4U_SEP3.SocketHandler.DriverHandler;
 using Food4U_SEP3.SocketHandler.OrderHandler;
 
 namespace Food4U_SEP3.Service.OrderService
@@ -14,7 +16,8 @@ namespace Food4U_SEP3.Service.OrderService
         private readonly ICustomerHandlerT2 customerHandlerT2;
         private readonly IEmailService emailService;
         private readonly IRestaurantHandlerT2 restaurantHandlerT2;
-
+        private readonly IDriverHandlerT2 driverHandlerT2;
+        
         public OrderServiceT2(IOrderHandlerT2 orderHandlerT2, IEmailService emailService,
             ICustomerHandlerT2 customerHandlerT2, IRestaurantHandlerT2 restaurantHandlerT2)
         {
@@ -83,13 +86,22 @@ namespace Food4U_SEP3.Service.OrderService
                 await orderHandlerT2.UpdateOrder(order);
                 Order editedOrder = await orderHandlerT2.UpdateOrder(order);
                 Customer customer = await customerHandlerT2.GetCustomer(order.CustomerUsername);
+                Driver driver = await driverHandlerT2.GetDriver(order.DriverUsername);
                 Restaurant restaurant = await restaurantHandlerT2.GetRestaurant(order.RestaurantUsername);
                 if (editedOrder != null)
                 {
-                    emailService.SendEmail("Order info - " + restaurant.Name,
-                        "There is a change in your order. Your status has been updated to,<\\br>" +
-                        "Status of your order: " + order.Status,
-                        customer.Email);
+                    if (editedOrder.TimeEstimation!=0)
+                    {
+                        emailService.SendEmail("Order info - " + restaurant.Name, 
+                            "There is a change in your order. Estimation time for preparation is " +order.TimeEstimation+ " minutes",
+                            customer.Email);
+                    }
+                    else
+                    {
+                       emailService.SendEmail("Order info - " + restaurant.Name, 
+                                               "There is a change in your order. Your status has been updated to " +order.Status,
+                                               customer.Email);     
+                    }
                 }
 
                 return editedOrder;

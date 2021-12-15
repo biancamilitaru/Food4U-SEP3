@@ -14,7 +14,20 @@ namespace Food4U_SEP3.Service.DriverService
         {
             this.driverHandlerT2 = driverHandlerT2;
         }
-
+        
+        public async Task<Driver> GetDriverAsync(string username)
+        {
+            try
+            {
+                return await driverHandlerT2.GetDriver(username);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+        
         public async Task<Driver> AddDriverAsync(Driver driver)
         {
             try
