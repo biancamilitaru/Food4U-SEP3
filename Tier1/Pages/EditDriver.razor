@@ -5,6 +5,8 @@
 @using System.Text.Json
 @inject IJSRuntime jsRuntime;
 @inject IDriverServiceT1 driverService;
+@inject AuthenticationStateProvider AuthenticationStateProvider;
+@using Client.Authentication
 
 <h3>Edit a driver</h3>
 
@@ -64,12 +66,24 @@
   <DataAnnotationsValidator/>
   <ValidationSummary/>
   
-  <p class="actions"><button class="btn btn-success" type="submit">Edit a profile</button></p>
+  <div style="padding: 20px">
+    <div class="row">
+      <div class="column" style="padding-right: 20px">
+        <a @onclick="DeleteProfile" class="actions"><button class="btn btn-secondary">Delete profile</button></a>
+      </div>
+      <div class="column" style="padding-right: 20px">
+        <p class="actions"><button class="btn btn-success" type="submit">Edit profile</button></p>
+      </div>
+    </div>
+  </div>
 
 </EditForm>
 
 @code {
   private Driver driver = new Driver();
+  
+  [Inject]
+  public NavigationManager NavigationManager { get; set; }
   
   
   public async Task ReadDriver()
@@ -97,5 +111,26 @@
   private async void OnEditDriver()
   {
     await driverService.UpdateDriverAsync(driver);
+    NavigationManager.NavigateTo("/");
+  }
+  
+  private async void DeleteProfile()
+  {
+    await driverService.DeleteDriverAsync(driver.Username);
+    await PerformLogout();
+    NavigationManager.NavigateTo("/");
+  }
+  
+  private async Task PerformLogout()
+  {
+    try
+    {
+      await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();
+    }
+    catch (Exception e)
+    {
+      Console.WriteLine(e);
+      throw;
+    }
   }
 }

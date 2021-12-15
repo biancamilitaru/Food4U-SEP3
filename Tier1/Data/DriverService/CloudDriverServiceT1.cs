@@ -68,7 +68,7 @@ namespace Client.Data.DriverService
 
         public async Task DeleteDriverAsync(string username)
         {
-            await client.DeleteAsync($"{uri}/Driver/{username}");
+            await client.DeleteAsync(uri+"/Driver?username="+username);
         }
         
     }
