@@ -86,10 +86,6 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-        
-
-
-
 
 
     }
