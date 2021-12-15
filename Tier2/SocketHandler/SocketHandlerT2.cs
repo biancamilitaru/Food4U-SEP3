@@ -15,7 +15,7 @@ namespace Food4U_SEP3.SocketHandler
         {
             stream = tcpClient.GetStream();
         }
-        
+
         //TODO Probably we need one more method SendToServer with closing stream if we are not expecting to get some response from server
         protected void SendToServer(string type, string context)
         {
@@ -24,17 +24,17 @@ namespace Food4U_SEP3.SocketHandler
                 Type = type,
                 Context = context
             };
-            
+
             string serialisedRequest = JsonSerializer.Serialize(newRequest);
             Console.WriteLine(serialisedRequest);
             byte[] dataToServer = Encoding.ASCII.GetBytes(serialisedRequest);
             stream.Write(dataToServer, 0, dataToServer.Length);
             //stream.Close();
         }
-        
+
         protected string GetFromServer()
         {
-            byte[] fromServer = new byte[1024*10];
+            byte[] fromServer = new byte[1024 * 10];
             int bytesRead = stream.Read(fromServer, 0, fromServer.Length);
             string response = Encoding.ASCII.GetString(fromServer, 0, bytesRead);
             Console.WriteLine(response);

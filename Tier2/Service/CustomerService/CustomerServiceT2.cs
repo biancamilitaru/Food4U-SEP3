@@ -23,11 +23,12 @@ namespace Food4U_SEP3.Service.CustomerService
                 Customer addedCustomer = await customerHandlerT2.AddCustomer(customer);
                 if (addedCustomer != null)
                 {
-                    string htmlBody = "Welcome "+customer.FirstName+" , you are now able to sign in!";
-                    
+                    string htmlBody = "Welcome " + customer.FirstName + " , you are now able to sign in!";
+
                     emailService.SendEmail("Welcome to Food4U", htmlBody,
-                        addedCustomer.Email);    
+                        addedCustomer.Email);
                 }
+
                 return addedCustomer;
             }
             catch (Exception e)
@@ -54,7 +55,7 @@ namespace Food4U_SEP3.Service.CustomerService
                 throw;
             }
         }
-        
+
         public async Task DeleteCustomerAsync(string username)
         {
             try

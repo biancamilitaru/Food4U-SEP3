@@ -11,7 +11,6 @@ namespace Food4U_SEP3.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerServiceT2 customerService;
@@ -25,11 +24,13 @@ namespace Food4U_SEP3.Controllers
             {
                 await customerService.AddCustomerAsync(customer);
                 return Created($"/{customer}", customer);
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return StatusCode(500, e.Message);
             }
         }
+
         [HttpPatch]
         public async Task<ActionResult> UpdateCustomerAsync([FromBody] Customer customer)
         {
@@ -43,8 +44,7 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-        
-        
+
         [HttpGet]
         public async Task<ActionResult<Customer>> GetCustomerAsync([FromQuery] string username)
         {
@@ -58,8 +58,8 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-        
-        [HttpDelete]
+
+        [HttpDelete] 
         public async Task<ActionResult> DeleteCustomerAsync([FromQuery] string username)
         {
             try
@@ -72,7 +72,5 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-        
-        
     }
 }

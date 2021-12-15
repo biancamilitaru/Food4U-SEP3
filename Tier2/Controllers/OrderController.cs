@@ -8,16 +8,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Food4U_SEP3.Controllers
 {
-    
     [Route("[controller]")]
     [ApiController]
-    
     public class OrderController : ControllerBase
     {
         private readonly IOrderServiceT2 orderService;
-        
+
         public OrderController(IOrderServiceT2 orderService) => this.orderService = orderService;
-        
+
         [HttpPost]
         public async Task<ActionResult<Order>> AddOrderAsync([FromBody] Order order)
         {
@@ -25,11 +23,13 @@ namespace Food4U_SEP3.Controllers
             {
                 await orderService.AddOrderAsync(order);
                 return Created($"/{order}", order);
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return StatusCode(500, e.Message);
             }
         }
+
         [HttpDelete]
         public async Task<ActionResult> DeleteOrderAsync([FromQuery] int orderId)
         {
@@ -43,10 +43,10 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-        
+
         [HttpGet]
         [Route("/Orders/Incoming")]
-        public async Task<ActionResult<List<Order>>> GetIncomingOrdersAsync([FromQuery] string restaurantUsername)
+        public async Task<ActionResult<IList<Order>>> GetIncomingOrdersAsync([FromQuery] string restaurantUsername)
         {
             try
             {
@@ -72,7 +72,7 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-        
+
         [HttpGet]
         [Route("/Orders/Accepted")]
         public async Task<ActionResult<IList<Order>>> GetAcceptedOrdersAsync([FromQuery] string restaurantUsername)
@@ -87,10 +87,9 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-        
+
         [HttpGet]
         [Route("/Orders/Previous")]
-        
         public async Task<ActionResult<IList<Order>>> GetPreviousOrdersAsync([FromQuery] string customerUsername)
         {
             try
@@ -105,7 +104,6 @@ namespace Food4U_SEP3.Controllers
         }
 
         [HttpGet]
-
         public async Task<ActionResult<Order>> GetOrderAsync([FromQuery] int orderId)
         {
             try
@@ -118,10 +116,10 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-        
+
         [HttpGet]
         [Route("/Orders/ReadyForPickup")]
-        public async Task<ActionResult<List<Order>>> GetReadyForPickupOrders()
+        public async Task<ActionResult<IList<Order>>> GetReadyForPickupOrdersAsync()
         {
             try
             {

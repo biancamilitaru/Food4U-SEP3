@@ -14,15 +14,16 @@ namespace Food4U_SEP3.Service.OrderService
         private readonly ICustomerHandlerT2 customerHandlerT2;
         private readonly IEmailService emailService;
         private readonly IRestaurantHandlerT2 restaurantHandlerT2;
-        
-        public OrderServiceT2(IOrderHandlerT2 orderHandlerT2, IEmailService emailService, ICustomerHandlerT2 customerHandlerT2, IRestaurantHandlerT2 restaurantHandlerT2)
+
+        public OrderServiceT2(IOrderHandlerT2 orderHandlerT2, IEmailService emailService,
+            ICustomerHandlerT2 customerHandlerT2, IRestaurantHandlerT2 restaurantHandlerT2)
         {
             this.orderHandlerT2 = orderHandlerT2;
             this.emailService = emailService;
             this.customerHandlerT2 = customerHandlerT2;
             this.restaurantHandlerT2 = restaurantHandlerT2;
         }
-        
+
         public async Task<Order> AddOrderAsync(Order order)
         {
             try
@@ -48,7 +49,7 @@ namespace Food4U_SEP3.Service.OrderService
                 throw;
             }
         }
-        
+
         public async Task<IList<Order>> GetAcceptedOrdersAsync(string restaurantUsername)
         {
             try
@@ -66,7 +67,7 @@ namespace Food4U_SEP3.Service.OrderService
         {
             try
             {
-               return await orderHandlerT2.GetPreviousOrders(customerUsername);
+                return await orderHandlerT2.GetPreviousOrders(customerUsername);
             }
             catch (Exception e)
             {
@@ -85,11 +86,12 @@ namespace Food4U_SEP3.Service.OrderService
                 Restaurant restaurant = await restaurantHandlerT2.GetRestaurant(order.RestaurantUsername);
                 if (editedOrder != null)
                 {
-                    emailService.SendEmail("Order info - " + restaurant.Name, 
-                        "There is a change in your order. Your status has been updated to,<\\br>"+
-                        "Status of your order: " +order.Status,
-                        customer.Email);    
+                    emailService.SendEmail("Order info - " + restaurant.Name,
+                        "There is a change in your order. Your status has been updated to,<\\br>" +
+                        "Status of your order: " + order.Status,
+                        customer.Email);
                 }
+
                 return editedOrder;
             }
             catch (Exception e)
@@ -98,6 +100,7 @@ namespace Food4U_SEP3.Service.OrderService
                 throw;
             }
         }
+
         public async Task DeleteOrderAsync(int orderId)
         {
             try
@@ -115,9 +118,7 @@ namespace Food4U_SEP3.Service.OrderService
         {
             try
             {
-                
                 return await orderHandlerT2.GetReadyForPickupOrders();
-                
             }
             catch (Exception e)
             {
@@ -125,6 +126,7 @@ namespace Food4U_SEP3.Service.OrderService
                 throw;
             }
         }
+
         public async Task<Order> GetOrderAsync(int orderId)
         {
             try

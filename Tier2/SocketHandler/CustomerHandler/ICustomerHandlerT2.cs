@@ -7,10 +7,7 @@ namespace Food4U_SEP3.SocketHandler.CustomerHandler
     {
         Task<Customer> AddCustomer(Customer customer);
         Task<Customer> ValidateLogin(string username);
-        
         Task<Customer> GetCustomer(string username);
-        
-        
         Task<Customer> DeleteCustomer(string username);
         Task<Customer> UpdateCustomer(Customer customer);
     }

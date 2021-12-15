@@ -9,9 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Food4U_SEP3.Controllers
 {
-  [Route("[controller]")]
+    [Route("[controller]")]
     [ApiController]
-    
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryServiceT2 categoryService;
@@ -25,12 +24,13 @@ namespace Food4U_SEP3.Controllers
             {
                 await categoryService.AddCategoryAsync(category);
                 return Created($"/{category}", category);
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return StatusCode(500, e.Message);
             }
         }
-        
+
         [HttpGet]
         public async Task<ActionResult<Category>> GetCategoryAsync([FromQuery] int categoryId)
         {
@@ -44,7 +44,7 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-        
+
         [HttpGet]
         [Route("/Categories")]
         public async Task<ActionResult<IList<Category>>> GetCategoryByMenuIdAsync([FromQuery] int menuId)
@@ -59,9 +59,9 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-        
+
         [HttpPatch]
-       // [Route("{name:string}")]
+        // [Route("{name:string}")]
         public async Task<ActionResult> UpdateCategoryAsync([FromBody] Category category)
         {
             try
@@ -74,21 +74,20 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-       
-       [HttpDelete]
-       public async Task<ActionResult> DeleteCategoriesAsync([FromQuery] Category category)
-       {
-           try
-           {
-               await categoryService.DeleteCategoryAsync(category.CategoryId);
-               return Ok();
 
-           }
-           catch (Exception e)
-           {
-               return StatusCode(500, e.Message);
-           }
-       }
-
-    }  
+        [HttpDelete]
+        public async Task<ActionResult> DeleteCategoriesAsync([FromQuery] int categoryId)
+        
+        {
+            try
+            {
+                await categoryService.DeleteCategoryAsync(categoryId);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+    }
 }

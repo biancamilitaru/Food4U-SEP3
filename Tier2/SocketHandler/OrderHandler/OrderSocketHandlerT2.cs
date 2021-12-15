@@ -7,7 +7,7 @@ using Entities;
 
 namespace Food4U_SEP3.SocketHandler.OrderHandler
 {
-    public class SocketOrderHandlerT2 : SocketHandler ,IOrderHandlerT2
+    public class OrderSocketHAndlerT2 : SocketHandler, IOrderHandlerT2
     {
         public Task<Order> AddOrder(Order order)
         {
@@ -18,17 +18,17 @@ namespace Food4U_SEP3.SocketHandler.OrderHandler
 
         public Task<IList<Order>> GetIncomingOrders(string restaurantUsername)
         {
-            SendToServer("GetIncomingOrders",restaurantUsername);
+            SendToServer("GetIncomingOrders", restaurantUsername);
             IList<Order> orders = JsonSerializer.Deserialize<IList<Order>>(GetFromServer());
-            
+
             return Task.FromResult(orders);
         }
-        
+
         public Task<IList<Order>> GetReadyForPickupOrders()
         {
-            SendToServer("GetReadyForPickupOrders",null);
+            SendToServer("GetReadyForPickupOrders", null);
             IList<Order> orders = JsonSerializer.Deserialize<IList<Order>>(GetFromServer());
-            
+
             return Task.FromResult(orders);
         }
 
@@ -38,27 +38,29 @@ namespace Food4U_SEP3.SocketHandler.OrderHandler
             SendToServer("UpdateOrder", serializedOrder);
             return Task.FromResult(order);
         }
+
         public Task<Order> DeleteOrder(int orderId)
-        { 
-            SendToServer("DeleteOrder",orderId.ToString());
+        {
+            SendToServer("DeleteOrder", orderId.ToString());
             Order deleteOrder = JsonSerializer.Deserialize<Order>(GetFromServer());
             return Task.FromResult(deleteOrder);
         }
 
         public Task<IList<Order>> GetAcceptedOrders(string restaurantUsername)
         {
-            SendToServer("GetAcceptedOrders",restaurantUsername);
+            SendToServer("GetAcceptedOrders", restaurantUsername);
             IList<Order> getOrders = JsonSerializer.Deserialize<IList<Order>>(GetFromServer());
             return Task.FromResult(getOrders);
         }
-        
+
         public Task<IList<Order>> GetPreviousOrders(string customerUsername)
         {
-            SendToServer("GetPreviousOrders",customerUsername);
+            SendToServer("GetPreviousOrders", customerUsername);
             IList<Order> getOrders = JsonSerializer.Deserialize<IList<Order>>(GetFromServer());
-            
+
             return Task.FromResult(getOrders);
         }
+
         public Task<Order> GetOrder(int orderId)
         {
             SendToServer("GetOrder", orderId.ToString());

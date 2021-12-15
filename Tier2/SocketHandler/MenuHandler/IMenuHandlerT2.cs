@@ -8,7 +8,6 @@ namespace Food4U_SEP3.SocketHandler
     {
         Task<Menu> AddMenu(Menu menu);
         Task<Menu> UpdateMenu(Menu menu);
-        Task<Menu> GetMenu(int menuId); 
-
+        Task<Menu> GetMenu(int menuId);
     }
 }

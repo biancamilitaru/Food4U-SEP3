@@ -7,19 +7,18 @@ namespace Food4U_SEP3.Service.MenuService
 {
     public class MenuServiceT2 : IMenuServiceT2
     {
-        private readonly IMenuHandlerT2 menuHandler;
+        private readonly IMenuHandlerT2 menuHandlerT2;
 
         public MenuServiceT2(IMenuHandlerT2 menuHandler)
         {
-            this.menuHandler = menuHandler;
+            this.menuHandlerT2 = menuHandler;
         }
-
 
         public async Task<Menu> AddMenuAsync(Menu menu)
         {
             try
             {
-                return await menuHandler.AddMenu(menu);
+                return await menuHandlerT2.AddMenu(menu);
             }
             catch (Exception e)
             {
@@ -32,7 +31,7 @@ namespace Food4U_SEP3.Service.MenuService
         {
             try
             {
-                return await menuHandler.UpdateMenu(menu);
+                return await menuHandlerT2.UpdateMenu(menu);
             }
             catch (Exception e)
             {
@@ -42,18 +41,16 @@ namespace Food4U_SEP3.Service.MenuService
         }
 
         public async Task<Menu> GetMenuAsync(int menuId)
-        
+        {
+            try
             {
-                try
-                {
-                    return await menuHandler.GetMenu(menuId);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    throw;
-                }
+                return await menuHandlerT2.GetMenu(menuId);
             }
-        
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

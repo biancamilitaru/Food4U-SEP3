@@ -11,7 +11,7 @@ using Food4U_SEP3.Models;
 
 namespace Food4U_SEP3.SocketHandler
 {
-    public class SocketCategoryHandlerT2 : SocketHandler, ICategoryHandlerT2
+    public class CategorySocketHandlerT2 : SocketHandler, ICategoryHandlerT2
     {
 
         public Task<Category> AddCategory(Category category)

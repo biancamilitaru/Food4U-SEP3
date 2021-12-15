@@ -8,19 +8,18 @@ namespace Food4U_SEP3.Service.ItemsService
 {
     public class ItemServiceT2 : IItemServiceT2
     {
-        
-        private readonly IItemHandlerT2 itemHandler;
+        private readonly IItemHandlerT2 itemHandlerT2;
 
         public ItemServiceT2(IItemHandlerT2 itemHandler)
         {
-            this.itemHandler = itemHandler;
+            this.itemHandlerT2 = itemHandler;
         }
-        
+
         public async Task<Item> AddItemAsync(Item item)
         {
             try
             {
-                return await itemHandler.AddItem(item);
+                return await itemHandlerT2.AddItem(item);
             }
             catch (Exception e)
             {
@@ -33,7 +32,7 @@ namespace Food4U_SEP3.Service.ItemsService
         {
             try
             {
-                return await itemHandler.GetItems(categoryId);
+                return await itemHandlerT2.GetItems(categoryId);
             }
             catch (Exception e)
             {
@@ -46,7 +45,7 @@ namespace Food4U_SEP3.Service.ItemsService
         {
             try
             {
-                return await itemHandler.UpdateItem(item);
+                return await itemHandlerT2.UpdateItem(item);
             }
             catch (Exception e)
             {
@@ -59,7 +58,7 @@ namespace Food4U_SEP3.Service.ItemsService
         {
             try
             {
-                await itemHandler.DeleteItem(itemId);
+                await itemHandlerT2.DeleteItem(itemId);
             }
             catch (Exception e)
             {
@@ -67,11 +66,12 @@ namespace Food4U_SEP3.Service.ItemsService
                 throw;
             }
         }
+
         public async Task<Item> GetItemAsync(int itemId)
         {
             try
             {
-                return await itemHandler.GetItem(itemId);
+                return await itemHandlerT2.GetItem(itemId);
             }
             catch (Exception e)
             {
@@ -79,6 +79,5 @@ namespace Food4U_SEP3.Service.ItemsService
                 throw;
             }
         }
-        
     }
 }

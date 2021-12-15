@@ -2,14 +2,15 @@ using Food4U_SEP3.RestaurantServices;
 using Food4U_SEP3.Service;
 using Food4U_SEP3.Service.CategoryService;
 using Food4U_SEP3.Service.CustomerService;
+using Food4U_SEP3.Service.DriverService;
 using Food4U_SEP3.Service.ItemsService;
 using Food4U_SEP3.SocketHandler;
 using Food4U_SEP3.Service.MenuService;
 using Food4U_SEP3.Service.OrderService;
 using Food4U_SEP3.SocketHandler.CustomerHandler;
+using Food4U_SEP3.SocketHandler.DriverHandler;
 using Food4U_SEP3.SocketHandler.ItemHandler;
 using Food4U_SEP3.SocketHandler.OrderHandler;
-using Food4U_SEP3.UserServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -37,23 +38,22 @@ namespace Food4U_SEP3
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "Food4U_SEP3", Version = "v1"});
             });
-            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRestaurantService, RestaurantService>();
             services.AddScoped<IMenuServiceT2, MenuServiceT2>();
-            services.AddScoped<IRestaurantHandlerT2, SocketRestaurantHandlerT2>();
-            services.AddScoped<IUserHandlerT2, SocketUserHandlerT2>();
-            services.AddScoped<IMenuServiceT2,MenuServiceT2>();
-            services.AddScoped<IMenuHandlerT2,SocketMenuHandlerT2>();
-            services.AddScoped<ICustomerHandlerT2,CustomerSocketHandlerT2T2>();
-            services.AddScoped<ICustomerServiceT2,CustomerServiceT2>();
-            services.AddScoped<ICategoryHandlerT2, SocketCategoryHandlerT2>();
+            services.AddScoped<IRestaurantHandlerT2, RestaurantSocketHandlerT2>();
+            services.AddScoped<IMenuServiceT2, MenuServiceT2>();
+            services.AddScoped<IMenuHandlerT2, MenuSocketHandlerT2>();
+            services.AddScoped<ICustomerHandlerT2, CustomerSocketHandlerT2>();
+            services.AddScoped<ICustomerServiceT2, CustomerServiceT2>();
+            services.AddScoped<ICategoryHandlerT2, CategorySocketHandlerT2>();
             services.AddScoped<ICategoryServiceT2, CategoryServiceT2>();
             services.AddScoped<IOrderServiceT2, OrderServiceT2>();
-            services.AddScoped<IOrderHandlerT2, SocketOrderHandlerT2>();
+            services.AddScoped<IOrderHandlerT2, OrderSocketHAndlerT2>();
             services.AddScoped<IItemServiceT2, ItemServiceT2>();
-            services.AddScoped<IItemHandlerT2,SocketItemHandlerT2>();
-            services.AddScoped<IEmailService,EmailService>();
-
+            services.AddScoped<IItemHandlerT2, ItemSocketHandlerT2>();
+            services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IDriverHandlerT2, DriverSocketHandlerT2>();
+            services.AddScoped<IDriverServiceT2, DriverServiceT2>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

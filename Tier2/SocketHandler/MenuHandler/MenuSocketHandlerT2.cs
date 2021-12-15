@@ -8,7 +8,7 @@ using Food4U_SEP3.Service.MenuService;
 
 namespace Food4U_SEP3.SocketHandler
 {
-    public class SocketMenuHandlerT2 : SocketHandler, IMenuHandlerT2
+    public class MenuSocketHandlerT2 : SocketHandler, IMenuHandlerT2
     {
         public Task<Menu> AddMenu(Menu menu)
         {
@@ -20,13 +20,13 @@ namespace Food4U_SEP3.SocketHandler
         public Task<Menu> UpdateMenu(Menu menu)
         {
             string serialisedMenu = JsonSerializer.Serialize(menu);
-            SendToServer("UpdateMenu",serialisedMenu);
+            SendToServer("UpdateMenu", serialisedMenu);
             return Task.FromResult(menu);
         }
-        
+
         public Task<Menu> GetMenu(int menuId)
         {
-            SendToServer("GetMenu",menuId.ToString());
+            SendToServer("GetMenu", menuId.ToString());
             Menu getMenu = JsonSerializer.Deserialize<Menu>(GetFromServer());
             return Task.FromResult(getMenu);
         }

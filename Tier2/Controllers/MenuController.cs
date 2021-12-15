@@ -8,13 +8,12 @@ namespace Food4U_SEP3.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    
     public class MenuController : ControllerBase
     {
         private readonly IMenuServiceT2 menuService;
 
         public MenuController(IMenuServiceT2 menuService) => this.menuService = menuService;
-        
+
         [HttpPost]
         public async Task<ActionResult<Menu>> AddMenuAsync([FromBody] Menu menu)
         {
@@ -22,11 +21,13 @@ namespace Food4U_SEP3.Controllers
             {
                 await menuService.AddMenuAsync(menu);
                 return Created($"/{menu}", menu);
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return StatusCode(500, e.Message);
             }
         }
+
         [HttpPatch]
         [Route("{menuID:int}")]
         public async Task<ActionResult> UpdateMenuAsync([FromBody] Menu menu)
@@ -56,9 +57,5 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-        
-
-        
-
     }
 }

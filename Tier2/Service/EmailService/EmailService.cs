@@ -7,7 +7,7 @@ namespace Food4U_SEP3.Service
     public class EmailService : IEmailService
     {
         const string password = "Food4U1234";
-        
+
         SmtpClient smtp = new SmtpClient
         {
             Host = "smtp.gmail.com",
@@ -18,7 +18,7 @@ namespace Food4U_SEP3.Service
             Credentials = new NetworkCredential("app.food4u@gmail.com", password)
         };
 
-        public void SendEmail(String subject, String body, String receiver)
+        public void SendEmail(string subject, string body, string receiver)
         {
             using (MailMessage message = new MailMessage("app.food4u@gmail.com", receiver)
             {

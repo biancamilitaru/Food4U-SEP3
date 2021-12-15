@@ -5,7 +5,7 @@ using Entities;
 
 namespace Food4U_SEP3.SocketHandler.ItemHandler
 {
-    public class SocketItemHandlerT2 : SocketHandler, IItemHandlerT2
+    public class ItemSocketHandlerT2 : SocketHandler, IItemHandlerT2
     {
         public Task<Item> AddItem(Item item)
         {
@@ -16,7 +16,7 @@ namespace Food4U_SEP3.SocketHandler.ItemHandler
 
         public Task<IList<Item>> GetItems(int categoryId)
         {
-            SendToServer("GetItems",categoryId.ToString());
+            SendToServer("GetItems", categoryId.ToString());
             IList<Item> items = JsonSerializer.Deserialize<IList<Item>>(GetFromServer());
             return Task.FromResult(items);
         }
@@ -24,18 +24,20 @@ namespace Food4U_SEP3.SocketHandler.ItemHandler
         public Task<Item> UpdateItem(Item item)
         {
             string serialisedItem = JsonSerializer.Serialize(item);
-            SendToServer("UpdateItem",serialisedItem);
+            SendToServer("UpdateItem", serialisedItem);
             return Task.FromResult(item);
         }
+
         public Task<Item> DeleteItem(int itemId)
         {
-            SendToServer("DeleteItem",itemId.ToString());
+            SendToServer("DeleteItem", itemId.ToString());
             Item deleteItem = JsonSerializer.Deserialize<Item>(GetFromServer());
             return Task.FromResult(deleteItem);
         }
+
         public Task<Item> GetItem(int itemId)
         {
-            SendToServer("GetItem",itemId.ToString());
+            SendToServer("GetItem", itemId.ToString());
             Item getItem = JsonSerializer.Deserialize<Item>(GetFromServer());
             return Task.FromResult(getItem);
         }

@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Entities;
-using Food4U_SEP3.Models;
 using Food4U_SEP3.RestaurantServices;
-using Food4U_SEP3.UserServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Food4U_SEP3.Controllers
@@ -24,12 +22,13 @@ namespace Food4U_SEP3.Controllers
             {
                 await restaurantService.AddRestaurantAsync(restaurant);
                 return Created($"/{restaurant}", restaurant);
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return StatusCode(500, e.Message);
             }
         }
-        
+
         [HttpPatch]
         public async Task<ActionResult> UpdateRestaurantAsync([FromBody] Restaurant restaurant)
         {
@@ -43,7 +42,7 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-        
+
         [HttpGet]
         public async Task<ActionResult<Restaurant>> GetRestaurantAsync([FromQuery] string username)
         {
@@ -57,7 +56,7 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-        
+
         [HttpDelete]
         public async Task<ActionResult> DeleteRestaurantAsync([FromQuery] string username)
         {
@@ -86,11 +85,5 @@ namespace Food4U_SEP3.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-        
-
-
-
-
-
     }
 }

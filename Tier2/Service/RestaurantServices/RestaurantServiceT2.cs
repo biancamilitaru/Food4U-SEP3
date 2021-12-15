@@ -10,7 +10,7 @@ namespace Food4U_SEP3.RestaurantServices
     public class RestaurantService : IRestaurantService
     {
         private readonly IRestaurantHandlerT2 restaurantHandlerT2;
-        
+
         public RestaurantService(IRestaurantHandlerT2 restaurantHandlerT2)
         {
             this.restaurantHandlerT2 = restaurantHandlerT2;
@@ -28,9 +28,7 @@ namespace Food4U_SEP3.RestaurantServices
                 throw;
             }
         }
-
         
-
         public async Task<Restaurant> AddRestaurantAsync(Restaurant restaurant)
         {
             try
@@ -42,7 +40,6 @@ namespace Food4U_SEP3.RestaurantServices
                 Console.WriteLine(e);
                 throw;
             }
-            
         }
 
         public async Task DeleteRestaurantAsync(string username)
@@ -88,7 +85,5 @@ namespace Food4U_SEP3.RestaurantServices
                 throw;
             }
         }
-
-       
     }
 }
