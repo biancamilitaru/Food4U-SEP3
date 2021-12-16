@@ -278,7 +278,8 @@
             RestaurantUsername = restaurant.Username,
             Status = "Incoming",
             TotalPrice = totalPrice,
-            Date = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")
+            Date = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"),
+            Items = shoppingList
         };
 
         orderServiceT1.AddOrderAsync(order);

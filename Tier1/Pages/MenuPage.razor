@@ -133,6 +133,33 @@
     </div>
 </div>
     <!--MODAL TO EDIT MENU DESCRIPTION-->
+    
+    
+    <!--MODAL TO ADD CATEGORY-->
+    <div class="modal fade" id="AddCategory" tabindex="-1" role="dialog" aria-labelledby="EditMenuLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AddCategoryLabel">Edit Menu</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <EditForm Model="newCategory" OnValidSubmit="@AddCategory">
+                    <div class="modal-body">
+                        <div style="padding-bottom: 10px">
+                            <InputTextArea placeholder="Enter menu description" class="form-control" @bind-Value="newCategory.Name"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <p class="actions"><button class="btn btn-secondary" data-dismiss="modal">Cancel</button></p>
+                        <p class="actions"><button class="btn btn-success" type="submit">Add category</button></p>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+    <!--MODAL TO ADD CATEGORY-->
 }
 
 
@@ -179,9 +206,9 @@
     }
     
     private Category newCategory = new Category();
-    private void AddCategory()
+    private async void AddCategory()
     {
         newCategory.MenuId = restaurant.Menu.MenuId;
-        categoryService.AddCategoryAsync(newCategory);
+        await categoryService.AddCategoryAsync(newCategory);
     }
 }

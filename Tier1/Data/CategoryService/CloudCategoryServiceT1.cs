@@ -30,7 +30,7 @@ namespace Client.Data.CategoryService
 
             Console.WriteLine(content);
 
-            HttpResponseMessage responseMessage = await client.PostAsync($"{uri}/Category/{category.Name}", content);
+            HttpResponseMessage responseMessage = await client.PostAsync($"{uri}/Category", content);
             
             if (!responseMessage.IsSuccessStatusCode)
                 throw new Exception($@"Error: {responseMessage.StatusCode},{responseMessage.ReasonPhrase}");

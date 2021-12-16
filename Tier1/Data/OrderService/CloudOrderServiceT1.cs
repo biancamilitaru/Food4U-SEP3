@@ -143,7 +143,7 @@ namespace Client.Data.OrderService
             order.Status = "Accepted";
             string orderAsJson = JsonSerializer.Serialize(order);
             HttpContent content = new StringContent(orderAsJson, Encoding.UTF8, "application/json");
-            await client.PatchAsync($"{uri}/Order/{order.OrderId}", content);
+            await client.PatchAsync($"{uri}/Order", content);
         }
         
         public async Task RejectOrderAsync(Order order)
@@ -152,7 +152,7 @@ namespace Client.Data.OrderService
             order.Status = "Rejected";
             string orderAsJson = JsonSerializer.Serialize(order);
             HttpContent content = new StringContent(orderAsJson, Encoding.UTF8, "application/json");
-            await client.PatchAsync($"{uri}/Order/{order.OrderId}", content);
+            await client.PatchAsync($"{uri}/Order", content);
         }
     }
 }
