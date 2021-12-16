@@ -1,6 +1,7 @@
 ﻿@page "/AddRestaurant"
 @using Client.Data.RestaurantService
 @using Entities
+@using System.Collections.ObjectModel
 @inject IRestaurantService RestaurantService
 
 
@@ -167,7 +168,7 @@
     {
         DeliveryOption1 = new Delivery(),
         DeliveryOption2 = new Delivery(),
-        Menu = new Menu(),
+        Menu = null,
         Visibility = false
     };
 

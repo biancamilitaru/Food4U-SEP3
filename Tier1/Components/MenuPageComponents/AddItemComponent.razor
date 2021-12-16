@@ -94,10 +94,10 @@
     public int CategoryId { get; set; }
     private Item newItem = new Item();
     
-    private void AddItem()
+    private async void AddItem()
     {
         newItem.CategoryId = CategoryId;
-        itemsService.AddItemAsync(newItem);
+        await itemsService.AddItemAsync(newItem);
     }
 
 }

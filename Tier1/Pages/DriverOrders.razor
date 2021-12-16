@@ -1,1 +1,62 @@
 @page "/Driver/Orders"
+@using Entities
+@using Client.Data.RestaurantService
+@using Client.Data.OrderService
+@using Client.Components
+@using System.Text.Json
+@inject IRestaurantService restaurantService;
+@inject IOrderServiceT1 orderService;
+@inject IJSRuntime jsRuntime;
+
+
+<a data-toggle="collapse">
+    <div class="div-category">
+        <div class="row" style="padding-left: 20px" xmlns="http://www.w3.org/1999/html">
+            <div class="column" style="padding-right: 20px">
+                
+            </div>
+
+            <div class="column">
+                <a>
+                    <h5>Orders</h5>
+                </a>
+            </div>
+        </div>
+    </div>
+</a>
+
+<div style="padding-top: 20px">
+    
+    @foreach (Order order in readyOrders)
+    {
+        <OrderDriverComponent Order="@order"></OrderDriverComponent>
+    }
+</div>
+
+@code{
+    private Driver driver = new Driver();
+    private IList<Order> readyOrders = new List<Order>();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await ReadDriver();
+            readyOrders = await orderService.GetReadyForPickUpOrdersAsync();
+        }
+        catch (Exception e)
+        {
+    // update some error label here, or show popup..
+        }
+    }
+    
+    public async Task ReadDriver()
+    {
+        string driverAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "currentDriver");
+
+        if (!string.IsNullOrEmpty(driverAsJson))
+        {
+            driver = JsonSerializer.Deserialize<Driver>(driverAsJson);
+        }
+    }
+}

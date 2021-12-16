@@ -79,9 +79,9 @@ namespace Food4U_SEP3.RestaurantServices
                         }
                     }
                 }
-                if (restaurant.DeliveryOption1 != null)
+                //if (restaurant.DeliveryOption1 != null)
                     await deliveryHandlerT2.AddDeliveryOption(restaurant.DeliveryOption1);
-                if (restaurant.DeliveryOption2 != null)
+                //if (restaurant.DeliveryOption2 != null)
                     await deliveryHandlerT2.AddDeliveryOption(restaurant.DeliveryOption2);
                 return restaurantAdded;
             }

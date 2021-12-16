@@ -29,7 +29,7 @@ namespace Client.Data.ItemService
 
             Console.WriteLine(content);
 
-            HttpResponseMessage responseMessage = await client.PostAsync($"{uri}/Item/{item.ItemId}", content);
+            HttpResponseMessage responseMessage = await client.PostAsync($"{uri}/Item", content);
             
             if (!responseMessage.IsSuccessStatusCode)
                 throw new Exception($@"Error: {responseMessage.StatusCode},{responseMessage.ReasonPhrase}");

@@ -164,7 +164,7 @@
             {
               <div style="padding: 20px">
                 <p>My profile is visible to other users.</p>
-                <a style="padding-top: 10px" @onclick="OnPrivate" class="actions"><button class="btn btn-primary btn-sm">Change to private</button></a>
+                <button @onclick="OnPrivate" class="btn btn-primary btn-sm">Change to private</button>
               </div>
             }
             
@@ -172,7 +172,7 @@
             {
               <div style="padding: 20px">
                 <p>My profile is private. Other users cannot see it.</p>
-                <a style="padding-top: 10px" @onclick="OnPublic" class="actions"><button class="btn btn-primary btn-sm">Change to public</button></a>
+                <button @onclick="OnPublic" class="btn btn-primary btn-sm">Change to public</button>
               </div>
             }
       </div>

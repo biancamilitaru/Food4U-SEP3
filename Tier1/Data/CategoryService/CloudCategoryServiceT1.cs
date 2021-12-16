@@ -76,13 +76,13 @@ namespace Client.Data.CategoryService
         {
             string categoryAsJson = JsonSerializer.Serialize(category);
             HttpContent content = new StringContent(categoryAsJson, Encoding.UTF8, "application/json");
-            await client.PatchAsync($"{uri}/Category/{category.Name}", content);
+            await client.PatchAsync(uri+"/Category", content);
         
         }
 
         public async Task RemoveCategoryAsync(int categoryId)
         {
-            await client.DeleteAsync($"{uri}/Category/{categoryId}");
+            await client.DeleteAsync(uri+"/Category/?categoryId="+categoryId);
         }
     }
 }

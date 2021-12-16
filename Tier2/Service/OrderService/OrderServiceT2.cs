@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Entities;
 using Food4U_SEP3.SocketHandler;
@@ -33,6 +34,8 @@ namespace Food4U_SEP3.Service.OrderService
             try
             {
                 Order orderAdded = await orderHandlerT2.AddOrder(order);
+                IList<Order> orders = await orderHandlerT2.GetIncomingOrders(order.RestaurantUsername);
+                order.OrderId = orders.Last().OrderId;
                 await itemHandlerT2.OrderItems(order);
                 return orderAdded;
             }

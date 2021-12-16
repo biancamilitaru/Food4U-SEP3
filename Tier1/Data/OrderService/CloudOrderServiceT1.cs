@@ -29,6 +29,8 @@ namespace Client.Data.OrderService
                 "application/json");
 
             Console.WriteLine(content);
+            
+            Console.WriteLine(orderAsJson);
 
             HttpResponseMessage responseMessage = await client.PostAsync($"{uri}/Order", content);
             
@@ -127,7 +129,7 @@ namespace Client.Data.OrderService
             order.Status = "Out for delivery";
             string orderAsJson = JsonSerializer.Serialize(order);
             HttpContent content = new StringContent(orderAsJson, Encoding.UTF8, "application/json");
-            await client.PatchAsync($"{uri}/Order/{order.OrderId}", content);
+            await client.PatchAsync($"{uri}/Order", content);
         }
 
         public async Task DriverDeliversOrder(Order order)
@@ -135,7 +137,7 @@ namespace Client.Data.OrderService
             order.Status = "Delivered";
             string orderAsJson = JsonSerializer.Serialize(order);
             HttpContent content = new StringContent(orderAsJson, Encoding.UTF8, "application/json");
-            await client.PatchAsync($"{uri}/Order/{order.OrderId}", content);
+            await client.PatchAsync($"{uri}/Order", content);
         }
 
         public async Task AcceptOrderAsync(Order order)
@@ -149,7 +151,7 @@ namespace Client.Data.OrderService
         public async Task RejectOrderAsync(Order order)
         {
             //TODO can someone check if this is okay? -Kyra
-            order.Status = "Rejected";
+            order.Status = "Declined";
             string orderAsJson = JsonSerializer.Serialize(order);
             HttpContent content = new StringContent(orderAsJson, Encoding.UTF8, "application/json");
             await client.PatchAsync($"{uri}/Order", content);
